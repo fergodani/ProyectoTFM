@@ -78,6 +78,7 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
   useFocusEffect(
     React.useCallback(() => {
       fetchPlants();
+      console.log(userPlants)
     }, [])
   );
 
@@ -108,7 +109,7 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
             key={userPlant.id}
             onPress={() => router.push({
               pathname: "/plant-details",
-              params: { id: userPlant.plant.id }
+              params: { id: userPlant.id }
             })}
           >
             <ThemedView style={styles.card}>
@@ -124,7 +125,7 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
                   <ThemedText type='italic'>{userPlant.plant.scientific_name}</ThemedText>
                 </View>
                 <View style={{ display: 'flex', flexDirection: 'row', gap: 2, alignContent: 'center', alignItems: 'center' }}>
-                  <Ionicons name="location-outline" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
+                  <Ionicons name="location" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
                   <ThemedText type='default'>{userPlant.garden_name || 'Ningún sitio seleccionado'}</ThemedText>
                 </View>
               </View>
@@ -143,7 +144,7 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
                   <Pressable style={{ marginBottom: 12 }} onPress={() => {
                     // Acción de ajustes
                     closeModal();
-                    router.push({ pathname: "/plant-settings", params: { id: selectedPlant?.id } });
+                    router.push({ pathname: "/plant-settings", params: { plant: JSON.stringify(userPlant) } });
                   }}>
                     <ThemedText type="defaultSemiBold">Ajustes de la planta</ThemedText>
                   </Pressable>

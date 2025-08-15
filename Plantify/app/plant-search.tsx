@@ -59,7 +59,7 @@ export default function PlantSearch() {
     const handleCreate = async (plantId: number) => {
         try {
             const userPlant = {
-                plant_id: plantId,
+                id: plantId,
                 garden: Number(gardenId),
                 owner: getUserId()!
             }
@@ -115,7 +115,7 @@ export default function PlantSearch() {
                                 })
                             } else {
                                 router.push({
-                                    pathname: "/plant-details",
+                                    pathname: "/plant-info-details",
                                     params: { id: plant.id }
                                 })
                             }
@@ -132,6 +132,14 @@ export default function PlantSearch() {
                                 <ThemedText type='title2'>{plant.common_name}</ThemedText>
                                 <ThemedText type='subtitle'>{plant.scientific_name}</ThemedText>
                             </View>
+                            <TouchableOpacity style={styles.button} onPress={() => {
+                                router.push({
+                                    pathname: "/garden-select",
+                                    params: { id: plant.id }
+                                })
+                            }}>
+                                <Ionicons name="add-circle" size={24} color="#333" />
+                            </TouchableOpacity>
                         </ThemedView>
                     </TouchableOpacity>
                 ))}
@@ -243,17 +251,14 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     button: {
-        marginTop: 32, // Espaciado superior
-        width: '100%',
-        height: 50,
-        borderRadius: 25,
         backgroundColor: Colors.light.tint,
-        justifyContent: 'center',
-        alignItems: 'center',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 4,
+        borderRadius: 25,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
         elevation: 5,
+        display: 'flex',
+        alignItems: 'center',
+        alignContent: 'center',
+        justifyContent: 'center',
     }
 });

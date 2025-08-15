@@ -11,6 +11,8 @@ class PlantInfoSerializer(serializers.ModelSerializer):
         
 class UserPlantSerializer(serializers.ModelSerializer):
     plant = PlantInfoSerializer(read_only=True)
+    
+    id = serializers.IntegerField(read_only=True)
     plant_id = serializers.PrimaryKeyRelatedField(
         queryset=PlantInfo.objects.all(), source='plant', write_only=True
     )
@@ -24,6 +26,11 @@ class GardenSerializer(serializers.ModelSerializer):
     class Meta:
         model = Garden
         fields = '__all__'
+        
+class GardenSimpleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Garden
+        fields = ['id', 'name']
         
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod

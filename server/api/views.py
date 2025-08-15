@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 import requests
 from django.http import JsonResponse
 from .models import Garden, UserPlant, PlantInfo
-from .serializers import UserRegisterSerializer, GardenSerializer, UserPlantSerializer, PlantInfoSerializer, CustomTokenObtainPairSerializer
+from .serializers import GardenSimpleSerializer, UserRegisterSerializer, GardenSerializer, UserPlantSerializer, PlantInfoSerializer, CustomTokenObtainPairSerializer
 from bs4 import BeautifulSoup
 from django.db.models import Q
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -30,6 +30,15 @@ class GardenListCreateView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# Get gardens (only id and name)
+class GardenListNameView(APIView):
+    permission_classes = [IsAuthenticated]
+    """Obtener todos los jardines del usuario"""
+    def get(self, request):
+        gardens = Garden.objects.filter(owner=request.user)
+        serializer = GardenSimpleSerializer(gardens, many=True)
+        return Response(serializer.data)
 
 
 class GardenDetailView(APIView):
@@ -100,14 +109,14 @@ class UserPlantDetailView(APIView):
         plant = self.get_object(pk)
         if not plant:
             return Response({"error": "Plant not found"}, status=status.HTTP_404_NOT_FOUND)
-        serializer = PlantSerializer(plant)
+        serializer = UserPlantSerializer(plant)
         return Response(serializer.data)
 
     def put(self, request, pk):
         plant = self.get_object(pk)
         if not plant:
             return Response({"error": "Plant not found"}, status=status.HTTP_404_NOT_FOUND)
-        serializer = PlantSerializer(plant, data=request.data)
+        serializer = UserPlantSerializer(plant, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

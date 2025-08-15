@@ -14,7 +14,7 @@ class ApiConfig(AppConfig):
         if PlantInfo.objects.exists():
             return
         try:
-            with open("../../plants_results_old.json", 'r', encoding='utf-8') as f:
+            with open("../../plants_results.json", 'r', encoding='utf-8') as f:
                 plants_data = json.load(f)
             count = 1
             for plant in plants_data:

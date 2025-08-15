@@ -1,6 +1,6 @@
 import { Garden } from '@/models/Plant';
 import GardensService from '@/services/gardensService';
-import { useFocusEffect, useLocalSearchParams, useNavigation } from 'expo-router';
+import { useFocusEffect, useLocalSearchParams, useNavigation, router } from 'expo-router';
 import React, { useEffect, useLayoutEffect } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Colors } from '@/constants/Colors';
@@ -17,7 +17,6 @@ export default function GardenDetails() {
     const params = useLocalSearchParams();
     const { id } = params;
     const [garden, setGarden] = React.useState<Garden | null>(null);
-    const [menuVisible, setMenuVisible] = React.useState(false);
     const colorScheme = useColorScheme();
     const navigation = useNavigation();
     const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
@@ -49,8 +48,13 @@ export default function GardenDetails() {
         >
             <View style={styles.titleContainer}>
                 <ThemedText type="title">{garden?.name}</ThemedText>
-                <TouchableOpacity onPress={() => { setMenuVisible(true) }}>
-                    <Ionicons name="ellipsis-vertical" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
+                <TouchableOpacity onPress={() => {
+                            router.push({
+                              pathname: `/garden-settings`,
+                              params: { gardenString: JSON.stringify(garden) }
+                            })
+                          }}>
+                    <Ionicons name="settings" size={24} color={Colors.light.tint} />
                 </TouchableOpacity>
             </View>
             {garden && <Plants gardenId={garden.id} />}

@@ -31,6 +31,27 @@ const GardensService = {
     }
   },
 
+  getGardensName: async (accessToken: string): Promise<Garden[]> => {
+    try {
+      const response = await fetch(`${API_URL}simple/`, {
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        }
+      });
+      if (response.status === 401) {
+        throw new Error("Unauthorized");
+      }
+      if (!response.ok) {
+        throw new Error("Error fetching gardens");
+      }
+      const json = await response.json();
+      return json || [];
+    } catch (error) {
+      throw error;
+    }
+  },
+
   createGarden: async (garden: any, accessToken: string): Promise<Garden> => {
     try {
       const response = await fetch(`${API_URL}`, {
@@ -66,6 +87,30 @@ const GardensService = {
       throw error;
     }
   },
+
+  updateGarden: async (garden: Garden, accessToken: string): Promise<Garden> => {
+    try {
+      const response = await fetch(`${API_URL}${garden.id}/`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${accessToken}`
+        },
+        body: JSON.stringify(garden)
+      });
+      if (response.status === 401) {
+        throw new Error("Unauthorized");
+      }
+      if (!response.ok) {
+        throw new Error("Error updating garden");
+      }
+      const json = await response.json();
+      return json;
+    } catch (error) {
+      throw error;
+    }
+  },
+
 
   /*
 // Obtener todos los jardines

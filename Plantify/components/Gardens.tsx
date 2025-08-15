@@ -134,6 +134,7 @@ export default function Gardens({ plantId }: Readonly<{ plantId: number | null }
                             <View style={styles.gardenInfoContainer}>
                                 <ThemedText type='title2'>{garden.name}</ThemedText>
                                 <ThemedText type='default'>{garden.location}</ThemedText>
+                                <ThemedText type='default'>{garden.user_plants?.length} {garden.user_plants?.length == 1 ? 'planta' : 'plantas'}</ThemedText>
                             </View>
                             <TouchableOpacity style={styles.buttonMenu} onPress={() => { }}>
                                 <Ionicons name="ellipsis-vertical" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />

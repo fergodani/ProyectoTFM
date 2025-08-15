@@ -1,10 +1,11 @@
 from django.urls import include, path
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from .views import GardenListCreateView, GardenDetailView, PlantInfoDetailView, PlantInfoListView, TrefflePlantDetail, TrefflePlantList, UserPlantDetailView, UserPlantListCreateView, CustomTokenObtainPairView, UserRegisterView 
+from .views import GardenListNameView, GardenListCreateView, GardenDetailView, PlantInfoDetailView, PlantInfoListView, TrefflePlantDetail, TrefflePlantList, UserPlantDetailView, UserPlantListCreateView, CustomTokenObtainPairView, UserRegisterView 
 
 urlpatterns = [
     path('gardens/', GardenListCreateView.as_view(), name='garden-list-create'),
+    path('gardens/simple/', GardenListNameView.as_view(), name='user-gardens-simple'),
     path('gardens/<int:pk>/', GardenDetailView.as_view(), name='garden-detail'),
     path('userplant/', UserPlantListCreateView.as_view(), name='plant-list-create'),
     path('userplant/<int:pk>/', UserPlantDetailView.as_view(), name='plant-detail'),

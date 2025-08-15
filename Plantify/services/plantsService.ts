@@ -27,6 +27,27 @@ export const PlantService = {
     }
   },
 
+  getUserPlantById: async (id: number, accessToken: string): Promise<UserPlant | null> => {
+    try {
+      const response = await fetch(`${url}/api/userplant/${id}`, {
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        }
+      });
+      if (response.status === 401) {
+        throw new Error("Unauthorized");
+      }
+      if (!response.ok) {
+        throw new Error("Error fetching plants");
+      }
+      const json = await response.json();
+      return json || [];
+    } catch (error) {
+      throw error;
+    }
+  },
+
   getPlantsByGarden: async (gardenId: number, accessToken: string): Promise<UserPlant[]> => {
     try {
       const response = await fetch(`${url}/api/userplant?gardenId=${gardenId}`, {
@@ -100,10 +121,31 @@ export const PlantService = {
     }
   },
 
+  putPlant: async (userPlant: UserPlant, accessToken: string): Promise<UserPlant | null> => {
+    try {
+      const response = await fetch(`${url}/api/userplant/${userPlant.id}/`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userPlant)
+      });
+      if (response.status === 401) {
+        throw new Error("Unauthorized");
+      }
+      if (!response.ok) {
+        throw new Error("Error updating plant");
+      }
+      const json = await response.json();
+      return json || null;
+    } catch (error) {
+      throw error;
+    }
+  },
 
   getPlantInfoList: async (page: number = 1, filter: string): Promise<PlantInfo[]> => {
     try {
-      console.log(`Fetching plants from Trefle API, page: ${page}`);
       let response;
       if (filter) {
         response = await fetch(`${url}/api/plantinfo?format=json&page=${page}&name=${encodeURIComponent(filter)}`);

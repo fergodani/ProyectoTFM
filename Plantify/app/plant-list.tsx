@@ -6,6 +6,8 @@ import React, { useEffect, useState } from "react";
 import { ScrollView, Text, View, StyleSheet, Image, TouchableOpacity, FlatList, ActivityIndicator } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { PlantInfo } from "@/models/PlantInfo";
+import { Ionicons } from "@expo/vector-icons";
+import { Colors } from "@/constants/Colors";
 
 export const options = {
     headerShown: false,
@@ -30,7 +32,7 @@ export default function PlantList() {
             if (newPlants.length === 0) {
                 setHasMore(false);
             } else {
-                setPlants(prev =>{ 
+                setPlants(prev => {
                     const prevIds = new Set(prev.map(p => p.id));
                     const filtered = newPlants.filter(p => !prevIds.has(p.id));
                     return [...prev, ...filtered]
@@ -45,36 +47,46 @@ export default function PlantList() {
 
     return (
         <View style={{ flex: 1 }}>
-        <FlatList
-            data={plants}
-            keyExtractor={item => item.id.toString()}
-            renderItem={({ item: plant }) => (
-                <TouchableOpacity
-                    key={plant.id}
-                    onPress={() => router.push({
-                        pathname: "/plant-details",
-                        params: { id: plant.id }
-                    })}
-                >
-                    <ThemedView style={styles.card}>
-                        {plant.image && (
-                            <Image
-                                source={{ uri: plant.image }}
-                                style={{ width: 100, height: 100, borderRadius: 8 }}
-                            />
-                        )}
-                        <View style={{ flex: 1, flexShrink: 1 }}>
-                            <ThemedText type='title2'>{plant.common_name}</ThemedText>
-                            <ThemedText type='subtitle'>{plant.scientific_name}</ThemedText>
-                        </View>
-                    </ThemedView>
-                </TouchableOpacity>
-            )}
-            contentContainerStyle={styles.container}
-            onEndReached={() => { loadPlants(page + 1); }}
-            onEndReachedThreshold={0.5}
-            ListFooterComponent={loading ? <ActivityIndicator size="large" style={{ marginVertical: 16 }} /> : null}
-        />
+            <FlatList
+                data={plants}
+                keyExtractor={item => item.id.toString()}
+                renderItem={({ item: plant }) => (
+                    <TouchableOpacity
+                        key={plant.id}
+                        onPress={() => router.push({
+                            pathname: "/plant-info-details",
+                            params: { id: plant.id }
+                        })}
+                    >
+                        <ThemedView style={styles.card}>
+                            {plant.image && (
+                                <Image
+                                    source={{ uri: plant.image }}
+                                    style={{ width: 100, height: 100, borderRadius: 8 }}
+                                />
+                            )}
+                            <View style={{ flex: 1, flexShrink: 1 }}>
+                                <ThemedText type='title2'>{plant.common_name}</ThemedText>
+                                <ThemedText type='subtitle'>{plant.scientific_name}</ThemedText>
+                            </View>
+                            <TouchableOpacity style={styles.button} onPress={() => {
+                                router.push({
+                                    pathname: "/garden-select",
+                                    params: { id: plant.id }
+                                })
+                            }}>
+                                <ThemedText type='default'>
+                                    <Ionicons name="add-circle" size={24} color="#333" />
+                                </ThemedText>
+                            </TouchableOpacity>
+                        </ThemedView>
+                    </TouchableOpacity>
+                )}
+                contentContainerStyle={styles.container}
+                onEndReached={() => { loadPlants(page + 1); }}
+                onEndReachedThreshold={0.5}
+                ListFooterComponent={loading ? <ActivityIndicator size="large" style={{ marginVertical: 16 }} /> : null}
+            />
         </View>
     );
 };
@@ -110,4 +122,11 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginTop: 4,
     },
+    button: {
+        backgroundColor: Colors.light.tint,
+        borderRadius: 25,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        elevation: 5,
+    }
 });
