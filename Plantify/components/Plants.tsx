@@ -101,6 +101,18 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
     }
   };
 
+  const unitLabelsPlural = {
+    "days": 'días',
+    "weeks": 'semanas',
+    "months": 'meses',
+  };
+
+  const unitLabelsSingular = {
+    "days": 'día',
+    "weeks": 'semana',
+    "months": 'mes',
+  };
+
   return (
     <>
       <ScrollView style={styles.container}>
@@ -123,6 +135,10 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
                 <View>
                   <ThemedText type='title2'>{userPlant.plant.common_name}</ThemedText>
                   <ThemedText type='italic'>{userPlant.plant.scientific_name}</ThemedText>
+                </View>
+                <View style={{ display: 'flex', flexDirection: 'row', gap: 2, alignContent: 'center', alignItems: 'center' }}>
+                  <Ionicons name="water" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
+                  <ThemedText type='default'>Cada {userPlant.plant.watering_period[0].value == "1" ? unitLabelsSingular[userPlant.plant.watering_period[0].unit as keyof typeof unitLabelsSingular] : userPlant.plant.watering_period[0].value} {userPlant.plant.watering_period[0].value !== "1" ? unitLabelsPlural[userPlant.plant.watering_period[0].unit as keyof typeof unitLabelsPlural] : ''}</ThemedText>
                 </View>
                 <View style={{ display: 'flex', flexDirection: 'row', gap: 2, alignContent: 'center', alignItems: 'center' }}>
                   <Ionicons name="location" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />

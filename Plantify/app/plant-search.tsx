@@ -86,8 +86,13 @@ export default function PlantSearch() {
                         placeholder="Buscar plantas..."
                         placeholderTextColor="#aaa"
                         onChangeText={setSearchText}
-
+                        value={searchText}
                     />
+                    {searchText.length > 0 && (
+                        <TouchableOpacity onPress={() => setSearchText('')}>
+                            <Ionicons name="close-circle" size={22} color="#aaa" />
+                        </TouchableOpacity>
+                    )}
                 </View>
                 <TouchableOpacity onPress={goBack}>
                     <ThemedText type="default">Cancelar</ThemedText>

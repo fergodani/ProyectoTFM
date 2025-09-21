@@ -1,6 +1,6 @@
 import { useAuth } from "@/hooks/useAuthContext";
-import { UserPlant } from "@/models/Plant";
-import { PlantInfo } from "@/models/PlantInfo";
+import { Tasks, UserPlant } from "@/models/Plant";
+import { PlantInfo, Prediction } from "@/models/PlantInfo";
 import { PlantDetailTrefle, PlantTrefle } from "@/models/PlanTrefle";
 
 const url = "http://192.168.1.48:8000"
@@ -144,12 +144,14 @@ export const PlantService = {
     }
   },
 
-  getPlantInfoList: async (page: number = 1, filter: string): Promise<PlantInfo[]> => {
+  getPlantInfoList: async (page: number = 1, filter: string, type: string): Promise<PlantInfo[]> => {
     try {
       let response;
       if (filter) {
         response = await fetch(`${url}/api/plantinfo?format=json&page=${page}&name=${encodeURIComponent(filter)}`);
-      } else {
+      } else if (type) {
+        response = await fetch(`${url}/api/plantinfo?format=json&page=${page}&type=${encodeURIComponent(type)}`);
+      }else {
         response = await fetch(`${url}/api/plantinfo?format=json&page=${page}`);
       }
 
@@ -189,4 +191,50 @@ export const PlantService = {
       throw error;
     }
   },
-};
+
+  getTasks: async (accessToken: string): Promise<Tasks> => {
+    try {
+      const response = await fetch(`${url}/api/user-tasks/`, {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        }
+      });
+      if (response.status === 401) {
+        throw new Error("Unauthorized");
+      }
+      if (!response.ok) {
+        throw new Error("Error fetching tasks");
+      }
+      const json = await response.json();
+      return json || [];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  sendPhoto: async (photoUri: string): Promise<Prediction> => {
+    const formData = new FormData();
+    formData.append('image', {
+      uri: photoUri,
+      type: 'image/jpeg',
+      name: 'photo.jpg',
+    });
+
+    try {
+      const response = await fetch(`${url}/api/predict/`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+      console.log('Prediction result:', data);
+      return data || {};
+      // Handle the prediction result as needed
+    } catch (error) {
+      console.error('Error sending photo:', error);
+      return {} as Prediction;
+    }
+  }
+}

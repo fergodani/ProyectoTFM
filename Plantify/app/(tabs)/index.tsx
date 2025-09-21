@@ -1,4 +1,4 @@
-import { View, Image, StyleSheet, Platform, Pressable, Text, Touchable, TouchableOpacity } from 'react-native';
+import { View, Image, StyleSheet, Platform, Pressable, Text, Touchable, TouchableOpacity, useWindowDimensions, ActivityIndicator } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -15,26 +15,156 @@ import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import Button from '@/components/Button';
 import { Collapsible } from '@/components/Collapsible';
+import * as Location from 'expo-location';
+import { PlantService } from '@/services/plantsService';
+import { UserService } from '@/services/userService';
+import { usePathname } from "expo-router";
+import { Tasks } from '@/models/Plant';
+import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
+import React from 'react';
+import TaskList from '@/components/TaskList';
+import { RecommendationService } from '@/services/recommendationService';
+
+const routes = [
+  { key: 'previous', title: 'Previous' },
+  { key: 'today', title: 'Today' },
+  { key: 'next', title: 'Upcoming' },
+];
 
 export default function HomeScreen() {
   const router = useRouter();
+  const pathname = usePathname();
   const colorScheme = useColorScheme();
-  const { isAuthenticated, login, logout, accessToken } = useAuth();
+  const { refreshToken, login, logout, accessToken, setTokens, isAuthenticated } = useAuth();
   const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
+  const [weatherInfo, setWeatherInfo] = useState<any>(null);
+  const [tasks, setTasks] = useState<Tasks>();
+  const [index, setIndex] = React.useState(1);
+  const layout = useWindowDimensions();
+  const [showWarning, setShowWarning] = useState(true);
+
+  const renderScene = SceneMap({
+    previous: () => <TaskList tasks={tasks?.previous_tasks} isToday={false} isNext={false} onRefresh={fetchTasks} />,
+    today: () => <TaskList tasks={tasks?.today_tasks} isToday={true} isNext={false} onRefresh={fetchTasks} />,
+    next: () => <TaskList tasks={tasks?.next_tasks} isToday={false} isNext={true} onRefresh={fetchTasks} />,
+  });
+
+
+  useEffect(() => {
+    (async () => {
+      try {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') return;
+
+        let location = await Location.getCurrentPositionAsync({});
+        const { latitude, longitude } = location.coords;
+
+        // Reemplaza YOUR_API_KEY por tu clave de OpenWeatherMap
+        const data = await RecommendationService.getWeather(latitude, longitude);
+        console.log(data)
+        setWeatherInfo(data);
+
+        if (isAuthenticated) {
+          fetchTasks();
+        }
+      } catch (error) {
+        console.error("Error fetching weather data:", error);
+      }
+    })();
+  }, []);
+
+
+  const fetchTasks = async () => {
+    try {
+      const data = await PlantService.getTasks(accessToken!);
+      console.log("Tasks data:", data);
+      setTasks(data);
+    } catch (error: any) {
+      if (error.message === 'Unauthorized') {
+        // Handle token refresh logic here
+        try {
+          const newTokens = await UserService.refreshToken(refreshToken!);
+          setTokens(newTokens.access, newTokens.refresh);
+
+          const data = await PlantService.getTasks(newTokens.access);
+          console.log("Tasks data:", data);
+          setTasks(data);
+        } catch (refreshError) {
+
+        }
+      }
+    }
+  };
 
   return (
     <LinearGradient
       colors={['rgba(213, 240, 219, 0.19)', backgroundColor]} // Cambia estos colores a los que quieras
       style={[globalStyles.body, { padding: 16 }]}
     >
-      <View style={globalStyles.titleContainer}>
-        <ThemedText type="title">Recordatorios</ThemedText>
+      <View style={{ display: "flex", gap: 12, flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ flex: 1, flexDirection: 'column', gap: 8 }}>
+          <View style={globalStyles.titleContainer}>
+            <ThemedText type="title">Recordatorios</ThemedText>
+          </View>
+          <ThemedText type='default'>Cuida cada una de tus plantas</ThemedText>
+        </View>
+        {weatherInfo === null ? (
+          <View style={{ width: 75, height: 75, justifyContent: 'center', alignItems: 'center' }}>
+            <ActivityIndicator size="large" color={Colors.light.tint} />
+          </View>
+        ) : (
+          <View style={{ flexDirection: 'column', gap: 2, justifyContent: 'flex-end', alignItems: 'center' }}>
+            <Image
+              source={{ uri: `https://openweathermap.org/img/wn/${weatherInfo.weather.weather[0].icon}@2x.png` }}
+              style={{ width: 75, height: 75 }}
+            />
+            <View style={{ paddingHorizontal: 8 }}>
+              <ThemedText type='default'>
+                {Math.trunc(weatherInfo.weather.main.temp_min)}°C - {Math.trunc(weatherInfo.weather.main.temp_max)}°C
+              </ThemedText>
+              <ThemedText type='subtitle'>
+                {weatherInfo.weather.name}
+              </ThemedText>
+            </View>
+          </View>
+        )}
       </View>
-      <ThemedText type='default'>Cuida cada una de tus plantas</ThemedText>
-      <ThemedView style={[styles.card, {padding: 16}]}>
-        <ThemedText type='default'>Parece que todavía no tienes ningún recordatorio</ThemedText>
-        <Button text="Añadir Recordatorio" onPress={() => console.log("Add Reminder")} />
-      </ThemedView>
+      {showWarning && weatherInfo && (
+        <View style={[styles.warning]}>
+          <Image
+            source={{ uri: `https://openweathermap.org/img/wn/${weatherInfo.weather.weather[0].icon}@2x.png` }}
+            style={{ width: 75, height: 75 }}
+          />
+          <ThemedText type="default" style={{ color: '#856404', flex: 1, flexWrap: 'wrap' }}>
+            {weatherInfo.recommendation}
+          </ThemedText>
+          <TouchableOpacity
+            onPress={() => setShowWarning(false)}
+            style={styles.closeButton}
+          >
+            <Text style={{ fontSize: 16, color: '#856404' }}>✕</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+      {!isAuthenticated ? (
+        <ThemedView style={[styles.card, { padding: 16 }]}>
+          <ThemedText type='default'>Inicia sesión para ver tus recordatorios</ThemedText>
+        </ThemedView>
+      ) : <TabView
+        style={{ marginTop: 16 }}
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        initialLayout={{ width: layout.width }}
+        renderTabBar={props => <TabBar
+          {...props}
+          style={styles.tab}
+          activeColor={Colors.light.text}
+          inactiveColor={Colors.light.text}
+          indicatorStyle={{ backgroundColor: 'white', height: '100%', borderRadius: 8 }}
+        />}
+      />}
+
     </LinearGradient>
   );
 }
@@ -71,5 +201,30 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+  },
+  tab: {
+    backgroundColor: Colors.light.tint,
+    borderRadius: 8,
+    marginBottom: 16,
+    marginHorizontal: 16,
+  },
+  warning: {
+    backgroundColor: '#fff3cdff',
+    borderColor: '#ffd558ff',
+    borderWidth: 4,
+    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 8,
+    position: 'relative',
+    maxWidth: '100%',
+    paddingRight: 32, // leave space for close button
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 4,
+    right: 4,
+    padding: 4,
+    zIndex: 1,
   },
 });

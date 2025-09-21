@@ -1,0 +1,40 @@
+{
+  "weather_conditions": [
+    {
+      "condition": "rain",
+      "recommendation": "No riegues en exceso tus plantas de exterior. Revisa el drenaje de las macetas para evitar acumulación de agua y posibles hongos."
+    },
+    {
+      "condition": "sunny",
+      "recommendation": "Asegúrate de que las plantas sensibles no estén expuestas a sol directo prolongado."
+    },
+    {
+      "condition": "cloudy",
+      "recommendation": "Reduce ligeramente el riego ya que la evaporación es menor en días nublados."
+    },
+    {
+      "condition": "windy",
+      "recommendation": "Protege las plantas delicadas del viento fuerte para evitar daños en hojas y tallos."
+    },
+    {
+      "condition": "hot",
+      "recommendation": "Incrementa la frecuencia de riego y vigila signos de deshidratación en las plantas."
+    },
+    {
+      "condition": "cold",
+      "recommendation": "Mantén las plantas sensibles en interior y protégelas de temperaturas extremas."
+    },
+    {
+      "condition": "frost",
+      "recommendation": "Cubre o resguarda tus plantas para evitar daños por heladas."
+    },
+    {
+      "condition": "humid",
+      "recommendation": "Evita el exceso de riego, ya que la humedad ambiental es alta."
+    },
+    {
+      "condition": "dry",
+      "recommendation": "Aumenta el riego y considera pulverizar las hojas de plantas que lo requieran."
+    }
+  ]
+}

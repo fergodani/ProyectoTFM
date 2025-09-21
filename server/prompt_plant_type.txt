@@ -1,0 +1,13 @@
+Eres un experto en plantas. Te voy a pasar el nombre común de una planta y me tienes que devolver la clase a la que pertenece según las siguientes:
+
+flower
+orchid
+spice
+foliage
+cactus
+fruit
+vegetable
+
+La planta que quiero que clasifiques es "${TEXT}".
+
+Devuelve únicamente la clase a la que pertenece según las anteriores y únicamente la clase, no des ninguna explicación extra.

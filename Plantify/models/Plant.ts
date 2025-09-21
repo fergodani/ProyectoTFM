@@ -19,6 +19,10 @@ export interface UserPlant {
     plant: PlantInfo;
     planting_date?: string;
     last_watered_date?: string;
+    last_fertilized_date?: string;
+    last_pruning_date?: string;
+    last_rotating_date?: string;
+    last_spraying_date?: string;
     garden?: Garden | number;
     garden_name?: string;
     custom_name?: string;
@@ -33,4 +37,18 @@ export interface UserPlant {
     pot_type?: string;
     pot_size?: number;
     drainage?: string;
+}
+
+export interface Tasks {
+    today_tasks: Task[];
+    next_tasks: Task[];
+    previous_tasks: Task[];
+}
+
+type TaskType = "watering" | "pruning" | "spraying" | "rotating" | "fertilizing";
+
+export interface Task {
+    type: TaskType;
+    user_plant: UserPlant;
+    next_date?: string;
 }

@@ -1,0 +1,93 @@
+[
+    {
+        "type": "flower",
+        "humidity": "40-60",
+        "light": ["partial"],
+        "preferred_location": "any",
+        "air_tolerance": "low",
+        "weather_recommendations": {
+            "rain": "Algunas flores pueden sufrir exceso de agua, controla el riego si llueve mucho.",
+            "sun": "Evitar sol directo prolongado en días calurosos.",
+            "wind": "Flores delicadas pueden dañarse con viento fuerte.",
+            "cold": "Proteger de heladas si están en exterior."
+        }
+    },
+    {
+        "type": "orchid",
+        "humidity": "60-80",
+        "light": ["indirect"],
+        "preferred_location": "indoor",
+        "air_tolerance": "low",
+        "weather_recommendations": {
+            "rain": "No exponer al exterior durante lluvias intensas.",
+            "sun": "Evitar sol directo en días despejados.",
+            "wind": "Mantener alejada de corrientes fuertes.",
+            "cold": "No tolera temperaturas bajas, mantener en interior."
+        }
+    },
+    {
+        "type": "spice",
+        "humidity": "40-60",
+        "light": ["partial", "direct"],
+        "preferred_location": "any",
+        "air_tolerance": "medium",
+        "weather_recommendations": {
+            "rain": "Proteger de exceso de agua si está en maceta sin drenaje.",
+            "sun": "Beneficia de sol directo, pero puede secarse rápido en olas de calor.",
+            "wind": "Toleran viento moderado, pero cuidado con rachas fuertes.",
+            "cold": "Sensibles a heladas, mejor mantener bajo techo."
+        }
+    },
+    {
+        "type": "foliage",
+        "humidity": "50-70",
+        "light": ["shade", "partial"],
+        "preferred_location": "indoor",
+        "air_tolerance": "low",
+        "weather_recommendations": {
+            "rain": "No requiere lluvia directa, cuidado con exceso de agua.",
+            "sun": "Evitar sol fuerte, puede quemar las hojas.",
+            "wind": "Sensibles al viento, mantener en lugar protegido.",
+            "cold": "Temperaturas bajas dañan las hojas, mantener en interior."
+        }
+    },
+    {
+        "type": "cactus",
+        "humidity": "20-40",
+        "light": ["direct"],
+        "preferred_location": "outdoor",
+        "air_tolerance": "high",
+        "weather_recommendations": {
+            "rain": "Evitar exceso de lluvia, riesgo de pudrición.",
+            "sun": "Tolera y necesita mucho sol.",
+            "wind": "Tolera viento sin problemas.",
+            "cold": "No tolera heladas fuertes, proteger en invierno."
+        }
+    },
+    {
+        "type": "fruit",
+        "humidity": "50-70",
+        "light": ["direct"],
+        "preferred_location": "outdoor",
+        "air_tolerance": "medium",
+        "weather_recommendations": {
+            "rain": "Demasiada lluvia puede dañar frutos, vigilar hongos.",
+            "sun": "Necesita sol directo para madurar frutos.",
+            "wind": "El viento fuerte puede tirar frutos o ramas.",
+            "cold": "Sensibles al frío, proteger en heladas."
+        }
+    },
+    {
+        "type": "vegetable",
+        "humidity": "50-70",
+        "light": ["partial", "direct"],
+        "preferred_location": "outdoor",
+        "air_tolerance": "medium",
+        "weather_recommendations": {
+            "rain": "Demasiada agua puede pudrir raíces, usar drenaje adecuado.",
+            "sun": "Necesitan sol para crecer, sombra excesiva afecta la producción.",
+            "wind": "Viento fuerte puede dañar tallos tiernos.",
+            "cold": "Muchas hortalizas son sensibles a heladas, protegerlas."
+        }
+    }
+]

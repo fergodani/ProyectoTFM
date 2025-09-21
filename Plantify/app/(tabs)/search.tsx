@@ -86,7 +86,7 @@ export default function SearchScreen() {
             )}
             <View style={styles.buttonContainer}>
 
-                <TouchableOpacity style={styles.cameraButton} onPress={() => console.log('Camera button pressed')}>
+                <TouchableOpacity style={styles.cameraButton} onPress={() => router.push('/camera-screen')}>
                     <Ionicons name="camera" size={120} color="#11181C" />
                 </TouchableOpacity>
             </View>

@@ -59,7 +59,8 @@ class ApiConfig(AppConfig):
                     scientific_name=plant.get('scientific_name'),
                     watering_long=plant.get('watering_long'),
                     pruning=plant.get('pruning'),
-                    watering_period=plant.get('watering_period')
+                    watering_period=plant.get('watering_period'),
+                    type=plant.get('type')
                 )
         except OperationalError:
             print("Error al conectar con la base de datos. Asegúrate de que el servidor esté en funcionamiento.")

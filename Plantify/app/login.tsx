@@ -2,25 +2,32 @@ import { ThemedText } from '@/components/ThemedText';
 import { Colors } from '@/constants/Colors';
 import { UserService } from '@/services/userService';
 import * as React from 'react';
-import { View, useWindowDimensions, Text, StatusBar, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, useWindowDimensions, Text, StatusBar, TextInput, TouchableOpacity, StyleSheet, useColorScheme } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { useAuth } from '@/hooks/useAuthContext';
 import Button from '@/components/Button';
+import { useLocalSearchParams } from "expo-router";
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function LoginScreen() {
+    const params = useLocalSearchParams();
+    const {from} = params;
+    const fromPath = Array.isArray(from) ? from[0] : from;
     const router = useRouter();
     const layout = useWindowDimensions();
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [error, setError] = React.useState('');
     const { login } = useAuth();
+    const colorScheme = useColorScheme();
+    const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
 
     const handleLogin = async () => {
         setError('');
         console.log("Attempting to log in with:", email);
-        if (!email || !password) {
+        if (!email || !password){
             setError('Por favor, completa todos los campos.');
             return;
         }
@@ -30,13 +37,13 @@ export default function LoginScreen() {
             setError('Error al iniciar sesión.');
             return;
         }
-        router.replace({
-            pathname: "/profile",
-            params: {}
-        });
+        router.replace(fromPath || '/');
     };
     return (
-        <View style={styles.body}>
+        <LinearGradient
+              colors={['rgba(213, 240, 219, 0.19)', backgroundColor]} // Cambia estos colores a los que quieras
+              style={[styles.body, { padding: 16 }]}
+            >
             <ThemedText type="title">Iniciar sesión</ThemedText>
             <View style={{ display: 'flex', gap: 12 }}>
                 <View>
@@ -64,6 +71,10 @@ export default function LoginScreen() {
                         />
                     </View>
                 </View>
+                <ThemedText type="subtitle">¿No tienes cuenta?</ThemedText>
+                <TouchableOpacity onPress={() => router.push('/signup')}>
+                    <ThemedText type="link">Regístrate aquí</ThemedText>
+                </TouchableOpacity>
                 {error ? (
                     <Text style={{ color: 'red', marginTop: 16, textAlign: 'center' }}>
                         {error}
@@ -71,7 +82,7 @@ export default function LoginScreen() {
                 ) : null}
                 <Button text="Entrar" onPress={handleLogin} />
             </View>
-        </View>
+        </LinearGradient>
     )
 }
 

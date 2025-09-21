@@ -38,11 +38,17 @@ class Garden(models.Model):
 
 class UserPlant(models.Model):
     planting_date = models.DateField(null=True, blank=True)
-    last_watered_date = models.DateField(blank=True, null=True)  # New field for last watering date
+    last_watered_date = models.DateField(blank=True, null=True)
+    last_fertilized_date = models.DateField(blank=True, null=True)
+    last_pruning_date = models.DateField(blank=True, null=True)
+    last_rotating_date = models.DateField(blank=True, null=True)
+    last_spraying_date = models.DateField(blank=True, null=True)
     garden = models.ForeignKey(Garden, on_delete=models.CASCADE, related_name='user_plants',null=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='plants') 
     plant = models.ForeignKey('PlantInfo', on_delete=models.CASCADE, related_name='user_plant')
-    
+
+    isWateringReminder = models.BooleanField(default=True)
+    isPruningReminder = models.BooleanField(default=True)
     custom_name = models.CharField(max_length=255, blank=True, null=True)
     height = models.PositiveIntegerField(blank=True, null=True)
     age = models.CharField(
@@ -114,6 +120,8 @@ class UserPlant(models.Model):
         null=True
     )
 
+    created_at = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
         return f"{self.plant.common_name or self.plant.scientific_name}"
 
@@ -159,6 +167,8 @@ class PlantInfo(models.Model):
 
     # Guarda el array watering_period como JSON
     watering_period = models.JSONField(blank=True, null=True)
+    
+    type = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.common_name or self.scientific_name or "Plant Info"

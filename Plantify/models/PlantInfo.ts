@@ -46,4 +46,11 @@ export interface PlantInfo {
     watering_long: string | null;
     pruning: string | null;
     watering_period: WateringPeriod[];
+    type: string;
+}
+
+export interface Prediction {
+    plant_id: number;
+    class: string;
+    probabilities: number[];
 }

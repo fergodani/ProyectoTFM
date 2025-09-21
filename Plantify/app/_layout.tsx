@@ -45,6 +45,7 @@ export default function RootLayout() {
           <Stack.Screen name="plant-form" options={{ title: "", headerShown: false }} />
           <Stack.Screen name="login" options={{ title: "", headerShown: true }} />
           <Stack.Screen name="signup" options={{ title: "", headerShown: true }} />
+          <Stack.Screen name="camera-screen" options={{ title: "", headerShown: true }} />
           <Stack.Screen name="+not-found" />
         </Stack>
         <StatusBar style="auto" />
