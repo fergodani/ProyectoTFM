@@ -1,3 +1,5 @@
+models/
+
 # Django
 *.pyc
 __pycache__/

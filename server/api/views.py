@@ -392,9 +392,9 @@ class UserTasksView(APIView):
             "previous_tasks": previous_tasks
         })
         
-model = load_model('./plant_model.h5')
-#model = load_model('./plant_identify.h5')
-#model = load_model('./model169_4.h5')
+model = load_model('./models/plant_model.h5')
+#model = load_model('./models/plant_identify.h5')
+#model = load_model('./models/model169_4.h5')
 
 class PredictImageView(APIView):
     parser_classes = [MultiPartParser]
