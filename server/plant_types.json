@@ -1,8 +1,8 @@
 [
     {
         "type": "flower",
-        "humidity": "40-60",
-        "light": ["partial"],
+        "humidity": "normal",
+        "light": ["partial_sun"],
         "preferred_location": "any",
         "air_tolerance": "low",
         "weather_recommendations": {
@@ -14,8 +14,8 @@
     },
     {
         "type": "orchid",
-        "humidity": "60-80",
-        "light": ["indirect"],
+        "humidity": "high",
+        "light": ["indirect_sun"],
         "preferred_location": "indoor",
         "air_tolerance": "low",
         "weather_recommendations": {
@@ -27,8 +27,8 @@
     },
     {
         "type": "spice",
-        "humidity": "40-60",
-        "light": ["partial", "direct"],
+        "humidity": "normal",
+        "light": ["partial_sun", "full_sun"],
         "preferred_location": "any",
         "air_tolerance": "medium",
         "weather_recommendations": {
@@ -40,8 +40,8 @@
     },
     {
         "type": "foliage",
-        "humidity": "50-70",
-        "light": ["shade", "partial"],
+        "humidity": "normal",
+        "light": ["full_shade", "partial_sun"],
         "preferred_location": "indoor",
         "air_tolerance": "low",
         "weather_recommendations": {
@@ -53,8 +53,8 @@
     },
     {
         "type": "cactus",
-        "humidity": "20-40",
-        "light": ["direct"],
+        "humidity": "low",
+        "light": ["full_sun"],
         "preferred_location": "outdoor",
         "air_tolerance": "high",
         "weather_recommendations": {
@@ -66,8 +66,8 @@
     },
     {
         "type": "fruit",
-        "humidity": "50-70",
-        "light": ["direct"],
+        "humidity": "normal",
+        "light": ["full_sun"],
         "preferred_location": "outdoor",
         "air_tolerance": "medium",
         "weather_recommendations": {
@@ -79,8 +79,8 @@
     },
     {
         "type": "vegetable",
-        "humidity": "50-70",
-        "light": ["partial", "direct"],
+        "humidity": "normal",
+        "light": ["partial", "full_sun"],
         "preferred_location": "outdoor",
         "air_tolerance": "medium",
         "weather_recommendations": {

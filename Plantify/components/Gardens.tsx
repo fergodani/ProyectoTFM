@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import gardensService from '@/services/gardensService';
-import { Garden } from '@/models/Plant';
+import { Garden, GardenBySuitability } from '@/models/Plant';
 import { ThemedText } from './ThemedText';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme.web';
@@ -20,6 +20,7 @@ export default function Gardens({ plantId }: Readonly<{ plantId: number | null }
     const router = useRouter();
     const { getUserId, accessToken, refreshToken, setTokens } = useAuth();
     const [gardens, setGardens] = React.useState<Garden[]>([]);
+    const [gardensBySuitability, setGardensBySuitability] = React.useState<GardenBySuitability[]>([]);
 
     const fetchGardens = async () => {
         if (!getUserId()) {
@@ -27,8 +28,16 @@ export default function Gardens({ plantId }: Readonly<{ plantId: number | null }
             return;
         }
         try {
-            const data = await GardensService.getAllGardens(accessToken!);
-            setGardens(data);
+            
+            if (plantId) {
+                const suitableGardens = await GardensService.getGardensBySuitability(plantId!, accessToken!);
+                setGardensBySuitability(suitableGardens);
+                console.log("Suitable gardens:", suitableGardens);
+            } else {
+                const data = await GardensService.getAllGardens(accessToken!);
+                setGardens(data);
+            }
+            
         } catch (error: any) {
             if (error.message === 'Unauthorized') {
                 // Handle token refresh logic here
@@ -37,6 +46,7 @@ export default function Gardens({ plantId }: Readonly<{ plantId: number | null }
                     setTokens(newTokens.access, newTokens.refresh);
                     // Retry fetching gardens with new access token
                     const data = await GardensService.getAllGardens(newTokens.access);
+                    
                     setGardens(data);
                 } catch (refreshError) {
                     console.error("Error refreshing tokens:", refreshError);
@@ -72,6 +82,8 @@ export default function Gardens({ plantId }: Readonly<{ plantId: number | null }
     );
 
     return (
+        <>
+        { !plantId && (
         <ScrollView style={styles.container}>
             {gardens.map((garden: Garden) => {
                 // Suponiendo que garden.plants es un array de plantas con propiedad image
@@ -147,7 +159,100 @@ export default function Gardens({ plantId }: Readonly<{ plantId: number | null }
               <Button text="Añadir jardín" onPress={handleAdd} />
             )}
             <View style={{ marginBottom: 24 }} />
-        </ScrollView>
+        </ScrollView>)}
+
+        { plantId && (
+        <ScrollView style={styles.container}>
+            {gardensBySuitability.map((gardenBySuitability: GardenBySuitability) => {
+                // Suponiendo que garden.plants es un array de plantas con propiedad image
+                const plantImages = gardenBySuitability.garden.user_plants?.slice(0, 3).map(p => p.plant.image) || [];
+                return (
+                    <TouchableOpacity
+                        key={gardenBySuitability.garden.id}
+                        onPress={() => {
+                            if (plantId) {
+                                handleCreatePlantInGarden(gardenBySuitability.garden.id);
+                            } else {
+                                router.push({
+                                    pathname: "/garden-details",
+                                    params: { id: gardenBySuitability.garden.id }
+                                })
+                            }
+                        }}
+                    >
+                        <ThemedView key={gardenBySuitability.garden.id} style={styles.gardenCard}>
+                            <View style={styles.mosaicContainer}>
+                                {plantImages.length > 0 && plantImages[0] && (
+                                    <Image
+                                        source={{ uri: plantImages[0] }}
+                                        style={styles.mainImage}
+                                    />
+                                )}
+                                {!plantImages[0] && (
+                                    <Image
+                                        source={require('@/assets/images/plant-placeholder.png')}
+                                        style={styles.mainImage}
+                                    />
+                                )}
+                                <View style={styles.sideImagesContainer}>
+                                    {plantImages[1] && (
+                                        <Image
+                                            source={{ uri: plantImages[1] }}
+                                            style={styles.sideImage}
+                                        />
+                                    )}
+                                    {!plantImages[1] && (
+                                        <Image
+                                            source={require('@/assets/images/plant-placeholder.png')}
+                                            style={styles.sideImage}
+                                        />
+                                    )}
+                                    {plantImages[2] && (
+                                        <Image
+                                            source={{ uri: plantImages[2] }}
+                                            style={styles.sideImage}
+                                        />
+                                    )}
+                                    {!plantImages[2] && (
+                                        <Image
+                                            source={require('@/assets/images/plant-placeholder.png')}
+                                            style={styles.sideImage}
+                                        />
+                                    )}
+                                </View>
+                            </View>
+                            <View style={styles.gardenInfoContainer}>
+                                <ThemedText type='title2'>{gardenBySuitability.garden.name}</ThemedText>
+                                <ThemedText type='default'>{gardenBySuitability.garden.location}</ThemedText>
+                                <ThemedText type='default'>{gardenBySuitability.garden.user_plants?.length} {gardenBySuitability.garden.user_plants?.length == 1 ? 'planta' : 'plantas'}</ThemedText>
+                                <View>
+                                {gardenBySuitability.is_optimal ? (
+                                    <ThemedText type='default' style={{ color: 'green', fontWeight: 'bold' }}>Óptimo</ThemedText>
+                                ) : (
+                                    <ThemedText type='default' style={{ color: 'red', fontWeight: 'bold' }}>No óptimo</ThemedText>
+                                )}
+                                {gardenBySuitability.reasons.map((reason: string) => {
+                                    return (
+                                        <ThemedText type='subtitle' style={{ color: 'gray' }}>{reason}</ThemedText>
+                                    )
+                                })}
+                                
+                            </View>
+                            </View>
+                            <TouchableOpacity style={styles.buttonMenu} onPress={() => { }}>
+                                <Ionicons name="ellipsis-vertical" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
+                            </TouchableOpacity>
+                        </ThemedView>
+                       
+                    </TouchableOpacity>
+                );
+            })}
+            { !plantId && (
+              <Button text="Añadir jardín" onPress={handleAdd} />
+            )}
+            <View style={{ marginBottom: 24 }} />
+        </ScrollView>)}
+        </>
     );
 }
 
@@ -195,6 +300,8 @@ const styles = StyleSheet.create({
         elevation: 3,
         display: 'flex',
         flexDirection: 'row',
+        alignContent: 'center',
+        justifyContent: 'center',
     },
     gardenName: {
         fontSize: 18,

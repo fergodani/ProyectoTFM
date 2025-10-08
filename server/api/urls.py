@@ -1,12 +1,13 @@
 from django.urls import include, path
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from .views import WeatherRecommendationView, PredictImageView, GardenListNameView, GardenListCreateView, GardenDetailView, PlantInfoDetailView, PlantInfoListView, TrefflePlantDetail, TrefflePlantList, UserPlantDetailView, UserPlantListCreateView, CustomTokenObtainPairView, UserRegisterView, UserTasksView 
+from .views import GardenSuitabilityView, WeatherRecommendationView, PredictImageView, GardenListNameView, GardenListCreateView, GardenDetailView, PlantInfoDetailView, PlantInfoListView, TrefflePlantDetail, TrefflePlantList, UserPlantDetailView, UserPlantListCreateView, CustomTokenObtainPairView, UserRegisterView, UserTasksView 
 
 urlpatterns = [
     path('gardens/', GardenListCreateView.as_view(), name='garden-list-create'),
     path('gardens/simple/', GardenListNameView.as_view(), name='user-gardens-simple'),
     path('gardens/<int:pk>/', GardenDetailView.as_view(), name='garden-detail'),
+    path('gardens/suitability/', GardenSuitabilityView.as_view(), name='garden-suitability'),
     path('userplant/', UserPlantListCreateView.as_view(), name='plant-list-create'),
     path('userplant/<int:pk>/', UserPlantDetailView.as_view(), name='plant-detail'),
     path('trefle/plant', TrefflePlantDetail.as_view(), name='trefle-plants'),

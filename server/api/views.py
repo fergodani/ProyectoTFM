@@ -85,6 +85,91 @@ class GardenDetailView(APIView):
         garden.delete()
         return Response({"message": "Garden deleted"}, status=status.HTTP_204_NO_CONTENT)
 
+class GardenSuitabilityView(APIView):
+    permission_classes = [IsAuthenticated]
+    """
+    Recibe el id de una planta y devuelve todos los jardines del usuario con un texto explicativo de si es óptimo o no para esa planta.
+    """
+    def get(self, request):
+        plant_id = request.GET.get('plant_id')
+        if not plant_id:
+            return Response({"error": "plant_id is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Obtiene la planta y su tipo
+        try:
+            plant = PlantInfo.objects.get(pk=plant_id)
+        except PlantInfo.DoesNotExist:
+            return Response({"error": "Plant not found"}, status=status.HTTP_404_NOT_FOUND)
+        plant_type = plant.type.lower() if plant.type else None
+        if not plant_type:
+            return Response({"error": "Plant type not found"}, status=status.HTTP_400_BAD_REQUEST)
+        print(f"Evaluating suitability for plant type: {plant_type}")
+        # Carga las preferencias del tipo de planta
+        plant_types_path = os.path.join(os.path.dirname(__file__), "../plant_types.json")
+        with open(plant_types_path, "r", encoding="utf-8") as f:
+            plant_types = json.load(f)
+
+        type_info = next((pt for pt in plant_types if pt.get("type", "").lower() == plant_type), None)
+        if not type_info:
+            return Response({"error": "No info for plant type"}, status=status.HTTP_400_BAD_REQUEST)
+
+        gardens = Garden.objects.filter(owner=request.user)
+        results = []
+        for garden in gardens:
+            reasons = []
+            is_optimal = True
+        
+            # Humedad
+            if hasattr(garden, "humidity") and "humidity" in type_info:
+                garden_humidity = getattr(garden, "humidity", None)
+                plant_humidity = type_info["humidity"]
+                if garden_humidity and plant_humidity:
+                   if garden_humidity != plant_humidity:
+                        is_optimal = False
+                        reasons.append(f"La humedad no es adecuada (jardín: {garden_humidity}%, planta: {plant_humidity}%)")
+
+            # Luz
+            if hasattr(garden, "sunlight_exposure") and "light" in type_info:
+                garden_light = getattr(garden, "sunlight_exposure", None)
+                plant_light = type_info["light"]
+                if garden_light and plant_light:
+                    if garden_light not in plant_light:
+                        is_optimal = False
+                        reasons.append(f"La luz no es adecuada")
+        
+            # Ubicación
+            if hasattr(garden, "location") and "preferred_location" in type_info:
+                garden_location = getattr(garden, "location", None)
+                preferred_location = type_info["preferred_location"]
+                if preferred_location != "any":
+                    if preferred_location == "indoor" and garden_location == "outdoor":
+                        is_optimal = False
+                        reasons.append("La planta prefiere interior, pero el jardín es exterior.")
+                    elif preferred_location == "outdoor" and garden_location == "indoor":
+                        is_optimal = False
+                        reasons.append("La planta prefiere exterior, pero el jardín es interior.")
+            if hasattr(garden, "air") and "air_tolerance" in type_info:
+                garden_air = getattr(garden, "air", None)
+                plant_air_tolerance = type_info["air_tolerance"]
+                if plant_air_tolerance == "low" and garden_air:
+                    is_optimal = False
+                    reasons.append("La planta no tolera mucho aire, pero el jardín tiene mucha ventilación.")
+                elif plant_air_tolerance == "high" and not garden_air:
+                    is_optimal = False
+                    reasons.append("La planta necesita mucha ventilación, pero el jardín tiene poco aire.")
+            # Explicación final
+            if is_optimal:
+                texto = "Este jardín es óptimo para la planta según sus necesidades de humedad, luz y ubicación."
+            else:
+                texto = "Este jardín NO es óptimo para la planta: " + " ".join(reasons)
+        
+            results.append({
+                "garden": GardenSimpleSerializer(garden).data,
+                "is_optimal": is_optimal,
+                "reasons": reasons,
+            })
+
+        return Response(results)
 
 # CRUD para Plant
 class UserPlantListCreateView(APIView):
@@ -302,7 +387,7 @@ class UserRegisterView(APIView):
     def post(self, request):
         serializer = UserRegisterSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            #serializer.save()
             user = serializer.save()
             refresh = RefreshToken.for_user(user)
             return Response({
@@ -508,3 +593,4 @@ class WeatherRecommendationView(APIView):
             "recommendation": recommendation,
             "condition": mapped_condition
         })
+        

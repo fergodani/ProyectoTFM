@@ -1,6 +1,6 @@
-import { Garden } from '@/models/Plant';
+import { Garden, GardenBySuitability } from '@/models/Plant';
 
-const API_URL = 'http://192.168.1.48:8000/api/gardens/'; // Cambia la URL según tu configuración
+const API_URL = 'http://192.168.1.53:8000/api/gardens/'; // Cambia la URL según tu configuración
 
 const mockGardens: Garden[] = [
   { id: 1, name: 'Backyard Garden', location: 'Madrid, España', created_at: '2023-01-01' },
@@ -34,6 +34,27 @@ const GardensService = {
   getGardensName: async (accessToken: string): Promise<Garden[]> => {
     try {
       const response = await fetch(`${API_URL}simple/`, {
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        }
+      });
+      if (response.status === 401) {
+        throw new Error("Unauthorized");
+      }
+      if (!response.ok) {
+        throw new Error("Error fetching gardens");
+      }
+      const json = await response.json();
+      return json || [];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  getGardensBySuitability: async (plantId: number, accessToken: string): Promise<GardenBySuitability[]> => {
+    try {
+      const response = await fetch(`${API_URL}suitability/?plant_id=${plantId}`, {
         headers: {
           "Authorization": `Bearer ${accessToken}`,
           "Content-Type": "application/json"

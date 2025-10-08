@@ -1,4 +1,4 @@
-const url = "http://192.168.1.48:8000"
+const url = "http://192.168.1.53:8000"
 
 export const UserService = {
 

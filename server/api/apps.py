@@ -12,7 +12,7 @@ class ApiConfig(AppConfig):
         from django.db.utils import OperationalError
         from .models import PlantInfo
         if PlantInfo.objects.exists():
-            return
+           return
         try:
             with open("../../plants_results.json", 'r', encoding='utf-8') as f:
                 plants_data = json.load(f)

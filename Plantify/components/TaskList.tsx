@@ -110,7 +110,7 @@ export default function TaskList({ tasks, isToday, isNext, onRefresh }: Readonly
                             </View>
                         </ThemedView>
                     )}
-                    {!isToday && (
+                    {!isToday && isNext && (
                         <ThemedView style={styles.card}>
                             <View style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                                 <ThemedText type='title2'>Tareas próximas</ThemedText>
@@ -119,6 +119,20 @@ export default function TaskList({ tasks, isToday, isNext, onRefresh }: Readonly
                                     <View>
                                         <ThemedText type='default'>Todo completado</ThemedText>
                                         <ThemedText type='subtitle'>Las próximas tareas se muestran aquí</ThemedText>
+                                    </View>
+                                </View>
+                            </View>
+                        </ThemedView>
+                    )}
+                    {!isToday && !isNext && (
+                        <ThemedView style={styles.card}>
+                            <View style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                                <ThemedText type='title2'>Tareas pasadas</ThemedText>
+                                <View style={{ display: 'flex', flexDirection: 'row', gap: 16, alignContent: 'center', alignItems: 'center' }}>
+                                    <Ionicons name="checkmark-circle" size={42} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
+                                    <View>
+                                        <ThemedText type='default'>Todo completado</ThemedText>
+                                        <ThemedText type='subtitle'>Las tareas pasadas se muestran aquí</ThemedText>
                                     </View>
                                 </View>
                             </View>

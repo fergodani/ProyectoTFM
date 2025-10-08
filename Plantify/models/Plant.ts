@@ -12,6 +12,12 @@ export interface Garden {
     user_plants?: UserPlant[];
 }
 
+export interface GardenBySuitability {
+    garden: Garden;
+    is_optimal: boolean;
+    reasons: string[];
+}
+
 export interface UserPlant {
     id: number;
     plant_id: number;
