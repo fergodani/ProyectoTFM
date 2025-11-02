@@ -3,11 +3,25 @@ import json
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import Garden, UserPlant, PlantInfo
+from .models import Garden, UserPlant, PlantInfo, Post, Comment
 from django.utils import timezone
 
 # Serializers
+class CommentSerializer(serializers.ModelSerializer):
+    author = serializers.StringRelatedField(read_only=True)
+    class Meta:
+        model = Comment
+        fields = '__all__'
+        
+class PostSerializer(serializers.ModelSerializer):
+    author = serializers.StringRelatedField(read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
+    class Meta:
+        model = Post
+        fields = '__all__'
+        
 class PlantInfoSerializer(serializers.ModelSerializer):
+    posts = PostSerializer(many=True, read_only=True)
     class Meta:
         model = PlantInfo
         fields = '__all__'

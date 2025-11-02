@@ -6,8 +6,8 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 import requests
 from django.http import JsonResponse
-from .models import Garden, UserPlant, PlantInfo
-from .serializers import GardenSimpleSerializer, UserRegisterSerializer, GardenSerializer, UserPlantSerializer, PlantInfoSerializer, CustomTokenObtainPairSerializer
+from .models import Garden, UserPlant, PlantInfo, Post, Comment
+from .serializers import PostSerializer, CommentSerializer, GardenSimpleSerializer, UserRegisterSerializer, GardenSerializer, UserPlantSerializer, PlantInfoSerializer, CustomTokenObtainPairSerializer
 from bs4 import BeautifulSoup
 from django.utils import timezone
 from django.db.models import Q
@@ -594,3 +594,71 @@ class WeatherRecommendationView(APIView):
             "condition": mapped_condition
         })
         
+class UserPostView(APIView):
+    permission_classes = [IsAuthenticated]
+    """CRUD para posts de usuarios"""
+    def get(self, request):
+        posts = request.user.posts.all()
+        serializer = PostSerializer(posts, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = PostSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(author=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class PlantInfoPostView(APIView):
+    """Obtener todos los posts de una planta específica"""
+    def get(self, request, pk):
+        posts = Post.objects.filter(plant_info_id=pk)
+        serializer = PostSerializer(posts, many=True)
+        return Response(serializer.data)    
+    
+class PostDetailView(APIView):
+    """Obtener, actualizar o eliminar un post específico"""
+    def get_object(self, pk):
+        try:
+            return Post.objects.get(pk=pk)
+        except Post.DoesNotExist:
+            return None
+
+    def get(self, request, pk):
+        post = self.get_object(pk)
+        if not post:
+            return Response({"error": "Post not found"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = PostSerializer(post)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        post = self.get_object(pk)
+        if not post:
+            return Response({"error": "Post not found"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = PostSerializer(post, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        post = self.get_object(pk)
+        if not post:
+            return Response({"error": "Post not found"}, status=status.HTTP_404_NOT_FOUND)
+        post.delete()
+        return Response({"message": "Post deleted"}, status=status.HTTP_204_NO_CONTENT)
+    
+class CommentView(APIView):
+    permission_classes = [IsAuthenticated]
+    """CRUD para comentarios de usuarios"""
+    def get(self, request):
+        comments = request.user.comments.all()
+        serializer = CommentSerializer(comments, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(author=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

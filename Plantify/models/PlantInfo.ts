@@ -1,3 +1,5 @@
+import { Post } from "./Post";
+
 type Season = "spring" | "summer" | "fall" | "winter";
 export interface WateringPeriod {
     value: string;
@@ -7,6 +9,7 @@ export interface WateringPeriod {
 
 export interface PlantInfo {
     id: number;
+    posts?: Post[];
     care_level: string | null;
     cones: string | null;
     cuisine: string | null;
