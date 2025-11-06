@@ -47,6 +47,8 @@ export default function RootLayout() {
           <Stack.Screen name="signup" options={{ title: "", headerShown: true }} />
           <Stack.Screen name="camera-screen" options={{ title: "", headerShown: true }} />
           <Stack.Screen name="post-details" options={{ title: "", headerShown: true }} />
+          <Stack.Screen name="post-form" options={{ title: "", headerShown: true }} />
+          <Stack.Screen name="comment-form" options={{ title: "Añadir comentario", headerShown: true }} />
           <Stack.Screen name="+not-found" />
         </Stack>
         <StatusBar style="auto" />

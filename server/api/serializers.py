@@ -3,22 +3,75 @@ import json
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import Garden, UserPlant, PlantInfo, Post, Comment
+from .models import Garden, UserPlant, PlantInfo, Post, Comment, Vote
 from django.utils import timezone
 
 # Serializers
+class VoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Vote
+        fields = ['vote_type', 'post', 'comment']
+        
+    def validate(self, data):
+        """Validar que se vote solo en post O comentario"""
+        if not data.get('post') and not data.get('comment'):
+            raise serializers.ValidationError("Must vote on either a post or comment")
+        if data.get('post') and data.get('comment'):
+            raise serializers.ValidationError("Cannot vote on both post and comment")
+        return data
+
 class CommentSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
+    vote_score = serializers.SerializerMethodField()
+    likes_count = serializers.SerializerMethodField()
+    dislikes_count = serializers.SerializerMethodField()
+    user_vote = serializers.SerializerMethodField()
+    
     class Meta:
         model = Comment
         fields = '__all__'
         
+    def get_vote_score(self, obj):
+        return obj.get_vote_score()
+    
+    def get_likes_count(self, obj):
+        return obj.get_likes_count()
+    
+    def get_dislikes_count(self, obj):
+        return obj.get_dislikes_count()
+        
+    def get_user_vote(self, obj):
+        request = self.context.get('request')
+        if request and request.user.is_authenticated:
+            return obj.get_user_vote(request.user)
+        return None
+        
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
+    vote_score = serializers.SerializerMethodField()
+    likes_count = serializers.SerializerMethodField()
+    dislikes_count = serializers.SerializerMethodField()
+    user_vote = serializers.SerializerMethodField()
+    
     class Meta:
         model = Post
         fields = '__all__'
+        
+    def get_vote_score(self, obj):
+        return obj.get_vote_score()
+    
+    def get_likes_count(self, obj):
+        return obj.get_likes_count()
+    
+    def get_dislikes_count(self, obj):
+        return obj.get_dislikes_count()
+        
+    def get_user_vote(self, obj):
+        request = self.context.get('request')
+        if request and request.user.is_authenticated:
+            return obj.get_user_vote(request.user)
+        return None
         
 class PlantInfoSerializer(serializers.ModelSerializer):
     posts = PostSerializer(many=True, read_only=True)

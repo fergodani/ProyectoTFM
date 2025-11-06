@@ -130,8 +130,32 @@ class Post(models.Model):
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     plant_info = models.ForeignKey('PlantInfo', on_delete=models.CASCADE, related_name='posts')
+    like_count = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def get_vote_score(self):
+        """Calcula el score total: likes - dislikes (mínimo 0)"""
+        likes = self.votes.filter(vote_type='like').count()
+        dislikes = self.votes.filter(vote_type='dislike').count()
+        return max(0, likes - dislikes)
+    
+    def get_likes_count(self):
+        """Número total de likes"""
+        return self.votes.filter(vote_type='like').count()
+    
+    def get_dislikes_count(self):
+        """Número total de dislikes"""
+        return self.votes.filter(vote_type='dislike').count()
+    
+    def get_user_vote(self, user):
+        """Obtiene el voto del usuario para este post"""
+        if not user.is_authenticated:
+            return None
+        try:
+            return self.votes.get(user=user).vote_type
+        except:
+            return None
 
     def __str__(self):
         return self.title
@@ -142,8 +166,67 @@ class Comment(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def get_vote_score(self):
+        """Calcula el score total: likes - dislikes (mínimo 0)"""
+        likes = self.votes.filter(vote_type='like').count()
+        dislikes = self.votes.filter(vote_type='dislike').count()
+        return max(0, likes - dislikes)
+    
+    def get_likes_count(self):
+        """Número total de likes"""
+        return self.votes.filter(vote_type='like').count()
+    
+    def get_dislikes_count(self):
+        """Número total de dislikes"""
+        return self.votes.filter(vote_type='dislike').count()
+    
+    def get_user_vote(self, user):
+        """Obtiene el voto del usuario para este comentario"""
+        if not user.is_authenticated:
+            return None
+        try:
+            return self.votes.get(user=user).vote_type
+        except:
+            return None
+
     def __str__(self):
         return f"Comment by {self.author.username} on {self.post.title}"
+
+class Vote(models.Model):
+    VOTE_CHOICES = [
+        ('like', 'Like'),
+        ('dislike', 'Dislike'),
+    ]
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='votes')
+    vote_type = models.CharField(max_length=10, choices=VOTE_CHOICES)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    # Campos para referenciar tanto posts como comentarios
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='votes', null=True, blank=True)
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='votes', null=True, blank=True)
+    
+    class Meta:
+        # Un usuario solo puede votar una vez por post o comentario
+        unique_together = [
+            ['user', 'post'],
+            ['user', 'comment']
+        ]
+        # Validar que solo se vote en post O comentario, no ambos
+        constraints = [
+            models.CheckConstraint(
+                check=(
+                    models.Q(post__isnull=False, comment__isnull=True) |
+                    models.Q(post__isnull=True, comment__isnull=False)
+                ),
+                name='vote_either_post_or_comment'
+            )
+        ]
+    
+    def __str__(self):
+        target = self.post.title if self.post else f"comment on {self.comment.post.title}"
+        return f"{self.user.username} {self.vote_type}d {target}"
 
 class PlantInfo(models.Model):
     care_level = models.CharField(max_length=50, blank=True, null=True)

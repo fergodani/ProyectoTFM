@@ -5,11 +5,12 @@ import * as React from 'react';
 import { View, useWindowDimensions, Text, StatusBar, TextInput, TouchableOpacity, StyleSheet, useColorScheme } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useRouter } from 'expo-router';
+import { useNavigation, useRouter } from 'expo-router';
 import { useAuth } from '@/hooks/useAuthContext';
 import Button from '@/components/Button';
 import { useLocalSearchParams } from "expo-router";
 import { LinearGradient } from 'expo-linear-gradient';
+import { useLayoutEffect } from 'react';
 
 export default function LoginScreen() {
     const params = useLocalSearchParams();
@@ -21,8 +22,17 @@ export default function LoginScreen() {
     const [password, setPassword] = React.useState('');
     const [error, setError] = React.useState('');
     const { login } = useAuth();
-    const colorScheme = useColorScheme();
+    const colorScheme = useColorScheme() ?? 'light';
+    const navigation = useNavigation();
     const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+          headerStyle: {
+            backgroundColor: Colors[colorScheme].background,
+          },
+        });
+      }, [navigation, colorScheme]);
 
     const handleLogin = async () => {
         setError('');

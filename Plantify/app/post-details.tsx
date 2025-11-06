@@ -1,9 +1,9 @@
 import { ThemedText } from "@/components/ThemedText";
 import { useAuth } from "@/hooks/useAuthContext";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import { Post } from "@/models/Post";
+import { Post, CommentVoteResponse } from "@/models/Post";
 import { PostService } from "@/services/postService";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { Ionicons } from '@expo/vector-icons';
 import { ActivityIndicator, View, StyleSheet, ScrollView, KeyboardAvoidingView, Platform, TouchableOpacity, TextInput } from "react-native";
@@ -16,32 +16,206 @@ export default function PostDetails() {
     const [loading, setLoading] = useState(true);
     const colorScheme = useColorScheme() ?? "light";
     const { getUserId, accessToken, refreshToken, setTokens } = useAuth();
-    const cardBackground = colorScheme === "dark" ? "#222" : "#fff"; // O los colores que prefieras
+    const cardBackground = colorScheme === "dark" ? "#222" : "#fff";
+    const buttonBackground = colorScheme === "dark" ? "#fff" : "#444";
     const [commentText, setCommentText] = useState("");
-    const [likeCount, setLikeCount] = useState(post?.likes || 0);
-    const [dislikeCount, setDislikeCount] = useState(post?.dislikes || 0);
+    const [commentVotes, setCommentVotes] = useState<{[key: number]: string | null}>({});
+    const [votingComments, setVotingComments] = useState<Set<number>>(new Set());
+    const [postVote, setPostVote] = useState<string | null>(null);
+    const [votingPost, setVotingPost] = useState(false);
 
-    const handleLike = () => {
-        // Aquí puedes llamar a tu servicio para registrar el voto positivo
-        setLikeCount(likeCount + 1);
+    // Función para mostrar feedback del voto
+    const showVoteFeedback = (action: string, voteType: string | null) => {
+        let message = '';
+        switch (action) {
+            case 'created':
+                message = `You ${voteType}d this post!`;
+                break;
+            case 'updated':
+                message = `Your vote has been changed to ${voteType}!`;
+                break;
+            case 'removed':
+                message = 'Your vote has been removed.';
+                break;
+        }
+        // console.log(message); // Puedes cambiar esto por una notificación toast si quieres
     };
 
-    const handleDislike = () => {
-        // Aquí puedes llamar a tu servicio para registrar el voto negativo
-        setDislikeCount(dislikeCount + 1);
+    const handleLikePost = async () => {
+        if (votingPost) return;
+        
+        setVotingPost(true);
+        
+        try {
+            const response = await PostService.giveLikePost(Number(id), accessToken!);
+            if (response) {
+                // Actualiza el estado del post con los nuevos conteos de votos
+                setPost(prevPost => prevPost ? {
+                    ...prevPost,
+                    vote_score: response.vote_score,
+                    likes_count: response.likes_count,
+                    dislikes_count: response.dislikes_count
+                } : prevPost);
+                
+                // Actualiza el estado del voto del usuario para el post
+                setPostVote(response.vote_type);
+                
+                // Mostrar feedback
+                showVoteFeedback(response.action, response.vote_type);
+            }
+        } finally {
+            setVotingPost(false);
+        }
+    };
+
+    const handleDislikePost = async () => {
+        if (votingPost) return;
+        
+        setVotingPost(true);
+        
+        try {
+            const response = await PostService.giveDislikePost(Number(id), accessToken!);
+            if (response) {
+                // Actualiza el estado del post con los nuevos conteos de votos
+                setPost(prevPost => prevPost ? {
+                    ...prevPost,
+                    vote_score: response.vote_score,
+                    likes_count: response.likes_count,
+                    dislikes_count: response.dislikes_count
+                } : prevPost);
+                
+                // Actualiza el estado del voto del usuario para el post
+                setPostVote(response.vote_type);
+                
+                // Mostrar feedback
+                showVoteFeedback(response.action, response.vote_type);
+            }
+        } finally {
+            setVotingPost(false);
+        }
+    };
+
+    const handleLikeComment = async (commentId: number) => {
+        // Evitar múltiples clics simultáneos
+        if (votingComments.has(commentId)) return;
+        
+        setVotingComments(prev => new Set([...prev, commentId]));
+        
+        try {
+            const response = await PostService.giveLikeComment(commentId, accessToken!);
+            if (response) {
+                // Actualiza el estado del comentario específico con los nuevos conteos de votos
+                setPost(prevPost => prevPost ? {
+                    ...prevPost,
+                    comments: prevPost.comments?.map(comment => 
+                        comment.id === commentId 
+                            ? {
+                                ...comment,
+                                vote_score: response.vote_score,
+                                likes_count: response.likes_count,
+                                dislikes_count: response.dislikes_count
+                              }
+                            : comment
+                    )
+                } : prevPost);
+                
+                // Actualiza el estado local del voto del usuario para este comentario
+                setCommentVotes(prev => ({
+                    ...prev,
+                    [commentId]: response.user_vote
+                }));
+            }
+        } finally {
+            setVotingComments(prev => {
+                const newSet = new Set(prev);
+                newSet.delete(commentId);
+                return newSet;
+            });
+        }
+    };
+
+    const handleDislikeComment = async (commentId: number) => {
+        // Evitar múltiples clics simultáneos
+        if (votingComments.has(commentId)) return;
+        
+        setVotingComments(prev => new Set([...prev, commentId]));
+        
+        try {
+            const response = await PostService.giveDislikeComment(commentId, accessToken!);
+            if (response) {
+                // Actualiza el estado del comentario específico con los nuevos conteos de votos
+                setPost(prevPost => prevPost ? {
+                    ...prevPost,
+                    comments: prevPost.comments?.map(comment => 
+                        comment.id === commentId 
+                            ? {
+                                ...comment,
+                                vote_score: response.vote_score,
+                                likes_count: response.likes_count,
+                                dislikes_count: response.dislikes_count
+                              }
+                            : comment
+                    )
+                } : prevPost);
+                
+                // Actualiza el estado local del voto del usuario para este comentario
+                setCommentVotes(prev => ({
+                    ...prev,
+                    [commentId]: response.user_vote
+                }));
+            }
+        } finally {
+            setVotingComments(prev => {
+                const newSet = new Set(prev);
+                newSet.delete(commentId);
+                return newSet;
+            });
+        }
     };
 
     const handleSendComment = () => {
-        // Aquí puedes llamar a tu servicio para enviar el comentario
-        // y luego limpiar el input
-        setCommentText("");
+        router.push({
+            pathname: "/comment-form",
+            params: { postId: id }
+        });
     };
+
+    // Efecto para limpiar estados cuando cambia el ID del post
+    useEffect(() => {
+        // Resetear estados cuando cambia el post
+        setPostVote(null);
+        setCommentVotes({});
+        setVotingPost(false);
+        setVotingComments(new Set());
+    }, [id]);
 
     useEffect(() => {
         const fetchPost = async () => {
             try {
                 const data = await PostService.getPostById(Number(id), accessToken!);
                 setPost(data);
+                
+                // Inicializar el voto del post (siempre, incluso si es null)
+                setPostVote(data?.user_vote || null);
+                
+                // Mensaje temporal para verificar que funciona (puedes quitarlo después)
+                if (data?.user_vote) {
+                    console.log(`✅ Post vote loaded: ${data.user_vote}`);
+                } else {
+                    console.log('ℹ️ No vote found for this post');
+                }
+                
+                // Inicializar el estado de los votos de comentarios si están disponibles
+                if (data?.comments) {
+                    const initialVotes: {[key: number]: string | null} = {};
+                    data.comments.forEach(comment => {
+                        if (comment.id) {
+                            // Siempre agregar el comentario, incluso si user_vote es null
+                            initialVotes[comment.id] = comment.user_vote || null;
+                        }
+                    });
+                    setCommentVotes(initialVotes);
+                }
             } catch (error) {
                 console.error("Error fetching post details:", error);
             }
@@ -58,36 +232,112 @@ export default function PostDetails() {
                 <>
                     <ScrollView style={styles.container}>
                         <View style={[styles.card, { backgroundColor: cardBackground, marginBottom: 16 }]}>
-                            <ThemedText type="subtitle">{post.author} · {new Date(post.created_at).toLocaleDateString()}</ThemedText>
+                            <ThemedText type="subtitle">{post.author} · {new Date(post.created_at!).toLocaleDateString()}</ThemedText>
                             <ThemedText type="title">{post.title}</ThemedText>
                             <ThemedText type="default">{post.content}</ThemedText>
-                            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 12 }}>
-                                <TouchableOpacity onPress={handleLike} style={{ flexDirection: "row", alignItems: "center", marginRight: 16 }}>
-                                    <Ionicons name="thumbs-up-outline" size={24} color="#4CAF50" />
-                                    <ThemedText style={{ marginLeft: 4 }}>{likeCount}</ThemedText>
+                            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 12, paddingVertical: 8 }}>
+                                <TouchableOpacity 
+                                    onPress={handleLikePost} 
+                                    style={{ 
+                                        flexDirection: "row", 
+                                        alignItems: "center", 
+                                        marginRight: 8, 
+                                        opacity: votingPost ? 0.6 : 1,
+                                        padding: 4,
+                                        borderRadius: 16,
+                                        backgroundColor: postVote === 'like' ? '#E8F5E8' : 'transparent'
+                                    }}
+                                    disabled={votingPost}
+                                    activeOpacity={0.7}
+                                >
+                                    <Ionicons 
+                                        name="arrow-up-circle" 
+                                        size={26} 
+                                        color={postVote === 'like' ? '#4CAF50' : buttonBackground} 
+                                    />
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={handleDislike} style={{ flexDirection: "row", alignItems: "center" }}>
-                                    <Ionicons name="thumbs-down-outline" size={24} color="#F44336" />
-                                    <ThemedText style={{ marginLeft: 4 }}>{dislikeCount}</ThemedText>
+                                <ThemedText style={{ marginLeft: 4, fontSize: 18, fontWeight: 'bold', minWidth: 30, textAlign: 'center' }}>
+                                    {post.vote_score || 0}
+                                </ThemedText>
+                                <TouchableOpacity 
+                                    onPress={handleDislikePost} 
+                                    style={{ 
+                                        flexDirection: "row", 
+                                        alignItems: "center", 
+                                        marginLeft: 8, 
+                                        opacity: votingPost ? 0.6 : 1,
+                                        padding: 4,
+                                        borderRadius: 16,
+                                        backgroundColor: postVote === 'dislike' ? '#FFEBEE' : 'transparent'
+                                    }}
+                                    disabled={votingPost}
+                                    activeOpacity={0.7}
+                                >
+                                    <Ionicons 
+                                        name="arrow-down-circle" 
+                                        size={26} 
+                                        color={postVote === 'dislike' ? '#f44336' : buttonBackground} 
+                                    />
                                 </TouchableOpacity>
+                                {votingPost && (
+                                    <ActivityIndicator size="small" color={buttonBackground} style={{ marginLeft: 12 }} />
+                                )}
                             </View>
                         </View>
-                        {post.comments.map(comment => (
+                        {post.comments?.map(comment => (
                             <View key={comment.id} style={[styles.card, { backgroundColor: cardBackground, marginBottom: 12 }]}>
-                                <ThemedText type="subtitle">{comment.author} · {new Date(comment.created_at).toLocaleDateString()}</ThemedText>
+                                <ThemedText type="subtitle">{comment.author} · {new Date(comment.created_at!).toLocaleDateString()}</ThemedText>
                                 <ThemedText type="default">{comment.content}</ThemedText>
-                                <View style={{ flexDirection: "row", alignItems: "center", marginTop: 12 }}>
-                                <View style={{ flexDirection: "row", alignItems: "center", marginLeft: "auto" }}>
-                                    <TouchableOpacity onPress={handleLike} style={{ flexDirection: "row", alignItems: "center", marginRight: 16 }}>
-                                        <Ionicons name="thumbs-up-outline" size={20} color="#4CAF50" />
-                                        <ThemedText style={{ marginLeft: 4 }}>{likeCount}</ThemedText>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity onPress={handleDislike} style={{ flexDirection: "row", alignItems: "center" }}>
-                                        <Ionicons name="thumbs-down-outline" size={20} color="#F44336" />
-                                        <ThemedText style={{ marginLeft: 4 }}>{dislikeCount}</ThemedText>
-                                    </TouchableOpacity>
+                                <View style={{ flexDirection: "row", alignItems: "center", marginTop: 12, paddingVertical: 4 }}>
+                                    <View style={{ flexDirection: "row", alignItems: "center", marginLeft: "auto" }}>
+                                        <TouchableOpacity 
+                                            onPress={() => handleLikeComment(comment.id!)} 
+                                            style={{ 
+                                                flexDirection: "row", 
+                                                alignItems: "center", 
+                                                marginRight: 6, 
+                                                opacity: votingComments.has(comment.id!) ? 0.6 : 1,
+                                                padding: 3,
+                                                borderRadius: 12,
+                                                backgroundColor: commentVotes[comment.id!] === 'like' ? '#E8F5E8' : 'transparent'
+                                            }}
+                                            disabled={votingComments.has(comment.id!)}
+                                            activeOpacity={0.7}
+                                        >
+                                            <Ionicons 
+                                                name="arrow-up-circle" 
+                                                size={22} 
+                                                color={commentVotes[comment.id!] === 'like' ? '#4CAF50' : buttonBackground} 
+                                            />
+                                        </TouchableOpacity>
+                                        <ThemedText style={{ marginLeft: 4, fontSize: 14, fontWeight: '600', minWidth: 24, textAlign: 'center' }}>
+                                            {comment.vote_score || 0}
+                                        </ThemedText>
+                                        <TouchableOpacity 
+                                            onPress={() => handleDislikeComment(comment.id!)} 
+                                            style={{ 
+                                                flexDirection: "row", 
+                                                alignItems: "center", 
+                                                marginLeft: 6, 
+                                                opacity: votingComments.has(comment.id!) ? 0.6 : 1,
+                                                padding: 3,
+                                                borderRadius: 12,
+                                                backgroundColor: commentVotes[comment.id!] === 'dislike' ? '#FFEBEE' : 'transparent'
+                                            }}
+                                            disabled={votingComments.has(comment.id!)}
+                                            activeOpacity={0.7}
+                                        >
+                                            <Ionicons 
+                                                name="arrow-down-circle" 
+                                                size={22} 
+                                                color={commentVotes[comment.id!] === 'dislike' ? '#f44336' : buttonBackground} 
+                                            />
+                                        </TouchableOpacity>
+                                        {votingComments.has(comment.id!) && (
+                                            <ActivityIndicator size="small" color={buttonBackground} style={{ marginLeft: 8 }} />
+                                        )}
+                                    </View>
                                 </View>
-                            </View>
                             </View>
                         ))}
                     </ScrollView>
@@ -96,15 +346,14 @@ export default function PostDetails() {
                         keyboardVerticalOffset={80}
                         style={{ position: "absolute", left: 0, right: 0, bottom: 0, backgroundColor: cardBackground, padding: 8, flexDirection: "row", alignItems: "center", borderTopWidth: 1, borderColor: "#eee" }}
                     >
-                        <TextInput
+                        <TouchableOpacity
                             style={{ flex: 1, borderRadius: 5, paddingHorizontal: 16, paddingVertical: 8, marginRight: 8, backgroundColor: "#fff" }}
-                            placeholder="Escribe un comentario..."
-                            value={commentText}
-                            onChangeText={setCommentText}
-                        />
-                        <TouchableOpacity onPress={handleSendComment} style={{ padding: 8 }}>
-                            <Ionicons name="send" size={25} color="#f3f3f3" />
+                            onPress={handleSendComment}
+                            activeOpacity={1}
+                        >
+                            <ThemedText type="default" style={{ color: "#aaa" }}>Escribe un comentario...</ThemedText>
                         </TouchableOpacity>
+                        <Ionicons name="send" size={25} color="#f3f3f3" />
                     </KeyboardAvoidingView>
                 </>
             ) : (

@@ -1,7 +1,7 @@
 from django.urls import include, path
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from .views import UserPostView, PlantInfoPostView, PostDetailView, CommentView, GardenSuitabilityView, WeatherRecommendationView, PredictImageView, GardenListNameView, GardenListCreateView, GardenDetailView, PlantInfoDetailView, PlantInfoListView, TrefflePlantDetail, TrefflePlantList, UserPlantDetailView, UserPlantListCreateView, CustomTokenObtainPairView, UserRegisterView, UserTasksView 
+from .views import PostVoteView, CommentVoteView, UserPostView, PlantInfoPostView, PostDetailView, CommentView, GardenSuitabilityView, WeatherRecommendationView, PredictImageView, GardenListNameView, GardenListCreateView, GardenDetailView, PlantInfoDetailView, PlantInfoListView, TrefflePlantDetail, TrefflePlantList, UserPlantDetailView, UserPlantListCreateView, CustomTokenObtainPairView, UserRegisterView, UserTasksView 
 
 urlpatterns = [
     path('gardens/', GardenListCreateView.as_view(), name='garden-list-create'),
@@ -22,6 +22,8 @@ urlpatterns = [
     path('weather/', WeatherRecommendationView.as_view(), name='weather-recommendation'),
     path('user-posts/', UserPostView.as_view(), name='user-posts'),
     path('posts/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+    path('posts/<int:pk>/vote/', PostVoteView.as_view(), name='post-vote'),
     path('plantinfo-posts/<int:pk>/', PlantInfoPostView.as_view(), name='plantinfo-post-detail'),
     path('comments/', CommentView.as_view(), name='comment-list-create'),
+    path('comments/<int:pk>/vote/', CommentVoteView.as_view(), name='comment-vote'),
 ]

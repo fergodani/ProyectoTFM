@@ -6,8 +6,8 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 import requests
 from django.http import JsonResponse
-from .models import Garden, UserPlant, PlantInfo, Post, Comment
-from .serializers import PostSerializer, CommentSerializer, GardenSimpleSerializer, UserRegisterSerializer, GardenSerializer, UserPlantSerializer, PlantInfoSerializer, CustomTokenObtainPairSerializer
+from .models import Garden, UserPlant, PlantInfo, Post, Comment, Vote
+from .serializers import PostSerializer, CommentSerializer, GardenSimpleSerializer, UserRegisterSerializer, GardenSerializer, UserPlantSerializer, PlantInfoSerializer, CustomTokenObtainPairSerializer, VoteSerializer
 from bs4 import BeautifulSoup
 from django.utils import timezone
 from django.db.models import Q
@@ -477,7 +477,7 @@ class UserTasksView(APIView):
             "previous_tasks": previous_tasks
         })
         
-model = load_model('./models/plant_model.h5')
+#model = load_model('./models/plant_model.h5')
 #model = load_model('./models/plant_identify.h5')
 #model = load_model('./models/model169_4.h5')
 
@@ -599,21 +599,23 @@ class UserPostView(APIView):
     """CRUD para posts de usuarios"""
     def get(self, request):
         posts = request.user.posts.all()
-        serializer = PostSerializer(posts, many=True)
+        serializer = PostSerializer(posts, many=True, context={'request': request})
         return Response(serializer.data)
 
     def post(self, request):
         serializer = PostSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(author=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            post = serializer.save(author=request.user)
+            # Devolver el post creado con el contexto para incluir user_vote
+            response_serializer = PostSerializer(post, context={'request': request})
+            return Response(response_serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class PlantInfoPostView(APIView):
     """Obtener todos los posts de una planta específica"""
     def get(self, request, pk):
         posts = Post.objects.filter(plant_info_id=pk)
-        serializer = PostSerializer(posts, many=True)
+        serializer = PostSerializer(posts, many=True, context={'request': request})
         return Response(serializer.data)    
     
 class PostDetailView(APIView):
@@ -628,17 +630,19 @@ class PostDetailView(APIView):
         post = self.get_object(pk)
         if not post:
             return Response({"error": "Post not found"}, status=status.HTTP_404_NOT_FOUND)
-        serializer = PostSerializer(post)
+        serializer = PostSerializer(post, context={'request': request})
         return Response(serializer.data)
 
     def put(self, request, pk):
         post = self.get_object(pk)
         if not post:
             return Response({"error": "Post not found"}, status=status.HTTP_404_NOT_FOUND)
-        serializer = PostSerializer(post, data=request.data)
+        serializer = PostSerializer(post, data=request.data, context={'request': request})
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
+            updated_post = serializer.save()
+            # Devolver el post actualizado con el contexto para incluir user_vote
+            response_serializer = PostSerializer(updated_post, context={'request': request})
+            return Response(response_serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
@@ -653,7 +657,7 @@ class CommentView(APIView):
     """CRUD para comentarios de usuarios"""
     def get(self, request):
         comments = request.user.comments.all()
-        serializer = CommentSerializer(comments, many=True)
+        serializer = CommentSerializer(comments, many=True, context={'request': request})
         return Response(serializer.data)
 
     def post(self, request):
@@ -662,3 +666,99 @@ class CommentView(APIView):
             serializer.save(author=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class PostVoteView(APIView):
+    permission_classes = [IsAuthenticated]
+    """Votar en un post"""
+    
+    def post(self, request, pk):
+        try:
+            post = Post.objects.get(pk=pk)
+        except Post.DoesNotExist:
+            return Response({"error": "Post not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+        vote_type = request.data.get('vote_type')
+        if vote_type not in ['like', 'dislike']:
+            return Response(
+                {"error": "vote_type must be 'like' or 'dislike'"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Buscar voto existente del usuario para este post
+        vote, created = Vote.objects.get_or_create(
+            user=request.user,
+            post=post,
+            defaults={'vote_type': vote_type}
+        )
+        
+        if not created:
+            # Si ya existe un voto
+            if vote.vote_type == vote_type:
+                # Si es el mismo voto, lo eliminamos (toggle)
+                vote.delete()
+                action = 'removed'
+            else:
+                # Si es diferente, lo actualizamos
+                vote.vote_type = vote_type
+                vote.save()
+                action = 'updated'
+        else:
+            action = 'created'
+        
+        # Devolver estado actualizado
+        return Response({
+            'action': action,
+            'vote_type': vote_type if action != 'removed' else None,
+            'vote_score': post.get_vote_score(),
+            'likes_count': post.get_likes_count(),
+            'dislikes_count': post.get_dislikes_count(),
+            'user_vote': post.get_user_vote(request.user)
+        })
+
+class CommentVoteView(APIView):
+    permission_classes = [IsAuthenticated]
+    """Votar en un comentario"""
+    
+    def post(self, request, pk):
+        try:
+            comment = Comment.objects.get(pk=pk)
+        except Comment.DoesNotExist:
+            return Response({"error": "Comment not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+        vote_type = request.data.get('vote_type')
+        if vote_type not in ['like', 'dislike']:
+            return Response(
+                {"error": "vote_type must be 'like' or 'dislike'"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Buscar voto existente del usuario para este comentario
+        vote, created = Vote.objects.get_or_create(
+            user=request.user,
+            comment=comment,
+            defaults={'vote_type': vote_type}
+        )
+        
+        if not created:
+            # Si ya existe un voto
+            if vote.vote_type == vote_type:
+                # Si es el mismo voto, lo eliminamos (toggle)
+                vote.delete()
+                action = 'removed'
+            else:
+                # Si es diferente, lo actualizamos
+                vote.vote_type = vote_type
+                vote.save()
+                action = 'updated'
+        else:
+            action = 'created'
+        
+        # Devolver estado actualizado
+        return Response({
+            'action': action,
+            'vote_type': vote_type if action != 'removed' else None,
+            'vote_score': comment.get_vote_score(),
+            'likes_count': comment.get_likes_count(),
+            'dislikes_count': comment.get_dislikes_count(),
+            'user_vote': comment.get_user_vote(request.user)
+        })
