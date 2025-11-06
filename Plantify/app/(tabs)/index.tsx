@@ -9,7 +9,7 @@ import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { globalStyles } from '@/styles/global-styles';
 import { useAuth } from "@/hooks/useAuthContext";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -42,43 +42,75 @@ export default function HomeScreen() {
   const [index, setIndex] = React.useState(1);
   const layout = useWindowDimensions();
   const [showWarning, setShowWarning] = useState(true);
+  const [loadingWeather, setLoadingWeather] = useState(false);
+  const [loadingTasks, setLoadingTasks] = useState(false);
 
   const renderScene = SceneMap({
-    previous: () => <TaskList tasks={tasks?.previous_tasks} isToday={false} isNext={false} onRefresh={fetchTasks} />,
-    today: () => <TaskList tasks={tasks?.today_tasks} isToday={true} isNext={false} onRefresh={fetchTasks} />,
-    next: () => <TaskList tasks={tasks?.next_tasks} isToday={false} isNext={true} onRefresh={fetchTasks} />,
+    previous: () => <TaskList tasks={tasks?.previous_tasks} isToday={false} isNext={false} onRefresh={loadTasksData} />,
+    today: () => <TaskList tasks={tasks?.today_tasks} isToday={true} isNext={false} onRefresh={loadTasksData} />,
+    next: () => <TaskList tasks={tasks?.next_tasks} isToday={false} isNext={true} onRefresh={loadTasksData} />,
   });
 
 
-  useEffect(() => {
-    (async () => {
-      try {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== 'granted') return;
-
-        let location = await Location.getCurrentPositionAsync({});
-        const { latitude, longitude } = location.coords;
-
-        // Reemplaza YOUR_API_KEY por tu clave de OpenWeatherMap
-        const data = await RecommendationService.getWeather(latitude, longitude);
-        console.log(data)
-        setWeatherInfo(data);
-
-        if (isAuthenticated) {
-          fetchTasks();
-        }
-      } catch (error) {
-        console.error("Error fetching weather data:", error);
+  // Función para obtener datos del tiempo (memoizada)
+  const loadWeatherData = useCallback(async () => {
+    setLoadingWeather(true);
+    try {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        console.log('Location permission not granted');
+        return;
       }
-    })();
+
+      let location = await Location.getCurrentPositionAsync({});
+      const { latitude, longitude } = location.coords;
+
+      const data = await RecommendationService.getWeather(latitude, longitude);
+      setWeatherInfo(data);
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+    } finally {
+      setLoadingWeather(false);
+    }
   }, []);
 
+  // Función para obtener las tareas (memoizada)
+  const loadTasksData = useCallback(async () => {
+    if (!isAuthenticated) return;
 
-  const fetchTasks = async () => {
+    setLoadingTasks(true);
+    try {
+      const data = await fetchTasksPromise();
+      setTasks(data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    } finally {
+      setLoadingTasks(false);
+    }
+  }, [isAuthenticated, accessToken, refreshToken]);
+
+  useEffect(() => {
+    // Ejecutar ambas funciones en paralelo al montar el componente
+    Promise.all([
+      loadWeatherData(),
+      loadTasksData()
+    ]);
+  }, [loadWeatherData, loadTasksData]);
+
+  // Efecto separado para cargar tareas cuando el usuario se autentica
+  useEffect(() => {
+    if (isAuthenticated && !tasks && !loadingTasks) {
+      loadTasksData();
+    }
+  }, [isAuthenticated, loadTasksData, tasks, loadingTasks]);
+
+
+  // Función que devuelve una promesa sin efectos secundarios
+  const fetchTasksPromise = async () => {
     try {
       const data = await PlantService.getTasks(accessToken!);
       console.log("Tasks data:", data);
-      setTasks(data);
+      return data;
     } catch (error: any) {
       if (error.message === 'Unauthorized') {
         // Handle token refresh logic here
@@ -88,11 +120,22 @@ export default function HomeScreen() {
 
           const data = await PlantService.getTasks(newTokens.access);
           console.log("Tasks data:", data);
-          setTasks(data);
+          return data;
         } catch (refreshError) {
-
+          throw refreshError;
         }
       }
+      throw error;
+    }
+  };
+
+  // Función wrapper para usar en otros lugares (mantiene la funcionalidad anterior)
+  const fetchTasks = async () => {
+    try {
+      const data = await fetchTasksPromise();
+      setTasks(data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
     }
   };
 
@@ -108,7 +151,7 @@ export default function HomeScreen() {
           </View>
           <ThemedText type='default'>Cuida cada una de tus plantas</ThemedText>
         </View>
-        {weatherInfo === null ? (
+        {loadingWeather || weatherInfo === null ? (
           <View style={{ width: 75, height: 75, justifyContent: 'center', alignItems: 'center' }}>
             <ActivityIndicator size="large" color={Colors.light.tint} />
           </View>
@@ -150,20 +193,27 @@ export default function HomeScreen() {
         <ThemedView style={[styles.card, { padding: 16 }]}>
           <ThemedText type='default'>Inicia sesión para ver tus recordatorios</ThemedText>
         </ThemedView>
-      ) : <TabView
-        style={{ marginTop: 16 }}
-        navigationState={{ index, routes }}
-        renderScene={renderScene}
-        onIndexChange={setIndex}
-        initialLayout={{ width: layout.width }}
-        renderTabBar={props => <TabBar
-          {...props}
-          style={styles.tab}
-          activeColor={Colors.light.text}
-          inactiveColor={Colors.light.text}
-          indicatorStyle={{ backgroundColor: 'white', height: '100%', borderRadius: 8 }}
-        />}
-      />}
+      ) : loadingTasks ? (
+        <View style={{ marginTop: 16, padding: 32, alignItems: 'center', justifyContent: 'center' }}>
+          <ActivityIndicator size="large" color={Colors.light.tint} />
+          <ThemedText type="default" style={{ marginTop: 8 }}>Cargando tareas...</ThemedText>
+        </View>
+      ) : (
+        <TabView
+          style={{ marginTop: 16 }}
+          navigationState={{ index, routes }}
+          renderScene={renderScene}
+          onIndexChange={setIndex}
+          initialLayout={{ width: layout.width }}
+          renderTabBar={props => <TabBar
+            {...props}
+            style={styles.tab}
+            activeColor={Colors.light.text}
+            inactiveColor={Colors.light.text}
+            indicatorStyle={{ backgroundColor: 'white', height: '100%', borderRadius: 8 }}
+          />}
+        />
+      )}
 
     </LinearGradient>
   );
