@@ -23,9 +23,15 @@ import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 import json
 import os
+from google import genai
+from google.genai import types
+from dotenv import load_dotenv
 
 TREFLE_API_URL = "https://trefle.io/api/v1/plants"
 TREFLE_TOKEN = "qD5bYaqpif9la_ZYT6zOPTe5icGrGiJAOlDacDK0Fic" 
+
+PERENUAL_API_URL = "https://perenual.com/api/v2"
+PERENUAL_API_KEY = os.getenv('PERENUAL_API_KEY') or "sk-pQXu688cc3229ec5b11655" 
 
 # CRUD para Garden
 class GardenListCreateView(APIView):
@@ -762,3 +768,272 @@ class CommentVoteView(APIView):
             'dislikes_count': comment.get_dislikes_count(),
             'user_vote': comment.get_user_vote(request.user)
         })
+
+class PerenualPlantListView(APIView):
+    """Obtener lista de plantas desde Perenual API"""
+    def get(self, request):
+        page = request.GET.get('page', 1)
+        q = request.GET.get('q', '')  # Búsqueda por nombre
+        indoor = request.GET.get('indoor', None)  # Filtro para plantas de interior
+        hardiness = request.GET.get('hardiness', None)  # Zona de resistencia
+        watering = request.GET.get('watering', None)  # Frecuencia de riego
+        sunlight = request.GET.get('sunlight', None)  # Requerimientos de luz
+        
+        try:
+            url = f"{PERENUAL_API_URL}/species-list"
+            params = {
+                'key': PERENUAL_API_KEY,
+                'page': page
+            }
+            
+            # Añadir parámetros de filtros si están presentes
+            if q:
+                params['q'] = q
+            if indoor is not None:
+                params['indoor'] = indoor
+            if hardiness:
+                params['hardiness'] = hardiness
+            if watering:
+                params['watering'] = watering
+            if sunlight:
+                params['sunlight'] = sunlight
+            
+            response = requests.get(url, params=params)
+            
+            if response.status_code == 200:
+                data = response.json()
+                # Filtrar solo los campos deseados
+                if 'data' in data:
+                    filtered_data = []
+                    for plant in data['data']:
+                        filtered_plant = {
+                            'id': plant.get('id'),
+                            'common_name': plant.get('common_name'),
+                            'scientific_name': plant.get('scientific_name'),
+                            'default_image': plant.get('default_image')
+                        }
+                        filtered_data.append(filtered_plant)
+                    data['data'] = filtered_data
+                return Response(data)
+            
+            if response.status_code == 200:
+                data = response.json()
+                return Response(data)
+            else:
+                return Response(
+                    {"error": "Failed to fetch plants from Perenual API"}, 
+                    status=response.status_code
+                )
+                
+        except Exception as e:
+            return Response(
+                {"error": "Error connecting to Perenual API", "details": str(e)}, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+class PerenualPlantDetailView(APIView):
+    """Obtener detalles de una planta específica desde Perenual API"""
+    def get(self, request, plant_id):
+        try:
+            url = f"{PERENUAL_API_URL}/species/details/{plant_id}"
+            params = {
+                'key': PERENUAL_API_KEY
+            }
+            
+            response = requests.get(url, params=params)
+            
+            if response.status_code == 200:
+                data = response.json()
+                
+                # Obtener información de cuidados desde care_guides si existe
+                if 'care_guides' in data:
+                    care_guides_url = data['care_guides']
+                    try:
+                        care_response = requests.get(care_guides_url)
+                        if care_response.status_code == 200:
+                            care_data = care_response.json()
+                            # Procesar la información de cuidados
+                            if care_data.get('data') and len(care_data['data']) > 0:
+                                first_guide = care_data['data'][0]
+                                if 'section' in first_guide:
+                                    # Extraer watering, pruning y sunlight descriptions
+                                    for section in first_guide['section']:
+                                        section_type = section.get('type')
+                                        if section_type == 'watering':
+                                            data['watering_long'] = section.get('description', '')
+                                        elif section_type == 'pruning':
+                                            data['pruning'] = section.get('description', '')
+                                        elif section_type == 'sunlight':
+                                            data['sunlight_long'] = section.get('description', '')
+                    except Exception as care_e:
+                        print(f"Error fetching care guides: {str(care_e)}")
+                
+                return Response(data)
+            elif response.status_code == 404:
+                return Response(
+                    {"error": "Plant not found"}, 
+                    status=status.HTTP_404_NOT_FOUND
+                )
+            else:
+                return Response(
+                    {"error": "Failed to fetch plant details from Perenual API"}, 
+                    status=response.status_code
+                )
+                
+        except Exception as e:
+            return Response(
+                {"error": "Error connecting to Perenual API", "details": str(e)}, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+class GeminiPlantIdentificationView(APIView):
+    parser_classes = [MultiPartParser]
+    """Identificación de plantas usando Gemini AI"""
+    
+    def post(self, request):
+        # Verificar que se envió una imagen
+        if 'image' not in request.FILES:
+            return Response(
+                {"error": "No image provided"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        image_file = request.FILES['image']
+        
+        try:
+            # Cargar variables de entorno
+            load_dotenv()
+            api_key = os.getenv('GEMINI_API_KEY')
+            
+            if not api_key:
+                return Response(
+                    {"error": "Gemini API key not configured"}, 
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+            
+            # Configurar cliente de Gemini
+            client = genai.Client(api_key=api_key)
+            
+            # Leer los datos de la imagen
+            image_data = image_file.read()
+            
+            # Determinar el tipo MIME de la imagen
+            content_type = image_file.content_type
+            if not content_type or not content_type.startswith('image/'):
+                content_type = 'image/jpeg'  # Fallback por defecto
+            
+            # Hacer la petición a Gemini
+            response = client.models.generate_content(
+                model='gemini-2.5-flash',
+                contents=[
+                    types.Part.from_bytes(
+                        data=image_data,
+                        mime_type=content_type,
+                    ),
+                    '''Identify this plant and provide only the scientific names. List 3-5 potential identifications with their complete scientific names only, one per line, without numbers, formatting, or additional text.'''
+                ]
+            )
+            
+            # Procesar la respuesta de Gemini
+            gemini_response = response.text.strip()
+            print("Gemini response:", gemini_response)
+            scientific_names = [name.strip() for name in gemini_response.split('\n') if name.strip()]
+            print("Identified scientific names:", scientific_names)
+            
+            # Buscar plantas en la base de datos
+            found_plants = []
+            suggestions = []
+            
+            for scientific_name in scientific_names:
+                # Buscar coincidencia exacta primero
+                plant_info = PlantInfo.objects.filter(
+                    scientific_name__iexact=scientific_name
+                ).first()
+                
+                if plant_info:
+                    found_plants.append({
+                        'plant_info': PlantInfoSerializer(plant_info).data,
+                        'confidence': 'high',
+                        'match_type': 'exact',
+                        'scientific_name': scientific_name
+                    })
+                else:
+                    # Buscar coincidencias parciales
+                    partial_matches = PlantInfo.objects.filter(
+                        scientific_name__icontains=scientific_name.split()[0]  # Buscar por género
+                    )[:3]
+                    
+                    for match in partial_matches:
+                        suggestions.append({
+                            'plant_info': PlantInfoSerializer(match).data,
+                            'confidence': 'medium',
+                            'match_type': 'partial',
+                            'scientific_name': scientific_name,
+                            'matched_name': match.scientific_name
+                        })
+            
+            # Si no encontramos coincidencias exactas, buscar por nombre común
+            if not found_plants:
+                for scientific_name in scientific_names:
+                    common_name_matches = PlantInfo.objects.filter(
+                        common_name__icontains=scientific_name.split()[0]
+                    )[:2]
+                    
+                    for match in common_name_matches:
+                        suggestions.append({
+                            'plant_info': PlantInfoSerializer(match).data,
+                            'confidence': 'low',
+                            'match_type': 'common_name',
+                            'scientific_name': scientific_name,
+                            'matched_name': match.common_name
+                        })
+            
+            # Determinar la planta primaria basada en el primer resultado de Gemini
+            primary_plant = None
+            primary_plant_id = None
+            confidence = 'low'  # Por defecto
+            primary_scientific_name = scientific_names[0] if scientific_names else None
+            
+            if primary_scientific_name:
+                # Intentar coincidencia exacta con el primer nombre
+                primary = PlantInfo.objects.filter(
+                    scientific_name__iexact=primary_scientific_name
+                ).first()
+                
+                if primary:
+                    primary_plant = primary
+                    primary_plant_id = primary.id
+                    confidence = 'high'
+                else:
+                    # Intentar coincidencias parciales por género (primer token)
+                    genus = primary_scientific_name.split()[0]
+                    partial = PlantInfo.objects.filter(scientific_name__icontains=genus).first()
+                    if partial:
+                        primary_plant = partial
+                        primary_plant_id = partial.id
+                        confidence = 'medium'
+                    else:
+                        # Intentar por nombre común
+                        common = PlantInfo.objects.filter(common_name__icontains=genus).first()
+                        if common:
+                            primary_plant = common
+                            primary_plant_id = common.id
+                            confidence = 'low'
+            
+            return Response({
+                'class': primary_scientific_name,
+                'confidence': confidence,
+                'plant_id': primary_plant_id,
+                'plant_info': PlantInfoSerializer(primary_plant).data if primary_plant else None,
+                'gemini_response': gemini_response,
+                'identified_names': scientific_names
+            })
+            
+        except Exception as e:
+            return Response(
+                {
+                    "error": "Failed to identify plant",
+                    "details": str(e)
+                }, 
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )

@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import { useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import { Button, StyleSheet, Text, TouchableOpacity, View, Image, ActivityIndicator } from 'react-native';
 
 export default function CameraScreen() {
 
@@ -12,6 +12,7 @@ export default function CameraScreen() {
     const [permission, requestPermission] = useCameraPermissions();
     const cameraRef = useRef<CameraView>(null);
     const [photoUri, setPhotoUri] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
     if (!permission) {
@@ -42,14 +43,22 @@ export default function CameraScreen() {
 
     async function sendPhoto() {
         if (photoUri) {
-            const data = await PlantService.sendPhoto(photoUri);
-            if (data.plant_id) {
-                router.push({
-                    pathname: "/plant-info-details",
-                    params: { id: data.plant_id }
-                });
-            } else {
-                alert("No se pudo identificar la planta. Inténtalo de nuevo.");
+            setIsLoading(true);
+            try {
+                const data = await PlantService.sendPhoto(photoUri);
+                if (data.plant_id) {
+                    router.push({
+                        pathname: "/plant-info-details",
+                        params: { id: data.plant_id }
+                    });
+                } else {
+                    alert("No se pudo identificar la planta. Inténtalo de nuevo.");
+                }
+            } catch (error) {
+                console.error('Error sending photo:', error);
+                alert("Error al procesar la imagen. Inténtalo de nuevo.");
+            } finally {
+                setIsLoading(false);
             }
         }
     }
@@ -67,30 +76,40 @@ export default function CameraScreen() {
             )}
             {photoUri ? (
                 <View style={styles.buttonContainer}>
-                    {photoUri && (
-                        <TouchableOpacity style={{ padding: 16 }} onPress={setPhotoUri.bind(null, null)}>
-                            <Ionicons name="close-outline" size={60} color="#fff" />
-                        </TouchableOpacity>
-                    )}
+                    {photoUri && !isLoading && (
+                        <>
+                            <TouchableOpacity style={{ padding: 16 }} onPress={setPhotoUri.bind(null, null)}>
+                                <Ionicons name="close-outline" size={60} color="#fff" />
+                            </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.button} onPress={takePhoto}>
-                        <View style={{ borderRadius: 200, backgroundColor: 'white', width: 50, height: 50 }}></View>
-                    </TouchableOpacity>
 
-                    {photoUri && (
-                        <TouchableOpacity style={{ padding: 16 }} onPress={sendPhoto}>
-                            <Ionicons name="checkmark-outline" size={60} color="#fff" />
-                        </TouchableOpacity>
+                            <TouchableOpacity style={styles.button} onPress={takePhoto} disabled={isLoading}>
+                                <View style={{ borderRadius: 200, backgroundColor: 'white', width: 50, height: 50 }}></View>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={{ padding: 16 }} onPress={sendPhoto}>
+                                <Ionicons name="checkmark-outline" size={60} color="#fff" />
+                            </TouchableOpacity>
+                        </>
                     )}
                 </View>
             ) : (
                 <View style={{ paddingHorizontal: 32, paddingVertical: 90, justifyContent: 'center', alignItems: 'center' }}>
-                    <TouchableOpacity style={styles.button} onPress={takePhoto}>
+                    <TouchableOpacity style={styles.button} onPress={takePhoto} disabled={isLoading}>
                         <View style={{ borderRadius: 200, backgroundColor: 'white', width: 50, height: 50 }}></View>
                     </TouchableOpacity>
                 </View>
             )}
 
+            {/* Loader Overlay */}
+            {isLoading && (
+                <View style={styles.loaderOverlay}>
+                    <View style={styles.loaderContainer}>
+                        <ActivityIndicator size="large" color={Colors.light.tint} />
+                        <Text style={styles.loaderText}>Identificando planta...</Text>
+                    </View>
+                </View>
+            )}
         </View>
     );
 }
@@ -137,5 +156,34 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         color: 'white',
+    },
+    loaderOverlay: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 1000,
+    },
+    loaderContainer: {
+        backgroundColor: 'white',
+        padding: 30,
+        borderRadius: 15,
+        alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+    loaderText: {
+        marginTop: 15,
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#333',
+        textAlign: 'center',
     },
 });

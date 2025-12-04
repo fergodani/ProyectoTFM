@@ -1,0 +1,22 @@
+digraph "packages" {
+rankdir=BT
+charset="utf-8"
+"api" [color="black", label=<api>, shape="box", style="solid"];
+"api.admin" [color="black", label=<api.admin>, shape="box", style="solid"];
+"api.apps" [color="black", label=<api.apps>, shape="box", style="solid"];
+"api.migrations" [color="black", label=<api.migrations>, shape="box", style="solid"];
+"api.migrations.0001_initial" [color="black", label=<api.migrations.0001_initial>, shape="box", style="solid"];
+"api.migrations.0002_post_comment" [color="black", label=<api.migrations.0002_post_comment>, shape="box", style="solid"];
+"api.migrations.0003_post_like_count_vote" [color="black", label=<api.migrations.0003_post_like_count_vote>, shape="box", style="solid"];
+"api.models" [color="black", label=<api.models>, shape="box", style="solid"];
+"api.serializers" [color="black", label=<api.serializers>, shape="box", style="solid"];
+"api.tests" [color="black", label=<api.tests>, shape="box", style="solid"];
+"api.urls" [color="black", label=<api.urls>, shape="box", style="solid"];
+"api.views" [color="black", label=<api.views>, shape="box", style="solid"];
+"api.admin" -> "api.models" [arrowhead="open", arrowtail="none"];
+"api.apps" -> "api.models" [arrowhead="open", arrowtail="none"];
+"api.serializers" -> "api.models" [arrowhead="open", arrowtail="none"];
+"api.urls" -> "api.views" [arrowhead="open", arrowtail="none"];
+"api.views" -> "api.models" [arrowhead="open", arrowtail="none"];
+"api.views" -> "api.serializers" [arrowhead="open", arrowtail="none"];
+}

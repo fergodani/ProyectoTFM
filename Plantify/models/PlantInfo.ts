@@ -4,9 +4,8 @@ type Season = "spring" | "summer" | "fall" | "winter";
 export interface WateringPeriod {
     value: string;
     unit: string;
-    season: Season;
 }
-
+/*
 export interface PlantInfo {
     id: number;
     posts?: Post[];
@@ -50,6 +49,119 @@ export interface PlantInfo {
     pruning: string | null;
     watering_period: WateringPeriod[];
     type: string;
+}
+*/
+interface Dimension {
+    type: string;
+    min_value: number;
+    max_value: number;
+    unit: string;
+}
+
+interface Hardiness {
+    min: string;
+    max: string;
+}
+
+interface HardinessLocation {
+    full_url: string;
+    full_iframe: string;
+}
+
+interface WateringGeneralBenchmark {
+    value: string;
+    unit: string;
+}
+
+interface PlantAnatomy {
+    part: string;
+    color: string[];
+}
+
+interface PruningCount {
+    amount: number;
+    interval: string;
+}
+
+interface DefaultImage {
+    license: number;
+    license_name: string;
+    license_url: string;
+    original_url: string;
+    regular_url: string;
+    medium_url: string;
+    small_url: string;
+    thumbnail: string;
+}
+
+export interface PlantInfo {
+    id: number;
+    common_name: string;
+    scientific_name: string[];
+    other_name: string[];
+    family: string | null;
+    hybrid: string | null;
+    authority: string | null;
+    subspecies: string | null;
+    cultivar: string | null;
+    variety: string | null;
+    species_epithet: string | null;
+    genus: string;
+    origin: string[];
+    type: string;
+    dimensions: Dimension[];
+    cycle: string;
+    attracts: string[];
+    propagation: string[];
+    hardiness: Hardiness;
+    hardiness_location: HardinessLocation;
+    watering: string;
+    watering_general_benchmark: WateringPeriod;
+    plant_anatomy: PlantAnatomy[];
+    sunlight: string[];
+    pruning_month: string[];
+    pruning_count: PruningCount;
+    seeds: boolean;
+    maintenance: string | null;
+    care_guides: string;
+    soil: string[];
+    growth_rate: string;
+    drought_tolerant: boolean;
+    salt_tolerant: boolean;
+    thorny: boolean;
+    invasive: boolean;
+    tropical: boolean;
+    indoor: boolean;
+    care_level: string;
+    pest_susceptibility: string[];
+    flowers: boolean;
+    flowering_season: string | null;
+    cones: boolean;
+    fruits: boolean;
+    edible_fruit: boolean;
+    harvest_season: string | null;
+    leaf: boolean;
+    edible_leaf: boolean;
+    cuisine: boolean;
+    medicinal: boolean;
+    poisonous_to_humans: boolean;
+    poisonous_to_pets: boolean;
+    description: string;
+    default_image: DefaultImage;
+    other_images: string;
+    xWateringQuality: string;
+    xWateringPeriod: string;
+    xWateringAvgVolumeRequirement: string;
+    xWateringDepthRequirement: string;
+    xWateringBasedTemperature: string;
+    xWateringPhLevel: string;
+    xSunlightDuration: string;
+    xTemperatureTolence: string;
+    xPlantSpacingRequirement: string;
+    pruning: string;
+    sunlight_long: string;
+    watering_long: string;
+    posts?: Post[];
 }
 
 export interface Prediction {

@@ -103,7 +103,7 @@ export default function PlantInfoDetails() {
       <ParallaxScrollView
         headerImage={
           <Image
-            source={{ uri: plant.image!! }}
+            source={{ uri: plant.default_image?.original_url }}
             style={{ width: '100%', height: 250 }} // Ocupa todo el header
             resizeMode="cover"
           />
@@ -133,10 +133,8 @@ export default function PlantInfoDetails() {
               plant.edible_leaf && { label: "🥬 Edible Leaf", value: plant.edible_leaf },
               plant.flowering_season && { label: "🌸 Flowering Season", value: plant.flowering_season },
               plant.flowers && { label: "🌼 Flowers", value: plant.flowers },
-              plant.fruiting_season && { label: "🍒 Fruiting Season", value: plant.fruiting_season },
               plant.fruits && { label: "🍎 Fruits", value: plant.fruits },
               plant.growth_rate && { label: "📈 Growth Rate", value: plant.growth_rate },
-              plant.harvest_method && { label: "🧺 Harvest Method", value: plant.harvest_method },
               plant.harvest_season && { label: "🌾 Harvest Season", value: plant.harvest_season },
               plant.indoor && { label: "🏠 Indoor", value: plant.indoor },
               plant.invasive && { label: "🚫 Invasive", value: plant.invasive },
@@ -147,15 +145,11 @@ export default function PlantInfoDetails() {
               plant.poisonous_to_humans && { label: "☠️ Poisonous to Humans", value: plant.poisonous_to_humans },
               plant.poisonous_to_pets && { label: "🐾 Poisonous to Pets", value: plant.poisonous_to_pets },
               plant.pruning_month && { label: "🗓️ Pruning Month", value: plant.pruning_month },
-              plant.rare && { label: "🦄 Rare", value: plant.rare },
               plant.salt_tolerant && { label: "🧂 Salt Tolerant", value: plant.salt_tolerant },
               plant.soil && { label: "🌱 Soil", value: plant.soil },
               plant.thorny && { label: "🌵 Thorny", value: plant.thorny },
               plant.tropical && { label: "🌴 Tropical", value: plant.tropical },
               plant.watering && { label: "💧 Watering", value: plant.watering },
-              plant.sun && { label: "🌞 Sun", value: plant.sun },
-              plant.edible && { label: "🥗 Edible", value: plant.edible },
-              plant.hardiness && { label: "❄️ Hardiness", value: plant.hardiness },
             ]
               .filter(Boolean)
               .map((item, idx) =>
@@ -168,11 +162,11 @@ export default function PlantInfoDetails() {
             }
           </View>
         </ThemedView>
-        {plant.watering_period && plant.watering_period.length > 0 && (
+        {plant.watering_general_benchmark && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
             <ThemedText type="title2">💧 Watering Frequency</ThemedText>
-            <PlantWateringChart periods={plant.watering_period} />
-            {plant.watering_long && (
+            
+            {plant.watering && (
               <ThemedView style={[{ backgroundColor: cardBackground }]}>
                 <ThemedText type="default">{plant.watering_long}</ThemedText>
               </ThemedView>
@@ -186,7 +180,7 @@ export default function PlantInfoDetails() {
             { backgroundColor: cardBackground }
           ]}>
             <ThemedText type="title2">☀️ Sunlight</ThemedText>
-            <ThemedText type="default">{plant.sunlight}</ThemedText>
+            <ThemedText type="default">{plant.sunlight_long}</ThemedText>
           </ThemedView>
         )}
         {plant.pruning && (

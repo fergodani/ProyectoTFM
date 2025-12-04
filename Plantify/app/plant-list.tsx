@@ -8,6 +8,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { PlantInfo } from "@/models/PlantInfo";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "@/constants/Colors";
+import { PerenualPlant } from "@/models/Plant";
 
 export const options = {
     headerShown: false,
@@ -16,7 +17,7 @@ export const options = {
 export default function PlantList() {
     const params = useLocalSearchParams();
     const isInfiniteScroll = params.isInfiniteScroll === "true";
-    const [plants, setPlants] = useState<PlantInfo[]>(params.plants ? JSON.parse(params.plants as string) : []);
+    const [plants, setPlants] = useState<PerenualPlant[]>(params.plants ? JSON.parse(params.plants as string) : []);
     const filter = params.filter ? params.filter as string : "";
     const router = useRouter();
     const [loading, setLoading] = useState(false);
@@ -29,8 +30,8 @@ export default function PlantList() {
         if (loading || !hasMore) return;
         setLoading(true);
         try {
-            console.log(filter)
             const newPlants = await PlantService.getPlantInfoList(nextPage, filter, type);
+            console.log(newPlants)
             if (newPlants.length === 0) {
                 setHasMore(false);
             } else {
@@ -55,74 +56,6 @@ export default function PlantList() {
 
     return (
         <>
-            {plantType === "" && (
-                <View style={styles.filters}>
-                    <View style={styles.filter}>
-                        <TouchableOpacity style={styles.iconContainer} onPress={() => setFilter("flower")}>
-                            <Image
-                                source={require('../assets/images/flowers.jpg')}
-                                style={styles.image}
-                            />
-                        </TouchableOpacity>
-                        <ThemedText type="default">Flores</ThemedText>
-                    </View>
-                    <View style={styles.filter}>
-                        <TouchableOpacity style={styles.iconContainer} onPress={() => setFilter("orchid")}>
-                            <Image
-                                source={require('../assets/images/orchid.jpg')}
-                                style={styles.image}
-                            />
-                        </TouchableOpacity>
-                        <ThemedText type="default">Orquídeas</ThemedText>
-                    </View>
-                    <View style={styles.filter}>
-                        <TouchableOpacity style={styles.iconContainer} onPress={() => setFilter("spice")}>
-                            <Image
-                                source={require('../assets/images/spice.jpg')}
-                                style={styles.image}
-                            />
-                        </TouchableOpacity>
-                        <ThemedText type="default">Especias</ThemedText>
-                    </View>
-                    <View style={styles.filter}>
-                        <TouchableOpacity style={styles.iconContainer} onPress={() => setFilter("foliage")}>
-                            <Image
-                                source={require('../assets/images/foliage.jpg')}
-                                style={styles.image}
-                            />
-                        </TouchableOpacity>
-                        <ThemedText type="default">Follaje</ThemedText>
-                    </View>
-                    <View style={styles.filter}>
-                        <TouchableOpacity style={styles.iconContainer} onPress={() => setFilter("cactus")}>
-                            <Image
-                                source={require('../assets/images/cactus.jpg')}
-                                style={styles.image}
-                            />
-                        </TouchableOpacity>
-                        <ThemedText type="default">Cactus</ThemedText>
-                    </View>
-                    <View style={styles.filter}>
-                        <TouchableOpacity style={styles.iconContainer} onPress={() => setFilter("fruit")}>
-                            <Image
-                                source={require('../assets/images/fruits.jpg')}
-                                style={styles.image}
-                            />
-                        </TouchableOpacity>
-                        <ThemedText type="default">Frutas</ThemedText>
-                    </View>
-                    <View style={styles.filter}>
-                        <TouchableOpacity style={styles.iconContainer} onPress={() => setFilter("vegetable")}>
-                            <Image
-                                source={require('../assets/images/vegetables.jpg')}
-                                style={styles.image}
-                            />
-                        </TouchableOpacity>
-                        <ThemedText type="default">Verduras</ThemedText>
-                    </View>
-                </View>
-            )}
-            {plantType !== "" && (
                 <View style={{ flex: 1 }}>
                     <FlatList
                         data={plants}
@@ -136,15 +69,15 @@ export default function PlantList() {
                                 })}
                             >
                                 <ThemedView style={styles.card}>
-                                    {plant.image && (
+                                    {plant.default_image && (
                                         <Image
-                                            source={{ uri: plant.image }}
+                                            source={{ uri: plant.default_image.original_url }}
                                             style={{ width: 100, height: 100, borderRadius: 8 }}
                                         />
                                     )}
                                     <View style={{ flex: 1, flexShrink: 1 }}>
                                         <ThemedText type='title2'>{plant.common_name}</ThemedText>
-                                        <ThemedText type='subtitle'>{plant.scientific_name}</ThemedText>
+                                        <ThemedText type='subtitle'>{plant.scientific_name[0]}</ThemedText>
                                     </View>
                                     <TouchableOpacity style={styles.button} onPress={() => {
                                         router.push({
@@ -165,7 +98,6 @@ export default function PlantList() {
                         ListFooterComponent={loading ? <ActivityIndicator size="large" style={{ marginVertical: 16 }} /> : null}
                     />
                 </View>
-            )}
         </>
     );
 };

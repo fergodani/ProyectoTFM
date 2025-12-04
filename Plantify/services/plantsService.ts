@@ -1,5 +1,5 @@
 import { useAuth } from "@/hooks/useAuthContext";
-import { Tasks, UserPlant } from "@/models/Plant";
+import { PerenualPlant, Tasks, UserPlant } from "@/models/Plant";
 import { PlantInfo, Prediction } from "@/models/PlantInfo";
 import { PlantDetailTrefle, PlantTrefle } from "@/models/PlanTrefle";
 
@@ -144,6 +144,7 @@ export const PlantService = {
     }
   },
 
+  /*
   getPlantInfoList: async (page: number = 1, filter: string, type: string): Promise<PlantInfo[]> => {
     try {
       let response;
@@ -165,6 +166,28 @@ export const PlantService = {
       throw error;
     }
   },
+  */
+  getPlantInfoList: async (page: number = 1, filter: string, type: string): Promise<PerenualPlant[]> => {
+    try {
+      let response;
+      if (filter) {
+        response = await fetch(`${url}/api/perenual/plants?format=json&page=${page}&q=${encodeURIComponent(filter)}`);
+      } else if (type) {
+        response = await fetch(`${url}/api/perenual/plants?format=json&page=${page}&type=${encodeURIComponent(type)}`);
+      }else {
+        response = await fetch(`${url}/api/perenual/plants?format=json&page=${page}`);
+      }
+
+      if (!response.ok) {
+        throw new Error("Error fetching plants");
+      }
+
+      const json = await response.json();
+      return json.data || [];
+    } catch (error) {
+      throw error;
+    }
+  },
 
   getTreflePlantById: async (id: number): Promise<PlantDetailTrefle> => {
     try {
@@ -179,9 +202,23 @@ export const PlantService = {
     }
   },
 
+  /*
   getPlantInfoById: async (id: number): Promise<PlantInfo> => {
     try {
       const response = await fetch(`${url}/api/plantinfo/${id}?format=json`);
+      if (!response.ok) {
+        throw new Error("Error fetching plant by ID");
+      }
+      const json = await response.json();
+      return json || {};
+    } catch (error) {
+      throw error;
+    }
+  },
+  */
+ getPlantInfoById: async (id: number): Promise<PlantInfo> => {
+    try {
+      const response = await fetch(`${url}/api/perenual/plants/${id}?format=json`);
       if (!response.ok) {
         throw new Error("Error fetching plant by ID");
       }
@@ -223,7 +260,8 @@ export const PlantService = {
     });
 
     try {
-      const response = await fetch(`${url}/api/predict/`, {
+      //const response = await fetch(`${url}/api/predict/`, {
+      const response = await fetch(`${url}/api/predict-gemini/`, {
         method: 'POST',
         body: formData,
       });

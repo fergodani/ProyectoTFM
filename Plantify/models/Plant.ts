@@ -45,6 +45,24 @@ export interface UserPlant {
     drainage?: string;
 }
 
+export interface PlantImage {
+    license: number;
+    license_name: string;
+    license_url: string;
+    original_url: string;
+    regular_url: string;
+    medium_url: string;
+    small_url: string;
+    thumbnail: string;
+}
+
+export interface PerenualPlant {
+    id: number;
+    common_name: string;
+    scientific_name: string[];
+    default_image: PlantImage;
+}
+
 export interface Tasks {
     today_tasks: Task[];
     next_tasks: Task[];
