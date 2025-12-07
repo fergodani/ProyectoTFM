@@ -96,6 +96,8 @@ export default function PlantSettings() {
     const { getUserId, accessToken, refreshToken, setTokens } = useAuth();
 
     const openModal = (type: ModalType | ((prevState: ModalType) => ModalType) | null) => {
+        // Sincronizar userPlantTemp con userPlant cada vez que se abre el modal
+        setUserPlantTemp({ ...userPlant });
         setModalType(type);
         setIsModalVisible(true);
     };
@@ -115,26 +117,42 @@ export default function PlantSettings() {
 
     const handlePut = async () => {
         try {
-            userPlantTemp.plant_id = userPlantTemp.plant.id;
-            console.log(userPlantTemp)
-            const plant = await PlantService.putPlant(userPlantTemp, accessToken!);
-            if (plant)
+            // Crear una copia del objeto sin mutar el estado
+            const plantToUpdate = {
+                ...userPlantTemp,
+                plant_id: userPlantTemp.perenual_details!.id
+            };
+            console.log("Updating plant:", plantToUpdate);
+            const plant = await PlantService.putPlant(plantToUpdate, accessToken!);
+            if (plant) {
                 setUserPlant(plant);
+                console.log("Plant updated successfully:", plant);
+            }
             setIsModalVisible(false);
         } catch (error: any) {
+            console.error("Error in handlePut:", error);
             if (error.message === 'Unauthorized') {
                 // Handle token refresh logic here
                 try {
                     const newTokens = await UserService.refreshToken(refreshToken!);
                     setTokens(newTokens.access, newTokens.refresh);
 
-                    const plant = await PlantService.putPlant(userPlantTemp, newTokens.access);
-                    if (plant)
+                    const plantToUpdate = {
+                        ...userPlantTemp,
+                        plant_id: userPlantTemp.perenual_details!.id
+                    };
+                    const plant = await PlantService.putPlant(plantToUpdate, newTokens.access);
+                    if (plant) {
                         setUserPlant(plant);
+                        console.log("Plant updated successfully after refresh:", plant);
+                    }
                     setIsModalVisible(false);
                 } catch (refreshError) {
                     console.error("Error refreshing tokens:", refreshError);
                 }
+            } else {
+                // Log other errors
+                console.error("Non-auth error:", error);
             }
         }
     }
@@ -146,16 +164,16 @@ export default function PlantSettings() {
                 <View style={styles.body}>
                     <ThemedView style={styles.card}>
                         <View style={styles.subcard}>
-                            {userPlant.plant.image && (
+                            {userPlant.image && (
                                 <Image
-                                    source={{ uri: userPlant.plant.image }}
+                                    source={{ uri: userPlant.image }}
                                     style={{ width: 100, height: 100, borderRadius: 8 }}
                                 />
                             )}
                             <View style={{}}>
                                 <View>
-                                    <ThemedText type='title2'>{userPlant.plant.common_name}</ThemedText>
-                                    <ThemedText type='italic'>{userPlant.plant.scientific_name}</ThemedText>
+                                    <ThemedText type='title2'>{userPlant.common_name}</ThemedText>
+                                    <ThemedText type='italic'>{userPlant.perenual_details!.scientific_name[0]}</ThemedText>
                                 </View>
                             </View>
                         </View>
@@ -392,12 +410,25 @@ export default function PlantSettings() {
                 animationType="slide">
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
-                            <TouchableOpacity onPress={() => setIsModalVisible(false)}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginBottom: 20 }}>
+                            <TouchableOpacity 
+                                onPress={() => {
+                                    console.log("Cerrar button pressed");
+                                    setIsModalVisible(false);
+                                }}
+                                style={{ padding: 10, minWidth: 60, alignItems: 'center' }}
+                            >
                                 <ThemedText type="default" style={{ color: "#000" }}>Cerrar</ThemedText>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => handlePut()}>
-                                <ThemedText type="default" style={{ color: "#000" }}>Aceptar</ThemedText>
+                            <TouchableOpacity 
+                                onPress={() => {
+                                    console.log("Aceptar button pressed");
+                                    console.log("Current userPlantTemp:", userPlantTemp);
+                                    handlePut();
+                                }}
+                                style={{ padding: 10, minWidth: 60, alignItems: 'center', backgroundColor: '#4CAF50', borderRadius: 5 }}
+                            >
+                                <ThemedText type="default" style={{ color: "#fff", fontWeight: 'bold' }}>Aceptar</ThemedText>
                             </TouchableOpacity>
                         </View>
 
@@ -405,7 +436,7 @@ export default function PlantSettings() {
                             <WheelPicker
                                 data={data}
                                 width={100}
-                                value={userPlant.height}
+                                value={userPlantTemp.height || 0}
                                 onValueChanged={({ item: { value } }) => setUserPlantTemp({ ...userPlantTemp, height: value })}
                                 enableScrollByTapOnItem={true}
                             />
@@ -414,8 +445,8 @@ export default function PlantSettings() {
                             <WheelPicker
                                 data={ageOptions}
                                 width={200}
-                                value={userPlant.age || ""}
-                                onValueChanged={({ item: { value } }) => { userPlantTemp.age = value }}
+                                value={userPlantTemp.age || ""}
+                                onValueChanged={({ item: { value } }) => setUserPlantTemp({ ...userPlantTemp, age: value })}
                                 enableScrollByTapOnItem={true}
                             />
                         )}
@@ -424,20 +455,19 @@ export default function PlantSettings() {
                                 <WheelPicker
                                     data={data}
                                     width={100}
-                                    value={userPlant.pruning_time || 0}
-                                    onValueChanged={({ item: { value } }) => { 
-                                        if (userPlantTemp.pruning_time_unit === undefined) {
-                                            userPlantTemp.pruning_time_unit = "day";
-                                        }
-                                        userPlantTemp.pruning_time = value;
-                                    }}
+                                    value={userPlantTemp.pruning_time || 0}
+                                    onValueChanged={({ item: { value } }) => setUserPlantTemp({ 
+                                        ...userPlantTemp, 
+                                        pruning_time: value,
+                                        pruning_time_unit: userPlantTemp.pruning_time_unit || "day"
+                                    })}
                                     enableScrollByTapOnItem={true}
                                 />
                                 <WheelPicker
                                     data={timeUnitOptions}
                                     width={100}
-                                    value={userPlant.pruning_time_unit || "day"}
-                                    onValueChanged={({ item: { value } }) => { userPlantTemp.pruning_time_unit = value }}
+                                    value={userPlantTemp.pruning_time_unit || "day"}
+                                    onValueChanged={({ item: { value } }) => setUserPlantTemp({ ...userPlantTemp, pruning_time_unit: value })}
                                     enableScrollByTapOnItem={true}
                                 />
                             </View>
@@ -447,15 +477,15 @@ export default function PlantSettings() {
                                 <WheelPicker
                                     data={data}
                                     width={100}
-                                    value={userPlant.sprayed_time || 0}
-                                    onValueChanged={({ item: { value } }) => { userPlantTemp.sprayed_time = value }}
+                                    value={userPlantTemp.sprayed_time || 0}
+                                    onValueChanged={({ item: { value } }) => setUserPlantTemp({ ...userPlantTemp, sprayed_time: value })}
                                     enableScrollByTapOnItem={true}
                                 />
                                 <WheelPicker
                                     data={timeUnitOptions}
                                     width={100}
-                                    value={userPlant.sprayed_unit || "day"}
-                                    onValueChanged={({ item: { value } }) => { userPlantTemp.sprayed_unit = value }}
+                                    value={userPlantTemp.sprayed_unit || "day"}
+                                    onValueChanged={({ item: { value } }) => setUserPlantTemp({ ...userPlantTemp, sprayed_unit: value })}
                                     enableScrollByTapOnItem={true}
                                 />
                             </View>
@@ -465,15 +495,15 @@ export default function PlantSettings() {
                                 <WheelPicker
                                     data={data}
                                     width={100}
-                                    value={userPlant.rotation_time || 0}
-                                    onValueChanged={({ item: { value } }) => { userPlantTemp.rotation_time = value }}
+                                    value={userPlantTemp.rotation_time || 0}
+                                    onValueChanged={({ item: { value } }) => setUserPlantTemp({ ...userPlantTemp, rotation_time: value })}
                                     enableScrollByTapOnItem={true}
                                 />
                                 <WheelPicker
                                     data={timeUnitOptions}
                                     width={100}
-                                    value={userPlant.rotation_unit || "day"}
-                                    onValueChanged={({ item: { value } }) => { userPlantTemp.rotation_unit = value }}
+                                    value={userPlantTemp.rotation_unit || "day"}
+                                    onValueChanged={({ item: { value } }) => setUserPlantTemp({ ...userPlantTemp, rotation_unit: value })}
                                     enableScrollByTapOnItem={true}
                                 />
                             </View>
@@ -483,8 +513,8 @@ export default function PlantSettings() {
                                 <WheelPicker
                                     data={gardens.map(garden => ({ value: garden.id, label: garden.name }))}
                                     width={200}
-                                    value={Number(userPlant.garden) || 0}
-                                    onValueChanged={({ item: { value } }) => userPlantTemp.garden = value}
+                                    value={Number(userPlantTemp.garden) || 0}
+                                    onValueChanged={({ item: { value } }) => setUserPlantTemp({ ...userPlantTemp, garden: value })}
                                     enableScrollByTapOnItem={true}
                                 />
                             </View>
@@ -493,9 +523,9 @@ export default function PlantSettings() {
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 100 }}>
                                 <WheelPicker
                                     data={potTypeOptions}
-                                    value={userPlant.pot_type || ""}
+                                    value={userPlantTemp.pot_type || ""}
                                     width={200}
-                                    onValueChanged={({ item: { value } }) => { userPlantTemp.pot_type = value }}
+                                    onValueChanged={({ item: { value } }) => setUserPlantTemp({ ...userPlantTemp, pot_type: value })}
                                     enableScrollByTapOnItem={true}
                                 />
                             </View>
@@ -504,9 +534,9 @@ export default function PlantSettings() {
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 100 }}>
                                 <WheelPicker
                                     data={data}
-                                    value={userPlant.pot_size || 0}
+                                    value={userPlantTemp.pot_size || 0}
                                     width={100}
-                                    onValueChanged={({ item: { value } }) => { userPlantTemp.pot_size = value }}
+                                    onValueChanged={({ item: { value } }) => setUserPlantTemp({ ...userPlantTemp, pot_size: value })}
                                     enableScrollByTapOnItem={true}
                                 />
                             </View>
@@ -515,9 +545,9 @@ export default function PlantSettings() {
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 100 }}>
                                 <WheelPicker
                                     data={drainageOptions}
-                                    value={userPlant.drainage || ""}
+                                    value={userPlantTemp.drainage || ""}
                                     width={200}
-                                    onValueChanged={({ item: { value } }) => { userPlantTemp.drainage = value }}
+                                    onValueChanged={({ item: { value } }) => setUserPlantTemp({ ...userPlantTemp, drainage: value })}
                                     enableScrollByTapOnItem={true}
                                 />
                             </View>

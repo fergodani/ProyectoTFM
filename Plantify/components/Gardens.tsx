@@ -15,7 +15,7 @@ import { UserService } from '@/services/userService';
 import Button from './Button';
 import { PlantService } from '@/services/plantsService';
 
-export default function Gardens({ plantId }: Readonly<{ plantId: number | null }>) {
+export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name }: Readonly<{ plantId: number | null; imageUrl?: string; wateringPeriod?: string; common_name?: string }>) {
     const colorScheme = useColorScheme();
     const router = useRouter();
     const { getUserId, accessToken, refreshToken, setTokens } = useAuth();
@@ -57,10 +57,14 @@ export default function Gardens({ plantId }: Readonly<{ plantId: number | null }
 
     const handleCreatePlantInGarden = async (gardenId: number) => {
         try {
+            console.log(imageUrl)
             const userPlant = {
                 plant_id: plantId,
                 garden: Number(gardenId),
-                owner: getUserId()!
+                owner: getUserId()!,
+                watering_period: wateringPeriod ? JSON.parse(wateringPeriod) : null,
+                image: imageUrl || null,
+                common_name: common_name || null,
             }
             console.log(userPlant)
             await PlantService.createPlant(userPlant, accessToken!);
@@ -87,7 +91,7 @@ export default function Gardens({ plantId }: Readonly<{ plantId: number | null }
         <ScrollView style={styles.container}>
             {gardens.map((garden: Garden) => {
                 // Suponiendo que garden.plants es un array de plantas con propiedad image
-                const plantImages = garden.user_plants?.slice(0, 3).map(p => p.plant.image) || [];
+                const plantImages = garden.user_plants?.slice(0, 3).map(p => p.image) || [];
                 return (
                     <TouchableOpacity
                         key={garden.id}
@@ -165,7 +169,7 @@ export default function Gardens({ plantId }: Readonly<{ plantId: number | null }
         <ScrollView style={styles.container}>
             {gardensBySuitability.map((gardenBySuitability: GardenBySuitability) => {
                 // Suponiendo que garden.plants es un array de plantas con propiedad image
-                const plantImages = gardenBySuitability.garden.user_plants?.slice(0, 3).map(p => p.plant.image) || [];
+                const plantImages = gardenBySuitability.garden.user_plants?.slice(0, 3).map(p => p.image) || [];
                 return (
                     <TouchableOpacity
                         key={gardenBySuitability.garden.id}

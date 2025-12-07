@@ -127,9 +127,9 @@ export default function PlantSearch() {
                         }}
                     >
                         <ThemedView style={styles.card}>
-                            {plant.image && (
+                            {plant.default_image && (
                                 <Image
-                                    source={{ uri: plant.image }}
+                                    source={{ uri: plant.default_image.original_url }}
                                     style={{ width: 100, height: 100, borderRadius: 8 }}
                                 />
                             )}

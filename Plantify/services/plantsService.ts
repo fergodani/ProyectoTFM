@@ -167,7 +167,7 @@ export const PlantService = {
     }
   },
   */
-  getPlantInfoList: async (page: number = 1, filter: string, type: string): Promise<PerenualPlant[]> => {
+  getPlantInfoList: async (page: number = 1, filter: string, type: string): Promise<PlantInfo[]> => {
     try {
       let response;
       if (filter) {

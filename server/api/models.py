@@ -45,10 +45,11 @@ class UserPlant(models.Model):
     last_spraying_date = models.DateField(blank=True, null=True)
     garden = models.ForeignKey(Garden, on_delete=models.CASCADE, related_name='user_plants',null=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='plants') 
-    plant = models.ForeignKey('PlantInfo', on_delete=models.CASCADE, related_name='user_plant')
-
+    plant_id = models.PositiveIntegerField(default=0)
+    image = models.URLField(blank=True, null=True)
     isWateringReminder = models.BooleanField(default=True)
     isPruningReminder = models.BooleanField(default=True)
+    common_name = models.CharField(max_length=255, blank=True, null=True)
     custom_name = models.CharField(max_length=255, blank=True, null=True)
     height = models.PositiveIntegerField(blank=True, null=True)
     age = models.CharField(
@@ -119,17 +120,19 @@ class UserPlant(models.Model):
         blank=True,
         null=True
     )
+    watering_period = models.JSONField(blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.plant.common_name or self.plant.scientific_name}"
+        return self.custom_name if self.custom_name else f"Plant {self.id} of {self.owner.username}"
     
 class Post(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
-    plant_info = models.ForeignKey('PlantInfo', on_delete=models.CASCADE, related_name='posts')
+    #plant_info = models.ForeignKey('PlantInfo', on_delete=models.CASCADE, related_name='posts')
+    plant_id = models.PositiveIntegerField(default=0)
     like_count = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

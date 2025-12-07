@@ -26,6 +26,7 @@ export default function PlantDetails() {
     const fetchPlant = async () => {
       try {
         const data = await PlantService.getUserPlantById(Number(id), accessToken!);
+        console.log(data);
         setUserPlant(data);
       } catch (error) {
         console.error("Error fetching plant details:", error);
@@ -39,8 +40,8 @@ export default function PlantDetails() {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: userPlant?.plant.common_name
-        ? userPlant.plant.common_name.charAt(0).toUpperCase() + userPlant.plant.common_name.slice(1)
+      title: userPlant?.common_name
+        ? userPlant.common_name!.charAt(0).toUpperCase() + userPlant.common_name!.slice(1)
         : "Detalles de la planta",
     });
   }, [navigation, userPlant]);
@@ -57,7 +58,7 @@ export default function PlantDetails() {
     <ParallaxScrollView
       headerImage={
         <Image
-          source={{ uri: userPlant.plant.image!! }}
+          source={{ uri: userPlant.image!! }}
           style={{ width: '100%', height: 250 }} // Ocupa todo el header
           resizeMode="cover"
         />
@@ -67,11 +68,11 @@ export default function PlantDetails() {
       <ThemedView style={styles.container}>
         <View style={{ flex: 1, alignItems: 'center' }}>
           <ThemedText type="title" style={{ textAlign: 'center' }}>
-            {userPlant.plant.common_name
-              ? userPlant.plant.common_name.charAt(0).toUpperCase() + userPlant.plant.common_name.slice(1)
+            {userPlant.common_name
+              ? userPlant.common_name.charAt(0).toUpperCase() + userPlant.common_name.slice(1)
               : ""}
           </ThemedText>
-          <ThemedText type="default">{userPlant.plant.scientific_name}</ThemedText>
+          <ThemedText type="default">{userPlant.perenual_details!.scientific_name}</ThemedText>
         </View>
         <TouchableOpacity
           key={userPlant.id}
@@ -87,41 +88,38 @@ export default function PlantDetails() {
         </TouchableOpacity>
       </ThemedView>
       <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
+        <ThemedText type="title2">{userPlant.perenual_details!.description}</ThemedText>
+      </ThemedView>
+      <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
         <ThemedText type="title2">🌱 Plant Details</ThemedText>
         <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between" }}>
           {[
-            userPlant.plant.care_level && { label: "🪴 Care Level", value: userPlant.plant.care_level },
-            userPlant.plant.cones && { label: "🌲 Cones", value: userPlant.plant.cones },
-            userPlant.plant.cuisine && { label: "🍽️ Cuisine", value: userPlant.plant.cuisine },
-            userPlant.plant.cycle && { label: "🔄 Cycle", value: userPlant.plant.cycle },
-            userPlant.plant.drought_tolerant && { label: "🌵 Drought Tolerant", value: userPlant.plant.drought_tolerant },
-            userPlant.plant.edible_fruit && { label: "🍏 Edible Fruit", value: userPlant.plant.edible_fruit },
-            userPlant.plant.edible_leaf && { label: "🥬 Edible Leaf", value: userPlant.plant.edible_leaf },
-            userPlant.plant.flowering_season && { label: "🌸 Flowering Season", value: userPlant.plant.flowering_season },
-            userPlant.plant.flowers && { label: "🌼 Flowers", value: userPlant.plant.flowers },
-            userPlant.plant.fruiting_season && { label: "🍒 Fruiting Season", value: userPlant.plant.fruiting_season },
-            userPlant.plant.fruits && { label: "🍎 Fruits", value: userPlant.plant.fruits },
-            userPlant.plant.growth_rate && { label: "📈 Growth Rate", value: userPlant.plant.growth_rate },
-            userPlant.plant.harvest_method && { label: "🧺 Harvest Method", value: userPlant.plant.harvest_method },
-            userPlant.plant.harvest_season && { label: "🌾 Harvest Season", value: userPlant.plant.harvest_season },
-            userPlant.plant.indoor && { label: "🏠 Indoor", value: userPlant.plant.indoor },
-            userPlant.plant.invasive && { label: "🚫 Invasive", value: userPlant.plant.invasive },
-            userPlant.plant.leaf && { label: "🍃 Leaf", value: userPlant.plant.leaf },
-            userPlant.plant.maintenance && { label: "🛠️ Maintenance", value: userPlant.plant.maintenance },
-            userPlant.plant.medicinal && { label: "💊 Medicinal", value: userPlant.plant.medicinal },
-            userPlant.plant.pest_susceptibility && { label: "🐛 Pest Susceptibility", value: userPlant.plant.pest_susceptibility },
-            userPlant.plant.poisonous_to_humans && { label: "☠️ Poisonous to Humans", value: userPlant.plant.poisonous_to_humans },
-            userPlant.plant.poisonous_to_pets && { label: "🐾 Poisonous to Pets", value: userPlant.plant.poisonous_to_pets },
-            userPlant.plant.pruning_month && { label: "🗓️ Pruning Month", value: userPlant.plant.pruning_month },
-            userPlant.plant.rare && { label: "🦄 Rare", value: userPlant.plant.rare },
-            userPlant.plant.salt_tolerant && { label: "🧂 Salt Tolerant", value: userPlant.plant.salt_tolerant },
-            userPlant.plant.soil && { label: "🌱 Soil", value: userPlant.plant.soil },
-            userPlant.plant.thorny && { label: "🌵 Thorny", value: userPlant.plant.thorny },
-            userPlant.plant.tropical && { label: "🌴 Tropical", value: userPlant.plant.tropical },
-            userPlant.plant.watering && { label: "💧 Watering", value: userPlant.plant.watering },
-            userPlant.plant.sun && { label: "🌞 Sun", value: userPlant.plant.sun },
-            userPlant.plant.edible && { label: "🥗 Edible", value: userPlant.plant.edible },
-            userPlant.plant.hardiness && { label: "❄️ Hardiness", value: userPlant.plant.hardiness },
+            userPlant.perenual_details!.care_level && { label: "🪴 Care Level", value: userPlant.perenual_details!.care_level },
+            userPlant.perenual_details!.cones && { label: "🌲 Cones", value: userPlant.perenual_details!.cones },
+            userPlant.perenual_details!.cuisine && { label: "🍽️ Cuisine", value: userPlant.perenual_details!.cuisine },
+            userPlant.perenual_details!.cycle && { label: "🔄 Cycle", value: userPlant.perenual_details!.cycle },
+            userPlant.perenual_details!.drought_tolerant && { label: "🌵 Drought Tolerant", value: userPlant.perenual_details!.drought_tolerant },
+            userPlant.perenual_details!.edible_fruit && { label: "🍏 Edible Fruit", value: userPlant.perenual_details!.edible_fruit },
+            userPlant.perenual_details!.edible_leaf && { label: "🥬 Edible Leaf", value: userPlant.perenual_details!.edible_leaf },
+            userPlant.perenual_details!.flowering_season && { label: "🌸 Flowering Season", value: userPlant.perenual_details!.flowering_season },
+            userPlant.perenual_details!.flowers && { label: "🌼 Flowers", value: userPlant.perenual_details!.flowers },
+            userPlant.perenual_details!.fruits && { label: "🍎 Fruits", value: userPlant.perenual_details!.fruits },
+            userPlant.perenual_details!.growth_rate && { label: "📈 Growth Rate", value: userPlant.perenual_details!.growth_rate },
+            userPlant.perenual_details!.harvest_season && { label: "🌾 Harvest Season", value: userPlant.perenual_details!.harvest_season },
+            userPlant.perenual_details!.indoor && { label: "🏠 Indoor", value: userPlant.perenual_details!.indoor },
+            userPlant.perenual_details!.invasive && { label: "🚫 Invasive", value: userPlant.perenual_details!.invasive },
+            userPlant.perenual_details!.leaf && { label: "🍃 Leaf", value: userPlant.perenual_details!.leaf },
+            userPlant.perenual_details!.maintenance && { label: "🛠️ Maintenance", value: userPlant.perenual_details!.maintenance },
+            userPlant.perenual_details!.medicinal && { label: "💊 Medicinal", value: userPlant.perenual_details!.medicinal },
+            userPlant.perenual_details!.pest_susceptibility && { label: "🐛 Pest Susceptibility", value: userPlant.perenual_details!.pest_susceptibility },
+            userPlant.perenual_details!.poisonous_to_humans && { label: "☠️ Poisonous to Humans", value: userPlant.perenual_details!.poisonous_to_humans },
+            userPlant.perenual_details!.poisonous_to_pets && { label: "🐾 Poisonous to Pets", value: userPlant.perenual_details!.poisonous_to_pets },
+            userPlant.perenual_details!.pruning_month && { label: "🗓️ Pruning Month", value: userPlant.perenual_details!.pruning_month },
+            userPlant.perenual_details!.salt_tolerant && { label: "🧂 Salt Tolerant", value: userPlant.perenual_details!.salt_tolerant },
+            userPlant.perenual_details!.soil && { label: "🌱 Soil", value: userPlant.perenual_details!.soil },
+            userPlant.perenual_details!.thorny && { label: "🌵 Thorny", value: userPlant.perenual_details!.thorny },
+            userPlant.perenual_details!.tropical && { label: "🌴 Tropical", value: userPlant.perenual_details!.tropical },
+            userPlant.perenual_details!.watering && { label: "💧 Watering", value: userPlant.perenual_details!.watering },
           ]
             .filter(Boolean)
             .map((item, idx) =>
@@ -134,34 +132,34 @@ export default function PlantDetails() {
           }
         </View>
       </ThemedView>
-      {userPlant.plant.watering_period && userPlant.plant.watering_period.length > 0 && (
+      {userPlant.perenual_details!.watering_general_benchmark && (
         <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
           <ThemedText type="title2">💧 Watering Frequency</ThemedText>
-          <PlantWateringChart periods={userPlant.plant.watering_period} />
-          {userPlant.plant.watering_long && (
+
+          {userPlant.perenual_details!.watering && (
             <ThemedView style={[{ backgroundColor: cardBackground }]}>
-              <ThemedText type="default">{userPlant.plant.watering_long}</ThemedText>
+              <ThemedText type="default">{userPlant.perenual_details!.watering_long}</ThemedText>
             </ThemedView>
           )}
         </ThemedView>
       )}
 
-      {userPlant.plant.sunlight && (
+      {userPlant.perenual_details!.sunlight_long && (
         <ThemedView style={[
           styles.card,
           { backgroundColor: cardBackground }
         ]}>
           <ThemedText type="title2">☀️ Sunlight</ThemedText>
-          <ThemedText type="default">{userPlant.plant.sunlight}</ThemedText>
+          <ThemedText type="default">{userPlant.perenual_details!.sunlight_long}</ThemedText>
         </ThemedView>
       )}
-      {userPlant.plant.pruning && (
+      {userPlant.perenual_details!.pruning && (
         <ThemedView style={[
           styles.card,
           { backgroundColor: cardBackground }
         ]}>
           <ThemedText type="title2">✂️ Pruning</ThemedText>
-          <ThemedText type="default">{userPlant.plant.pruning}</ThemedText>
+          <ThemedText type="default">{userPlant.perenual_details!.pruning}</ThemedText>
         </ThemedView>
       )}
     </ParallaxScrollView>

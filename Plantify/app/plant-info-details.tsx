@@ -84,9 +84,15 @@ export default function PlantInfoDetails() {
 
   const handleAddToGarden = () => {
     setShowMenu(false);
+    console.log(plant.default_image.original_url);
     router.push({
       pathname: "/garden-select",
-      params: { id }
+      params: { 
+        id, 
+        watering_period: plant.watering_general_benchmark ? JSON.stringify(plant.watering_general_benchmark) : "",
+        image_url: plant.default_image?.original_url || "",
+        common_name: plant.common_name || "",
+      }
     })
   };
 

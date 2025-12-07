@@ -102,7 +102,7 @@ export default function HomeScreen() {
     if (isAuthenticated && !tasks && !loadingTasks) {
       loadTasksData();
     }
-  }, [isAuthenticated, loadTasksData, tasks, loadingTasks]);
+  }, [isAuthenticated, loadTasksData, tasks]);
 
 
   // Función que devuelve una promesa sin efectos secundarios

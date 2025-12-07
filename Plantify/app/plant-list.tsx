@@ -17,7 +17,7 @@ export const options = {
 export default function PlantList() {
     const params = useLocalSearchParams();
     const isInfiniteScroll = params.isInfiniteScroll === "true";
-    const [plants, setPlants] = useState<PerenualPlant[]>(params.plants ? JSON.parse(params.plants as string) : []);
+    const [plants, setPlants] = useState<PlantInfo[]>(params.plants ? JSON.parse(params.plants as string) : []);
     const filter = params.filter ? params.filter as string : "";
     const router = useRouter();
     const [loading, setLoading] = useState(false);
@@ -56,48 +56,53 @@ export default function PlantList() {
 
     return (
         <>
-                <View style={{ flex: 1 }}>
-                    <FlatList
-                        data={plants}
-                        keyExtractor={item => item.id.toString()}
-                        renderItem={({ item: plant }) => (
-                            <TouchableOpacity
-                                key={plant.id}
-                                onPress={() => router.push({
-                                    pathname: "/plant-info-details",
-                                    params: { id: plant.id }
-                                })}
-                            >
-                                <ThemedView style={styles.card}>
-                                    {plant.default_image && (
-                                        <Image
-                                            source={{ uri: plant.default_image.original_url }}
-                                            style={{ width: 100, height: 100, borderRadius: 8 }}
-                                        />
-                                    )}
-                                    <View style={{ flex: 1, flexShrink: 1 }}>
-                                        <ThemedText type='title2'>{plant.common_name}</ThemedText>
-                                        <ThemedText type='subtitle'>{plant.scientific_name[0]}</ThemedText>
-                                    </View>
-                                    <TouchableOpacity style={styles.button} onPress={() => {
-                                        router.push({
-                                            pathname: "/garden-select",
-                                            params: { id: plant.id }
-                                        })
-                                    }}>
-                                        <ThemedText type='default'>
-                                            <Ionicons name="add-circle" size={24} color="#333" />
-                                        </ThemedText>
-                                    </TouchableOpacity>
-                                </ThemedView>
-                            </TouchableOpacity>
-                        )}
-                        contentContainerStyle={styles.container}
-                        onEndReached={() => { loadPlants(page + 1, filter, plantType); }}
-                        onEndReachedThreshold={0.5}
-                        ListFooterComponent={loading ? <ActivityIndicator size="large" style={{ marginVertical: 16 }} /> : null}
-                    />
-                </View>
+            <View style={{ flex: 1 }}>
+                <FlatList
+                    data={plants}
+                    keyExtractor={item => item.id.toString()}
+                    renderItem={({ item: plant }) => (
+                        <TouchableOpacity
+                            key={plant.id}
+                            onPress={() => router.push({
+                                pathname: "/plant-info-details",
+                                params: { id: plant.id }
+                            })}
+                        >
+                            <ThemedView style={styles.card}>
+                                {plant.default_image && (
+                                    <Image
+                                        source={{ uri: plant.default_image.original_url }}
+                                        style={{ width: 100, height: 100, borderRadius: 8 }}
+                                    />
+                                )}
+                                <View style={{ flex: 1, flexShrink: 1 }}>
+                                    <ThemedText type='title2'>{plant.common_name}</ThemedText>
+                                    <ThemedText type='subtitle'>{plant.scientific_name[0]}</ThemedText>
+                                </View>
+                                <TouchableOpacity style={styles.button} onPress={() => {
+                                    router.push({
+                                        pathname: "/garden-select",
+                                        params: {
+                                            id: plant.id,
+                                            watering_period: plant.watering_general_benchmark ? JSON.stringify(plant.watering_general_benchmark) : "",
+                                            image_url: plant.default_image?.original_url || "",
+                                            common_name: plant.common_name || "",
+                                        }
+                                    })
+                                }}>
+                                    <ThemedText type='default'>
+                                        <Ionicons name="add-circle" size={24} color="#333" />
+                                    </ThemedText>
+                                </TouchableOpacity>
+                            </ThemedView>
+                        </TouchableOpacity>
+                    )}
+                    contentContainerStyle={styles.container}
+                    onEndReached={() => { loadPlants(page + 1, filter, plantType); }}
+                    onEndReachedThreshold={0.5}
+                    ListFooterComponent={loading ? <ActivityIndicator size="large" style={{ marginVertical: 16 }} /> : null}
+                />
+            </View>
         </>
     );
 };

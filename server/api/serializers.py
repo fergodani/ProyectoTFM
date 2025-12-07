@@ -80,12 +80,12 @@ class PlantInfoSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 class UserPlantSerializer(serializers.ModelSerializer):
-    plant = PlantInfoSerializer(read_only=True)
+    #plant = PlantInfoSerializer(read_only=True)
     
     id = serializers.IntegerField(read_only=True)
-    plant_id = serializers.PrimaryKeyRelatedField(
-        queryset=PlantInfo.objects.all(), source='plant', write_only=True
-    )
+    #plant_id = serializers.PrimaryKeyRelatedField(
+    #    queryset=PlantInfo.objects.all(), source='plant', write_only=True
+    #)
     garden_name = serializers.CharField(source='garden.name', read_only=True)
     #next_watering_date = serializers.SerializerMethodField()
     class Meta:
@@ -111,24 +111,18 @@ class UserPlantSerializer(serializers.ModelSerializer):
     def get_next_watering_date(self, obj):
         # obj.last_watered_date: fecha de último riego
         # obj.plant.watering_period: JSON con los periodos
-        if obj.last_watered_date and obj.plant and obj.plant.watering_period:
+        if obj.last_watered_date and obj.watering_period:
             try:
                 # Si watering_period es un string, conviértelo a lista
-                periods = obj.plant.watering_period
-                if isinstance(periods, str):
-                    periods = json.loads(periods)
+                period = obj.watering_period
+                if isinstance(period, str):
+                    period = json.loads(period)
                 today = obj.last_watered_date
-                season = self.get_season(today)
-                print(season)
-                # Busca el periodo para la estación actual
-                period = next((p for p in periods if p["season"] == season), None)
-                print(period)
-                if period:
-                    value = self.parse_value(period["value"])
-                    unit = period["unit"]
-                    unit_days = {"days": 1, "weeks": 7, "months": 30}
-                    days = value * unit_days.get(unit, 1)
-                    return today + timedelta(days=days)
+
+                unit = period["unit"]
+                unit_days = {"days": 1, "weeks": 7, "months": 30}
+                days = period["value"] * unit_days.get(unit, 1)
+                return today + timedelta(days=days)
             except Exception:
                 return None
         return obj.created_at.date()

@@ -125,20 +125,19 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
             })}
           >
             <ThemedView style={styles.card}>
-              {userPlant.plant.image && (
+              {userPlant.image && (
                 <Image
-                  source={{ uri: userPlant.plant.image }}
+                  source={{ uri: userPlant.image }}
                   style={{ width: 100, height: 100, borderRadius: 8 }}
                 />
               )}
               <View style={{ flex: 1, flexShrink: 1, gap: 16 }}>
                 <View>
-                  <ThemedText type='title2'>{userPlant.plant.common_name}</ThemedText>
-                  <ThemedText type='italic'>{userPlant.plant.scientific_name}</ThemedText>
+                  <ThemedText type='title2'>{userPlant.common_name}</ThemedText>
                 </View>
                 <View style={{ display: 'flex', flexDirection: 'row', gap: 2, alignContent: 'center', alignItems: 'center' }}>
                   <Ionicons name="water" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
-                  <ThemedText type='default'>Cada {userPlant.plant.watering_period[0].value == "1" ? unitLabelsSingular[userPlant.plant.watering_period[0].unit as keyof typeof unitLabelsSingular] : userPlant.plant.watering_period[0].value} {userPlant.plant.watering_period[0].value !== "1" ? unitLabelsPlural[userPlant.plant.watering_period[0].unit as keyof typeof unitLabelsPlural] : ''}</ThemedText>
+                  <ThemedText type='default'>Cada {userPlant.watering_period.value == "1" ? unitLabelsSingular[userPlant.watering_period.unit as keyof typeof unitLabelsSingular] : userPlant.watering_period.value} {userPlant.watering_period.value !== "1" ? unitLabelsPlural[userPlant.watering_period.unit as keyof typeof unitLabelsPlural] : ''}</ThemedText>
                 </View>
                 <View style={{ display: 'flex', flexDirection: 'row', gap: 2, alignContent: 'center', alignItems: 'center' }}>
                   <Ionicons name="location" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />

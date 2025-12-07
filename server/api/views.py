@@ -188,11 +188,40 @@ class UserPlantListCreateView(APIView):
             user_plants = UserPlant.objects.filter(owner=user, garden_id=garden_id)
         else:
             user_plants = UserPlant.objects.filter(owner=user)
-        serializer = UserPlantSerializer(user_plants.select_related('plant'), many=True)
+        serializer = UserPlantSerializer(user_plants, many=True)
         return Response(serializer.data)
 
     def post(self, request):
         serializer = UserPlantSerializer(data=request.data)
+        
+        # Si faltan campos, hacer petición a Perenual API
+        plant_id = request.data.get('plant_id')
+        if plant_id and (not request.data.get('common_name') or not request.data.get('watering_period') or not request.data.get('image')):
+            try:
+                url = f"{PERENUAL_API_URL}/species/details/{plant_id}"
+                params = {'key': PERENUAL_API_KEY}
+                response = requests.get(url, params=params)
+            
+                if response.status_code == 200:
+                    perenual_data = response.json()
+                
+                    # Actualizar datos del request con información de Perenual
+                    request_data = request.data.copy()
+                
+                    if not request_data.get('common_name') and perenual_data.get('common_name'):
+                        request_data['common_name'] = perenual_data['common_name']
+                
+                    if not request_data.get('watering_period') and perenual_data.get('watering'):
+                        request_data['watering_period'] = perenual_data['watering_general_benchmark']
+                
+                    if not request_data.get('image') and perenual_data.get('default_image', {}).get('regular_url'):
+                        request_data['image'] = perenual_data['default_image']['regular_url']
+                
+                    # Recrear el serializer con los datos actualizados
+                    serializer = UserPlantSerializer(data=request_data)
+                
+            except Exception as e:
+                print(f"Error fetching plant details from Perenual: {str(e)}")
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -212,8 +241,62 @@ class UserPlantDetailView(APIView):
         plant = self.get_object(pk)
         if not plant:
             return Response({"error": "Plant not found"}, status=status.HTTP_404_NOT_FOUND)
+        
         serializer = UserPlantSerializer(plant)
-        return Response(serializer.data)
+        plant_data = serializer.data
+        
+        # Hacer petición a Perenual para obtener detalles adicionales
+        if plant.plant_id:
+            try:
+                url = f"{PERENUAL_API_URL}/species/details/{plant.plant_id}"
+                params = {
+                    'key': PERENUAL_API_KEY
+                }
+                
+                response = requests.get(url, params=params)
+                
+                if response.status_code == 200:
+                    perenual_data = response.json()
+                    
+                    # Obtener información de cuidados desde care_guides si existe
+                    if 'care_guides' in perenual_data:
+                        care_guides_url = perenual_data['care_guides']
+                        try:
+                            care_response = requests.get(care_guides_url)
+                            if care_response.status_code == 200:
+                                care_data = care_response.json()
+                                # Procesar la información de cuidados
+                                if care_data.get('data') and len(care_data['data']) > 0:
+                                    first_guide = care_data['data'][0]
+                                    if 'section' in first_guide:
+                                        # Extraer watering, pruning y sunlight descriptions
+                                        for section in first_guide['section']:
+                                            section_type = section.get('type')
+                                            if section_type == 'watering':
+                                                perenual_data['watering_long'] = section.get('description', '')
+                                            elif section_type == 'pruning':
+                                                perenual_data['pruning'] = section.get('description', '')
+                                            elif section_type == 'sunlight':
+                                                perenual_data['sunlight_long'] = section.get('description', '')
+                        except Exception as care_e:
+                            print(f"Error fetching care guides: {str(care_e)}")
+                    
+                    # Agregar los datos de Perenual a la respuesta
+                    plant_data['perenual_details'] = perenual_data
+                    
+                elif response.status_code != 404:
+                    # Si hay error pero no es 404, agregar información del error
+                    plant_data['perenual_details'] = {
+                        'error': f"Failed to fetch plant details from Perenual API (status: {response.status_code})"
+                    }
+                    
+            except Exception as e:
+                # En caso de error de conexión, agregar información del error pero continuar
+                plant_data['perenual_details'] = {
+                    'error': f"Error connecting to Perenual API: {str(e)}"
+                }
+        
+        return Response(plant_data)
 
     def put(self, request, pk):
         plant = self.get_object(pk)
@@ -221,7 +304,64 @@ class UserPlantDetailView(APIView):
             return Response({"error": "Plant not found"}, status=status.HTTP_404_NOT_FOUND)
         serializer = UserPlantSerializer(plant, data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            updated_plant = serializer.save()
+            
+            # Obtener el serializer data actualizado
+            updated_serializer = UserPlantSerializer(updated_plant)
+            plant_data = updated_serializer.data
+            
+            # Hacer petición a Perenual para obtener detalles adicionales
+            if updated_plant.plant_id:
+                try:
+                    url = f"{PERENUAL_API_URL}/species/details/{updated_plant.plant_id}"
+                    params = {
+                        'key': PERENUAL_API_KEY
+                    }
+                    
+                    response = requests.get(url, params=params)
+                    
+                    if response.status_code == 200:
+                        perenual_data = response.json()
+                        
+                        # Obtener información de cuidados desde care_guides si existe
+                        if 'care_guides' in perenual_data:
+                            care_guides_url = perenual_data['care_guides']
+                            try:
+                                care_response = requests.get(care_guides_url)
+                                if care_response.status_code == 200:
+                                    care_data = care_response.json()
+                                    # Procesar la información de cuidados
+                                    if care_data.get('data') and len(care_data['data']) > 0:
+                                        first_guide = care_data['data'][0]
+                                        if 'section' in first_guide:
+                                            # Extraer watering, pruning y sunlight descriptions
+                                            for section in first_guide['section']:
+                                                section_type = section.get('type')
+                                                if section_type == 'watering':
+                                                    perenual_data['watering_long'] = section.get('description', '')
+                                                elif section_type == 'pruning':
+                                                    perenual_data['pruning'] = section.get('description', '')
+                                                elif section_type == 'sunlight':
+                                                    perenual_data['sunlight_long'] = section.get('description', '')
+                            except Exception as care_e:
+                                print(f"Error fetching care guides: {str(care_e)}")
+                        
+                        # Agregar los datos de Perenual a la respuesta
+                        plant_data['perenual_details'] = perenual_data
+                        
+                    elif response.status_code != 404:
+                        # Si hay error pero no es 404, agregar información del error
+                        plant_data['perenual_details'] = {
+                            'error': f"Failed to fetch plant details from Perenual API (status: {response.status_code})"
+                        }
+                        
+                except Exception as e:
+                    # En caso de error de conexión, agregar información del error pero continuar
+                    plant_data['perenual_details'] = {
+                        'error': f"Error connecting to Perenual API: {str(e)}"
+                    }
+            
+            return Response(plant_data)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

@@ -1,4 +1,4 @@
-import { PlantInfo } from "./PlantInfo";
+import { PlantInfo, WateringPeriod } from "./PlantInfo";
 
 export interface Garden {
     id: number;
@@ -31,6 +31,7 @@ export interface UserPlant {
     last_spraying_date?: string;
     garden?: Garden | number;
     garden_name?: string;
+    common_name?: string;
     custom_name?: string;
     height?: number;
     age?: string;
@@ -43,6 +44,9 @@ export interface UserPlant {
     pot_type?: string;
     pot_size?: number;
     drainage?: string;
+    image?: string;
+    watering_period: WateringPeriod;
+    perenual_details?: PlantInfo;
 }
 
 export interface PlantImage {
