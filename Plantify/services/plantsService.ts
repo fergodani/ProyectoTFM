@@ -3,7 +3,7 @@ import { PerenualPlant, Tasks, UserPlant } from "@/models/Plant";
 import { PlantInfo, Prediction } from "@/models/PlantInfo";
 import { PlantDetailTrefle, PlantTrefle } from "@/models/PlanTrefle";
 
-const url = "http://192.168.1.143:8000"
+const url = "http://192.168.1.154:8000"
 
 export const PlantService = {
   getAllPlants: async (accessToken: string): Promise<UserPlant[]> => {

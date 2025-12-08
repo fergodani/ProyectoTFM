@@ -1,7 +1,7 @@
 import { Garden, UserPlant } from "@/models/Plant";
 import { PlantService } from "@/services/plantsService";
 import React, { useEffect, useState } from "react";
-import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Image, useColorScheme, Pressable, Modal } from "react-native";
+import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Image, useColorScheme, Pressable, Modal, ActivityIndicator } from "react-native";
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";
 import { useAuth } from "@/hooks/useAuthContext";
@@ -19,15 +19,25 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
   const [modalVisible, setModalVisible] = useState(false);
   const [confirmVisible, setConfirmVisible] = useState(false);
   const [selectedPlant, setSelectedPlant] = useState<UserPlant | null>(null);
+  const [menuPosition, setMenuPosition] = useState({ top: 0, right: 0 });
+  const [isLoading, setIsLoading] = useState(false);
   const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
 
-  const openModal = (userPlant: UserPlant) => {
+  const openModal = (userPlant: UserPlant, event: any) => {
     if (modalVisible && selectedPlant?.id === userPlant.id) {
       closeModal();
       return;
     }
-    setSelectedPlant(userPlant);
-    setModalVisible(true);
+
+    // Medir la posición del botón
+    event.target.measure((x: number, y: number, width: number, height: number, pageX: number, pageY: number) => {
+      setMenuPosition({
+        top: pageY + height,
+        right: 16
+      });
+      setSelectedPlant(userPlant);
+      setModalVisible(true);
+    });
   };
 
   const closeModal = () => {
@@ -113,6 +123,23 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
     "months": 'mes',
   };
 
+  if (isLoading) {
+      return <ActivityIndicator size="large" style={{ marginTop: 32 }} />;
+    }
+
+  const handleSettings = async (plantId: number) => {
+    try {
+      setIsLoading(true);
+      const plantDetails = await PlantService.getUserPlantById(plantId, accessToken!);
+      closeModal();
+      setIsLoading(false);
+      router.push({ pathname: "/plant-settings", params: { plant: JSON.stringify(plantDetails) } });
+    } catch (error) {
+      console.error("Error fetching plant details:", error);
+      setIsLoading(false);
+    }
+  }
+
   return (
     <>
       <ScrollView style={styles.container}>
@@ -147,36 +174,51 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
 
               <TouchableOpacity
                 style={styles.buttonMenu}
-                onPress={() => {
-                  openModal(userPlant);
+                onPress={(event) => {
+                  openModal(userPlant, event);
                 }}
               >
                 <Ionicons name="ellipsis-vertical" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
               </TouchableOpacity>
-              {/* Opciones del menú */}
-              {modalVisible && selectedPlant?.id === userPlant.id && (
-                <View style={[styles.optionsMenu, { backgroundColor }]}>
-                  <Pressable style={{ marginBottom: 12 }} onPress={() => {
-                    // Acción de ajustes
-                    closeModal();
-                    router.push({ pathname: "/plant-settings", params: { plant: JSON.stringify(userPlant) } });
-                  }}>
-                    <ThemedText type="defaultSemiBold">Ajustes de la planta</ThemedText>
-                  </Pressable>
-                  <Pressable onPress={() => {
-                    setConfirmVisible(true);
-                  }}>
-                    <ThemedText type="defaultSemiBold" style={{ fontSize: 16, color: "red" }}>Eliminar</ThemedText>
-                  </Pressable>
-                </View>
-              )}
+
             </ThemedView>
           </TouchableOpacity>
         ))}
         <Button text="Añadir planta" onPress={handleAdd} />
         <View style={{ marginBottom: 24 }} />
       </ScrollView>
-      {/* Modal de opciones */}
+
+      {/* Modal de opciones del menú */}
+      <Modal
+        visible={modalVisible}
+        transparent
+        animationType="fade"
+        onRequestClose={closeModal}>
+        <TouchableOpacity
+          style={styles.modalOverlay}
+          activeOpacity={1}
+          onPress={closeModal}>
+          <View style={[styles.optionsMenu, {
+            backgroundColor,
+            position: 'absolute',
+            top: menuPosition.top,
+            right: menuPosition.right
+          }]}>
+            <Pressable style={{ marginBottom: 12 }} onPress={() => {
+              handleSettings(selectedPlant!.id);
+            }}>
+              <ThemedText type="defaultSemiBold">Ajustes de la planta</ThemedText>
+            </Pressable>
+            <Pressable onPress={() => {
+              setConfirmVisible(true);
+            }}>
+              <ThemedText type="defaultSemiBold" style={{ fontSize: 16, color: "red" }}>Eliminar</ThemedText>
+            </Pressable>
+          </View>
+        </TouchableOpacity>
+      </Modal>
+
+      {/* Modal de confirmación de eliminación */}
       <Modal
         visible={confirmVisible}
         transparent
@@ -222,18 +264,19 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
 };
 
 const styles = StyleSheet.create({
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+  },
   optionsMenu: {
-    position: 'absolute',
-    right: 0,
-    top: 40, // ajusta según tu diseño
     borderRadius: 12,
-    shadowColor: "#fff",
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 10,
-    zIndex: 100,
-    padding: 16
+    padding: 16,
+    minWidth: 200,
   },
   container: {
     paddingHorizontal: 16,
@@ -251,7 +294,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 16,
-    zIndex: 1,
   },
   title: {
     fontSize: 18,
@@ -266,7 +308,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   button: {
-    marginTop: 32, // Espaciado superior
+    marginTop: 32,
     width: '100%',
     height: 50,
     borderRadius: 25,
@@ -283,5 +325,5 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 6,
     top: 12,
-  }
+  },
 });

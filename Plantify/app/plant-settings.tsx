@@ -93,6 +93,7 @@ export default function PlantSettings() {
     const [value, setValue] = useState(0);
     const [stringValue, setStringValue] = useState("");
     const [gardens, setGardens] = useState<Garden[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
     const { getUserId, accessToken, refreshToken, setTokens } = useAuth();
 
     const openModal = (type: ModalType | ((prevState: ModalType) => ModalType) | null) => {
@@ -116,13 +117,13 @@ export default function PlantSettings() {
     }, []);
 
     const handlePut = async () => {
+        setIsLoading(true);
         try {
             // Crear una copia del objeto sin mutar el estado
             const plantToUpdate = {
                 ...userPlantTemp,
                 plant_id: userPlantTemp.perenual_details!.id
             };
-            console.log("Updating plant:", plantToUpdate);
             const plant = await PlantService.putPlant(plantToUpdate, accessToken!);
             if (plant) {
                 setUserPlant(plant);
@@ -154,6 +155,8 @@ export default function PlantSettings() {
                 // Log other errors
                 console.error("Non-auth error:", error);
             }
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -417,8 +420,9 @@ export default function PlantSettings() {
                                     setIsModalVisible(false);
                                 }}
                                 style={{ padding: 10, minWidth: 60, alignItems: 'center' }}
+                                disabled={isLoading}
                             >
-                                <ThemedText type="default" style={{ color: "#000" }}>Cerrar</ThemedText>
+                                <ThemedText type="default" style={{ color: isLoading ? "#999" : "#000" }}>Cerrar</ThemedText>
                             </TouchableOpacity>
                             <TouchableOpacity 
                                 onPress={() => {
@@ -426,9 +430,17 @@ export default function PlantSettings() {
                                     console.log("Current userPlantTemp:", userPlantTemp);
                                     handlePut();
                                 }}
-                                style={{ padding: 10, minWidth: 60, alignItems: 'center', backgroundColor: '#4CAF50', borderRadius: 5 }}
+                                style={{ padding: 10, minWidth: 60, alignItems: 'center', backgroundColor: isLoading ? '#ccc' : '#4CAF50', borderRadius: 5, flexDirection: 'row', gap: 8 }}
+                                disabled={isLoading}
                             >
-                                <ThemedText type="default" style={{ color: "#fff", fontWeight: 'bold' }}>Aceptar</ThemedText>
+                                {isLoading ? (
+                                    <>
+                                        <ActivityIndicator size="small" color="#fff" />
+                                        <ThemedText type="default" style={{ color: "#fff", fontWeight: 'bold' }}>Guardando...</ThemedText>
+                                    </>
+                                ) : (
+                                    <ThemedText type="default" style={{ color: "#fff", fontWeight: 'bold' }}>Aceptar</ThemedText>
+                                )}
                             </TouchableOpacity>
                         </View>
 

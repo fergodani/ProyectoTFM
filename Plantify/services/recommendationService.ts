@@ -1,4 +1,4 @@
-const url = "http://192.168.1.143:8000"
+const url = "http://192.168.1.154:8000"
 
 export const RecommendationService = {
     getWeather: async (lat: number, lon: number): Promise<any> => {

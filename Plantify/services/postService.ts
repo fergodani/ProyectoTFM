@@ -4,7 +4,7 @@ import { PlantInfo, Prediction } from "@/models/PlantInfo";
 import { PlantDetailTrefle, PlantTrefle } from "@/models/PlanTrefle";
 import { Post, Comment, PostVoteResponse, CommentVoteResponse, VoteRequest, VoteType } from "@/models/Post";
 
-const url = "http://192.168.1.143:8000/api";
+const url = "http://192.168.1.154:8000/api";
 
 export const PostService = {
     getPostById: async (id: number, accessToken: string): Promise<Post | null> => {

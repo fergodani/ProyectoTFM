@@ -231,7 +231,7 @@ export default function PlantInfoDetails() {
             onPress={handleAddToGarden}
           >
             <Ionicons name="leaf" size={20} color="#333" />
-            <ThemedText style={styles.menuText}>Add to Garden</ThemedText>
+            <ThemedText style={styles.menuText}>Add Plant</ThemedText>
           </TouchableOpacity>
 
           <TouchableOpacity

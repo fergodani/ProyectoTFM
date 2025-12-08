@@ -1,4 +1,4 @@
-source ~/.virtualenvs/djangodev/bin/activate
+source venv/bin/activate
 .\djangodev\bin\activate
 .\venv\Scripts\activate
 python manage.py makemigrations api

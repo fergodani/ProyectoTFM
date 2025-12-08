@@ -33,6 +33,7 @@ export default function TabTwoScreen() {
   const [locationValue, setLocationValue] = React.useState('');
   const { isAuthenticated, logout, getUserId } = useAuth();
   const [menuVisible, setMenuVisible] = React.useState(false);
+  const [menuPosition, setMenuPosition] = React.useState({ top: 0, right: 0 });
   const colorScheme = useColorScheme();
   const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
   /*
@@ -99,7 +100,15 @@ export default function TabTwoScreen() {
         <View style={styles.titleContainer}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', gap: 8 }}>
             <ThemedText type="title">Mis plantas</ThemedText>
-            <TouchableOpacity onPress={() => { setMenuVisible(true) }}>
+            <TouchableOpacity onPress={(event) => {
+              event.target.measure((x: number, y: number, width: number, height: number, pageX: number, pageY: number) => {
+                setMenuPosition({ 
+                  top: pageY + height, 
+                  right: 16 
+                });
+                setMenuVisible(true);
+              });
+            }}>
               <Ionicons name="ellipsis-vertical" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
             </TouchableOpacity>
           </View>
@@ -123,22 +132,25 @@ export default function TabTwoScreen() {
         <TouchableOpacity style={styles.fab} onPress={handleAdd}>
           <Ionicons name="add" size={24} color="#333" />
         </TouchableOpacity>
-
         {/* Menú modal */}
-        <Modal visible={menuVisible} transparent animationType="fade">
-          <View style={styles.menuOverlay}>
-            <View style={styles.menuContent}>
+        <Modal visible={menuVisible} transparent animationType="fade" onRequestClose={() => setMenuVisible(false)}>
+          <TouchableOpacity
+            style={styles.menuOverlay}
+            activeOpacity={1}
+            onPress={() => setMenuVisible(false)}>
+            <View style={[styles.menuContent, {
+              position: 'absolute',
+              top: menuPosition.top,
+              right: menuPosition.right
+            }]}>
               <TouchableOpacity style={styles.menuButton} onPress={() => { setMenuVisible(false); /* acción 1 */ }}>
                 <Text style={styles.menuText}>Editar perfil</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.menuButton} onPress={() => { handleLogout(); /* acción 2 */ }}>
                 <Text style={styles.menuText}>Cerrar sesión</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.menuButton} onPress={() => setMenuVisible(false)}>
-                <Text style={[styles.menuText, { color: 'red' }]}>Cancelar</Text>
-              </TouchableOpacity>
             </View>
-          </View>
+          </TouchableOpacity>
         </Modal>
       </LinearGradient>
     ));
@@ -241,19 +253,18 @@ const styles = StyleSheet.create({
   },
   menuOverlay: {
     flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0,0,0,0.01)',
-    alignItems: 'flex-end',
-    position: 'absolute',
-    right: 0,
+    backgroundColor: 'rgba(0,0,0,0.3)',
   },
   menuContent: {
     backgroundColor: '#fff',
     borderRadius: 8,
     padding: 16,
-    margin: 16,
     minWidth: 160,
     elevation: 6,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
   },
   menuButton: {
     paddingVertical: 12,
