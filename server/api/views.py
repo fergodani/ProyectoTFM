@@ -211,8 +211,14 @@ class UserPlantListCreateView(APIView):
                     if not request_data.get('common_name') and perenual_data.get('common_name'):
                         request_data['common_name'] = perenual_data['common_name']
                 
-                    if not request_data.get('watering_period') and perenual_data.get('watering'):
-                        request_data['watering_period'] = perenual_data['watering_general_benchmark']
+                    if not request_data.get('watering_period') and perenual_data.get('watering_general_benchmark'):
+                        watering_data = perenual_data.get('watering_general_benchmark', {})
+                        if isinstance(watering_data, dict):
+                            value = watering_data.get('value', '').replace('"', '')
+                            unit = watering_data.get('unit', '')
+                            request_data['watering_period'] = f"{value} {unit}".strip()
+                        else:
+                            request_data['watering_period'] = perenual_data['watering_general_benchmark']
                 
                     if not request_data.get('image') and perenual_data.get('default_image', {}).get('regular_url'):
                         request_data['image'] = perenual_data['default_image']['regular_url']

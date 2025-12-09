@@ -47,6 +47,9 @@ export interface UserPlant {
     image?: string;
     watering_period: WateringPeriod;
     perenual_details?: PlantInfo;
+    isWateringReminder?: boolean;
+    fertilizing_time?: number;
+    fertilizing_time_unit?: string;
 }
 
 export interface PlantImage {

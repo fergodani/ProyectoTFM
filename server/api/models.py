@@ -48,7 +48,6 @@ class UserPlant(models.Model):
     plant_id = models.PositiveIntegerField(default=0)
     image = models.URLField(blank=True, null=True)
     isWateringReminder = models.BooleanField(default=True)
-    isPruningReminder = models.BooleanField(default=True)
     common_name = models.CharField(max_length=255, blank=True, null=True)
     custom_name = models.CharField(max_length=255, blank=True, null=True)
     height = models.PositiveIntegerField(blank=True, null=True)
@@ -58,6 +57,17 @@ class UserPlant(models.Model):
             ('less_1_year', 'Less than 1 year'),
             ('2_3_years', '2-3 years'),
             ('more_3_years', 'More than 3 years'),
+        ],
+        blank=True,
+        null=True
+    )
+    fertilizing_time = models.PositiveIntegerField(blank=True, null=True)
+    fertilizing_time_unit = models.CharField(
+        max_length=10,
+        choices=[
+            ('day', 'Day'),
+            ('week', 'Week'),
+            ('month', 'Month'),
         ],
         blank=True,
         null=True

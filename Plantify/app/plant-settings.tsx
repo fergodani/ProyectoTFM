@@ -88,7 +88,7 @@ export default function PlantSettings() {
     const [isWateringEnabled, setIsWateringEnabled] = useState(false);
     const [isFertilityEnabled, setIsFertilityEnabled] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
-    type ModalType = "height" | "age" | "pruning" | "spraying" | "rotation" | "site" | "pot_type" | "pot_size" | "pot_drainage" | null;
+    type ModalType = "height" | "age" | "pruning" | "spraying" | "rotation" | "site" | "pot_type" | "pot_size" | "pot_drainage" | "fertilizing" | null;
     const [modalType, setModalType] = useState<ModalType>(null);
     const [value, setValue] = useState(0);
     const [stringValue, setStringValue] = useState("");
@@ -234,7 +234,7 @@ export default function PlantSettings() {
                             </View>
                             <View>
                                 <Switch
-                                    value={isWateringEnabled}
+                                    value={userPlant.isWateringReminder}
                                     onValueChange={setIsWateringEnabled}
                                     trackColor={{ false: "#ccc", true: Colors.light.tint }}
                                     thumbColor={isWateringEnabled ? Colors.light.tint : "#f4f3f4"}
@@ -243,30 +243,36 @@ export default function PlantSettings() {
                         </View>
                         <View style={styles.innerCard}>
                             <ThemedText type="default" style={{ color: '#333' }}>Frecuencia</ThemedText>
-                            <ThemedText type="default" style={{ color: '#333' }}>Cada 15 días</ThemedText>
-                        </View>
-                        <DashedLine />
-                        {/* Frecuencia de fertilización */}
-                        <View style={styles.subcardTouchable}>
-                            <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-                                <Ionicons name="archive" size={24} color={"#bfd8c5ff"} />
-                                <ThemedText type="default">Fertilización</ThemedText>
-                            </View>
-                            <View>
-                                <Switch
-                                    value={isFertilityEnabled}
-                                    onValueChange={setIsFertilityEnabled}
-                                    trackColor={{ false: "#ccc", true: Colors.light.tint }}
-                                    thumbColor={isFertilityEnabled ? Colors.light.tint : "#f4f3f4"}
-                                />
-                            </View>
-                        </View>
-                        <View style={styles.innerCard}>
-                            <ThemedText type="default" style={{ color: '#333' }}>Frecuencia</ThemedText>
-                            <ThemedText type="default" style={{ color: '#333' }}>Cada 15 días</ThemedText>
+                            {userPlant.watering_period.value === "1" && (
+                                <ThemedText type="default" style={{ color: '#333' }}>Cada {userPlant.watering_period.unit}</ThemedText>
+                            )}
+                            {userPlant.watering_period.value != "1" && (
+                                <ThemedText type="default" style={{ color: '#333' }}>
+                                    Cada {userPlant.watering_period.value.includes('-') 
+                                        ? Math.round((parseInt(userPlant.watering_period.value.split('-')[0]) + parseInt(userPlant.watering_period.value.split('-')[1])) / 2)
+                                        : userPlant.watering_period.value} {userPlant.watering_period.unit}
+                                </ThemedText>
+                            )}
                         </View>
                         <DashedLine />
                         <View style={{ flex: 1, gap: 8 }}>
+                            {/* Frecuencia de fertilización */}
+                            <TouchableOpacity
+                                style={styles.subcardTouchable}
+                                onPress={() => { openModal('fertilizing') }}
+                            >
+                                <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+                                    <Ionicons name="archive" size={24} color={"#bfd8c5ff"} />
+                                    <ThemedText type="default">Fertilización</ThemedText>
+                                </View>
+                                <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
+                                    {userPlant.fertilizing_time ? (<ThemedText type='default'>{userPlant.fertilizing_time} / {timeUnitLabels[userPlant.fertilizing_time_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
+                                        <ThemedText type='italic'>Seleccionar</ThemedText>
+                                    )}
+                                    <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
+                                </View>
+                            </TouchableOpacity>
+
                             {/* Datos de poda */}
                             <TouchableOpacity
                                 style={styles.subcardTouchable}
@@ -277,7 +283,7 @@ export default function PlantSettings() {
                                     <ThemedText type='default'>Poda</ThemedText>
                                 </View>
                                 <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                    {userPlant.pruning_time ? (<ThemedText type='default'>{userPlant.pruning_time} {timeUnitLabels[userPlant.pruning_time_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
+                                    {userPlant.pruning_time ? (<ThemedText type='default'>{userPlant.pruning_time} / {timeUnitLabels[userPlant.pruning_time_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
                                         <ThemedText type='italic'>Seleccionar</ThemedText>
                                     )}
                                     <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
@@ -295,7 +301,7 @@ export default function PlantSettings() {
                                     <ThemedText type='default'>Rociado</ThemedText>
                                 </View>
                                 <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                    {userPlant.sprayed_time ? (<ThemedText type='default'>{userPlant.sprayed_time} {timeUnitLabels[userPlant.sprayed_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
+                                    {userPlant.sprayed_time ? (<ThemedText type='default'>{userPlant.sprayed_time} /{timeUnitLabels[userPlant.sprayed_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
                                         <ThemedText type='italic'>Seleccionar</ThemedText>
                                     )}
                                     <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
@@ -313,7 +319,7 @@ export default function PlantSettings() {
                                     <ThemedText type='default'>Rotación</ThemedText>
                                 </View>
                                 <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                    {userPlant.rotation_time ? (<ThemedText type='default'>{userPlant.rotation_time} {timeUnitLabels[userPlant.rotation_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
+                                    {userPlant.rotation_time ? (<ThemedText type='default'>{userPlant.rotation_time} / {timeUnitLabels[userPlant.rotation_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
                                         <ThemedText type='italic'>Seleccionar</ThemedText>
                                     )}
                                     <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
@@ -414,7 +420,7 @@ export default function PlantSettings() {
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginBottom: 20 }}>
-                            <TouchableOpacity 
+                            <TouchableOpacity
                                 onPress={() => {
                                     console.log("Cerrar button pressed");
                                     setIsModalVisible(false);
@@ -424,7 +430,7 @@ export default function PlantSettings() {
                             >
                                 <ThemedText type="default" style={{ color: isLoading ? "#999" : "#000" }}>Cerrar</ThemedText>
                             </TouchableOpacity>
-                            <TouchableOpacity 
+                            <TouchableOpacity
                                 onPress={() => {
                                     console.log("Aceptar button pressed");
                                     console.log("Current userPlantTemp:", userPlantTemp);
@@ -462,14 +468,32 @@ export default function PlantSettings() {
                                 enableScrollByTapOnItem={true}
                             />
                         )}
+                        {modalType === 'fertilizing' && (
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 100 }}>
+                                <WheelPicker
+                                    data={data}
+                                    width={100}
+                                    value={userPlantTemp.fertilizing_time || 0}
+                                    onValueChanged={({ item: { value } }) => setUserPlantTemp({ ...userPlantTemp, fertilizing_time: value })}
+                                    enableScrollByTapOnItem={true}
+                                />
+                                <WheelPicker
+                                    data={timeUnitOptions}
+                                    width={100}
+                                    value={userPlantTemp.fertilizing_time_unit || "day"}
+                                    onValueChanged={({ item: { value } }) => setUserPlantTemp({ ...userPlantTemp, fertilizing_time_unit: value })}
+                                    enableScrollByTapOnItem={true}
+                                />
+                            </View>
+                        )}
                         {modalType === 'pruning' && (
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 100 }}>
                                 <WheelPicker
                                     data={data}
                                     width={100}
                                     value={userPlantTemp.pruning_time || 0}
-                                    onValueChanged={({ item: { value } }) => setUserPlantTemp({ 
-                                        ...userPlantTemp, 
+                                    onValueChanged={({ item: { value } }) => setUserPlantTemp({
+                                        ...userPlantTemp,
                                         pruning_time: value,
                                         pruning_time_unit: userPlantTemp.pruning_time_unit || "day"
                                     })}
@@ -588,8 +612,8 @@ const styles = StyleSheet.create({
         padding: 16,
         borderTopLeftRadius: 8,
         borderTopRightRadius: 8,
-        borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0,
+        borderBottomLeftRadius: 8,
+        borderBottomRightRadius: 8,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
