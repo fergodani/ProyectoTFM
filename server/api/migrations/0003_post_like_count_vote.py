@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='votes', to=settings.AUTH_USER_MODEL)),
             ],
             options={
-                'constraints': [models.CheckConstraint(condition=models.Q(models.Q(('comment__isnull', True), ('post__isnull', False)), models.Q(('comment__isnull', False), ('post__isnull', True)), _connector='OR'), name='vote_either_post_or_comment')],
+                'constraints': [models.CheckConstraint(check=models.Q(models.Q(('comment__isnull', True), ('post__isnull', False)), models.Q(('comment__isnull', False), ('post__isnull', True)), _connector='OR'), name='vote_either_post_or_comment')],
                 'unique_together': {('user', 'comment'), ('user', 'post')},
             },
         ),

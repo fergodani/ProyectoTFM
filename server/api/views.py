@@ -18,20 +18,18 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser
 from tensorflow.keras.models import load_model
 import numpy as np
-from PIL import Image
-import tensorflow as tf
-from tensorflow.keras.preprocessing import image
 import json
+from ultralytics import YOLO
+import cv2
 import os
-from google import genai
-from google.genai import types
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 TREFLE_API_URL = "https://trefle.io/api/v1/plants"
 TREFLE_TOKEN = "qD5bYaqpif9la_ZYT6zOPTe5icGrGiJAOlDacDK0Fic" 
 
 PERENUAL_API_URL = "https://perenual.com/api/v2"
-PERENUAL_API_KEY = os.getenv('PERENUAL_API_KEY') or "sk-pQXu688cc3229ec5b11655" 
+PERENUAL_API_KEY = os.getenv('PERENUAL_API_KEY')
 
 # CRUD para Garden
 class GardenListCreateView(APIView):
@@ -629,59 +627,14 @@ class UserTasksView(APIView):
             "previous_tasks": previous_tasks
         })
         
-#model = load_model('./models/plant_model.h5')
-#model = load_model('./models/plant_identify.h5')
-#model = load_model('./models/model169_4.h5')
+model = YOLO("../../model/results/plantify_model_v1/weights/best.pt")
 
 class PredictImageView(APIView):
     parser_classes = [MultiPartParser]
 
     def post(self, request):
         image_file = request.FILES['image']
-        #img = Image.open(image_file).resize((180, 180))  # ajusta tamaño según tu modelo
-        #img_array = np.expand_dims(img, axis=0)
         
-        # Plantnet
-        img = Image.open(image_file).resize((180, 180))
-        img_array = image.img_to_array(img)
-        img_array = np.expand_dims(img_array, axis=0)
-        img_array = img_array / 255.0  # Normalizing the image
-        
-        prediction = model.predict(img_array)
-        score = tf.nn.softmax(prediction[0])
-        with open('plantnet_classes.json', 'r') as f:
-            class_names = json.load(f)
-         # Obtener los índices de las 10 clases con mayor confianza
-        top_indices = np.argsort(score)[-10:][::-1]
-        top_classes = [class_names[i] for i in top_indices]
-        top_confidences = [100 * score[i].numpy() for i in top_indices]
-        # Obtener los nombres científicos de las 10 clases
-        with open('plantnet300K_species_names.json', 'r') as f:
-            species_names = json.load(f)
-        top_scientific_names = [species_names.get(cls, cls).replace('_', ' ') for cls in top_classes]
-        print("Top 10 clases: ", top_classes)
-        print("Confianzas: ", top_confidences)
-        print("Nombres científicos: ", top_scientific_names)
-        #class_names = ['aloevera', 'banana', 'bilimbi', 'cantaloupe', 'cassava', 'coconut', 'corn', 'cucumber', 'curcuma', 'eggplant', 'galangal', 'ginger', 'guava', 'kale', 'longbeans', 'mango', 'melon', 'orange', 'paddy', 'papaya', 'peperchili', 'pineapple', 'pomelo', 'shallot', 'soybeans', 'spinach', 'sweetpotatoes', 'tobacco', 'waterapple', 'watermelon']
-        
-        predicted_class = class_names[np.argmax(score)]
-        confidence = 100 * np.max(score)
-        print("Clase predecida: ", predicted_class, " Confidence: ", confidence)
-        with open('plantnet300K_species_names.json', 'r') as f:
-            species_names = json.load(f)
-        predicted_scientific_name = species_names.get(predicted_class, predicted_class)
-        predicted_scientific_name = predicted_scientific_name.replace('_', ' ')
-        print("Nombre científico predicho: ", predicted_scientific_name)
-        # Busca la planta en la base de datos
-        plant_info = PlantInfo.objects.filter(scientific_name__icontains=predicted_scientific_name).first()
-        plant_id = plant_info.id if plant_info else None
-        print("ID de planta predicho: ", plant_id, " Nombre: ", plant_info.scientific_name if plant_info else "No encontrado")
-        return Response({
-            'class': predicted_class,
-            'confidence': confidence,
-            'probabilities': score.numpy().tolist(),
-            'plant_id': plant_id
-        })
         
 class WeatherRecommendationView(APIView):
     """
