@@ -25,11 +25,14 @@ import os
 import google.generativeai as genai
 from dotenv import load_dotenv
 
+# Ensure environment variables are loaded if a .env exists
+load_dotenv()
+
 TREFLE_API_URL = "https://trefle.io/api/v1/plants"
 TREFLE_TOKEN = "qD5bYaqpif9la_ZYT6zOPTe5icGrGiJAOlDacDK0Fic" 
 
 PERENUAL_API_URL = "https://perenual.com/api/v2"
-PERENUAL_API_KEY = os.getenv('PERENUAL_API_KEY')
+# Do not read the API key at import time; fetch per-request to reflect env changes
 
 # CRUD para Garden
 class GardenListCreateView(APIView):
@@ -627,13 +630,81 @@ class UserTasksView(APIView):
             "previous_tasks": previous_tasks
         })
         
-model = YOLO("../../model/results/plantify_model_v1/weights/best.pt")
+model = YOLO("../model/results/plantify_model_v1/weights/best.pt")
 
 class PredictImageView(APIView):
     parser_classes = [MultiPartParser]
 
     def post(self, request):
-        image_file = request.FILES['image']
+        # Acepta imagen subida por multipart o una URL
+        image_file = request.FILES.get('image')
+        image_url = request.data.get('image_url')
+
+        if not image_file and not image_url:
+            return Response({"error": "No image provided. Upload a file as 'image' or provide 'image_url'."}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            if image_file:
+                # Convertir archivo subido (InMemoryUploadedFile) a np.ndarray soportado por Ultralytics
+                image_file.seek(0)
+                file_bytes = np.frombuffer(image_file.read(), dtype=np.uint8)
+                img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+                if img is None:
+                    return Response({"error": "Unsupported or corrupt image file."}, status=status.HTTP_400_BAD_REQUEST)
+                results = model.predict(img)
+            else:
+                # Si se proporciona URL, Ultralytics acepta rutas/URLs directamente
+                results = model.predict(image_url)
+        except TypeError as te:
+            # Captura el error de tipo de Ultralytics y devuelve un mensaje claro
+            return Response({
+                "error": "Unsupported image type",
+                "detail": str(te),
+                "hint": "Provide a standard image file (jpg, png, webp) or a reachable URL."
+            }, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response({"error": "Failed to process image", "detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Obtener el resultado más probable
+        top1 = results[0].probs.top1
+        confianza = results[0].probs.top1conf.item()
+        nombre_planta = results[0].names[top1]
+        
+        print("\n" + "="*30)
+        print(f"🌿 PLANTA DETECTADA: {nombre_planta}")
+        print(f"🌿 PLANTA DETECTADA: {nombre_planta.upper()}")
+        print(f"📊 Confianza: {confianza:.2%}")
+        print("="*30 + "\n")
+        # Buscar en Perenual API por nombre de planta
+        try:
+            api_key = os.getenv('PERENUAL_API_KEY')
+            if not api_key:
+                return Response(
+                    {"error": "Perenual API key not configured", "env": "Missing PERENUAL_API_KEY"},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+            search_url = f"{PERENUAL_API_URL}/species-list"
+            search_params = {
+            'key': api_key,
+            'q': nombre_planta
+            }
+            search_response = requests.get(search_url, params=search_params)
+            
+            perenual_plant_id = None
+            if search_response.status_code == 200:
+                search_data = search_response.json()
+                if search_data.get('data') and len(search_data['data']) > 0:
+                    perenual_plant_id = search_data['data'][0].get('id')
+                    print(f"🔍 Perenual Plant ID: {perenual_plant_id}")
+                    return Response({
+                        'plant_id': perenual_plant_id
+                    })
+        except Exception as e:
+            print(f"Error buscando en Perenual API: {str(e)}")
+            return Response({
+                'error': str(e)
+            })
+
         
         
 class WeatherRecommendationView(APIView):
@@ -871,6 +942,13 @@ class CommentVoteView(APIView):
 class PerenualPlantListView(APIView):
     """Obtener lista de plantas desde Perenual API"""
     def get(self, request):
+        # Read API key at request time and validate
+        api_key = os.getenv('PERENUAL_API_KEY')
+        if not api_key:
+            return Response(
+                {"error": "Perenual API key not configured", "env": "Missing PERENUAL_API_KEY"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
         page = request.GET.get('page', 1)
         q = request.GET.get('q', '')  # Búsqueda por nombre
         indoor = request.GET.get('indoor', None)  # Filtro para plantas de interior
@@ -881,7 +959,7 @@ class PerenualPlantListView(APIView):
         try:
             url = f"{PERENUAL_API_URL}/species-list"
             params = {
-                'key': PERENUAL_API_KEY,
+                'key': api_key,
                 'page': page
             }
             
@@ -919,8 +997,9 @@ class PerenualPlantListView(APIView):
                 data = response.json()
                 return Response(data)
             else:
+                # Pass through status and add details for debugging
                 return Response(
-                    {"error": "Failed to fetch plants from Perenual API"}, 
+                    {"error": "Failed to fetch plants from Perenual API", "status": response.status_code, "details": response.text[:300]}, 
                     status=response.status_code
                 )
                 
@@ -933,10 +1012,17 @@ class PerenualPlantListView(APIView):
 class PerenualPlantDetailView(APIView):
     """Obtener detalles de una planta específica desde Perenual API"""
     def get(self, request, plant_id):
+        # Read API key at request time and validate
+        api_key = os.getenv('PERENUAL_API_KEY')
+        if not api_key:
+            return Response(
+                {"error": "Perenual API key not configured", "env": "Missing PERENUAL_API_KEY"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
         try:
             url = f"{PERENUAL_API_URL}/species/details/{plant_id}"
             params = {
-                'key': PERENUAL_API_KEY
+                'key': api_key
             }
             
             response = requests.get(url, params=params)

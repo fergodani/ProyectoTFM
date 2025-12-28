@@ -1,4 +1,5 @@
 import { useAuth } from "@/hooks/useAuthContext";
+import { Platform } from "react-native";
 import { PerenualPlant, Tasks, UserPlant } from "@/models/Plant";
 import { PlantInfo, Prediction } from "@/models/PlantInfo";
 import { PlantDetailTrefle, PlantTrefle } from "@/models/PlanTrefle";
@@ -253,15 +254,42 @@ export const PlantService = {
 
   sendPhoto: async (photoUri: string): Promise<Prediction> => {
     const formData = new FormData();
-    formData.append('image', {
-      uri: photoUri,
-      type: 'image/jpeg',
-      name: 'photo.jpg',
-    });
 
+    // En web, FormData necesita un Blob/File real. En móvil, RN usa el objeto con uri.
+    if (Platform.OS === 'web') {
+      try {
+        let blob: Blob;
+        if (photoUri.startsWith('data:')) {
+          // Convertir data URL a Blob
+          const [header, base64] = photoUri.split(',');
+          const mimeMatch = header.match(/data:(.*);base64/);
+          const mime = mimeMatch ? mimeMatch[1] : 'image/jpeg';
+          const binary = atob(base64);
+          const array = new Uint8Array(binary.length);
+          for (let i = 0; i < binary.length; i++) {
+            array[i] = binary.charCodeAt(i);
+          }
+          blob = new Blob([array], { type: mime });
+        } else {
+          // blob: or http(s)://
+          const res = await fetch(photoUri);
+          blob = await res.blob();
+        }
+        formData.append('image', blob, 'photo.jpg');
+      } catch (e) {
+        console.error('Failed to prepare image blob for web:', e);
+        return {} as Prediction;
+      }
+    } else {
+      formData.append('image', {
+        uri: photoUri,
+        type: 'image/jpeg',
+        name: 'photo.jpg',
+      } as any);
+    }
     try {
       //const response = await fetch(`${url}/api/predict/`, {
-      const response = await fetch(`${url}/api/predict-gemini/`, {
+      const response = await fetch(`${url}/api/predict/`, {
         method: 'POST',
         body: formData,
       });
