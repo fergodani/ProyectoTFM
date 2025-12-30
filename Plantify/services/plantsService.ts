@@ -3,8 +3,9 @@ import { Platform } from "react-native";
 import { PerenualPlant, Tasks, UserPlant } from "@/models/Plant";
 import { PlantInfo, Prediction } from "@/models/PlantInfo";
 import { PlantDetailTrefle, PlantTrefle } from "@/models/PlanTrefle";
+import { API_CONFIG } from "@/constants/ApiConfig";
 
-const url = "http://192.168.1.154:8000"
+const url = API_CONFIG.BASE_URL
 
 export const PlantService = {
   getAllPlants: async (accessToken: string): Promise<UserPlant[]> => {
@@ -80,8 +81,12 @@ export const PlantService = {
         },
         body: JSON.stringify(newPlant)
       });
+      console.log(response.status);
       if (response.status === 401) {
         throw new Error("Unauthorized");
+      }
+      if (response.status === 400) {
+        throw new Error("Error creating plant: Bad Requestr");
       }
       if (!response.ok) {
         throw new Error("Error fetching plants");

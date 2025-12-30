@@ -1,4 +1,6 @@
-const url = "http://192.168.1.154:8000"
+import { API_CONFIG } from "@/constants/ApiConfig";
+
+const url = API_CONFIG.BASE_URL
 
 export const UserService = {
 

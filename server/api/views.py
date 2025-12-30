@@ -32,7 +32,71 @@ TREFLE_API_URL = "https://trefle.io/api/v1/plants"
 TREFLE_TOKEN = "qD5bYaqpif9la_ZYT6zOPTe5icGrGiJAOlDacDK0Fic" 
 
 PERENUAL_API_URL = "https://perenual.com/api/v2"
-# Do not read the API key at import time; fetch per-request to reflect env changes
+
+
+# Mock data helpers
+def should_use_mock_data():
+    """Determina si debe usar datos mock en lugar de la API real"""
+    return os.getenv('USE_MOCK_DATA', 'True').lower() == 'true'
+
+def load_species_details_mock():
+    """Carga los datos mock de species-details"""
+    try:
+        with open(os.path.join(os.path.dirname(__file__), '..', 'species-details-mock.json'), 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print("Warning: species-details-mock.json not found")
+        return []
+
+def load_species_list_mock():
+    """Carga los datos mock de species-list"""
+    try:
+        with open(os.path.join(os.path.dirname(__file__), '..', 'species-list-mock.json'), 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print("Warning: species-list-mock.json not found")
+        return {"data": []}
+
+def get_mock_species_details(plant_id):
+    """Obtiene los detalles de una planta específica desde los datos mock"""
+    mock_data = load_species_details_mock()
+    for plant in mock_data:
+        if plant.get('id') == int(plant_id):
+            return plant
+    return None
+
+def search_mock_species_list(query=None, page=1):
+    """Busca plantas en los datos mock"""
+    mock_data = load_species_list_mock()
+    plants = mock_data.get('data', [])
+    
+    if query:
+        # Filtrar por nombre común o científico
+        query_lower = query.lower()
+        filtered_plants = []
+        for plant in plants:
+            common_name = plant.get('common_name', '').lower()
+            scientific_names = plant.get('scientific_name', [])
+            scientific_match = any(name.lower() for name in scientific_names if query_lower in name.lower())
+            
+            if query_lower in common_name or scientific_match:
+                filtered_plants.append(plant)
+        plants = filtered_plants
+    
+    # Simular paginación (30 plantas por página)
+    per_page = 30
+    start_index = (page - 1) * per_page
+    end_index = start_index + per_page
+    
+    return {
+        'data': plants[start_index:end_index],
+        'to': min(end_index, len(plants)),
+        'per_page': per_page,
+        'current_page': page,
+        'from': start_index + 1 if plants else 0,
+        'last_page': (len(plants) + per_page - 1) // per_page,
+        'total': len(plants)
+    }
 
 # CRUD para Garden
 class GardenListCreateView(APIView):
@@ -195,44 +259,71 @@ class UserPlantListCreateView(APIView):
     def post(self, request):
         serializer = UserPlantSerializer(data=request.data)
         
-        # Si faltan campos, hacer petición a Perenual API
         plant_id = request.data.get('plant_id')
         if plant_id and (not request.data.get('common_name') or not request.data.get('watering_period') or not request.data.get('image')):
             try:
-                url = f"{PERENUAL_API_URL}/species/details/{plant_id}"
-                params = {'key': PERENUAL_API_KEY}
-                response = requests.get(url, params=params)
-            
-                if response.status_code == 200:
-                    perenual_data = response.json()
-                
-                    # Actualizar datos del request con información de Perenual
-                    request_data = request.data.copy()
-                
-                    if not request_data.get('common_name') and perenual_data.get('common_name'):
-                        request_data['common_name'] = perenual_data['common_name']
-                
-                    if not request_data.get('watering_period') and perenual_data.get('watering_general_benchmark'):
-                        watering_data = perenual_data.get('watering_general_benchmark', {})
-                        if isinstance(watering_data, dict):
-                            value = watering_data.get('value', '').replace('"', '')
-                            unit = watering_data.get('unit', '')
-                            request_data['watering_period'] = f"{value} {unit}".strip()
-                        else:
-                            request_data['watering_period'] = perenual_data['watering_general_benchmark']
-                
-                    if not request_data.get('image') and perenual_data.get('default_image', {}).get('regular_url'):
-                        request_data['image'] = perenual_data['default_image']['regular_url']
-                
-                    # Recrear el serializer con los datos actualizados
-                    serializer = UserPlantSerializer(data=request_data)
-                
+                if should_use_mock_data():
+                    print("Using mock data for Perenual API")
+                    perenual_data = get_mock_species_details(plant_id)
+                    if not perenual_data:
+                        return Response(
+                            {"error": "Plant not found in mock data"},
+                            status=status.HTTP_404_NOT_FOUND
+                        )
+                    return self.set_perenual_info(request.data, perenual_data, serializer)
+                else:
+                    print("Fetching plant details from Perenual API")
+                    api_key = os.getenv('PERENUAL_API_KEY')
+                    if not api_key:
+                        return Response(
+                        {"error": "Perenual API key not configured", "env": "Missing PERENUAL_API_KEY"},
+                        status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                        )
+                    url = f"{PERENUAL_API_URL}/species/details/{plant_id}"
+                    params = {'key': api_key}
+                    response = requests.get(url, params=params)
+
+                    if response.status_code == 200:
+                        perenual_data = response.json()
+
+                        # Actualizar datos del request con información de Perenual
+                        request_data = request.data.copy()
+
+                        return self.set_perenual_info(request_data, perenual_data, serializer)
+                    else:
+                        return Response(response.json(), status=status.HTTP_429_TOO_MANY_REQUESTS)
             except Exception as e:
                 print(f"Error fetching plant details from Perenual: {str(e)}")
+        
+        return Response({}, status=status.HTTP_400_BAD_REQUEST)
+    
+    def set_perenual_info(self, request_data, perenual_data, serializer):
+        if not request_data.get('common_name') and perenual_data.get('common_name'):
+            request_data['common_name'] = perenual_data['common_name']
+                
+        if not request_data.get('watering_period') and perenual_data.get('watering_general_benchmark'):
+            watering_data = perenual_data.get('watering_general_benchmark', {})
+            if isinstance(watering_data, dict):
+                value = watering_data.get('value', '').replace('"', '')
+                unit = watering_data.get('unit', '')
+                request_data['watering_period'] = {"value": value, "unit": unit}
+            else:
+                watering_str = perenual_data['watering_general_benchmark']
+                # Dividir el string "7-10 days" en value y unit
+                parts = watering_str.strip().split()
+                if len(parts) >= 2:
+                    value = parts[0]  # "7-10"
+                    unit = ' '.join(parts[1:])  # "days"
+                    request_data['watering_period'] = {"value": value, "unit": unit}
+                
+        if not request_data.get('image') and perenual_data.get('default_image', {}).get('regular_url'):
+            request_data['image'] = perenual_data['default_image']['regular_url']
+                
+        # Recrear el serializer con los datos actualizados
+        serializer = UserPlantSerializer(data=request_data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserPlantDetailView(APIView):
@@ -255,47 +346,74 @@ class UserPlantDetailView(APIView):
         # Hacer petición a Perenual para obtener detalles adicionales
         if plant.plant_id:
             try:
-                url = f"{PERENUAL_API_URL}/species/details/{plant.plant_id}"
-                params = {
-                    'key': PERENUAL_API_KEY
-                }
-                
-                response = requests.get(url, params=params)
-                
-                if response.status_code == 200:
-                    perenual_data = response.json()
-                    
-                    # Obtener información de cuidados desde care_guides si existe
-                    if 'care_guides' in perenual_data:
-                        care_guides_url = perenual_data['care_guides']
-                        try:
-                            care_response = requests.get(care_guides_url)
-                            if care_response.status_code == 200:
-                                care_data = care_response.json()
-                                # Procesar la información de cuidados
-                                if care_data.get('data') and len(care_data['data']) > 0:
-                                    first_guide = care_data['data'][0]
-                                    if 'section' in first_guide:
-                                        # Extraer watering, pruning y sunlight descriptions
-                                        for section in first_guide['section']:
-                                            section_type = section.get('type')
-                                            if section_type == 'watering':
-                                                perenual_data['watering_long'] = section.get('description', '')
-                                            elif section_type == 'pruning':
-                                                perenual_data['pruning'] = section.get('description', '')
-                                            elif section_type == 'sunlight':
-                                                perenual_data['sunlight_long'] = section.get('description', '')
-                        except Exception as care_e:
-                            print(f"Error fetching care guides: {str(care_e)}")
-                    
-                    # Agregar los datos de Perenual a la respuesta
-                    plant_data['perenual_details'] = perenual_data
-                    
-                elif response.status_code != 404:
-                    # Si hay error pero no es 404, agregar información del error
-                    plant_data['perenual_details'] = {
-                        'error': f"Failed to fetch plant details from Perenual API (status: {response.status_code})"
+                if should_use_mock_data():
+                    print("Using mock data for Perenual API")
+                    perenual_data = get_mock_species_details(plant.plant_id)
+                    if perenual_data:
+                        care_data = perenual_data.get('care_guides')
+                        # Procesar la información de cuidados
+                        if care_data.get('data') and len(care_data['data']) > 0:
+                            first_guide = care_data['data'][0]
+                            if 'section' in first_guide:
+                                # Extraer watering, pruning y sunlight descriptions
+                                for section in first_guide['section']:
+                                    section_type = section.get('type')
+                                    if section_type == 'watering':
+                                        perenual_data['watering_long'] = section.get('description', '')
+                                    elif section_type == 'pruning':
+                                        perenual_data['pruning'] = section.get('description', '')
+                                    elif section_type == 'sunlight':
+                                        perenual_data['sunlight_long'] = section.get('description', '')
+                        plant_data['perenual_details'] = perenual_data
+                else:
+                    print("Fetching plant details from Perenual API")
+                    api_key = os.getenv('PERENUAL_API_KEY')
+                    if not api_key:
+                        return Response(
+                        {"error": "Perenual API key not configured", "env": "Missing PERENUAL_API_KEY"},
+                        status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                        )
+                    url = f"{PERENUAL_API_URL}/species/details/{plant.plant_id}"
+                    params = {
+                        'key': api_key
                     }
+
+                    response = requests.get(url, params=params)
+
+                    if response.status_code == 200:
+                        perenual_data = response.json()
+
+                        # Obtener información de cuidados desde care_guides si existe
+                        if 'care_guides' in perenual_data:
+                            care_guides_url = perenual_data['care_guides']
+                            try:
+                                care_response = requests.get(care_guides_url)
+                                if care_response.status_code == 200:
+                                    care_data = care_response.json()
+                                    # Procesar la información de cuidados
+                                    if care_data.get('data') and len(care_data['data']) > 0:
+                                        first_guide = care_data['data'][0]
+                                        if 'section' in first_guide:
+                                            # Extraer watering, pruning y sunlight descriptions
+                                            for section in first_guide['section']:
+                                                section_type = section.get('type')
+                                                if section_type == 'watering':
+                                                    perenual_data['watering_long'] = section.get('description', '')
+                                                elif section_type == 'pruning':
+                                                    perenual_data['pruning'] = section.get('description', '')
+                                                elif section_type == 'sunlight':
+                                                    perenual_data['sunlight_long'] = section.get('description', '')
+                            except Exception as care_e:
+                                print(f"Error fetching care guides: {str(care_e)}")
+
+                        # Agregar los datos de Perenual a la respuesta
+                        plant_data['perenual_details'] = perenual_data
+
+                    elif response.status_code != 404:
+                        # Si hay error pero no es 404, agregar información del error
+                        plant_data['perenual_details'] = {
+                            'error': f"Failed to fetch plant details from Perenual API (status: {response.status_code})"
+                        }
                     
             except Exception as e:
                 # En caso de error de conexión, agregar información del error pero continuar
@@ -320,47 +438,74 @@ class UserPlantDetailView(APIView):
             # Hacer petición a Perenual para obtener detalles adicionales
             if updated_plant.plant_id:
                 try:
-                    url = f"{PERENUAL_API_URL}/species/details/{updated_plant.plant_id}"
-                    params = {
-                        'key': PERENUAL_API_KEY
-                    }
-                    
-                    response = requests.get(url, params=params)
-                    
-                    if response.status_code == 200:
-                        perenual_data = response.json()
-                        
-                        # Obtener información de cuidados desde care_guides si existe
-                        if 'care_guides' in perenual_data:
-                            care_guides_url = perenual_data['care_guides']
-                            try:
-                                care_response = requests.get(care_guides_url)
-                                if care_response.status_code == 200:
-                                    care_data = care_response.json()
-                                    # Procesar la información de cuidados
-                                    if care_data.get('data') and len(care_data['data']) > 0:
-                                        first_guide = care_data['data'][0]
-                                        if 'section' in first_guide:
-                                            # Extraer watering, pruning y sunlight descriptions
-                                            for section in first_guide['section']:
-                                                section_type = section.get('type')
-                                                if section_type == 'watering':
-                                                    perenual_data['watering_long'] = section.get('description', '')
-                                                elif section_type == 'pruning':
-                                                    perenual_data['pruning'] = section.get('description', '')
-                                                elif section_type == 'sunlight':
-                                                    perenual_data['sunlight_long'] = section.get('description', '')
-                            except Exception as care_e:
-                                print(f"Error fetching care guides: {str(care_e)}")
-                        
-                        # Agregar los datos de Perenual a la respuesta
-                        plant_data['perenual_details'] = perenual_data
-                        
-                    elif response.status_code != 404:
-                        # Si hay error pero no es 404, agregar información del error
-                        plant_data['perenual_details'] = {
-                            'error': f"Failed to fetch plant details from Perenual API (status: {response.status_code})"
+                    if should_use_mock_data():
+                        print("Using mock data for Perenual API")
+                        perenual_data = get_mock_species_details(plant.plant_id)
+                        if perenual_data:
+                            care_data = perenual_data.get('care_guides')
+                            # Procesar la información de cuidados
+                            if care_data.get('data') and len(care_data['data']) > 0:
+                                first_guide = care_data['data'][0]
+                                if 'section' in first_guide:
+                                    # Extraer watering, pruning y sunlight descriptions
+                                    for section in first_guide['section']:
+                                        section_type = section.get('type')
+                                        if section_type == 'watering':
+                                            perenual_data['watering_long'] = section.get('description', '')
+                                        elif section_type == 'pruning':
+                                            perenual_data['pruning'] = section.get('description', '')
+                                        elif section_type == 'sunlight':
+                                            perenual_data['sunlight_long'] = section.get('description', '')
+                            plant_data['perenual_details'] = perenual_data
+                    else:
+                        print("Fetching plant details from Perenual API")
+                        api_key = os.getenv('PERENUAL_API_KEY')
+                        if not api_key:
+                            return Response(
+                            {"error": "Perenual API key not configured", "env": "Missing PERENUAL_API_KEY"},
+                            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                            )
+                        url = f"{PERENUAL_API_URL}/species/details/{updated_plant.plant_id}"
+                        params = {
+                            'key': api_key
                         }
+
+                        response = requests.get(url, params=params)
+
+                        if response.status_code == 200:
+                            perenual_data = response.json()
+
+                            # Obtener información de cuidados desde care_guides si existe
+                            if 'care_guides' in perenual_data:
+                                care_guides_url = perenual_data['care_guides']
+                                try:
+                                    care_response = requests.get(care_guides_url)
+                                    if care_response.status_code == 200:
+                                        care_data = care_response.json()
+                                        # Procesar la información de cuidados
+                                        if care_data.get('data') and len(care_data['data']) > 0:
+                                            first_guide = care_data['data'][0]
+                                            if 'section' in first_guide:
+                                                # Extraer watering, pruning y sunlight descriptions
+                                                for section in first_guide['section']:
+                                                    section_type = section.get('type')
+                                                    if section_type == 'watering':
+                                                        perenual_data['watering_long'] = section.get('description', '')
+                                                    elif section_type == 'pruning':
+                                                        perenual_data['pruning'] = section.get('description', '')
+                                                    elif section_type == 'sunlight':
+                                                        perenual_data['sunlight_long'] = section.get('description', '')
+                                except Exception as care_e:
+                                    print(f"Error fetching care guides: {str(care_e)}")
+
+                            # Agregar los datos de Perenual a la respuesta
+                            plant_data['perenual_details'] = perenual_data
+
+                        elif response.status_code != 404:
+                            # Si hay error pero no es 404, agregar información del error
+                            plant_data['perenual_details'] = {
+                                'error': f"Failed to fetch plant details from Perenual API (status: {response.status_code})"
+                            }
                         
                 except Exception as e:
                     # En caso de error de conexión, agregar información del error pero continuar
@@ -369,7 +514,6 @@ class UserPlantDetailView(APIView):
                     }
             
             return Response(plant_data)
-            return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
@@ -566,7 +710,7 @@ class UserTasksView(APIView):
 
             # Riego
             next_watering_date = serializer.get_next_watering_date(plant)
-            if next_watering_date:
+            if next_watering_date and plant_data.get('is_watering_enabled', True):
                 date = next_watering_date.date() if hasattr(next_watering_date, "date") else next_watering_date
                 task = {"type": "watering", "next_date": date, "user_plant": plant_data}
                 if date == today:
@@ -942,6 +1086,25 @@ class CommentVoteView(APIView):
 class PerenualPlantListView(APIView):
     """Obtener lista de plantas desde Perenual API"""
     def get(self, request):
+        if should_use_mock_data():
+            print("/perenual/plants Using mock data for Perenual API")
+            query = request.GET.get('q', None)
+            page = int(request.GET.get('page', 1))
+            
+            data = search_mock_species_list(query, page)
+            if 'data' in data:
+                filtered_data = []
+                for plant in data['data']:
+                    filtered_plant = {
+                        'id': plant.get('id'),
+                        'common_name': plant.get('common_name'),
+                        'scientific_name': plant.get('scientific_name'),
+                        'default_image': plant.get('default_image')
+                    }
+                    filtered_data.append(filtered_plant)
+                data['data'] = filtered_data
+            return Response(data)
+            
         # Read API key at request time and validate
         api_key = os.getenv('PERENUAL_API_KEY')
         if not api_key:
@@ -1012,6 +1175,25 @@ class PerenualPlantListView(APIView):
 class PerenualPlantDetailView(APIView):
     """Obtener detalles de una planta específica desde Perenual API"""
     def get(self, request, plant_id):
+        if should_use_mock_data():
+            print("Using mock data for Perenual API")
+            perenual_data = get_mock_species_details(plant_id)
+            if perenual_data:
+                care_data = perenual_data.get('care_guides')
+                # Procesar la información de cuidados
+                if care_data.get('data') and len(care_data['data']) > 0:
+                    first_guide = care_data['data'][0]
+                    if 'section' in first_guide:
+                        # Extraer watering, pruning y sunlight descriptions
+                        for section in first_guide['section']:
+                            section_type = section.get('type')
+                            if section_type == 'watering':
+                                perenual_data['watering_long'] = section.get('description', '')
+                            elif section_type == 'pruning':
+                                perenual_data['pruning'] = section.get('description', '')
+                            elif section_type == 'sunlight':
+                                perenual_data['sunlight_long'] = section.get('description', '')
+            return Response(perenual_data)
         # Read API key at request time and validate
         api_key = os.getenv('PERENUAL_API_KEY')
         if not api_key:

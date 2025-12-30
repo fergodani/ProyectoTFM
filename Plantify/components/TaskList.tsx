@@ -29,6 +29,7 @@ export default function TaskList({ tasks, isToday, isNext, onRefresh }: Readonly
     const colorScheme = useColorScheme();
 
     const completeTask = async (task: Task) => {
+        console.log("Completing task:", task);
         switch (task.type) {
             case 'watering':
                 task.user_plant.last_watered_date = new Date().toISOString().slice(0, 10);
@@ -47,7 +48,6 @@ export default function TaskList({ tasks, isToday, isNext, onRefresh }: Readonly
                 break;
         }
         try {
-            task.user_plant.plant_id = task.user_plant.plant.id;
             console.log(task.user_plant)
             const plant = await PlantService.putPlant(task.user_plant, accessToken!);
             if (plant) {

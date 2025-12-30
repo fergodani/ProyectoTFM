@@ -70,7 +70,8 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
             await PlantService.createPlant(userPlant, accessToken!);
             router.replace("/(tabs)/profile");
         } catch (error) {
-            console.error("Error adding plant:", error);
+            alert("Error al agregar la planta.");
+            router.replace("/(tabs)/profile");
         }
     }
 

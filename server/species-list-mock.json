@@ -1,0 +1,820 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "common_name": "European Silver Fir",
+      "scientific_name": [
+        "Abies alba"
+      ],
+      "other_name": [
+        "Common Silver Fir"
+      ],
+      "family": "Pinaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": null,
+      "variety": null,
+      "species_epithet": "alba",
+      "genus": "Abies",
+      "default_image": {
+        "license": 45,
+        "license_name": "Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0/deed.en",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/1_abies_alba/og/1536px-Abies_alba_SkalitC3A9.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=2211e969792c72262c2636c8beba6e7dad5411a20a7f0740a1a4749f417b796f",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/1_abies_alba/regular/1536px-Abies_alba_SkalitC3A9.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=5ec6da772457a27c25b4a211f862ed9a1f6d1305680bafa7d2308d4165427540",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/1_abies_alba/medium/1536px-Abies_alba_SkalitC3A9.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=3a30bc4b216849f20daefb27519a8084523ecea80a25ae83ab5531d837394fd6",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/1_abies_alba/small/1536px-Abies_alba_SkalitC3A9.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=b3a296e85630195defbf688c883e0d8e1767b51f14bc4d50e59faad755e1bd6c",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/1_abies_alba/thumbnail/1536px-Abies_alba_SkalitC3A9.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=6e35cf2d6c1bb4bf1fce6c8cfa0337780b8d26cca96d7a2164c6d3a0520f23b2"
+      }
+    },
+    {
+      "id": 2,
+      "common_name": "Pyramidalis Silver Fir",
+      "scientific_name": [
+        "Abies alba 'Pyramidalis'"
+      ],
+      "other_name": [],
+      "family": "Pinaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Pyramidalis",
+      "variety": null,
+      "species_epithet": "alba",
+      "genus": "Abies",
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/2_abies_alba_pyramidalis/og/49255769768_df55596553_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=6ea5e5d99168af350fa48ffa0fbd47e07118b43aec85d287c6adabedb5dea829",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/2_abies_alba_pyramidalis/regular/49255769768_df55596553_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=f2408e2a52575f1d08f559064432cecbfc229a8d8517be273de2341e4ab830b3",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/2_abies_alba_pyramidalis/medium/49255769768_df55596553_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=034fd491f23cce816c7d0550dd1d605b6aa7f8734c89af40584e93cf0dd4fe96",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/2_abies_alba_pyramidalis/small/49255769768_df55596553_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=dcc5824ed7dd21bb20a264e463b462eded62c8df047d0f7bf232b8e5e1ddc6d2",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/2_abies_alba_pyramidalis/thumbnail/49255769768_df55596553_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=e4075c189684573cd6ec10cdfe3984a8bfb698b56d580ccf5c4ffd5d659dd4dc"
+      }
+    },
+    {
+      "id": 3,
+      "common_name": "White Fir",
+      "scientific_name": [
+        "Abies concolor"
+      ],
+      "other_name": [
+        "Silver Fir",
+        "Concolor Fir",
+        "Colorado Fir"
+      ],
+      "family": "Pinaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": null,
+      "variety": null,
+      "species_epithet": "concolor",
+      "genus": "Abies",
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/3_abies_concolor/og/52292935430_f4f3b22614_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=f0a636f0e66b767f8387030e0d5c250df250ee8fc9c17f4a536dbac9ad0c2d8f",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/3_abies_concolor/regular/52292935430_f4f3b22614_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=4f540703848c8db269cf1d9c24ae09ede5894e4e93b5da8dce2fbde63c3ef7ed",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/3_abies_concolor/medium/52292935430_f4f3b22614_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=b3725919dc52085d81dded7083c1d44765e44588105b6c142148a525684d69b0",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/3_abies_concolor/small/52292935430_f4f3b22614_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=d09d4a6e128499eb46ae310003da9c3f6acae35f87a2d0cc82564b40861e12e6",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/3_abies_concolor/thumbnail/52292935430_f4f3b22614_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=4df163c3a4b3462e0ce4f95d2e1219b9ddb725c5e99def63bef4d980d23f20aa"
+      }
+    },
+    {
+      "id": 4,
+      "common_name": "Candicans White Fir",
+      "scientific_name": [
+        "Abies concolor 'Candicans'"
+      ],
+      "other_name": [
+        "Silver Fir",
+        "Concolor Fir",
+        "Colorado Fir"
+      ],
+      "family": "Pinaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Candicans",
+      "variety": null,
+      "species_epithet": "concolor",
+      "genus": "Abies",
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/4_abies_concolor_candicans/og/49283844888_332c9e46f2_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=35d7e22cc09bca7c8bce9390033101dcd6fb9529664274346b019fc96616de10",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/4_abies_concolor_candicans/regular/49283844888_332c9e46f2_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=2cee18c72a3d56966c3b6427a682319dd98b4bb6116e198c48d4d87ff53da336",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/4_abies_concolor_candicans/medium/49283844888_332c9e46f2_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=97fb1cd384ba84c87144c5620e06d3e6501e9e76bd93f0a678db0ef417249993",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/4_abies_concolor_candicans/small/49283844888_332c9e46f2_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=8b74112900ae37c34c3314e100f1e085433168d2a82199192e817522ffcae5e5",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/4_abies_concolor_candicans/thumbnail/49283844888_332c9e46f2_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=673a4441a17ef159867cbecfec68fe7f2019588f63dcdb4b09768ed30523c67a"
+      }
+    },
+    {
+      "id": 5,
+      "common_name": "Fraser Fir",
+      "scientific_name": [
+        "Abies fraseri"
+      ],
+      "other_name": [
+        "Southern Fir"
+      ],
+      "family": "Pinaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": null,
+      "variety": null,
+      "species_epithet": "fraseri",
+      "genus": "Abies",
+      "default_image": {
+        "license": 4,
+        "license_name": "Attribution License",
+        "license_url": "https://creativecommons.org/licenses/by/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/5_abies_fraseri/og/36843539702_e80fc436e0_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=252ef99a8afed1c3231948a367bed3619db828774daa17fd6b3e62c8e1033a01",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/5_abies_fraseri/regular/36843539702_e80fc436e0_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=b25ea0202bcee41d6171c9bdbc57fced091ea674b08a218b7843049a13028e3b",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/5_abies_fraseri/medium/36843539702_e80fc436e0_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=094a8a7dc1583d098dcd717ce417fce85a2c2e3b8a3216b039d8c43c2fcff87d",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/5_abies_fraseri/small/36843539702_e80fc436e0_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a6ee7f5feadd8eb62337f8a5e57ca1d15112c6b041b97b69bf28b5c047a978bc",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/5_abies_fraseri/thumbnail/36843539702_e80fc436e0_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=bcf3910896b572f65d0c81b7d3086119344be7d7600bc9248762bcba95db1d2e"
+      }
+    },
+    {
+      "id": 6,
+      "common_name": "Golden Korean Fir",
+      "scientific_name": [
+        "Abies koreana 'Aurea'"
+      ],
+      "other_name": [],
+      "family": "Pinaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Aurea",
+      "variety": null,
+      "species_epithet": "koreana",
+      "genus": "Abies",
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/6_abies_koreana_aurea/og/49235570926_99ec10781d_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=15187f40a711697edd8879b0cb0bd47bf2045986f2a82842a9fccb54c6983f8a",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/6_abies_koreana_aurea/regular/49235570926_99ec10781d_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=e44f8b7a3c9c74f484a20b23ea184ba203cbc55e090ce0cd0604e3a810439eec",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/6_abies_koreana_aurea/medium/49235570926_99ec10781d_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=fff7d0fc706b0c09597df8e782e84a84a575544672f5a85c4b9ec6b428886c1c",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/6_abies_koreana_aurea/small/49235570926_99ec10781d_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=4679e7ae063c5bd6ebe0be04b9127c3a4b069e32c4a3fd8766f41957ae71b33b",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/6_abies_koreana_aurea/thumbnail/49235570926_99ec10781d_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=1f191cfcc3d08bf861546b31c1975254560e7e97085159fb9c4d668fc9ce7fb0"
+      }
+    },
+    {
+      "id": 7,
+      "common_name": "Alpine Fir",
+      "scientific_name": [
+        "Abies lasiocarpa"
+      ],
+      "other_name": [
+        "Subalpine Fir",
+        "Rocky Mountain Fir"
+      ],
+      "family": "Pinaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": null,
+      "variety": null,
+      "species_epithet": "lasiocarpa",
+      "genus": "Abies",
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/7_abies_lasiocarpa/og/51002756843_74fae3c2fa_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=5becea997843c7a7455f9098fe7faec02de0690527830dcfc87888c34e661e17",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/7_abies_lasiocarpa/regular/51002756843_74fae3c2fa_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=d8bdcbe639ccb49c98d48b36fb847b8ea2ed49e96d07dd8bb62aba7f24121673",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/7_abies_lasiocarpa/medium/51002756843_74fae3c2fa_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=09646c5bc86b2af5c356d5203607aefaa6ca0bfab370bd6460f8da93d49c7114",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/7_abies_lasiocarpa/small/51002756843_74fae3c2fa_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=899b1c3e3c96f6694a33d81b71e9fdb2e10f82a1792b6080215ef6e9043f85fb",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/7_abies_lasiocarpa/thumbnail/51002756843_74fae3c2fa_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=2761c7d74f042a9c208bda3ef14dd300fc585fa7ed0027b27d07c13db17860ed"
+      }
+    },
+    {
+      "id": 8,
+      "common_name": "Blue Spanish Fir",
+      "scientific_name": [
+        "Abies pinsapo 'Glauca'"
+      ],
+      "other_name": [
+        "Glaucous Spanish Fir"
+      ],
+      "family": "Pinaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Glauca",
+      "variety": null,
+      "species_epithet": "pinsapo",
+      "genus": "Abies",
+      "default_image": {
+        "license": 4,
+        "license_name": "Attribution License",
+        "license_url": "https://creativecommons.org/licenses/by/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/8_abies_pinsapo_glauca/og/21657514018_c0d9fed9f4_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a62ea278c328e85d560b89a6debaf99b1965842c32f5ec281369121f9ac6baa5",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/8_abies_pinsapo_glauca/regular/21657514018_c0d9fed9f4_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=1e628ca112e73552fed89e9d9dc9b416515e2122d2707897518c5ed198f5aff4",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/8_abies_pinsapo_glauca/medium/21657514018_c0d9fed9f4_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=82ae8fe8415b9cdc54f9f90b0086f778aa99bab55d7f97eb2879e88ffe82df32",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/8_abies_pinsapo_glauca/small/21657514018_c0d9fed9f4_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=9156f805165ca0ff60468726891cd68d21f4df8a05169997e838e0ebdbcbdebd",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/8_abies_pinsapo_glauca/thumbnail/21657514018_c0d9fed9f4_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=9be0817cc51a7d3a8e8f61d63f70335f17840bed2683ea9f4d7a126edab08caa"
+      }
+    },
+    {
+      "id": 9,
+      "common_name": "Noble Fir",
+      "scientific_name": [
+        "Abies procera"
+      ],
+      "other_name": [
+        "Red Fir",
+        "White Fir"
+      ],
+      "family": "Pinaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": null,
+      "variety": null,
+      "species_epithet": "procera",
+      "genus": "Abies",
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/9_abies_procera/og/49107504112_6bd7effb8b_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=68c4d6897a2b7a95f2f6c951e5241bff3a1f91b98fe45097811a1bc8770c17cf",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/9_abies_procera/regular/49107504112_6bd7effb8b_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=56bebdcb93e85d261dc084deda9c2a38b18f1b496cc5c0a3b8f3d2f7ef39129d",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/9_abies_procera/medium/49107504112_6bd7effb8b_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=6fa75f2dcd21e7c42f8f3010e1ca06cbf824ec0b9316a767c633a935013f86ba",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/9_abies_procera/small/49107504112_6bd7effb8b_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=460969b9f699253ccbf4c5263236a38ff7d7a14e1e651eb9c1293c0030c8e0c0",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/9_abies_procera/thumbnail/49107504112_6bd7effb8b_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=19d2331ce5d8d9d5b69f8e113c74baf4935e0a3e8204755722f79c5c43b8b2c8"
+      }
+    },
+    {
+      "id": 10,
+      "common_name": "Johin Japanese Maple",
+      "scientific_name": [
+        "Acer 'Johin'"
+      ],
+      "other_name": [
+        "Red Full Moon Maple"
+      ],
+      "family": null,
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Johin",
+      "variety": null,
+      "species_epithet": "'Johin'",
+      "genus": "Acer",
+      "default_image": {
+        "license": 451,
+        "license_name": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/10_acer_johin/og/pexels-photo-2183508.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=836b080d0c499e125ab1f329234d0ec4d179d7bf248c243d06c09f865c3ba6a4",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/10_acer_johin/regular/pexels-photo-2183508.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=7d09fb9e015a76f48a0cd3212ebe54f0e67e1f5c39637be3da9cf4a3fa893db8",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/10_acer_johin/medium/pexels-photo-2183508.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=b60ada0fda3935d537399f090891d36204e1f9875d33bd6bfa5747cb2ba1b686",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/10_acer_johin/small/pexels-photo-2183508.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ab0f3fb3233b067e3125f33cadb18237ba651d3cdacd33f6d461b9a0a5714daf",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/10_acer_johin/thumbnail/pexels-photo-2183508.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=44e442cdcdaa91075d3cee1a8ebaa3416b415b2d5ca6ae8a49c8662453d70a5e"
+      }
+    },
+    {
+      "id": 11,
+      "common_name": "Snakebark Maple",
+      "scientific_name": [
+        "Acer davidii"
+      ],
+      "other_name": [
+        "Father David's Maple",
+        "Pere David's Maple"
+      ],
+      "family": "Sapindaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": null,
+      "variety": null,
+      "species_epithet": "davidii",
+      "genus": "Acer",
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/11_acer_davidii/og/6868591754_f4ac5b0510_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=3b18b9c66e799437336b081a6d491e0bbc6927a0df55dd5a55b3c6e78cda514e",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/11_acer_davidii/regular/6868591754_f4ac5b0510_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=96e1b6d3d118bd3ad069a98f094cb237945c984ae2712988cef97424e5ccf1f8",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/11_acer_davidii/medium/6868591754_f4ac5b0510_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=2545353b882b5201e82796f6a8c5be9aef63b8d2e838a89e96608e1c482053b8",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/11_acer_davidii/small/6868591754_f4ac5b0510_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=beffb5f5c089ec04fc286080f3cf3d754ceec4800b44d80d11a92b6a891ac6fa",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/11_acer_davidii/thumbnail/6868591754_f4ac5b0510_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=39edb8d54527d352475b52687e003e902a52b796e4d69948b8fab2086d116a67"
+      }
+    },
+    {
+      "id": 12,
+      "common_name": "Amur Maple",
+      "scientific_name": [
+        "Acer ginnala"
+      ],
+      "other_name": [],
+      "family": null,
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": null,
+      "variety": null,
+      "species_epithet": "ginnala",
+      "genus": "Acer",
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/12_acer_ginnala/og/10476032513_76ca899bc4_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=127679abbb5eb7fc6af29f6e87d3bf5b2c5fd3355a439736265addb048c83edf",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/12_acer_ginnala/regular/10476032513_76ca899bc4_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=5f99992cb66641620367e2cdf7b33452ab59c5bed8842780f11a3cb9892f2d50",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/12_acer_ginnala/medium/10476032513_76ca899bc4_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=9665f9c93d22ae254194efcf3bd615ed02a891dd93c16d8401bddfe03602b089",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/12_acer_ginnala/small/10476032513_76ca899bc4_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=335492cd4e9b77ff6b2ec7f94322789874b4e6f3134f68136b13a16ddfc55213",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/12_acer_ginnala/thumbnail/10476032513_76ca899bc4_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=7e28e0af4b1b075e9284c11d505fa606290259e145211961c9e27ee19626a191"
+      }
+    },
+    {
+      "id": 13,
+      "common_name": "Flame Amur Maple",
+      "scientific_name": [
+        "Acer ginnala 'Flame'"
+      ],
+      "other_name": [],
+      "family": null,
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Flame",
+      "variety": null,
+      "species_epithet": "ginnala",
+      "genus": "Acer",
+      "default_image": {
+        "license": 451,
+        "license_name": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/13_acer_ginnala_flame/og/pexels-photo-1649190.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=566a1e2c07aa2df186abcc6dc192a44857222d69c73f62c91df915e9c6af74e2",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/13_acer_ginnala_flame/regular/pexels-photo-1649190.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=e9b4f47d16c624943ea8724aad83c4572e03257ca03ce08013b0b1cb401fe764",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/13_acer_ginnala_flame/medium/pexels-photo-1649190.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=237d3618199359d5b47bf67dfd82f73a18733dcb1059db7263ca3ecb394cc733",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/13_acer_ginnala_flame/small/pexels-photo-1649190.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a14be4677c46329b611e9bd2c557dcc99f5dffb10421f9f8c17ebe6761796984",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/13_acer_ginnala_flame/thumbnail/pexels-photo-1649190.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=3d4e9fd413b72f9cdfb5250879329ca8b431df0c5b5002207010a6732439073e"
+      }
+    },
+    {
+      "id": 14,
+      "common_name": "Red Rhapsody Amur Maple",
+      "scientific_name": [
+        "Acer ginnala 'Mondy'"
+      ],
+      "other_name": [],
+      "family": null,
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Mondy",
+      "variety": null,
+      "species_epithet": "ginnala",
+      "genus": "Acer",
+      "default_image": {
+        "license": 451,
+        "license_name": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/14_acer_ginnala_mondy/og/pexels-photo-1789879.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=25fae8db4c97a446fbb49b32a2bfbbf4e4dbd6b49608fb7987e5ed6a5fca9e83",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/14_acer_ginnala_mondy/regular/pexels-photo-1789879.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=0c7d9e1f5d36ad21ef4bba88d9ec2436ce27d3831e82abf2aa1767df72b9b6a2",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/14_acer_ginnala_mondy/medium/pexels-photo-1789879.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=22900cbeecb1b6658730ccaf6f13264d7f9360002d27f1b1df026c5524f6d598",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/14_acer_ginnala_mondy/small/pexels-photo-1789879.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=0ba3196e31a7af0aa5f757668fd75f5785af8b4fb50a0a4a8c29ad10d5565636",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/14_acer_ginnala_mondy/thumbnail/pexels-photo-1789879.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=8ad8980ff6ce2ce2a055504a4579febc18f6771ac1f82d3f157467ee560688a2"
+      }
+    },
+    {
+      "id": 15,
+      "common_name": "Ruby Slippers Amur Maple",
+      "scientific_name": [
+        "Acer ginnala 'Ruby Slippers'"
+      ],
+      "other_name": [],
+      "family": null,
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Ruby Slippers",
+      "variety": null,
+      "species_epithet": "ginnala",
+      "genus": "Acer",
+      "default_image": {
+        "license": 451,
+        "license_name": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/15_acer_ginnala_ruby_slippers/og/pexels-photo-1640820.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=9cf9ef1c2cb106baf9d40e98c13e0690d038c1a176dbb8cc773b237f69cce51e",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/15_acer_ginnala_ruby_slippers/regular/pexels-photo-1640820.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a4a82ce9969dc19859cbeb954a8a1be9d63086de696c64184c9131c32d05cfd0",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/15_acer_ginnala_ruby_slippers/medium/pexels-photo-1640820.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=994b35183bfe281542ab9533fecc90fc292683186b967c1ac145ab03bee121a1",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/15_acer_ginnala_ruby_slippers/small/pexels-photo-1640820.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ef7614f15cff073587e92a53a4df14c9212d20920b7d397f26f6148893f8db36",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/15_acer_ginnala_ruby_slippers/thumbnail/pexels-photo-1640820.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=494fe0fb71ab35c3539faaeebd688f46ad8f57e531cdd42b138b917bb78918a6"
+      }
+    },
+    {
+      "id": 16,
+      "common_name": "Paperbark Maple",
+      "scientific_name": [
+        "Acer griseum"
+      ],
+      "other_name": [],
+      "family": "Sapindaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": null,
+      "variety": null,
+      "species_epithet": "griseum",
+      "genus": "Acer",
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/16_acer_griseum/og/5158906371_ed08a86876_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=d9337ec321359ca5cdd3df491f09712f90ac046d61f6cbc92adb3548b1603ec5",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/16_acer_griseum/regular/5158906371_ed08a86876_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=3e115f4c31a8e42837543f6ee6903b589adb6a9fb5382bc8cda634d509aac0f2",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/16_acer_griseum/medium/5158906371_ed08a86876_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=8c9bfc763ef07d3b8af2f1be976a271f8273b6a9a86e416190fbd0ae48b3fc64",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/16_acer_griseum/small/5158906371_ed08a86876_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=46284db1b39743672d4d65298b13f8e6cc589fd20bb65ec6c4dbba2cb9be043e",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/16_acer_griseum/thumbnail/5158906371_ed08a86876_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=2be8a8807f0c84afc53119848789f0bd377b27481839ba1619225848a2688f7e"
+      }
+    },
+    {
+      "id": 17,
+      "common_name": "Fullmoon Maple",
+      "scientific_name": [
+        "Acer japonicum"
+      ],
+      "other_name": [],
+      "family": "Sapindaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": null,
+      "variety": null,
+      "species_epithet": "japonicum",
+      "genus": "Acer",
+      "default_image": {
+        "license": 4,
+        "license_name": "Attribution License",
+        "license_url": "https://creativecommons.org/licenses/by/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/17_acer_japonicum/og/7175475239_52543c51b3_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=d661f3176033ffedd9b00c16e705f252cad6d320e8dcfe0afd55ea2768758114",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/17_acer_japonicum/regular/7175475239_52543c51b3_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=7364d1c6e001ae2e499dbe46b30f77ccf81a20a79679e1e0bcedd8c3f2246c69",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/17_acer_japonicum/medium/7175475239_52543c51b3_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=84098fb4874259f2440a839538fbbc86b4f79fbf7f8567de02cec43e33d70f69",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/17_acer_japonicum/small/7175475239_52543c51b3_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=83e4c99733e4eb24f68d577855c2d9bc4286297c8cfdff06a54a3ad44af0e5ac",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/17_acer_japonicum/thumbnail/7175475239_52543c51b3_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=591bed535bddab584e351b2c1e996562df62991e2329d87c141cf96942342d91"
+      }
+    },
+    {
+      "id": 18,
+      "common_name": "Cutleaf Fullmoon Maple",
+      "scientific_name": [
+        "Acer japonicum 'Aconitifolium'"
+      ],
+      "other_name": [
+        "fernleaf full moon maple"
+      ],
+      "family": "Sapindaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Aconitifolium",
+      "variety": null,
+      "species_epithet": "japonicum",
+      "genus": "Acer",
+      "default_image": {
+        "license": 4,
+        "license_name": "Attribution License",
+        "license_url": "https://creativecommons.org/licenses/by/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/18_acer_japonicum_aconitifolium/og/23528789198_c419363323_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a5f56fe1062eaca399f01782cba9282719d927ccf26e1a3a7e6f89b3a91a1796",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/18_acer_japonicum_aconitifolium/regular/23528789198_c419363323_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=b2e05a85c2fd4e873302f42c2a8a618f2716ed1b80271d80b99ef24dba7ad492",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/18_acer_japonicum_aconitifolium/medium/23528789198_c419363323_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=c4e29eb527058001ac909957c45629486de6e4d76772265d485df9287a32a13d",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/18_acer_japonicum_aconitifolium/small/23528789198_c419363323_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a49071e28db81413cdf20d49a1d9f6537ee8fe6cc375f1e1d27ec97c02d0c74a",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/18_acer_japonicum_aconitifolium/thumbnail/23528789198_c419363323_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a2997ef1c7d3d53c02e72d64a33faf2beee9123fff00a33353dc6efee56d6d37"
+      }
+    },
+    {
+      "id": 19,
+      "common_name": "Attaryi Fullmoon Maple*",
+      "scientific_name": [
+        "Acer japonicum 'Attaryi'"
+      ],
+      "other_name": [],
+      "family": null,
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Attaryi",
+      "variety": null,
+      "species_epithet": "japonicum",
+      "genus": "Acer",
+      "default_image": {
+        "license": 451,
+        "license_name": "CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/19_acer_japonicum_attaryi/og/pexels-photo-669323.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=7e44516df869822c97fbf2a6974161b93942411975a72397cd6775b4d7ac8c06",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/19_acer_japonicum_attaryi/regular/pexels-photo-669323.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=6b39e293449088b59f6d9bdeed5bfd0a3585ab877e42666840e860c6652f7d9d",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/19_acer_japonicum_attaryi/medium/pexels-photo-669323.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=998d02df796dd6d73e2eda7bc4d3b3cd9871e8471b14d85d2a4fb1156e1a5559",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/19_acer_japonicum_attaryi/small/pexels-photo-669323.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=e835df9ba8e892253482bc41e508970e7d2801f14401eb711d19d5b0064e79d9",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/19_acer_japonicum_attaryi/thumbnail/pexels-photo-669323.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=caa6f51efed7229bfed36530632c3ecc39e2ca6763385215ede971a090c73e26"
+      }
+    },
+    {
+      "id": 20,
+      "common_name": "Golden Fullmoon Maple",
+      "scientific_name": [
+        "Acer japonicum 'Aureum'"
+      ],
+      "other_name": [],
+      "family": null,
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Aureum",
+      "variety": null,
+      "species_epithet": "japonicum",
+      "genus": "Acer",
+      "default_image": {
+        "license": 45,
+        "license_name": "Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0/deed.en",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/20_acer_japonicum_aureum/og/2560px-Acer_shirasawanum_27Aureum27.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=1498eaf072e0dfc20d309663883857657c3d917dad8861687341a0090f1de968",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/20_acer_japonicum_aureum/regular/2560px-Acer_shirasawanum_27Aureum27.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=173e363bc40c551cf7f61cda5824e3b4390d19bff1b10d02dab7f800590bd3f3",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/20_acer_japonicum_aureum/medium/2560px-Acer_shirasawanum_27Aureum27.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=9780d1dcee331c07cf1c25680a60fad70fed9b06c738266a1df2921072baf005",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/20_acer_japonicum_aureum/small/2560px-Acer_shirasawanum_27Aureum27.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=0442fa5cbc79a2b7b0e1776e5d6bf8e69efb481f37de2c5c79f01c59a2e8cf96",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/20_acer_japonicum_aureum/thumbnail/2560px-Acer_shirasawanum_27Aureum27.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=3f76b69962aa4c168f6c9959d669ebe22dd9ed433fc7ccc018c5a85b79ec173c"
+      }
+    },
+    {
+      "id": 21,
+      "common_name": "Emmett's Pumpkin Fullmoon Maple",
+      "scientific_name": [
+        "Acer japonicum 'Emmett's Pumpkin'"
+      ],
+      "other_name": [],
+      "family": null,
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Emmett",
+      "variety": null,
+      "species_epithet": "japonicum",
+      "genus": "Acer",
+      "default_image": {
+        "license": 45,
+        "license_name": "Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0/deed.en",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/21_acer_japonicum_emmetts_pumpkin/og/Acer_shirasawanum_28golden_fullmoon_maple29_2_284633285838129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=e255b0b22f63b38f7bbf396effc04d8e54189def3f269d78a8ee78d2760b6cd0",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/21_acer_japonicum_emmetts_pumpkin/regular/Acer_shirasawanum_28golden_fullmoon_maple29_2_284633285838129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a104b55af463afd9133668cfc93ecd8f17976217a95bde2bec6176b987e2a18f",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/21_acer_japonicum_emmetts_pumpkin/medium/Acer_shirasawanum_28golden_fullmoon_maple29_2_284633285838129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=caab4d9fbd1efe1a3b4ff84b5292b06460bbd2268f723180952b89bb9cacb607",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/21_acer_japonicum_emmetts_pumpkin/small/Acer_shirasawanum_28golden_fullmoon_maple29_2_284633285838129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=4f971ede5d0f70e3292ba7c90f581b5834e839a6adb0d40e205e7a6c2acf4a4e",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/21_acer_japonicum_emmetts_pumpkin/thumbnail/Acer_shirasawanum_28golden_fullmoon_maple29_2_284633285838129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=857b0a1892baf03e7df90cb288ff56319fafd232967dfb06989398cec2ae5826"
+      }
+    },
+    {
+      "id": 22,
+      "common_name": "Green Cascade Maple",
+      "scientific_name": [
+        "Acer japonicum 'Green Cascade'"
+      ],
+      "other_name": [],
+      "family": "Sapindaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Green Cascade",
+      "variety": null,
+      "species_epithet": "japonicum",
+      "genus": "Acer",
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/22_acer_japonicum_green_cascade/og/4847225395_2509ee2bfe_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=71ae8994b2a14c6efb1392d59342532f21d833d010755d8e79bfe569666cc159",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/22_acer_japonicum_green_cascade/regular/4847225395_2509ee2bfe_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=c8745a58e1cc75c2f515e0f70e964984605a4bf05b8fef50474c04922d106094",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/22_acer_japonicum_green_cascade/medium/4847225395_2509ee2bfe_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=2d48c52f2d2bd081c25a27ff49933f1d107efb2471e5be2c9aa799373f735b1f",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/22_acer_japonicum_green_cascade/small/4847225395_2509ee2bfe_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=26d16cf75c64a5b8826977246f4ba4d8c2bb913070605bf8d9721744a9b37d7b",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/22_acer_japonicum_green_cascade/thumbnail/4847225395_2509ee2bfe_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=b586124e7194fe6d7f88405c2c890a790c5295900dfe7bb70b8424eef1dd7ed7"
+      }
+    },
+    {
+      "id": 23,
+      "common_name": "Big Leaf Maple",
+      "scientific_name": [
+        "Acer macrophyllum"
+      ],
+      "other_name": [
+        "Oregon Maple"
+      ],
+      "family": "Sapindaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": null,
+      "variety": null,
+      "species_epithet": "macrophyllum",
+      "genus": "Acer",
+      "default_image": {
+        "license": 4,
+        "license_name": "Attribution License",
+        "license_url": "https://creativecommons.org/licenses/by/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/23_acer_macrophyllum/og/52135137216_8a124b5188_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ecc5eb7843c7bb50225da374cf419e77ddc998ad776f2b7853ad2481a14c87a6",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/23_acer_macrophyllum/regular/52135137216_8a124b5188_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=569c24b3c694664f55f59b4fb666383b32444edb32ad99b58e4cb79bb183d7fb",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/23_acer_macrophyllum/medium/52135137216_8a124b5188_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=cfb891dfb7fa55749b274b595f7d28bc4c079536f0f97da9522c7c983b7b0348",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/23_acer_macrophyllum/small/52135137216_8a124b5188_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=4eb32f485c16bf8c6718986cfab35c325d72c077f573f3308ee76b259467a010",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/23_acer_macrophyllum/thumbnail/52135137216_8a124b5188_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=aaf67c51e858bd00a82910f6299eca2a8f127ca3b6a34d0985c2b8065a3ef200"
+      }
+    },
+    {
+      "id": 24,
+      "common_name": "Mocha Rose Big Leaf Maple",
+      "scientific_name": [
+        "Acer macrophyllum 'Mocha Rose'"
+      ],
+      "other_name": [
+        "Oregon Maple"
+      ],
+      "family": "Sapindaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Mocha Rose",
+      "variety": null,
+      "species_epithet": "macrophyllum",
+      "genus": "Acer",
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/24_acer_macrophyllum_mocha_rose/og/4715169892_220a9d39f6_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=215c98d1627fa22d2452258b73ce36550094738e3cf0ae1973f8778478e7b95c",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/24_acer_macrophyllum_mocha_rose/regular/4715169892_220a9d39f6_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=5aa0f3699cf1ea8ccb9fe2d9d8c81c4e9f593331f2b6ef39c7631923b4ca1fbe",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/24_acer_macrophyllum_mocha_rose/medium/4715169892_220a9d39f6_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=9298f6e8601718c7379cb99357ce917bd90f3802cf8c57297696d76ff211e670",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/24_acer_macrophyllum_mocha_rose/small/4715169892_220a9d39f6_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=b23f9049e8dc5ab91097173331b31de452fd500c292b9bbfa7ad10963a37a0cf",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/24_acer_macrophyllum_mocha_rose/thumbnail/4715169892_220a9d39f6_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=0cc6f81fef86f456c7e8f8d4223c802db7c7a4ebb7c6926c42373005d34da8c9"
+      }
+    },
+    {
+      "id": 25,
+      "common_name": "Flamingo Boxelder",
+      "scientific_name": [
+        "Acer negundo 'Flamingo'"
+      ],
+      "other_name": [
+        "Manitoba Maple",
+        "box elder"
+      ],
+      "family": "Sapindaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Flamingo",
+      "variety": null,
+      "species_epithet": "negundo",
+      "genus": "Acer",
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/25_acer_negundo_flamingo/og/5867345385_a9dff5bee7_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=2a181e5de4909d450c0159fa9ae14beb87218b025691a27bd7c3576ec970b922",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/25_acer_negundo_flamingo/regular/5867345385_a9dff5bee7_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=16c6113192915508f623296d6cdb9d8adaffc432ff858a2018eb94e10ec649ea",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/25_acer_negundo_flamingo/medium/5867345385_a9dff5bee7_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=83c35db293aa4045badda97f1c1303e6779646e5ebeaa56e95009e620569c58f",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/25_acer_negundo_flamingo/small/5867345385_a9dff5bee7_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a887cc427c6ba18dfa214863e30c47c519a933410f3d3df6e021a5e45025f19c",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/25_acer_negundo_flamingo/thumbnail/5867345385_a9dff5bee7_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=bf00e2b6a748ab3c929895bf11d1ba9b274febd6adf1ec11380186472062b9f6"
+      }
+    },
+    {
+      "id": 26,
+      "common_name": "Kelly's Gold Boxelder",
+      "scientific_name": [
+        "Acer negundo 'Kelly's Gold'"
+      ],
+      "other_name": [
+        "Manitoba Maple",
+        "box elder"
+      ],
+      "family": "Sapindaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Kelly",
+      "variety": null,
+      "species_epithet": "negundo",
+      "genus": "Acer",
+      "default_image": {
+        "license": 5,
+        "license_name": "Attribution-ShareAlike License",
+        "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/26_acer_negundo_kellys_gold/og/28819730054_e2a2b797c9_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a0b1183055e09fa31095c14b52db4968506a34c4f805b51fb009ca493cbccc37",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/26_acer_negundo_kellys_gold/regular/28819730054_e2a2b797c9_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a0b5e5c1c0eee3bc5e203e12a698ff359e72da23c81ccfe921bd4c5244eca38d",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/26_acer_negundo_kellys_gold/medium/28819730054_e2a2b797c9_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=c6ed9137e49355360c21ccf80a339b97d021e7279a3b1bb036ede64ae57506d8",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/26_acer_negundo_kellys_gold/small/28819730054_e2a2b797c9_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=97784141a09d24527009683c40fe9cb73259390ab53831a7dc09fbfe957e3a2d",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/26_acer_negundo_kellys_gold/thumbnail/28819730054_e2a2b797c9_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=feb829c2859cc8de2a769239cbfe937e51701745da4d9a0cf8e1502d7580c1d3"
+      }
+    },
+    {
+      "id": 27,
+      "common_name": "Japanese Maple",
+      "scientific_name": [
+        "Acer palmatum"
+      ],
+      "other_name": [],
+      "family": "Sapindaceae",
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": null,
+      "variety": null,
+      "species_epithet": "palmatum",
+      "genus": "Acer",
+      "default_image": {
+        "license": 45,
+        "license_name": "Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0/deed.en",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/27_acer_palmatum/og/2560px-Acer_palmatum_27Bloodgood27_kz01.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=09874ae709ac733dbfa9af1299effad42e8099199f4a0d089c2bfcfeaa1b6f18",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/27_acer_palmatum/regular/2560px-Acer_palmatum_27Bloodgood27_kz01.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=8f9fd09e96ccaacf7ddcb48b628845ca5f3ae3e5cfea3801e6eabbb616ee9dfe",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/27_acer_palmatum/medium/2560px-Acer_palmatum_27Bloodgood27_kz01.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=42e3618f49866b07a511852d7a715b69287d4bbb048bdbe519d4bda4ff434680",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/27_acer_palmatum/small/2560px-Acer_palmatum_27Bloodgood27_kz01.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=61c2f4c0264ef42fbe75a2933235cc398b02381d88db24779df45a2c2bd2d3eb",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/27_acer_palmatum/thumbnail/2560px-Acer_palmatum_27Bloodgood27_kz01.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=56b7ff900888d7419fc67c5a4e9bac12714174c264f6ae1b5510a093e26ebc51"
+      }
+    },
+    {
+      "id": 28,
+      "common_name": "Aka Shigitatsu Sawa Japanese Maple",
+      "scientific_name": [
+        "Acer palmatum 'Aka Shigitatsu Sawa'"
+      ],
+      "other_name": [
+        "Samurai"
+      ],
+      "family": null,
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Aka Shigitatsu Sawa",
+      "variety": null,
+      "species_epithet": "palmatum",
+      "genus": "Acer",
+      "default_image": {
+        "license": 45,
+        "license_name": "Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0/deed.en",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/28_acer_palmatum_aka_shigitatsu_sawa/og/Acer_palmatum_Aka_shigitatsu_sawa_2zz.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=91624dc7cedb04388d29ee66e9500f0b1235978bb23688fc587b8b2da24204d3",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/28_acer_palmatum_aka_shigitatsu_sawa/regular/Acer_palmatum_Aka_shigitatsu_sawa_2zz.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=b0396676c43c3ac1b29f9af294fb668bea79e0fd10287543b3c166f2542fee12",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/28_acer_palmatum_aka_shigitatsu_sawa/medium/Acer_palmatum_Aka_shigitatsu_sawa_2zz.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=f2b2e066bb40be5c5e6d1b114cbfb9bb36944158bf447765eaf26441acd6443a",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/28_acer_palmatum_aka_shigitatsu_sawa/small/Acer_palmatum_Aka_shigitatsu_sawa_2zz.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=99e8b8066d1d23c7cf4d51cc6be5facb225410d7cb34c488799da406c2351a83",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/28_acer_palmatum_aka_shigitatsu_sawa/thumbnail/Acer_palmatum_Aka_shigitatsu_sawa_2zz.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=d98ba79356dfdb714d4c7b8500f5fae3836454ef5a9bffcc0870b4b33bb556ff"
+      }
+    },
+    {
+      "id": 29,
+      "common_name": "Alpenweiss Variegated Dwarf Japanese Maple*",
+      "scientific_name": [
+        "Acer palmatum 'Alpenweiss'"
+      ],
+      "other_name": [],
+      "family": null,
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Alpenweiss",
+      "variety": null,
+      "species_epithet": "palmatum",
+      "genus": "Acer",
+      "default_image": null
+    },
+    {
+      "id": 30,
+      "common_name": "Ao Shime No Uchi Japanese Maple",
+      "scientific_name": [
+        "Acer palmatum 'Ao Shime No Uchi'"
+      ],
+      "other_name": [],
+      "family": null,
+      "hybrid": null,
+      "authority": null,
+      "subspecies": null,
+      "cultivar": "Ao Shime No Uchi",
+      "variety": null,
+      "species_epithet": "palmatum",
+      "genus": "Acer",
+      "default_image": {
+        "license": 45,
+        "license_name": "Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0/deed.en",
+        "original_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/30_acer_palmatum_ao_shime_no_uchi/og/Acer_palmatum_Ao_shime_no_uchi_3zz.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=f0b68f5f0644f55eac444a44caa098986ebe66cdc5d1001883c91565508e43dd",
+        "regular_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/30_acer_palmatum_ao_shime_no_uchi/regular/Acer_palmatum_Ao_shime_no_uchi_3zz.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=c8090ef170bb3808e1ee9efc4f172fa0614f9c80a3dbef1dd59272b8511f5740",
+        "medium_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/30_acer_palmatum_ao_shime_no_uchi/medium/Acer_palmatum_Ao_shime_no_uchi_3zz.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a68f4c0da049af394de2e69005cd481f6d052accb339c7dbcdc66380eadb1620",
+        "small_url": "https://s3.us-central-1.wasabisys.com/perenual/species_image/30_acer_palmatum_ao_shime_no_uchi/small/Acer_palmatum_Ao_shime_no_uchi_3zz.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=25cf85de98e22d4da41f7ff9338e93b6c07731d5f0420651972c2ea3bd14a1ad",
+        "thumbnail": "https://s3.us-central-1.wasabisys.com/perenual/species_image/30_acer_palmatum_ao_shime_no_uchi/thumbnail/Acer_palmatum_Ao_shime_no_uchi_3zz.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20251230%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20251230T183954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=eafbefd761efb89ba0b5b9e6d062ffd7bcc7920326239074b540e57cab0226b9"
+      }
+    }
+  ],
+  "to": 30,
+  "per_page": 30,
+  "current_page": 1,
+  "from": 1,
+  "last_page": 337,
+  "total": 10102
+}

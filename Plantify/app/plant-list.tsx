@@ -55,7 +55,6 @@ export default function PlantList() {
     }
 
     return (
-        <>
             <View style={{ flex: 1 }}>
                 <FlatList
                     data={plants}
@@ -103,7 +102,6 @@ export default function PlantList() {
                     ListFooterComponent={loading ? <ActivityIndicator size="large" style={{ marginVertical: 16 }} /> : null}
                 />
             </View>
-        </>
     );
 };
 

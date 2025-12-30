@@ -1,6 +1,7 @@
 import { Garden, GardenBySuitability } from '@/models/Plant';
+import { API_CONFIG } from '@/constants/ApiConfig';
 
-const API_URL = 'http://192.168.1.154:8000/api/gardens/'; // Cambia la URL según tu configuración
+const API_URL = API_CONFIG.ENDPOINTS.GARDENS;
 
 const mockGardens: Garden[] = [
   { id: 1, name: 'Backyard Garden', location: 'Madrid, España', created_at: '2023-01-01' },

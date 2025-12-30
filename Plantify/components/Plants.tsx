@@ -164,7 +164,7 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
                 </View>
                 <View style={{ display: 'flex', flexDirection: 'row', gap: 2, alignContent: 'center', alignItems: 'center' }}>
                   <Ionicons name="water" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
-                  <ThemedText type='default'>Cada {userPlant.watering_period.value == "1" ? unitLabelsSingular[userPlant.watering_period.unit as keyof typeof unitLabelsSingular] : userPlant.watering_period.value} {userPlant.watering_period.value !== "1" ? unitLabelsPlural[userPlant.watering_period.unit as keyof typeof unitLabelsPlural] : ''}</ThemedText>
+                  <ThemedText type='default'>Cada {userPlant.watering_period.value} {unitLabelsPlural[userPlant.watering_period.unit as keyof typeof unitLabelsPlural]}</ThemedText>
                 </View>
                 <View style={{ display: 'flex', flexDirection: 'row', gap: 2, alignContent: 'center', alignItems: 'center' }}>
                   <Ionicons name="location" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />

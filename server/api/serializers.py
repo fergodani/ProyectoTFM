@@ -121,7 +121,16 @@ class UserPlantSerializer(serializers.ModelSerializer):
 
                 unit = period["unit"]
                 unit_days = {"days": 1, "weeks": 7, "months": 30}
-                days = period["value"] * unit_days.get(unit, 1)
+                
+                value = period["value"]
+                if isinstance(value, str) and '-' in value:
+                    # Si es un rango como "7-10", calcular la media
+                    min_val, max_val = map(int, value.split('-'))
+                    value = (min_val + max_val) / 2
+                else:
+                    value = int(value)
+                days = value * unit_days.get(unit, 1)
+                print("Calculated days for watering:", days)
                 return today + timedelta(days=days)
             except Exception:
                 return None

@@ -46,7 +46,7 @@ class UserPlant(models.Model):
     garden = models.ForeignKey(Garden, on_delete=models.CASCADE, related_name='user_plants',null=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='plants') 
     plant_id = models.PositiveIntegerField(default=0)
-    image = models.URLField(blank=True, null=True)
+    image = models.URLField(max_length=500, blank=True, null=True)
     isWateringReminder = models.BooleanField(default=True)
     common_name = models.CharField(max_length=255, blank=True, null=True)
     custom_name = models.CharField(max_length=255, blank=True, null=True)

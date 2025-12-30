@@ -124,6 +124,7 @@ export default function PlantSettings() {
                 ...userPlantTemp,
                 plant_id: userPlantTemp.perenual_details!.id
             };
+            console.log(plantToUpdate);
             const plant = await PlantService.putPlant(plantToUpdate, accessToken!);
             if (plant) {
                 setUserPlant(plant);
@@ -163,6 +164,21 @@ export default function PlantSettings() {
 
     return (
         <>
+            {isLoading && (
+                <View style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    zIndex: 1000
+                }}>
+                    <ActivityIndicator size="large" color="#fff" />
+                </View>
+            )}
             <ScrollView>
                 <View style={styles.body}>
                     <ThemedView style={styles.card}>
@@ -235,7 +251,13 @@ export default function PlantSettings() {
                             <View>
                                 <Switch
                                     value={userPlant.isWateringReminder}
-                                    onValueChange={setIsWateringEnabled}
+                                    onValueChange={
+                                        (value) => {
+                                            console.log(value)
+                                            userPlantTemp.isWateringReminder = value;
+                                            handlePut();
+                                        }
+                                    }
                                     trackColor={{ false: "#ccc", true: Colors.light.tint }}
                                     thumbColor={isWateringEnabled ? Colors.light.tint : "#f4f3f4"}
                                 />
