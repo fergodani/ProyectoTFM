@@ -68,10 +68,14 @@ export default function PlantDetails() {
       <ThemedView style={styles.container}>
         <View style={{ flex: 1, alignItems: 'center' }}>
           <ThemedText type="title" style={{ textAlign: 'center' }}>
-            {userPlant.common_name
-              ? userPlant.common_name.charAt(0).toUpperCase() + userPlant.common_name.slice(1)
-              : ""}
+            { userPlant.custom_name || userPlant.common_name!.charAt(0).toUpperCase() + userPlant.common_name!.slice(1)}
           </ThemedText>
+          { userPlant.custom_name &&
+            <ThemedText type="subtitle" style={{ textAlign: 'center', fontStyle: 'italic' }}>
+              ({userPlant.common_name!.charAt(0).toUpperCase() + userPlant.common_name!.slice(1)})
+            </ThemedText>
+
+          }
           <ThemedText type="default">{userPlant.perenual_details!.scientific_name}</ThemedText>
         </View>
         <TouchableOpacity

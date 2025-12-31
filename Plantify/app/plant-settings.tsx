@@ -1,6 +1,6 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { Text, View, Image, StyleSheet, ScrollView, ActivityIndicator, useColorScheme, TouchableOpacity, Alert, Pressable, SafeAreaView, TouchableWithoutFeedback, Modal } from "react-native";
+import { Text, View, Image, StyleSheet, ScrollView, ActivityIndicator, useColorScheme, TouchableOpacity, Alert, Pressable, SafeAreaView, TouchableWithoutFeedback, Modal, TextInput } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Garden, UserPlant } from "@/models/Plant";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
@@ -88,7 +88,7 @@ export default function PlantSettings() {
     const [isWateringEnabled, setIsWateringEnabled] = useState(false);
     const [isFertilityEnabled, setIsFertilityEnabled] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
-    type ModalType = "height" | "age" | "pruning" | "spraying" | "rotation" | "site" | "pot_type" | "pot_size" | "pot_drainage" | "fertilizing" | null;
+    type ModalType = "custom_name" | "height" | "age" | "pruning" | "spraying" | "rotation" | "site" | "pot_type" | "pot_size" | "pot_drainage" | "fertilizing" | null;
     const [modalType, setModalType] = useState<ModalType>(null);
     const [value, setValue] = useState(0);
     const [stringValue, setStringValue] = useState("");
@@ -191,10 +191,18 @@ export default function PlantSettings() {
                             )}
                             <View style={{}}>
                                 <View>
-                                    <ThemedText type='title2'>{userPlant.common_name}</ThemedText>
+                                    <ThemedText type='title2'>{ userPlant.custom_name || userPlant.common_name}</ThemedText>
                                     <ThemedText type='italic'>{userPlant.perenual_details!.scientific_name[0]}</ThemedText>
                                 </View>
                             </View>
+                            <TouchableOpacity 
+                            style={{ position: 'absolute', top: 0, right: 0 }}
+                            onPress={() => {
+                                openModal('custom_name')
+                            }}
+                            >
+                                <Ionicons name="create" size={20} color={"#bfd8c5ff"} />
+                            </TouchableOpacity>
                         </View>
                         <DashedLine />
                         <TouchableOpacity
@@ -471,7 +479,15 @@ export default function PlantSettings() {
                                 )}
                             </TouchableOpacity>
                         </View>
-
+                        {modalType === 'custom_name' && (
+                            <View>
+                                <TextInput
+                                    style={styles.input}
+                                    value={userPlantTemp.custom_name || ''}
+                                    onChangeText={(text) => setUserPlantTemp({ ...userPlantTemp, custom_name: text })}
+                                />
+                            </View>
+                        )}
                         {modalType === 'height' && (
                             <WheelPicker
                                 data={data}
@@ -718,5 +734,12 @@ const styles = StyleSheet.create({
     modalText: {
         marginBottom: 15,
         textAlign: 'center',
+    },
+    input: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        paddingHorizontal: 8,
+        borderRadius: 4,
     },
 });

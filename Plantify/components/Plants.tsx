@@ -160,7 +160,7 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
               )}
               <View style={{ flex: 1, flexShrink: 1, gap: 16 }}>
                 <View>
-                  <ThemedText type='title2'>{userPlant.common_name}</ThemedText>
+                  <ThemedText type='title2'>{ userPlant.custom_name || userPlant.common_name}</ThemedText>
                 </View>
                 <View style={{ display: 'flex', flexDirection: 'row', gap: 2, alignContent: 'center', alignItems: 'center' }}>
                   <Ionicons name="water" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />

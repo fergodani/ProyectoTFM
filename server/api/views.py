@@ -166,23 +166,36 @@ class GardenSuitabilityView(APIView):
         if not plant_id:
             return Response({"error": "plant_id is required"}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Obtiene la planta y su tipo
-        try:
-            plant = PlantInfo.objects.get(pk=plant_id)
-        except PlantInfo.DoesNotExist:
-            return Response({"error": "Plant not found"}, status=status.HTTP_404_NOT_FOUND)
-        plant_type = plant.type.lower() if plant.type else None
-        if not plant_type:
-            return Response({"error": "Plant type not found"}, status=status.HTTP_400_BAD_REQUEST)
-        print(f"Evaluating suitability for plant type: {plant_type}")
-        # Carga las preferencias del tipo de planta
-        plant_types_path = os.path.join(os.path.dirname(__file__), "../plant_types.json")
-        with open(plant_types_path, "r", encoding="utf-8") as f:
-            plant_types = json.load(f)
+        # Obtiene la información de la planta
+        if should_use_mock_data():
+            print("Using mock data for Perenual API")
+            plant = get_mock_species_details(plant_id)
+        else:
+            print("Fetching plant details from Perenual API")
+            # Read API key at request time and validate
+            api_key = os.getenv('PERENUAL_API_KEY')
+            if not api_key:
+                return Response(
+                    {"error": "Perenual API key not configured", "env": "Missing PERENUAL_API_KEY"},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+            try:
+                url = f"{PERENUAL_API_URL}/species/details/{plant_id}"
+                params = {
+                    'key': api_key
+                }
 
-        type_info = next((pt for pt in plant_types if pt.get("type", "").lower() == plant_type), None)
-        if not type_info:
-            return Response({"error": "No info for plant type"}, status=status.HTTP_400_BAD_REQUEST)
+                response = requests.get(url, params=params)
+
+                if response.status_code == 200:
+                    plant = response.json()
+            except Exception as e:
+                return Response(
+                    {"error": "Error connecting to Perenual API", "details": str(e)}, 
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+        
+        print(f"Evaluating suitability for plant: {plant.get('common_name')}")
 
         gardens = Garden.objects.filter(owner=request.user)
         results = []
@@ -190,47 +203,80 @@ class GardenSuitabilityView(APIView):
             reasons = []
             is_optimal = True
         
-            # Humedad
-            if hasattr(garden, "humidity") and "humidity" in type_info:
-                garden_humidity = getattr(garden, "humidity", None)
-                plant_humidity = type_info["humidity"]
-                if garden_humidity and plant_humidity:
-                   if garden_humidity != plant_humidity:
-                        is_optimal = False
-                        reasons.append(f"La humedad no es adecuada (jardín: {garden_humidity}%, planta: {plant_humidity}%)")
+            # Evaluación de humedad usando el atributo 'watering' de Perenual
+            if plant.get('watering') and garden.humidity:
+                plant_watering = plant.get('watering').lower()
+                garden_humidity = garden.humidity.lower()
+                
+                # Mapear watering de Perenual a las opciones de humedad del jardín
+                if plant_watering == "frequent" and garden_humidity != "high":
+                    is_optimal = False
+                    reasons.append("La planta necesita riego frecuente pero el jardín tiene baja/normal humedad.")
+                elif plant_watering == "minimal" and garden_humidity == "high":
+                    is_optimal = False
+                    reasons.append("La planta necesita riego mínimo pero el jardín tiene alta humedad.")
+                elif plant_watering == "average" and garden_humidity == "low":
+                    is_optimal = False
+                    reasons.append("La planta necesita riego promedio pero el jardín tiene baja humedad.")
 
-            # Luz
-            if hasattr(garden, "sunlight_exposure") and "light" in type_info:
-                garden_light = getattr(garden, "sunlight_exposure", None)
-                plant_light = type_info["light"]
-                if garden_light and plant_light:
-                    if garden_light not in plant_light:
+            # Evaluación de luz usando el atributo 'sunlight' de Perenual
+            if plant.get('sunlight') and garden.sunlight_exposure:
+                try:
+                    # sunlight puede ser un string JSON o ya una lista
+                    if isinstance(plant.get('sunlight'), str):
+                        plant_sunlight_list = json.loads(plant.get('sunlight'))
+                    else:
+                        plant_sunlight_list = plant.get('sunlight')
+                    
+                    garden_light = garden.sunlight_exposure
+                    
+                    # Mapear opciones de sunlight de Perenual a las del jardín
+                    sunlight_mapping = {
+                        "full sun": "full_sun",
+                        "part sun": "partial_sun", 
+                        "part shade": "indirect_sun",
+                        "full shade": "full_shade"
+                    }
+                    
+                    # Convertir los requisitos de luz de la planta al formato del jardín
+                    compatible_lights = []
+                    for light in plant_sunlight_list:
+                        mapped_light = sunlight_mapping.get(light.lower())
+                        if mapped_light:
+                            compatible_lights.append(mapped_light)
+                    
+                    # Verificar si la luz del jardín es compatible
+                    if compatible_lights and garden_light not in compatible_lights:
                         is_optimal = False
-                        reasons.append(f"La luz no es adecuada")
+                        light_names = [k for k, v in sunlight_mapping.items() if v in compatible_lights]
+                        reasons.append(f"La luz no es adecuada. La planta necesita: {', '.join(light_names)}")
+                        
+                except (json.JSONDecodeError, TypeError):
+                    # Si hay error al parsear sunlight, continuar sin evaluar luz
+                    pass
         
-            # Ubicación
-            if hasattr(garden, "location") and "preferred_location" in type_info:
-                garden_location = getattr(garden, "location", None)
-                preferred_location = type_info["preferred_location"]
-                if preferred_location != "any":
-                    if preferred_location == "indoor" and garden_location == "outdoor":
-                        is_optimal = False
-                        reasons.append("La planta prefiere interior, pero el jardín es exterior.")
-                    elif preferred_location == "outdoor" and garden_location == "indoor":
-                        is_optimal = False
-                        reasons.append("La planta prefiere exterior, pero el jardín es interior.")
-            if hasattr(garden, "air") and "air_tolerance" in type_info:
-                garden_air = getattr(garden, "air", None)
-                plant_air_tolerance = type_info["air_tolerance"]
-                if plant_air_tolerance == "low" and garden_air:
+            # Evaluación de ubicación usando el atributo 'indoor' de Perenual
+            if plant.get('indoor') is not None and garden.location:
+                plant_indoor = str(plant.get('indoor')).lower() == "true"
+                garden_location = garden.location.lower()
+                print(f"Plant indoor: {plant_indoor}, Garden location: {garden_location}")
+                if plant_indoor and garden_location == "outdoor":
                     is_optimal = False
-                    reasons.append("La planta no tolera mucho aire, pero el jardín tiene mucha ventilación.")
-                elif plant_air_tolerance == "high" and not garden_air:
+                    reasons.append("La planta es de interior, pero el lugar es exterior.")
+                elif not plant_indoor and garden_location == "indoor":
                     is_optimal = False
-                    reasons.append("La planta necesita mucha ventilación, pero el jardín tiene poco aire.")
+                    reasons.append("La planta es de exterior, pero el lugar es interior.")
+            
+            # Evaluación de corrientes de aire
+            if plant.get('indoor') is not None and garden.air is not None:
+                plant_indoor = str(plant.get('indoor')).lower() == "true"
+                if plant_indoor and garden.air:
+                    is_optimal = False
+                    reasons.append("La planta es de interior pero el jardín tiene corrientes de aire.")
+            
             # Explicación final
             if is_optimal:
-                texto = "Este jardín es óptimo para la planta según sus necesidades de humedad, luz y ubicación."
+                texto = "Este jardín es óptimo para la planta según sus necesidades de riego, luz y ubicación."
             else:
                 texto = "Este jardín NO es óptimo para la planta: " + " ".join(reasons)
         
