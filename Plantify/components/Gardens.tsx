@@ -150,7 +150,7 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
                             </View>
                             <View style={styles.gardenInfoContainer}>
                                 <ThemedText type='title2'>{garden.name}</ThemedText>
-                                <ThemedText type='default'>{garden.location}</ThemedText>
+                                <ThemedText type='default'>{garden.location === 'indoor' ? 'Interior' : garden.location === 'outdoor' ? 'Exterior' : garden.location}</ThemedText>
                                 <ThemedText type='default'>{garden.user_plants?.length} {garden.user_plants?.length == 1 ? 'planta' : 'plantas'}</ThemedText>
                             </View>
                             <TouchableOpacity style={styles.buttonMenu} onPress={() => { }}>
@@ -228,7 +228,7 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
                             </View>
                             <View style={styles.gardenInfoContainer}>
                                 <ThemedText type='title2'>{gardenBySuitability.garden.name}</ThemedText>
-                                <ThemedText type='default'>{gardenBySuitability.garden.location}</ThemedText>
+                                <ThemedText type='default'>{gardenBySuitability.garden.location === 'indoor' ? 'Interior' : gardenBySuitability.garden.location === 'outdoor' ? 'Exterior' : gardenBySuitability.garden.location}</ThemedText>
                                 <ThemedText type='default'>{gardenBySuitability.garden.user_plants?.length} {gardenBySuitability.garden.user_plants?.length == 1 ? 'planta' : 'plantas'}</ThemedText>
                                 <View>
                                 {gardenBySuitability.is_optimal ? (
@@ -244,9 +244,6 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
                                 
                             </View>
                             </View>
-                            <TouchableOpacity style={styles.buttonMenu} onPress={() => { }}>
-                                <Ionicons name="ellipsis-vertical" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
-                            </TouchableOpacity>
                         </ThemedView>
                        
                     </TouchableOpacity>

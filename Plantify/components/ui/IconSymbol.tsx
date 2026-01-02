@@ -17,6 +17,7 @@ const MAPPING = {
   'search': 'search',
   'alarm': 'alarm',
   'camera': 'camera-alt',
+  'book': 'book',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],

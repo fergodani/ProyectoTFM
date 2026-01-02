@@ -94,6 +94,30 @@ interface DefaultImage {
     thumbnail: string;
 }
 
+interface CareGuideSection {
+    id: number;
+    type: string;
+    description: string;
+}
+
+interface CareGuideData {
+    id: number;
+    species_id: number;
+    common_name: string;
+    scientific_name: string[];
+    section: CareGuideSection[];
+}
+
+interface CareGuides {
+    data: CareGuideData[];
+    to: number;
+    per_page: number;
+    current_page: number;
+    from: number;
+    last_page: number;
+    total: number;
+}
+
 export interface PlantInfo {
     id: number;
     common_name: string;
@@ -123,7 +147,7 @@ export interface PlantInfo {
     pruning_count: PruningCount;
     seeds: boolean;
     maintenance: string | null;
-    care_guides: string;
+    care_guides: CareGuides;
     soil: string[];
     growth_rate: string;
     drought_tolerant: boolean;

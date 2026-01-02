@@ -281,7 +281,7 @@ class GardenSuitabilityView(APIView):
                 texto = "Este jardín NO es óptimo para la planta: " + " ".join(reasons)
         
             results.append({
-                "garden": GardenSimpleSerializer(garden).data,
+                "garden": GardenSerializer(garden).data,
                 "is_optimal": is_optimal,
                 "reasons": reasons,
             })

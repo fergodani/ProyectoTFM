@@ -1,0 +1,160 @@
+[
+  {
+    "id": "riego",
+    "titulo": "Riego Maestro",
+    "icono": "💧",
+    "colorFondo": "#E3F2FD",
+    "colorTexto": "#1565C0",
+    "consejos": [
+      {
+        "tema": "La Regla de Oro",
+        "contenido": "Nunca riegues por calendario (ej: 'cada lunes'). Toca la tierra: introduce el dedo unos 2-3 cm. Si sale seco, riega. Si sale húmedo, espera unos días más."
+      },
+      {
+        "tema": "El Drenaje es Vital",
+        "contenido": "Asegúrate de que tu maceta tenga agujeros abajo. Si el agua se estanca en el fondo, las raíces se pudrirán. Si usas cubremacetas decorativos, tira el agua sobrante 10 minutos después de regar."
+      },
+      {
+        "tema": "¿Me he pasado de agua?",
+        "contenido": "Síntomas: Hojas amarillas (especialmente las bajas), tallos blandos o negruzcos y presencia de mosquitos en la tierra. Solución: Deja secar el sustrato por completo antes de volver a regar."
+      },
+      {
+        "tema": "Tipos de planta y sus necesidades",
+        "contenido": "Cactus y Suculentas: Almacenan agua en sus hojas y tallos, por lo que requieres un riego esporádico, generalmente cada 2-3 semanas. Arbustos y árboles: Necesitan riegos más profundos y menos frecuentes para fomentar el crecimiento de raíces fuertes. Plantas de flor: Requieren riegos regulares debido a una demanada mayor de hidratación para sostener la floración, aunque sin llegar a encharcar."
+      },
+      {
+        "tema": "Clima y temperatura",
+        "contenido": "En verano, el calor hace que el agua se evapore más rápido, por lo que es necesario regar con mayor frecuencia, especialmente en suelos arenosos. En invierno, muchas plantas reducen su actividad y necesitan menos agua. \tEn climas secos y ventosos, el riego debe ser más regular, mientras que en climas húmedos se debe evitar el exceso de agua para prevenir hongos y enfermedades."
+      },
+      {
+        "tema": "Tipos de suelo",
+        "contenido": "El tipo de suelo influye directamente en la cantidad de agua que las plantas pueden absorber. Los suelos arcillosos retienen más agua, por lo que necesitan riegos menos frecuentes, mientras que los suelos arenosos drenan rápido y requieren riegos más constantes. Adaptar el riego a la capacidad de retención del suelo evitará el exceso o la falta de hidratación."
+      },
+      {
+        "tema": "Plantas de interior",
+        "contenido": "El riego de las plantas de interior depende de la especie y las condiciones del hogar. Generalmente, necesitan agua una o dos veces por semana, evitando encharcar la tierra."
+      },
+      {
+        "tema": "Plantas de exterior",
+        "contenido": "Las plantas de exterior requieren un riego adaptado a la temporada. En verano, es recomendable regarlas temprano en la mañana o al atardecer para evitar la evaporación. En invierno, es mejor reducir la frecuencia para evitar el exceso de humedad, especialmente en suelos que retienen agua."
+      }
+    ]
+  },
+  {
+    "id": "luz",
+    "titulo": "Iluminación",
+    "icono": "☀️",
+    "colorFondo": "#FFF8E1",
+    "colorTexto": "#F57F17",
+    "consejos": [
+      {
+        "tema": "Tipos de luz en interiores",
+        "titulo": "true"
+      },
+      {
+        "tema": "Luz directa",
+        "contenido": "La luz directa es aquella que proviene directamente del sol sin obstáculos que la filtren. Esto ocurre cuando los rayos solares entran por una ventana abierta o el balcón y tocan directamente las hojas de tus plantas. Las plantas que disfrutan de luz directa suelen ser las que prosperan en climas soleados, como los cactus, suculentas y algunas hierbas aromáticas. Si tienes ventanas orientadas al sur, ese es el lugar perfecto para colocar plantas que necesiten un alto nivel de exposición solar."
+      },
+      {
+        "tema": "Luz indirecta o semisombra",
+        "contenido": "La luz indirecta puede ser brillante o moderada. La brillante es la luz solar que ha sido filtrada o reflejada. No llega a las plantas de manera directa, pero aún así ofrece la cantidad suficiente para que crezcan con vigor. Este tipo de luz es ideal para la mayoría de las plantas de interior, como los ficus, helechos y filodendros. Mientras que la moderada es menos intensa y se puede encontrar en habitaciones con ventanas orientadas al este o al oeste, o en zonas que reciben luz difusa durante unas pocas horas al día. Plantas como la hoja elegante, la monstera o las zamioculcas prosperan en estas condiciones."
+      },
+      {
+        "tema": "Sombra",
+        "contenido": "La sombra no significa ausencia total de luz, sino que la planta recibe muy poca exposición solar. Este tipo de luz es ideal para plantas que han evolucionado para sobrevivir bajo la sombra en su hábitat natural, como la Cuna de Moises o las sansevierias (lengua de suegra). Aunque estas plantas pueden tolerar niveles bajos de luz, es importante recordar que crecerán más lentamente y pueden requerir menos agua que aquellas que reciben más luz."
+      },
+      {
+        "tema": "¿Cómo saber cuánta luz recibe tu espacio?",
+        "titulo": "true"
+      },
+      {
+        "tema": "Observa el movimiento del sol",
+        "contenido": "Observa cómo entra la luz en las distintas habitaciones durante el día. Las ventanas orientadas al sur suelen recibir la mayor cantidad de luz directa, mientras que las orientadas al este o al oeste reciben luz moderada y las del norte muy poca luz directa."
+      },
+      {
+        "tema": "La prueba de la sombra",
+        "contenido": "Al mediodía, pon tu mano entre la ventana y la planta. Si tu sombra es negra y definida, es luz fuerte. Si es borrosa y suave, es luz indirecta (la favorita de casi todas)."
+      },
+      {
+        "tema": "Usa un medidor de luz",
+        "contenido": "Si quieres ser más preciso, puedes invertir en un medidor de luz que te indicará los niveles de luz en lúmenes o footcandles. Esto te dará una idea más clara sobre si tu planta está recibiendo suficiente luz para crecer de manera óptima."
+      },
+      {
+
+        "tema": "Consejos para la iluminación de plantas de interior",
+        "titulo": "true"
+      },
+      {
+        "tema": "Rotación",
+        "contenido": "Las plantas crecen buscando la luz. Gira tu maceta 90 grados cada vez que riegues para que crezca recta y frondosa por todos lados."
+      },
+      {
+        "tema": "Duración y consistencia",
+        "contenido": "Es importante mantener un horario regular de iluminación para tus plantas de interior. Idealmente, deben recibir luz durante 12 a 16 horas al día, imitando el ciclo natural de luz del sol."
+      },
+      {
+        "tema": "Distancia e intensidad",
+        "contenido": "Asegúrate de ajustar la distancia entre las luces y las plantas según la intensidad de la luz emitida. Demasiada luz puede quemar las hojas, mientras que muy poca puede inhibir el crecimiento."
+      },
+      {
+        "tema": "Monitoreo del crecimiento",
+        "contenido": "Observa de cerca el crecimiento y la salud de tus plantas. Si notas hojas amarillentas o un crecimiento lento, podría ser una señal de que necesitan más luz."
+      }
+    ]
+  },
+  {
+    "id": "humedad",
+    "titulo": "Humedad y Clima",
+    "icono": "☁️",
+    "colorFondo": "#E0F2F1",
+    "colorTexto": "#00695C",
+    "consejos": [
+      {
+        "tema": "El mito del spray",
+        "contenido": "Pulverizar agua sobre las hojas solo sube la humedad 5 minutos. Es mejor agrupar tus plantas (crean un microclima entre ellas) o usar un humidificador."
+      },
+      {
+        "tema": "Corrientes de aire",
+        "contenido": "El enemigo silencioso. Evita poner tus plantas justo en la línea de flujo del Aire Acondicionado, calefacción o ventanas que se abren mucho en invierno."
+      },
+      {
+        "tema": "Puntas secas",
+        "contenido": "Si las puntas de las hojas se ponen marrones y crujientes, tu planta te está gritando: '¡Tengo sed ambiental!'. Necesita más humedad en el aire."
+      }
+    ]
+  },
+  {
+    "id": "limpieza",
+    "titulo": "Limpieza y Plagas",
+    "icono": "✨",
+    "colorFondo": "#F3E5F5",
+    "colorTexto": "#6A1B9A",
+    "consejos": [
+      {
+        "tema": "Limpiar el polvo",
+        "contenido": "El polvo bloquea la luz y la planta no puede 'respirar'. Pasa un paño húmedo suavemente por las hojas una vez al mes. ¡Brillarán más!"
+      },
+      {
+        "tema": "Inspección Rutinaria",
+        "contenido": "Cuando riegues, mira el envés (la parte de abajo) de las hojas. Ahí es donde se esconden las plagas como la cochinilla o la araña roja antes de invadir toda la planta."
+      }
+    ]
+  },
+  {
+    "id": "sos",
+    "titulo": "Dr. Planta (S.O.S)",
+    "icono": "🚑",
+    "colorFondo": "#FFEBEE",
+    "colorTexto": "#C62828",
+    "consejos": [
+      {
+        "tema": "Hojas caídas y tristes",
+        "contenido": "Si la planta se ve 'desmayada' pero las hojas están verdes, suele ser falta de agua (sed). Riega y en unas horas revivirá."
+      },
+      {
+        "tema": "Hojas pálidas",
+        "contenido": "Si la planta pierde su color verde intenso y el crecimiento es muy lento, probablemente le falta luz o necesita abono (solo en primavera/verano)."
+      }
+    ]
+  }
+]
