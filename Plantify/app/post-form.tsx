@@ -15,7 +15,7 @@ const PostForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const colorScheme = useColorScheme() ?? "light";
   const params = useLocalSearchParams();
-  const { plantId, plantName } = params;
+  const { plant_id, plantName } = params;
   const navigation = useNavigation();
   const { getUserId, accessToken, refreshToken } = useAuth();
 
@@ -38,11 +38,11 @@ const PostForm = () => {
 
     setIsSubmitting(true);
     try {
-      console.log("Creating post:", { title, content, plantId });
+      console.log("Creating post:", { title, content, plant_id });
       const post: Post = {
         title: title,
         content: content,
-        plant_info: Number(plantId),
+        plant_id: Number(plant_id),
         author: getUserId()!,
       };
       const response = await PostService.createPost(post, accessToken!)

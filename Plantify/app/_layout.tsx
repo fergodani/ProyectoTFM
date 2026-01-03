@@ -3,7 +3,7 @@ import { useFonts } from 'expo-font';
 import { router, Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
+import { StrictMode, useEffect } from 'react';
 import 'react-native-reanimated';
 import { AuthProvider, useAuth } from "@/hooks/useAuthContext";
 
@@ -30,6 +30,7 @@ export default function RootLayout() {
   }
 
   return (
+    <StrictMode>
     <AuthProvider>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
@@ -42,7 +43,6 @@ export default function RootLayout() {
           <Stack.Screen name="garden-select" options={{ title: "Selecciona un lugar", headerShown: true }} />
           <Stack.Screen name="garden-details" options={{ title: "", headerShown: true }} />
           <Stack.Screen name="garden-settings" options={{ title: "Ajustes del sitio", headerShown: true }} />
-          <Stack.Screen name="plant-form" options={{ title: "", headerShown: false }} />
           <Stack.Screen name="login" options={{ title: "", headerShown: true }} />
           <Stack.Screen name="signup" options={{ title: "", headerShown: true }} />
           <Stack.Screen name="camera-screen" options={{ title: "", headerShown: true }} />
@@ -54,5 +54,6 @@ export default function RootLayout() {
         <StatusBar style="auto" />
       </ThemeProvider>
     </AuthProvider>
+    </StrictMode>
   );
 }

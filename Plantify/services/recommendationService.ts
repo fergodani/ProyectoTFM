@@ -1,6 +1,4 @@
-import { API_CONFIG } from "@/constants/ApiConfig";
-
-const url = API_CONFIG.BASE_URL
+const url = process.env.EXPO_PUBLIC_API_BASE_URL;
 
 export const RecommendationService = {
     getWeather: async (lat: number, lon: number): Promise<any> => {

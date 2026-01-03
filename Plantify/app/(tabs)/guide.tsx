@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
     View,
     Text,
+    Image,
     StyleSheet,
     TouchableOpacity,
     LayoutAnimation,
@@ -25,6 +26,9 @@ interface Consejo {
     tema: string;
     contenido: string;
     titulo?: string;
+    imagen?: string; // soporta la clave 'imagen' en el JSON
+    image?: string;  // soporta la clave 'image' en el JSON
+    url?: string;    // soporta la clave 'url' en el JSON
 }
 
 interface GuiaData {
@@ -86,11 +90,21 @@ const GuideCard: React.FC<GuideCardProps> = ({ item }) => {
                             <Text key={index} style={styles.title}>{consejo.tema}</Text>
                         ) : (
                             <View key={index} style={styles.tipContainer}>
-                            <Text style={[styles.tipTitle, { color: item.colorTexto }]}>
-                                • {consejo.tema}
-                            </Text>
-                            <Text style={styles.tipContent}>{consejo.contenido}</Text>
-                        </View>
+                                <Text style={[styles.tipTitle, { color: item.colorTexto }]}>• {consejo.tema}</Text>
+                                <Text style={styles.tipContent}>{consejo.contenido}</Text>
+                                {/* Posible URL de imagen en varias claves del JSON */}
+                                {(() => {
+                                    const img = consejo.imagen || consejo.image || consejo.url;
+                                    if (!img) return null;
+                                    return (
+                                        <Image
+                                            source={{ uri: img }}
+                                            style={styles.tipImage}
+                                            resizeMode="cover"
+                                        />
+                                    );
+                                })()}
+                            </View>
                         )
                         
                     ))}
@@ -199,6 +213,13 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#444',
         lineHeight: 20,
+    },
+    tipImage: {
+        width: '100%',
+        height: 180,
+        borderRadius: 12,
+        marginTop: 10,
+        backgroundColor: '#eee',
     },
 });
 

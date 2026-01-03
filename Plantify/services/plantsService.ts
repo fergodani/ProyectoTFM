@@ -3,9 +3,7 @@ import { Platform } from "react-native";
 import { PerenualPlant, Tasks, UserPlant } from "@/models/Plant";
 import { PlantInfo, Prediction } from "@/models/PlantInfo";
 import { PlantDetailTrefle, PlantTrefle } from "@/models/PlanTrefle";
-import { API_CONFIG } from "@/constants/ApiConfig";
-
-const url = API_CONFIG.BASE_URL
+const url = process.env.EXPO_PUBLIC_API_BASE_URL;
 
 export const PlantService = {
   getAllPlants: async (accessToken: string): Promise<UserPlant[]> => {

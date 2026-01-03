@@ -104,22 +104,118 @@
   },
   {
     "id": "humedad",
-    "titulo": "Humedad y Clima",
+    "titulo": "Humedad y Temperatura",
     "icono": "☁️",
     "colorFondo": "#E0F2F1",
     "colorTexto": "#00695C",
     "consejos": [
       {
-        "tema": "El mito del spray",
-        "contenido": "Pulverizar agua sobre las hojas solo sube la humedad 5 minutos. Es mejor agrupar tus plantas (crean un microclima entre ellas) o usar un humidificador."
+        "tema": "Signos de estrés por altas temperatura",
+        "contenido": "Las hojas de vuelven marrones.\tLa planta empieza a marchitarse por la evaporación excesiva.\tLas plantas pueden crecer más despacio y sus hojas pueden ser más pequeñas.\tLas hojas empiezan a rizarse o incluso a caerse."
+      },
+      {
+        "tema": "Signos de estrés por bajas temperatura",
+        "contenido": "Las hojas y las plantas empiezan a marchitarse por los daños del frío. Las hojas y los tallos se vuelven marrones, negros. Las partes marrones o ennegrecidas de la planta se vuelven blandas o inlcuso pastosas. El crecimiento de la planta se ralentiza o entra en un periodo de latencia."
+      },
+      {
+        "tema": "¿Cómo mantener la temperatura?",
+        "titulo": "true"
+      },
+      {
+        "tema": "Utiliza un (mini)invernadero",
+        "contenido": "Un invernadero es una opción para mantener la temperatura estable y proteger tus plantas de las condiciones extremas."
+      },
+      {
+        "tema": "Cuidado con el sobrecalentamiento",
+        "contenido": "Es normal querer proteger a tus plantas del frío subiendo el termostato, pero demasiado calor puede ser una amnenza igual de grande para ellas."
       },
       {
         "tema": "Corrientes de aire",
         "contenido": "El enemigo silencioso. Evita poner tus plantas justo en la línea de flujo del Aire Acondicionado, calefacción o ventanas que se abren mucho en invierno."
       },
       {
-        "tema": "Puntas secas",
-        "contenido": "Si las puntas de las hojas se ponen marrones y crujientes, tu planta te está gritando: '¡Tengo sed ambiental!'. Necesita más humedad en el aire."
+        "tema": "Agrupa tus plantas",
+        "contenido": "Si agrupas tus plantas, el aire y la humedad quedan atrapados entre cada una de ellas. De este modo, también se mantienen unas a otras un poco más calientes."
+      },
+      {
+        "tema": "Niveles de humedad",
+        "titulo": "true"
+      },
+      {
+        "tema": "Humedad alta (60-80%)",
+        "contenido": "Es ideal para casi todas las plantas tropicales de interior. Sin embargo, es difícil de mantener en interiores. Puedes mantener este nivel con un terrario cerrado o un pequeño invernadero."
+      },
+      {
+        "tema": "Humedad media (40-60%)",
+        "contenido": "La mayoría de las plantas de interior comunes prosperan en este rango. La mayoría de las casas tienen este nivel de humedad en verano. Algunas plantas siguen necesitando algo de ayuda, entonces puedes nebulizarlas o colocar una bandeja de agua cerca"
+      },
+      {
+        "tema": "Humedad baja (20-40%)",
+        "contenido": "Este rango es adecuado para las plantas que prosperan en condiciones áridas. El aire suele secarse así cuando se utiliza la calefacción. A los cactus y suculentas les irá bien, pero la mayoría de las plantas tendrán problemas con las hojas."
+      },
+      {
+        "tema": "Signos de estrés por humedad alta",
+        "titulo": "true"
+      },
+      {
+        "tema": "Puntas de las hojas marrones",
+        "contenido": ""
+      }
+      ,
+      {
+        "tema": "Bordes de las hojas amarillentos",
+        "contenido": ""
+      }
+      ,
+      {
+        "tema": "Las hojas se secan y se arrugan o encogen",
+        "contenido": ""
+      },
+      {
+        "tema": "Signos de estrés por humedad baja",
+        "titulo": "true"
+      },
+      {
+        "tema": "Hongos (moho) en las hojas",
+        "contenido": ""
+      }
+      ,
+      {
+        "tema": "Hongos (moho) en la tierra de la maceta",
+        "contenido": ""
+      }
+      ,
+      {
+        "tema": "Las hojas y los tallos empiezan a mostrar signos de podredumbre",
+        "contenido": ""
+      },
+      {
+        "tema": "¿Cómo mantener los niveles de humedad adecuados?",
+        "titulo": "true"
+      },
+      {
+        "tema": "Nebulización",
+        "contenido": "Basta con nebulizar agua tibia sobre las hojas con un pulverizador. Recuerda que tendrás que nebulizar con frecuencia, ya que este efecto es temporal."
+      },
+      {
+        "tema": "Agrupa las plantas",
+        "contenido": "Si juntas las plantas en grupos, el aire y la humedad quedan atrapados entre cada una de ellas. También pueden aprovechar la humedad del suelo de las demás. Si haces esto, tienes que dejar algo de espacio (de crecimiento) entre las plantas."
+      },
+      {
+        "tema": "Bandeja con guijarros o hidrogranos",
+        "contenido": "La bandeja consiste en pequeños guijarros o hidrogranos cubiertos de agua. El agua debe estar justo por debajo de la parte superior de los guijarros para que la planta no absorba agua y se mantenga bien aireada."
+      },
+      {
+        "tema": "Humidificador",
+        "contenido": "Un humidificador es un aparato que añade humedad al aire mediante la evaporación. Es probablemente la forma más fácil de aumentar la humedad de tu habitación."
+      },
+      {
+        "tema": "Cuelga la ropa para que se seque",
+        "contenido": "También puedes tender la ropa en casa (cerca de las plantas) después de lavarla. Esto aumenta la humedad del aire al evaporarse el agua de la ropa."
+      },
+      {
+        "tema": "Utiliza un (mini)invernadero",
+        "contenido": "Un invernadero es otra opción para mantener un mayor nivel de humedad para tus plantas. Si tienes plantas tropicales, una humedad baja puede matarlas"
       }
     ]
   },
@@ -131,29 +227,54 @@
     "colorTexto": "#6A1B9A",
     "consejos": [
       {
-        "tema": "Limpiar el polvo",
-        "contenido": "El polvo bloquea la luz y la planta no puede 'respirar'. Pasa un paño húmedo suavemente por las hojas una vez al mes. ¡Brillarán más!"
+        "tema": "Principales tipos de plagas",
+        "titulo": "true"
       },
       {
-        "tema": "Inspección Rutinaria",
-        "contenido": "Cuando riegues, mira el envés (la parte de abajo) de las hojas. Ahí es donde se esconden las plagas como la cochinilla o la araña roja antes de invadir toda la planta."
+        "tema": "Pulgones",
+        "contenido": "Atacan brotes tiernos, hojas nuevas o tallos blandos. Se alimentan chupando la savia de la planta, lo que puede debilitarla y deformar el crecimiento, además de facilitar que entren hongos u otras plagas.",
+        "imagen": "https://gargofumigaciones.com/wp-content/uploads/2025/11/plagas_en_plantas_pulgones.webp"
+      },
+      {
+        "tema": "Araña roja",
+        "contenido": "Es un ácaro diminuto que perfora las células de las hojas para alimentarse, causando manchas amarillas o blancas y una apariencia polvorienta. En infestaciones severas, puede provocar la caída de las hojas y debilitar la planta.",
+        "imagen": "https://gargofumigaciones.com/wp-content/uploads/2025/11/plagas_en_plantas_arana_roja.webp"
+      },
+      {
+        "tema": "Mosca blanca / Cochinilla / Escamas",
+        "contenido": "Estos insectos succionan la savia y se esconden en el envés de las hojas o en los tallos. Pueden causar amarillamiento, deformación de las hojas y debilitamiento general de la planta, además de producir melaza que atrae hongos.",
+        "imagen": "https://gargofumigaciones.com/wp-content/uploads/2025/11/plagas_en_plantas_mosca_blanca.webp"
+      },
+      {
+        "tema": "Orugas y minadores de hojas",
+        "contenido": "Las orugas devoran hojas, las cuales pueden quedar con agujeros o completamente comidas. Los minadores de hojas crean túneles dentro de las hojas, lo que puede causar manchas y debilitamiento de la planta.",
+        "imagen": "https://gargofumigaciones.com/wp-content/uploads/2025/11/plagas_en_plantas_orugas.webp"
+      },
+      {
+        "tema": "¿Cómo eliminar plagas de las plantas?",
+        "titulo": "true"
+      },
+      {
+        "tema": "Aislar la planta afectada",
+        "contenido": "Para evitar que la plaga se propague a otras plantas, es importante aislar la planta afectada tan pronto como se detecte el problema."
       }
-    ]
-  },
-  {
-    "id": "sos",
-    "titulo": "Dr. Planta (S.O.S)",
-    "icono": "🚑",
-    "colorFondo": "#FFEBEE",
-    "colorTexto": "#C62828",
-    "consejos": [
+      ,
       {
-        "tema": "Hojas caídas y tristes",
-        "contenido": "Si la planta se ve 'desmayada' pero las hojas están verdes, suele ser falta de agua (sed). Riega y en unas horas revivirá."
+        "tema": "Limpiar las hojas",
+        "contenido": "Limpiar las hojas con un paño húmedo o una solución suave de agua y jabón puede ayudar a eliminar las plagas visibles y sus huevos."
       },
       {
-        "tema": "Hojas pálidas",
-        "contenido": "Si la planta pierde su color verde intenso y el crecimiento es muy lento, probablemente le falta luz o necesita abono (solo en primavera/verano)."
+        "tema": "Usar tratamientos adecuados al tipo de plaga",
+        "contenido": "Investiga el tipo de plaga que afecta a tu planta y utiliza insecticidas o remedios caseros específicos para esa plaga. Asegúrate de seguir las instrucciones del producto para evitar dañar la planta."
+      }
+      ,
+      {
+        "tema": "Prevención",
+        "contenido": "Mantén tus plantas saludables mediante un riego adecuado, buena iluminación y ventilación. Las plantas fuertes son menos susceptibles a las plagas."
+      },
+      {
+        "tema": "Inspección regular",
+        "contenido": "Revisa tus plantas con frecuencia para detectar signos tempranos de plagas, como hojas pegajosas, manchas o deformaciones. La detección temprana facilita el control de las plagas antes de que se conviertan en un problema grave."
       }
     ]
   }

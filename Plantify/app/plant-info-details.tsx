@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams, useNavigation, useFocusEffect } from "expo-router";
-import { View, Image, StyleSheet, ActivityIndicator, useColorScheme, TouchableOpacity } from "react-native";
+import { View, Image, StyleSheet, ActivityIndicator, useColorScheme, TouchableOpacity, FlatList } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { useEffect, useLayoutEffect, useState, useCallback } from "react";
 import { PlantService } from "@/services/plantsService";
@@ -9,6 +9,7 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
 import { useAuth } from "@/hooks/useAuthContext";
 import { Colors } from "@/constants/Colors";
+import { Post } from "@/models/Post";
 
 export default function PlantInfoDetails() {
   // Recibe los parámetros por router
@@ -24,7 +25,7 @@ export default function PlantInfoDetails() {
   // Función para cargar los datos de la planta
   const fetchPlant = useCallback(async () => {
     if (!id) return;
-    
+
     setLoading(true);
     try {
       const data = await PlantService.getPlantInfoById(Number(id));
@@ -84,8 +85,8 @@ export default function PlantInfoDetails() {
     console.log(plant.default_image.original_url);
     router.push({
       pathname: "/garden-select",
-      params: { 
-        id, 
+      params: {
+        id,
         watering_period: plant.watering_general_benchmark ? JSON.stringify(plant.watering_general_benchmark) : "",
         image_url: plant.default_image?.original_url || "",
         common_name: plant.common_name || "",
@@ -97,7 +98,7 @@ export default function PlantInfoDetails() {
     setShowMenu(false);
     router.push({
       pathname: '/post-form',
-      params: { plantId: id, plantName: plant.common_name }
+      params: { plant_id: id, plantName: plant.common_name }
     });
   };
 
@@ -168,7 +169,7 @@ export default function PlantInfoDetails() {
               <View key={index} style={styles.infoRow}>
                 <ThemedText style={styles.infoLabel}>{dimension.type}:</ThemedText>
                 <ThemedText style={styles.infoValue}>
-                  {dimension.min_value === dimension.max_value 
+                  {dimension.min_value === dimension.max_value
                     ? `${dimension.min_value} ${dimension.unit}`
                     : `${dimension.min_value} - ${dimension.max_value} ${dimension.unit}`
                   }
@@ -198,7 +199,7 @@ export default function PlantInfoDetails() {
             <View style={styles.infoRow}>
               <ThemedText style={styles.infoLabel}>Zone:</ThemedText>
               <ThemedText style={styles.infoValue}>
-                {plant.hardiness.min === plant.hardiness.max 
+                {plant.hardiness.min === plant.hardiness.max
                   ? plant.hardiness.min
                   : `${plant.hardiness.min} - ${plant.hardiness.max}`
                 }
@@ -399,20 +400,22 @@ export default function PlantInfoDetails() {
         {plant.posts && plant.posts.length > 0 && (
           <>
             <ThemedText type="title2">Posts</ThemedText>
-            {plant.posts.map((post) => (
-              <TouchableOpacity
-                key={post.id}
-                onPress={() => goToPostDetails(post.id!)}
-                style={[styles.card, { backgroundColor: cardBackground }]}
-              >
-                <ThemedText type="title2" style={{ color: "#4CAF50" }}>
-                  {post.title}
-                </ThemedText>
-                <ThemedText type="default" style={{ fontSize: 12 }}>
-                  Autor: {post.author} | {new Date(post.created_at!).toLocaleDateString()}
-                </ThemedText>
-              </TouchableOpacity>
-            ))}
+            <View>
+              {plant.posts.map((post) => (
+                <TouchableOpacity
+                  key={post.id}
+                  onPress={() => goToPostDetails(post.id!)}
+                  style={[styles.card, { backgroundColor: cardBackground }]}
+                >
+                  <ThemedText type="title2" style={{ color: "#4CAF50" }}>
+                    {post.title}
+                  </ThemedText>
+                  <ThemedText type="default" style={{ fontSize: 12 }}>
+                    Autor: {post.author} | {new Date(post.created_at!).toLocaleDateString()}
+                  </ThemedText>
+                </TouchableOpacity>
+              ))}
+            </View> 
           </>
         )}
 

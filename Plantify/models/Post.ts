@@ -8,7 +8,7 @@ export interface Post {
     dislikes_count?: number;
     vote_score?: number;
     user_vote?: VoteType | null; // Voto del usuario actual
-    plant_info?: number;
+    plant_id?: number;
     created_at?: string;
     updated_at?: string;
 }

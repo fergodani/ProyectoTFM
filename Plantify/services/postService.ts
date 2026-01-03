@@ -3,9 +3,8 @@ import { Tasks, UserPlant } from "@/models/Plant";
 import { PlantInfo, Prediction } from "@/models/PlantInfo";
 import { PlantDetailTrefle, PlantTrefle } from "@/models/PlanTrefle";
 import { Post, Comment, PostVoteResponse, CommentVoteResponse, VoteRequest, VoteType } from "@/models/Post";
-import { API_CONFIG } from "@/constants/ApiConfig";
 
-const url = `${API_CONFIG.BASE_URL}/api`;
+const url = `${process.env.EXPO_PUBLIC_API_BASE_URL}/api`;
 
 export const PostService = {
     getPostById: async (id: number, accessToken: string): Promise<Post | null> => {

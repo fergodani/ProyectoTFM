@@ -467,6 +467,16 @@ class UserPlantDetailView(APIView):
                     'error': f"Error connecting to Perenual API: {str(e)}"
                 }
         
+        # Añadir posts relacionados con esta planta (por plant_id)
+        try:
+            if plant.plant_id:
+                posts_qs = Post.objects.filter(plant_id=plant.plant_id).order_by('-created_at')
+                posts_serialized = PostSerializer(posts_qs, many=True, context={'request': request})
+                plant_data['posts'] = posts_serialized.data
+        except Exception as posts_e:
+            # No bloquear la respuesta si falla la consulta de posts
+            plant_data['posts_error'] = str(posts_e)
+
         return Response(plant_data)
 
     def put(self, request, pk):
@@ -1239,6 +1249,13 @@ class PerenualPlantDetailView(APIView):
                                 perenual_data['pruning'] = section.get('description', '')
                             elif section_type == 'sunlight':
                                 perenual_data['sunlight_long'] = section.get('description', '')
+            # Añadir posts relacionados por plant_id (si existen)
+            try:
+                posts_qs = Post.objects.filter(plant_id=plant_id).order_by('-created_at')
+                perenual_data['posts'] = PostSerializer(posts_qs, many=True, context={'request': request}).data
+            except Exception as posts_e:
+                perenual_data['posts_error'] = str(posts_e)
+
             return Response(perenual_data)
         # Read API key at request time and validate
         api_key = os.getenv('PERENUAL_API_KEY')
@@ -1281,6 +1298,13 @@ class PerenualPlantDetailView(APIView):
                     except Exception as care_e:
                         print(f"Error fetching care guides: {str(care_e)}")
                 
+                # Añadir posts relacionados por plant_id (si existen)
+                try:
+                    posts_qs = Post.objects.filter(plant_id=plant_id).order_by('-created_at')
+                    data['posts'] = PostSerializer(posts_qs, many=True, context={'request': request}).data
+                except Exception as posts_e:
+                    data['posts_error'] = str(posts_e)
+
                 return Response(data)
             elif response.status_code == 404:
                 return Response(
