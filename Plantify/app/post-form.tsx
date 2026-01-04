@@ -2,22 +2,28 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, ScrollView, Alert, useColorScheme } from "react-native";
 import { useState, useLayoutEffect } from "react";
+import * as ImagePicker from 'expo-image-picker';
+import { Platform, ActivityIndicator } from 'react-native';
 import { router, useLocalSearchParams, useNavigation } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
 import { PostService } from "@/services/postService";
 import { useAuth } from "@/hooks/useAuthContext";
 import { Post } from "@/models/Post";
+import { LinearGradient } from 'expo-linear-gradient';
 
 const PostForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [imageUri, setImageUri] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
   const colorScheme = useColorScheme() ?? "light";
   const params = useLocalSearchParams();
   const { plant_id, plantName } = params;
   const navigation = useNavigation();
   const { getUserId, accessToken, refreshToken } = useAuth();
+  const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -45,18 +51,18 @@ const PostForm = () => {
         plant_id: Number(plant_id),
         author: getUserId()!,
       };
-      const response = await PostService.createPost(post, accessToken!)
-      
+
+      const response = await PostService.createPost(post, accessToken!, imageUri || undefined);
+
       console.log("Post created successfully:", response);
-      
+
       Alert.alert(
-        "Success", 
-        "Post created successfully!", 
+        "Success",
+        "Post created successfully!",
         [
-          { 
-            text: "OK", 
+          {
+            text: "OK",
             onPress: () => {
-              // Volver a la pantalla anterior
               router.back();
             }
           }
@@ -70,8 +76,38 @@ const PostForm = () => {
     }
   };
 
+  const pickImage = async () => {
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!permissionResult.granted) {
+      Alert.alert('Permission required', 'Permission to access the media library is required.');
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: (ImagePicker as any).MediaType?.Images ?? (ImagePicker as any).MediaTypeOptions?.Images ?? ['images'],
+      quality: 0.8,
+      allowsEditing: true,
+    });
+
+    const canceled = (result as any).canceled ?? (result as any).cancelled ?? false;
+    let selectedUri: string | undefined;
+    if ((result as any).assets && (result as any).assets.length > 0) {
+      selectedUri = (result as any).assets[0].uri;
+    } else if ((result as any).uri) {
+      selectedUri = (result as any).uri;
+    }
+
+    if (!canceled && selectedUri) {
+      setImageUri(selectedUri);
+    }
+  };
+
   return (
-    <ThemedView style={styles.container}>
+
+    <LinearGradient
+      colors={['rgba(213, 240, 219, 0.19)', backgroundColor]} 
+      style={[styles.container]}
+    >
       <ScrollView showsVerticalScrollIndicator={false}>
 
         <View style={styles.form}>
@@ -91,6 +127,21 @@ const PostForm = () => {
               onChangeText={setTitle}
               maxLength={100}
             />
+          </View>
+
+          {/* Image picker preview */}
+          <View style={styles.inputGroup}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+              <TouchableOpacity onPress={pickImage} style={{ padding: 6, borderRadius: 8, backgroundColor: '#f5f5f5' }}>
+                <Ionicons name="image" size={20} color="#666" />
+              </TouchableOpacity>
+              <ThemedText>Attach an image (optional)</ThemedText>
+            </View>
+            {imageUri ? (
+              <View style={{ marginTop: 12 }}>
+                <Image source={{ uri: imageUri }} style={{ width: 200, height: 150, borderRadius: 8 }} />
+              </View>
+            ) : null}
           </View>
 
           {/* Input para el contenido */}
@@ -149,7 +200,7 @@ const PostForm = () => {
           </View>
         </View>
       </ScrollView>
-    </ThemedView>
+    </LinearGradient>
   );
 };
 

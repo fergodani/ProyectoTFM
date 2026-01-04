@@ -5,6 +5,7 @@ import { useLocalSearchParams } from "expo-router";
 import { Garden, UserPlant } from "@/models/Plant";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
 import { useEffect } from "react";
+import * as ImagePicker from 'expo-image-picker';
 import DashedLine from "@/components/DashedLine";
 import { Switch } from "react-native";
 import { useState } from "react";
@@ -16,6 +17,7 @@ import { useAuth } from "@/hooks/useAuthContext";
 import GardensService from "@/services/gardensService";
 import { PlantService } from "@/services/plantsService";
 import { UserService } from "@/services/userService";
+import { LinearGradient } from 'expo-linear-gradient';
 
 const data = [...Array(100).keys()].map((index) => ({
     value: index,
@@ -95,6 +97,70 @@ export default function PlantSettings() {
     const [gardens, setGardens] = useState<Garden[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const { getUserId, accessToken, refreshToken, setTokens } = useAuth();
+    const [isUploading, setIsUploading] = useState(false);
+    const [image, setImage] = useState<string | null>(null);
+    const colorScheme = useColorScheme();
+    const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
+
+    const pickImage = async () => {
+        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+        if (!permissionResult.granted) {
+            Alert.alert('Permission required', 'Permission to access the media library is required.');
+            return;
+        }
+
+        let result = await ImagePicker.launchImageLibraryAsync({
+            // mediaTypes compatibility: prefer MediaType if available
+            mediaTypes: (ImagePicker as any).MediaType?.Images ?? (ImagePicker as any).MediaTypeOptions?.Images ?? ['images'],
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 0.8,
+        });
+
+        console.log(result);
+
+        const canceled = (result as any).canceled ?? (result as any).cancelled ?? false;
+        let selectedUri: string | undefined;
+        if ((result as any).assets && (result as any).assets.length > 0) {
+            selectedUri = (result as any).assets[0].uri;
+        } else if ((result as any).uri) {
+            selectedUri = (result as any).uri;
+        }
+
+        if (!canceled && selectedUri) {
+            setImage(selectedUri);
+            // upload immediately
+            setIsUploading(true);
+            try {
+                const updated = await PlantService.uploadPlantImage(userPlant.id as number, selectedUri, accessToken!);
+                if (updated) {
+                    setUserPlant(updated);
+                    setUserPlantTemp(updated);
+                }
+            } catch (e: any) {
+                console.error('Error uploading image:', e);
+                if (e.message === 'Unauthorized') {
+                    try {
+                        const newTokens = await UserService.refreshToken(refreshToken!);
+                        setTokens(newTokens.access, newTokens.refresh);
+                        const updated = await PlantService.uploadPlantImage(userPlant.id as number, selectedUri, newTokens.access);
+                        if (updated) {
+                            setUserPlant(updated);
+                            setUserPlantTemp(updated);
+                        }
+                    } catch (re) {
+                        console.error('Refresh failed:', re);
+                        Alert.alert('Error', 'No autorizado');
+                    }
+                } else {
+                    Alert.alert('Error', 'No se pudo subir la imagen');
+                }
+            } finally {
+                setIsUploading(false);
+            }
+        }
+    };
 
     const openModal = (type: ModalType | ((prevState: ModalType) => ModalType) | null) => {
         // Sincronizar userPlantTemp con userPlant cada vez que se abre el modal
@@ -165,284 +231,309 @@ export default function PlantSettings() {
     return (
         <>
             {isLoading && (
-                <View style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    zIndex: 1000
-                }}>
-                    <ActivityIndicator size="large" color="#fff" />
-                </View>
+                <LinearGradient
+                    colors={['rgba(213, 240, 219, 0.19)', backgroundColor]} // Cambia estos colores a los que quieras
+                    style={[styles.container]}
+                >
+                    <View style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        zIndex: 1000
+                    }}>
+                        <ActivityIndicator size="large" color="#fff" />
+                    </View>
+                </LinearGradient>
             )}
-            <ScrollView>
-                <View style={styles.body}>
-                    <ThemedView style={styles.card}>
-                        <View style={styles.subcard}>
-                            {userPlant.image && (
-                                <Image
-                                    source={{ uri: userPlant.image }}
-                                    style={{ width: 100, height: 100, borderRadius: 8 }}
-                                />
-                            )}
-                            <View style={{}}>
+            <LinearGradient
+                colors={['rgba(213, 240, 219, 0.19)', backgroundColor]} // Cambia estos colores a los que quieras
+                style={[styles.container]}
+            >
+                <ScrollView>
+                    <View style={styles.body}>
+                        <ThemedView style={styles.card}>
+                            <View style={styles.subcard}>
+                                <View style={{ width: 100, height: 100, borderRadius: 8, overflow: 'hidden', position: 'relative' }}>
+                                    {userPlant.custom_image ? (
+                                        <Image source={{ uri: userPlant.custom_image }} style={{ width: '100%', height: '100%' }} />
+                                    ) : (
+                                        <Image source={{ uri: userPlant.image }} style={{ width: '100%', height: '100%' }} />
+                                    )}
+
+                                    {/* Small edit icon */}
+                                    <View style={{ position: 'absolute', right: 6, bottom: 6 }}>
+                                        <View style={{ backgroundColor: '#fff', borderRadius: 16, width: 28, height: 28, justifyContent: 'center', alignItems: 'center', elevation: 2 }}>
+                                            <Ionicons name="camera" size={16} color={Colors.light.tint} />
+                                        </View>
+                                    </View>
+
+                                    <TouchableOpacity
+                                        style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }}
+                                        onPress={pickImage}
+                                    >
+                                        {isUploading ? <ActivityIndicator /> : null}
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{}}>
+                                    <View>
+                                        <ThemedText type='title2'>{userPlant.custom_name || userPlant.common_name}</ThemedText>
+                                        <ThemedText type='italic'>{userPlant.perenual_details!.scientific_name[0]}</ThemedText>
+                                    </View>
+                                </View>
+                                <TouchableOpacity
+                                    style={{ position: 'absolute', top: 0, right: 0 }}
+                                    onPress={() => {
+                                        openModal('custom_name')
+                                    }}
+                                >
+                                    <Ionicons name="create" size={20} color={"#bfd8c5ff"} />
+                                </TouchableOpacity>
+                            </View>
+                            <DashedLine />
+                            <TouchableOpacity
+                                style={styles.subcardTouchable}
+                                onPress={() => {
+                                    openModal('height')
+                                }}
+                            >
+                                <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+                                    <Ionicons name="stats-chart" size={24} color={"#bfd8c5ff"} />
+                                    <ThemedText type='default'>Altura de la planta</ThemedText>
+                                </View>
+                                <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
+                                    {userPlant.height ? (<ThemedText type='default'>{userPlant.height} cm</ThemedText>) : (
+                                        <ThemedText type='italic'>Seleccionar</ThemedText>
+                                    )}
+                                    <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
+                                </View>
+
+                            </TouchableOpacity>
+                            <View
+                                style={{
+                                    borderBottomWidth: 1,
+                                    borderStyle: "dashed",
+                                    borderColor: "#ccc",
+                                    marginVertical: 16,
+                                    width: "100%",
+                                }}
+                            />
+                            <TouchableOpacity
+                                style={styles.subcardTouchable}
+                                onPress={() => { openModal('age'); }}
+                            >
+                                <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+                                    <Ionicons name="time" size={24} color={"#bfd8c5ff"} />
+                                    <ThemedText type='default'>Tiempo de plantación</ThemedText>
+                                </View>
+                                <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
+                                    {userPlant.age ? (<ThemedText type='default'>{ageLabels[userPlant.age as keyof typeof ageLabels]}</ThemedText>) : (
+                                        <ThemedText type='italic'>Seleccionar</ThemedText>
+                                    )}
+                                    <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
+                                </View>
+                            </TouchableOpacity>
+                        </ThemedView>
+                        <ThemedView style={styles.card}>
+                            <ThemedText type="title2" style={{ fontWeight: "bold" }}>Horario de cuidado de plantas</ThemedText>
+                            {/* Frecuencia de riego */}
+                            <View style={styles.subcardTouchable}>
+                                <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+                                    <Ionicons name="color-fill" size={24} color={"#bfd8c5ff"} />
+                                    <ThemedText type="default">Riego</ThemedText>
+                                </View>
                                 <View>
-                                    <ThemedText type='title2'>{ userPlant.custom_name || userPlant.common_name}</ThemedText>
-                                    <ThemedText type='italic'>{userPlant.perenual_details!.scientific_name[0]}</ThemedText>
-                                </View>
-                            </View>
-                            <TouchableOpacity 
-                            style={{ position: 'absolute', top: 0, right: 0 }}
-                            onPress={() => {
-                                openModal('custom_name')
-                            }}
-                            >
-                                <Ionicons name="create" size={20} color={"#bfd8c5ff"} />
-                            </TouchableOpacity>
-                        </View>
-                        <DashedLine />
-                        <TouchableOpacity
-                            style={styles.subcardTouchable}
-                            onPress={() => {
-                                openModal('height')
-                            }}
-                        >
-                            <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-                                <Ionicons name="stats-chart" size={24} color={"#bfd8c5ff"} />
-                                <ThemedText type='default'>Altura de la planta</ThemedText>
-                            </View>
-                            <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                {userPlant.height ? (<ThemedText type='default'>{userPlant.height} cm</ThemedText>) : (
-                                    <ThemedText type='italic'>Seleccionar</ThemedText>
-                                )}
-                                <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
-                            </View>
-
-                        </TouchableOpacity>
-                        <View
-                            style={{
-                                borderBottomWidth: 1,
-                                borderStyle: "dashed",
-                                borderColor: "#ccc",
-                                marginVertical: 16,
-                                width: "100%",
-                            }}
-                        />
-                        <TouchableOpacity
-                            style={styles.subcardTouchable}
-                            onPress={() => { openModal('age'); }}
-                        >
-                            <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-                                <Ionicons name="time" size={24} color={"#bfd8c5ff"} />
-                                <ThemedText type='default'>Tiempo de plantación</ThemedText>
-                            </View>
-                            <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                {userPlant.age ? (<ThemedText type='default'>{ageLabels[userPlant.age as keyof typeof ageLabels]}</ThemedText>) : (
-                                    <ThemedText type='italic'>Seleccionar</ThemedText>
-                                )}
-                                <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
-                            </View>
-                        </TouchableOpacity>
-                    </ThemedView>
-                    <ThemedView style={styles.card}>
-                        <ThemedText type="title2" style={{ fontWeight: "bold" }}>Horario de cuidado de plantas</ThemedText>
-                        {/* Frecuencia de riego */}
-                        <View style={styles.subcardTouchable}>
-                            <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-                                <Ionicons name="color-fill" size={24} color={"#bfd8c5ff"} />
-                                <ThemedText type="default">Riego</ThemedText>
-                            </View>
-                            <View>
-                                <Switch
-                                    value={userPlant.isWateringReminder}
-                                    onValueChange={
-                                        (value) => {
-                                            console.log(value)
-                                            userPlantTemp.isWateringReminder = value;
-                                            handlePut();
+                                    <Switch
+                                        value={userPlant.isWateringReminder}
+                                        onValueChange={
+                                            (value) => {
+                                                console.log(value)
+                                                userPlantTemp.isWateringReminder = value;
+                                                handlePut();
+                                            }
                                         }
-                                    }
-                                    trackColor={{ false: "#ccc", true: Colors.light.tint }}
-                                    thumbColor={isWateringEnabled ? Colors.light.tint : "#f4f3f4"}
-                                />
+                                        trackColor={{ false: "#ccc", true: Colors.light.tint }}
+                                        thumbColor={isWateringEnabled ? Colors.light.tint : "#f4f3f4"}
+                                    />
+                                </View>
                             </View>
-                        </View>
-                        <View style={styles.innerCard}>
-                            <ThemedText type="default" style={{ color: '#333' }}>Frecuencia</ThemedText>
-                            {userPlant.watering_period.value === "1" && (
-                                <ThemedText type="default" style={{ color: '#333' }}>Cada {userPlant.watering_period.unit}</ThemedText>
-                            )}
-                            {userPlant.watering_period.value != "1" && (
-                                <ThemedText type="default" style={{ color: '#333' }}>
-                                    Cada {userPlant.watering_period.value.includes('-') 
-                                        ? Math.round((parseInt(userPlant.watering_period.value.split('-')[0]) + parseInt(userPlant.watering_period.value.split('-')[1])) / 2)
-                                        : userPlant.watering_period.value} {userPlant.watering_period.unit}
-                                </ThemedText>
-                            )}
-                        </View>
-                        <DashedLine />
-                        <View style={{ flex: 1, gap: 8 }}>
-                            {/* Frecuencia de fertilización */}
+                            <View style={styles.innerCard}>
+                                <ThemedText type="default" style={{ color: '#333' }}>Frecuencia</ThemedText>
+                                {userPlant.watering_period.value === "1" && (
+                                    <ThemedText type="default" style={{ color: '#333' }}>Cada {userPlant.watering_period.unit}</ThemedText>
+                                )}
+                                {userPlant.watering_period.value != "1" && (
+                                    <ThemedText type="default" style={{ color: '#333' }}>
+                                        Cada {userPlant.watering_period.value.includes('-')
+                                            ? Math.round((parseInt(userPlant.watering_period.value.split('-')[0]) + parseInt(userPlant.watering_period.value.split('-')[1])) / 2)
+                                            : userPlant.watering_period.value} {userPlant.watering_period.unit}
+                                    </ThemedText>
+                                )}
+                            </View>
+                            <DashedLine />
+                            <View style={{ flex: 1, gap: 8 }}>
+                                {/* Frecuencia de fertilización */}
+                                <TouchableOpacity
+                                    style={styles.subcardTouchable}
+                                    onPress={() => { openModal('fertilizing') }}
+                                >
+                                    <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+                                        <Ionicons name="archive" size={24} color={"#bfd8c5ff"} />
+                                        <ThemedText type="default">Fertilización</ThemedText>
+                                    </View>
+                                    <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
+                                        {userPlant.fertilizing_time ? (<ThemedText type='default'>{userPlant.fertilizing_time} / {timeUnitLabels[userPlant.fertilizing_time_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
+                                            <ThemedText type='italic'>Seleccionar</ThemedText>
+                                        )}
+                                        <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
+                                    </View>
+                                </TouchableOpacity>
+
+                                {/* Datos de poda */}
+                                <TouchableOpacity
+                                    style={styles.subcardTouchable}
+                                    onPress={() => { openModal('pruning') }}
+                                >
+                                    <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+                                        <Ionicons name="cut" size={24} color={"#bfd8c5ff"} />
+                                        <ThemedText type='default'>Poda</ThemedText>
+                                    </View>
+                                    <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
+                                        {userPlant.pruning_time ? (<ThemedText type='default'>{userPlant.pruning_time} / {timeUnitLabels[userPlant.pruning_time_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
+                                            <ThemedText type='italic'>Seleccionar</ThemedText>
+                                        )}
+                                        <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
+                                    </View>
+
+                                </TouchableOpacity>
+
+                                {/* Datos de rociado */}
+                                <TouchableOpacity
+                                    style={styles.subcardTouchable}
+                                    onPress={() => { openModal('spraying') }}
+                                >
+                                    <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+                                        <Ionicons name="water" size={24} color={"#bfd8c5ff"} />
+                                        <ThemedText type='default'>Rociado</ThemedText>
+                                    </View>
+                                    <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
+                                        {userPlant.sprayed_time ? (<ThemedText type='default'>{userPlant.sprayed_time} /{timeUnitLabels[userPlant.sprayed_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
+                                            <ThemedText type='italic'>Seleccionar</ThemedText>
+                                        )}
+                                        <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
+                                    </View>
+
+                                </TouchableOpacity>
+
+                                {/* Datos de rotacion */}
+                                <TouchableOpacity
+                                    style={styles.subcardTouchable}
+                                    onPress={() => { openModal('rotation') }}
+                                >
+                                    <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+                                        <Ionicons name="sync" size={24} color={"#bfd8c5ff"} />
+                                        <ThemedText type='default'>Rotación</ThemedText>
+                                    </View>
+                                    <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
+                                        {userPlant.rotation_time ? (<ThemedText type='default'>{userPlant.rotation_time} / {timeUnitLabels[userPlant.rotation_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
+                                            <ThemedText type='italic'>Seleccionar</ThemedText>
+                                        )}
+                                        <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
+                                    </View>
+
+                                </TouchableOpacity>
+                            </View>
+                        </ThemedView>
+                        {/* Datos del sitio */}
+                        <ThemedView style={[styles.card, { gap: 16 }]}>
+                            <ThemedText type="title2" style={{ fontWeight: "bold" }}>Establecer sitio</ThemedText>
                             <TouchableOpacity
                                 style={styles.subcardTouchable}
-                                onPress={() => { openModal('fertilizing') }}
+                                onPress={() => { openModal('site') }}
                             >
                                 <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-                                    <Ionicons name="archive" size={24} color={"#bfd8c5ff"} />
-                                    <ThemedText type="default">Fertilización</ThemedText>
+                                    <Ionicons name="location" size={24} color={"#bfd8c5ff"} />
+                                    <ThemedText type='default'>Lugar</ThemedText>
                                 </View>
                                 <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                    {userPlant.fertilizing_time ? (<ThemedText type='default'>{userPlant.fertilizing_time} / {timeUnitLabels[userPlant.fertilizing_time_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
+                                    {userPlant.garden_name ? (<ThemedText type='default'>{userPlant.garden_name}</ThemedText>) : (
+                                        <ThemedText type='italic'>Seleccionar</ThemedText>
+                                    )}
+                                    <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
+                                </View>
+
+                            </TouchableOpacity>
+                        </ThemedView>
+
+                        {/* Datos de la maceta */}
+                        <ThemedView style={[styles.card, { gap: 16 }]}>
+                            <ThemedText type="title2" style={{ fontWeight: "bold" }}>Maceta</ThemedText>
+                            {/* Tipo de la maceta */}
+                            <TouchableOpacity
+                                style={styles.subcardTouchable}
+                                onPress={() => {
+                                    openModal('pot_type')
+                                }}
+                            >
+                                <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+                                    <Ionicons name="grid" size={24} color={"#bfd8c5ff"} />
+                                    <ThemedText type='default'>Tipo</ThemedText>
+                                </View>
+                                <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
+                                    {userPlant.pot_type ? (<ThemedText type='default'>{potTypeLabels[userPlant.pot_type as keyof typeof potTypeLabels]}</ThemedText>) : (
                                         <ThemedText type='italic'>Seleccionar</ThemedText>
                                     )}
                                     <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
                                 </View>
                             </TouchableOpacity>
 
-                            {/* Datos de poda */}
+                            {/* Tamaño de la maceta */}
                             <TouchableOpacity
                                 style={styles.subcardTouchable}
-                                onPress={() => { openModal('pruning') }}
+                                onPress={() => {
+                                    openModal('pot_size')
+                                }}
                             >
                                 <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-                                    <Ionicons name="cut" size={24} color={"#bfd8c5ff"} />
-                                    <ThemedText type='default'>Poda</ThemedText>
+                                    <Ionicons name="stats-chart" size={24} color={"#bfd8c5ff"} />
+                                    <ThemedText type='default'>Tamaño</ThemedText>
                                 </View>
                                 <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                    {userPlant.pruning_time ? (<ThemedText type='default'>{userPlant.pruning_time} / {timeUnitLabels[userPlant.pruning_time_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
+                                    {userPlant.pot_size ? (<ThemedText type='default'>{userPlant.pot_size} cm</ThemedText>) : (
                                         <ThemedText type='italic'>Seleccionar</ThemedText>
                                     )}
                                     <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
                                 </View>
-
                             </TouchableOpacity>
 
-                            {/* Datos de rociado */}
+                            {/* Drenaje de la maceta */}
                             <TouchableOpacity
                                 style={styles.subcardTouchable}
-                                onPress={() => { openModal('spraying') }}
+                                onPress={() => {
+                                    openModal('pot_drainage')
+                                }}
                             >
                                 <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
                                     <Ionicons name="water" size={24} color={"#bfd8c5ff"} />
-                                    <ThemedText type='default'>Rociado</ThemedText>
+                                    <ThemedText type='default'>Drenaje</ThemedText>
                                 </View>
                                 <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                    {userPlant.sprayed_time ? (<ThemedText type='default'>{userPlant.sprayed_time} /{timeUnitLabels[userPlant.sprayed_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
+                                    {userPlant.drainage ? (<ThemedText type='default'>{drainageLabels[userPlant.drainage as keyof typeof drainageLabels]}</ThemedText>) : (
                                         <ThemedText type='italic'>Seleccionar</ThemedText>
                                     )}
                                     <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
                                 </View>
-
                             </TouchableOpacity>
+                        </ThemedView>
+                        <Button text="Eliminar esta planta" onPress={() => { }} />
+                    </View>
 
-                            {/* Datos de rotacion */}
-                            <TouchableOpacity
-                                style={styles.subcardTouchable}
-                                onPress={() => { openModal('rotation') }}
-                            >
-                                <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-                                    <Ionicons name="sync" size={24} color={"#bfd8c5ff"} />
-                                    <ThemedText type='default'>Rotación</ThemedText>
-                                </View>
-                                <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                    {userPlant.rotation_time ? (<ThemedText type='default'>{userPlant.rotation_time} / {timeUnitLabels[userPlant.rotation_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
-                                        <ThemedText type='italic'>Seleccionar</ThemedText>
-                                    )}
-                                    <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
-                                </View>
-
-                            </TouchableOpacity>
-                        </View>
-                    </ThemedView>
-                    {/* Datos del sitio */}
-                    <ThemedView style={[styles.card, { gap: 16 }]}>
-                        <ThemedText type="title2" style={{ fontWeight: "bold" }}>Establecer sitio</ThemedText>
-                        <TouchableOpacity
-                            style={styles.subcardTouchable}
-                            onPress={() => { openModal('site') }}
-                        >
-                            <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-                                <Ionicons name="location" size={24} color={"#bfd8c5ff"} />
-                                <ThemedText type='default'>Lugar</ThemedText>
-                            </View>
-                            <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                {userPlant.garden_name ? (<ThemedText type='default'>{userPlant.garden_name}</ThemedText>) : (
-                                    <ThemedText type='italic'>Seleccionar</ThemedText>
-                                )}
-                                <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
-                            </View>
-
-                        </TouchableOpacity>
-                    </ThemedView>
-
-                    {/* Datos de la maceta */}
-                    <ThemedView style={[styles.card, { gap: 16 }]}>
-                        <ThemedText type="title2" style={{ fontWeight: "bold" }}>Maceta</ThemedText>
-                        {/* Tipo de la maceta */}
-                        <TouchableOpacity
-                            style={styles.subcardTouchable}
-                            onPress={() => {
-                                openModal('pot_type')
-                            }}
-                        >
-                            <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-                                <Ionicons name="grid" size={24} color={"#bfd8c5ff"} />
-                                <ThemedText type='default'>Tipo</ThemedText>
-                            </View>
-                            <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                {userPlant.pot_type ? (<ThemedText type='default'>{potTypeLabels[userPlant.pot_type as keyof typeof potTypeLabels]}</ThemedText>) : (
-                                    <ThemedText type='italic'>Seleccionar</ThemedText>
-                                )}
-                                <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
-                            </View>
-                        </TouchableOpacity>
-
-                        {/* Tamaño de la maceta */}
-                        <TouchableOpacity
-                            style={styles.subcardTouchable}
-                            onPress={() => {
-                                openModal('pot_size')
-                            }}
-                        >
-                            <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-                                <Ionicons name="stats-chart" size={24} color={"#bfd8c5ff"} />
-                                <ThemedText type='default'>Tamaño</ThemedText>
-                            </View>
-                            <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                {userPlant.pot_size ? (<ThemedText type='default'>{userPlant.pot_size} cm</ThemedText>) : (
-                                    <ThemedText type='italic'>Seleccionar</ThemedText>
-                                )}
-                                <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
-                            </View>
-                        </TouchableOpacity>
-
-                        {/* Drenaje de la maceta */}
-                        <TouchableOpacity
-                            style={styles.subcardTouchable}
-                            onPress={() => {
-                                openModal('pot_drainage')
-                            }}
-                        >
-                            <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-                                <Ionicons name="water" size={24} color={"#bfd8c5ff"} />
-                                <ThemedText type='default'>Drenaje</ThemedText>
-                            </View>
-                            <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                {userPlant.drainage ? (<ThemedText type='default'>{drainageLabels[userPlant.drainage as keyof typeof drainageLabels]}</ThemedText>) : (
-                                    <ThemedText type='italic'>Seleccionar</ThemedText>
-                                )}
-                                <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
-                            </View>
-                        </TouchableOpacity>
-                    </ThemedView>
-                    <Button text="Eliminar esta planta" onPress={() => { }} />
-                </View>
-
-            </ScrollView>
+                </ScrollView>
+            </LinearGradient>
             <Modal
                 visible={isModalVisible}
                 transparent={true}
@@ -639,6 +730,9 @@ const styles = StyleSheet.create({
         padding: 16,
         flex: 1,
         gap: 16,
+    },
+    container: {
+        flex: 1,
     },
     image: {
         width: 200,

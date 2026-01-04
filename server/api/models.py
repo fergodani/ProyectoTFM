@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User 
+from django.db.models.signals import post_delete, pre_save
+from django.dispatch import receiver
+from django.core.files.storage import default_storage
 
 class Garden(models.Model):
     name = models.CharField(max_length=255)
@@ -47,6 +50,7 @@ class UserPlant(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='plants') 
     plant_id = models.PositiveIntegerField(default=0)
     image = models.URLField(max_length=500, blank=True, null=True)
+    custom_image = models.ImageField(upload_to='userplants/', blank=True, null=True)
     isWateringReminder = models.BooleanField(default=True)
     common_name = models.CharField(max_length=255, blank=True, null=True)
     custom_name = models.CharField(max_length=255, blank=True, null=True)
@@ -143,6 +147,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     #plant_info = models.ForeignKey('PlantInfo', on_delete=models.CASCADE, related_name='posts')
     plant_id = models.PositiveIntegerField(default=0)
+    image = models.ImageField(upload_to='posts/', blank=True, null=True)
     like_count = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -173,10 +178,66 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+
+# Señales para eliminar archivos en disco cuando se borra una instancia
+@receiver(post_delete, sender=Post)
+def delete_post_image(sender, instance, **kwargs):
+    if instance.image:
+        try:
+            default_storage.delete(instance.image.name)
+        except Exception:
+            pass
+
+
+@receiver(post_delete, sender=UserPlant)
+def delete_userplant_image(sender, instance, **kwargs):
+    if instance.image:
+        try:
+            default_storage.delete(instance.image.name)
+        except Exception:
+            pass
+
+
+# Eliminar archivo anterior si se reemplaza en update
+@receiver(pre_save, sender=Post)
+def auto_delete_post_image_on_change(sender, instance, **kwargs):
+    if not instance.pk:
+        return
+    try:
+        old = Post.objects.get(pk=instance.pk)
+    except Post.DoesNotExist:
+        return
+    old_file = old.image
+    new_file = instance.image
+    if old_file and old_file != new_file:
+        try:
+            default_storage.delete(old_file.name)
+        except Exception:
+            pass
+
+
+@receiver(pre_save, sender=UserPlant)
+def auto_delete_userplant_image_on_change(sender, instance, **kwargs):
+    if not instance.pk:
+        return
+    try:
+        old = UserPlant.objects.get(pk=instance.pk)
+    except UserPlant.DoesNotExist:
+        return
+    old_file = old.image
+    new_file = instance.image
+    if old_file and old_file != new_file:
+        try:
+            default_storage.delete(old_file.name)
+        except Exception:
+            pass
+
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
     content = models.TextField()
+    is_deleted = models.BooleanField(default=False)
+    deleted_at = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def get_vote_score(self):

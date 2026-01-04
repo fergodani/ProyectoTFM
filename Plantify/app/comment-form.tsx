@@ -48,11 +48,11 @@ const CommentForm = () => {
         "Success",
         "Comment created successfully!",
         [
-          { 
-            text: "OK", 
+          {
+            text: "OK",
             onPress: () => {
-              // Volver a la pantalla anterior
-              router.back();
+              // Reemplazar la pantalla actual por PostDetails para forzar recarga
+              router.replace({ pathname: "/post-details", params: { id: postId } });
             }
           }
         ]
@@ -120,7 +120,7 @@ const CommentForm = () => {
                 color="#333"
               />
               <Text style={styles.submitButtonText}>
-                {isSubmitting ? "Creating..." : "Create Post"}
+                {isSubmitting ? "Creating..." : "Create Comment"}
               </Text>
             </TouchableOpacity>
           </View>

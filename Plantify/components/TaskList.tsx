@@ -143,15 +143,19 @@ export default function TaskList({ tasks, isToday, isNext, onRefresh }: Readonly
                 plantTasksList.map(({ user_plant, tasks }) => (
                     <ThemedView key={user_plant.id} style={styles.card}>
                         <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 16, justifyContent: 'space-between' }}>
-                            {user_plant.image && (
-                                <Image
-                                    source={{ uri: user_plant.image }}
-                                    style={{ width: 50, height: 50, borderRadius: 100 }}
-                                />
-                            )}
-                            <ThemedText type="title2">{user_plant.common_name
+                            {user_plant.custom_image ? (
+                                    <Image source={{ uri: user_plant.custom_image }} style={{ width: 50, height: 50 }} />
+                                ) : (
+                                    <Image source={{ uri: user_plant.image }} style={{ width: 50, height: 50 }} />
+                                )}
+                            {user_plant.custom_name ? (
+                                <ThemedText type="title2">{user_plant.custom_name.charAt(0).toUpperCase() + user_plant.custom_name.slice(1)}</ThemedText>
+                            ) : (
+                                <ThemedText type="title2">{user_plant.common_name
                                 ? user_plant.common_name.charAt(0).toUpperCase() + user_plant.common_name.slice(1)
                                 : ""}</ThemedText>
+                            )}
+                            
                             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
                                 <View style={styles.taskCount}>
                                     <ThemedText type="subtitle" style={{ color: Colors.light.text }}>

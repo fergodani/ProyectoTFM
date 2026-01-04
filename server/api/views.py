@@ -15,7 +15,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.parsers import MultiPartParser
+from rest_framework.parsers import MultiPartParser, FormParser
 from tensorflow.keras.models import load_model
 import numpy as np
 import json
@@ -292,6 +292,7 @@ class GardenSuitabilityView(APIView):
 class UserPlantListCreateView(APIView):
     permission_classes = [IsAuthenticated]
     """Obtener todas las plantas o crear una nueva"""
+    parser_classes = [MultiPartParser, FormParser]
     def get(self, request):
         user = request.user
         garden_id = request.GET.get('gardenId')
@@ -299,7 +300,7 @@ class UserPlantListCreateView(APIView):
             user_plants = UserPlant.objects.filter(owner=user, garden_id=garden_id)
         else:
             user_plants = UserPlant.objects.filter(owner=user)
-        serializer = UserPlantSerializer(user_plants, many=True)
+        serializer = UserPlantSerializer(user_plants, many=True, context={'request': request})
         return Response(serializer.data)
 
     def post(self, request):
@@ -368,13 +369,14 @@ class UserPlantListCreateView(APIView):
         # Recrear el serializer con los datos actualizados
         serializer = UserPlantSerializer(data=request_data)
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            plant = serializer.save()
+            return Response(UserPlantSerializer(plant, context={'request': request}).data, status=status.HTTP_201_CREATED)
 
 
 class UserPlantDetailView(APIView):
     permission_classes = [IsAuthenticated]
     """Obtener, actualizar o eliminar una planta específica"""
+    parser_classes = [MultiPartParser, FormParser]
     def get_object(self, pk):
         try:
             return UserPlant.objects.get(pk=pk)
@@ -386,7 +388,7 @@ class UserPlantDetailView(APIView):
         if not plant:
             return Response({"error": "Plant not found"}, status=status.HTTP_404_NOT_FOUND)
         
-        serializer = UserPlantSerializer(plant)
+        serializer = UserPlantSerializer(plant, context={'request': request})
         plant_data = serializer.data
         
         # Hacer petición a Perenual para obtener detalles adicionales
@@ -483,12 +485,12 @@ class UserPlantDetailView(APIView):
         plant = self.get_object(pk)
         if not plant:
             return Response({"error": "Plant not found"}, status=status.HTTP_404_NOT_FOUND)
-        serializer = UserPlantSerializer(plant, data=request.data)
+        serializer = UserPlantSerializer(plant, data=request.data, partial=True, context={'request': request})
         if serializer.is_valid():
             updated_plant = serializer.save()
             
             # Obtener el serializer data actualizado
-            updated_serializer = UserPlantSerializer(updated_plant)
+            updated_serializer = UserPlantSerializer(updated_plant, context={'request': request})
             plant_data = updated_serializer.data
             
             # Hacer petición a Perenual para obtener detalles adicionales
@@ -761,7 +763,7 @@ class UserTasksView(APIView):
         previous_tasks = []
         
         for plant in user_plants:
-            serializer = UserPlantSerializer(plant)
+            serializer = UserPlantSerializer(plant, context={'request': request})
             plant_data = serializer.data
 
             # Riego
@@ -973,6 +975,7 @@ class WeatherRecommendationView(APIView):
 class UserPostView(APIView):
     permission_classes = [IsAuthenticated]
     """CRUD para posts de usuarios"""
+    parser_classes = [MultiPartParser, FormParser]
     def get(self, request):
         posts = request.user.posts.all()
         serializer = PostSerializer(posts, many=True, context={'request': request})
@@ -995,6 +998,7 @@ class PlantInfoPostView(APIView):
         return Response(serializer.data)    
     
 class PostDetailView(APIView):
+    parser_classes = [MultiPartParser, FormParser]
     """Obtener, actualizar o eliminar un post específico"""
     def get_object(self, pk):
         try:
@@ -1013,6 +1017,8 @@ class PostDetailView(APIView):
         post = self.get_object(pk)
         if not post:
             return Response({"error": "Post not found"}, status=status.HTTP_404_NOT_FOUND)
+        # permitir multipart/form-data para actualizar imagen
+        parser_classes = [MultiPartParser, FormParser]
         serializer = PostSerializer(post, data=request.data, context={'request': request})
         if serializer.is_valid():
             updated_post = serializer.save()
@@ -1042,6 +1048,32 @@ class CommentView(APIView):
             serializer.save(author=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class CommentDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get_object(self, pk):
+        try:
+            return Comment.objects.get(pk=pk)
+        except Comment.DoesNotExist:
+            return None
+    def get(self, request, pk):
+        comment = self.get_object(pk)
+        if not comment:
+            return Response({"error": "Comment not found"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = CommentSerializer(comment, context={'request': request})
+        return Response(serializer.data)
+    def delete(self, request, pk):
+        comment = self.get_object(pk)
+        if not comment:
+            return Response({"error": "Comment not found"}, status=status.HTTP_404_NOT_FOUND)
+        # Only the author can delete their comment
+        if comment.author != request.user:
+            return Response({"error": "Permission denied"}, status=status.HTTP_403_FORBIDDEN)
+        comment.is_deleted = True
+        comment.deleted_at = timezone.now()
+        comment.save()
+        # Return a JSON body with 200 to avoid some mobile clients treating empty 204 responses as network errors
+        return Response({"message": "Comment deleted"}, status=status.HTTP_200_OK)
 
 class PostVoteView(APIView):
     permission_classes = [IsAuthenticated]

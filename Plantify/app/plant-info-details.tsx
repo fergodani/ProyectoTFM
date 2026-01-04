@@ -9,7 +9,7 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
 import { useAuth } from "@/hooks/useAuthContext";
 import { Colors } from "@/constants/Colors";
-import { Post } from "@/models/Post";
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function PlantInfoDetails() {
   // Recibe los parámetros por router
@@ -20,7 +20,8 @@ export default function PlantInfoDetails() {
   const [showMenu, setShowMenu] = useState(false);
   const colorScheme = useColorScheme() ?? "light";
   const { } = useAuth();
-  const cardBackground = colorScheme === "dark" ? "#222" : "#fff"; // O los colores que prefieras
+  const cardBackground = colorScheme === "dark" ? "#222" : "#fff";
+  const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
 
   // Función para cargar los datos de la planta
   const fetchPlant = useCallback(async () => {
@@ -103,7 +104,8 @@ export default function PlantInfoDetails() {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 }}
+        >
       <ParallaxScrollView
         headerImage={
           <Image
@@ -415,15 +417,15 @@ export default function PlantInfoDetails() {
                   </ThemedText>
                 </TouchableOpacity>
               ))}
-            </View> 
+            </View>
           </>
         )}
 
         {plant.posts && plant.posts.length == 0 && (
           <ThemedText type="default">No posts for this plant.</ThemedText>
         )}
+      
       </ParallaxScrollView>
-
       {/* Menú desplegable */}
       {showMenu && (
         <View style={styles.menuContainer}>

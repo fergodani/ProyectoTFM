@@ -1,4 +1,5 @@
 import { useAuth } from "@/hooks/useAuthContext";
+import { Platform } from 'react-native';
 import { Tasks, UserPlant } from "@/models/Plant";
 import { PlantInfo, Prediction } from "@/models/PlantInfo";
 import { PlantDetailTrefle, PlantTrefle } from "@/models/PlanTrefle";
@@ -26,21 +27,54 @@ export const PostService = {
         }
     },
 
-    createPost: async (post: Post, accessToken: string): Promise<Post | null> => {
+    createPost: async (post: Post, accessToken: string, imageUri?: string): Promise<Post | null> => {
         try {
-            const response = await fetch(`${url}/user-posts/`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${accessToken}`,
-                },
-                body: JSON.stringify(post),
-            });
-            if (!response.ok) {
-                throw new Error("Failed to create post");
+            if (imageUri) {
+                const formData = new FormData();
+                formData.append('title', post.title as any);
+                formData.append('content', post.content as any);
+                formData.append('plant_id', String(post.plant_id) as any);
+
+                if (Platform.OS === 'web') {
+                    const res = await fetch(imageUri);
+                    const blob = await res.blob();
+                    formData.append('image', blob, 'photo.jpg');
+                } else {
+                    formData.append('image', {
+                        uri: imageUri,
+                        type: 'image/jpeg',
+                        name: 'photo.jpg',
+                    } as any);
+                }
+
+                const response = await fetch(`${url}/user-posts/`, {
+                    method: 'POST',
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Failed to create post: ${response.status}`);
+                }
+                const data = await response.json();
+                return data;
+            } else {
+                const response = await fetch(`${url}/user-posts/`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                    body: JSON.stringify(post),
+                });
+                if (!response.ok) {
+                    throw new Error("Failed to create post");
+                }
+                const data = await response.json();
+                return data;
             }
-            const data = await response.json();
-            return data;
         } catch (error) {
             console.error("Error creating post:", error);
             return null;
@@ -139,4 +173,33 @@ export const PostService = {
     giveDislikeComment: async (commentId: number, accessToken: string): Promise<CommentVoteResponse | null> => {
         return PostService.voteComment(commentId, 'dislike', accessToken);
     },
+    deleteComment: async (commentId: number, accessToken: string): Promise<boolean> => {
+        try {
+            const response = await fetch(`${url}/comments/${commentId}/`, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                }
+            });
+            
+            // Leer texto para evitar problemas con cuerpos vacíos en algunas plataformas
+            let text = '';
+            try {
+                text = await response.text();
+            } catch (e) {
+                // ignore
+            }
+
+            const ok = response.status === 204 || response.status === 200 || response.ok;
+            if (!ok) {
+                console.error(`Delete comment failed: status=${response.status} text=${text}`);
+            } else {
+                console.log(`Delete comment success: status=${response.status} text=${text}`);
+            }
+            return ok;
+        } catch (error) {
+            console.error('Error deleting comment (network):', error);
+            return false;
+        }
+    }
 };

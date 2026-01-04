@@ -148,6 +148,48 @@ export const PlantService = {
     }
   },
 
+  uploadPlantImage: async (plantId: number, photoUri: string, accessToken: string): Promise<UserPlant | null> => {
+    const formData = new FormData();
+    if (Platform.OS === 'web') {
+      try {
+        const res = await fetch(photoUri);
+        const blob = await res.blob();
+        formData.append('custom_image', blob, 'photo.jpg');
+      } catch (e) {
+        console.error('Failed to prepare image blob for web:', e);
+        throw e;
+      }
+    } else {
+      formData.append('custom_image', {
+        uri: photoUri,
+        type: 'image/jpeg',
+        name: 'photo.jpg',
+      } as any);
+    }
+
+    try {
+      const response = await fetch(`${url}/api/userplant/${plantId}/`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+        },
+        body: formData,
+      });
+
+      if (response.status === 401) {
+        throw new Error('Unauthorized');
+      }
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`Error uploading image: ${response.status} ${text}`);
+      }
+      const json = await response.json();
+      return json || null;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   /*
   getPlantInfoList: async (page: number = 1, filter: string, type: string): Promise<PlantInfo[]> => {
     try {

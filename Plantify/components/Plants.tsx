@@ -124,8 +124,8 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
   };
 
   if (isLoading) {
-      return <ActivityIndicator size="large" style={{ marginTop: 32 }} />;
-    }
+    return <ActivityIndicator size="large" style={{ marginTop: 32 }} />;
+  }
 
   const handleSettings = async (plantId: number) => {
     try {
@@ -152,15 +152,18 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
             })}
           >
             <ThemedView style={styles.card}>
-              {userPlant.image && (
-                <Image
-                  source={{ uri: userPlant.image }}
-                  style={{ width: 100, height: 100, borderRadius: 8 }}
-                />
+              {userPlant.custom_image ? (
+              <Image source={{ uri: userPlant.custom_image }} style={{ width: 100, height: 100, borderRadius: 8 }} />
+              ) : (
+              <Image
+                source={{ uri: userPlant.image }}
+                style={{ width: 100, height: 100, borderRadius: 8 }}
+              />
               )}
+
               <View style={{ flex: 1, flexShrink: 1, gap: 16 }}>
                 <View>
-                  <ThemedText type='title2'>{ userPlant.custom_name || userPlant.common_name}</ThemedText>
+                  <ThemedText type='title2'>{userPlant.custom_name || userPlant.common_name}</ThemedText>
                 </View>
                 <View style={{ display: 'flex', flexDirection: 'row', gap: 2, alignContent: 'center', alignItems: 'center' }}>
                   <Ionicons name="water" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />

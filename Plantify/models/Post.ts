@@ -11,15 +11,18 @@ export interface Post {
     plant_id?: number;
     created_at?: string;
     updated_at?: string;
+    image?: string;
 }
 
 export interface Comment {
     id?: number;
     content: string;
     author: number;
+    author_id?: number;
     post: number;
     likes_count?: number;
     dislikes_count?: number;
+    is_deleted?: boolean;
     vote_score?: number;
     user_vote?: VoteType | null; // Voto del usuario actual
     created_at?: string;

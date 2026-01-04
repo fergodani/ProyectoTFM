@@ -22,6 +22,7 @@ class VoteSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
+    author_id = serializers.IntegerField(source='author.id', read_only=True)
     vote_score = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()
@@ -30,6 +31,14 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'
+    
+    def to_representation(self, instance):
+        """Oculta el contenido si el comentario ha sido marcado como eliminado."""
+        data = super().to_representation(instance)
+        if getattr(instance, 'is_deleted', False):
+            # Mostrar un placeholder en lugar del contenido real
+            data['content'] = None
+        return data
         
     def get_vote_score(self, obj):
         return obj.get_vote_score()

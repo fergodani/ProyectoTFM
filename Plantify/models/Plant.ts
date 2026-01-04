@@ -1,4 +1,5 @@
 import { PlantInfo, WateringPeriod } from "./PlantInfo";
+import { Post } from "./Post";
 
 export interface Garden {
     id: number;
@@ -45,11 +46,13 @@ export interface UserPlant {
     pot_size?: number;
     drainage?: string;
     image?: string;
+    custom_image?: string;
     watering_period: WateringPeriod;
     perenual_details?: PlantInfo;
     isWateringReminder?: boolean;
     fertilizing_time?: number;
     fertilizing_time_unit?: string;
+    posts?: Post[];
 }
 
 export interface PlantImage {

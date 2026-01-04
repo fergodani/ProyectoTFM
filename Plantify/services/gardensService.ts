@@ -1,7 +1,7 @@
 import { Garden, GardenBySuitability } from '@/models/Plant';
 
 //const API_URL = API_CONFIG.ENDPOINTS.GARDENS;
-const API_URL = process.env.EXPO_PUBLIC_API_BASE_URL;
+const API_URL = `${process.env.EXPO_PUBLIC_API_BASE_URL}/api/gardens/`;
 
 const mockGardens: Garden[] = [
   { id: 1, name: 'Backyard Garden', location: 'Madrid, España', created_at: '2023-01-01' },

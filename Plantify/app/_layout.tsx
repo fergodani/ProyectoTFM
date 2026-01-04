@@ -9,6 +9,10 @@ import { AuthProvider, useAuth } from "@/hooks/useAuthContext";
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 
+if (__DEV__) {
+  require("../ReactotronConfig");
+}
+
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -30,7 +34,6 @@ export default function RootLayout() {
   }
 
   return (
-    <StrictMode>
     <AuthProvider>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
@@ -54,6 +57,5 @@ export default function RootLayout() {
         <StatusBar style="auto" />
       </ThemeProvider>
     </AuthProvider>
-    </StrictMode>
   );
 }
