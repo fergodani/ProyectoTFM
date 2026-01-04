@@ -15,7 +15,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from tensorflow.keras.models import load_model
 import numpy as np
 import json
@@ -292,7 +292,7 @@ class GardenSuitabilityView(APIView):
 class UserPlantListCreateView(APIView):
     permission_classes = [IsAuthenticated]
     """Obtener todas las plantas o crear una nueva"""
-    parser_classes = [MultiPartParser, FormParser]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
     def get(self, request):
         user = request.user
         garden_id = request.GET.get('gardenId')
@@ -376,7 +376,7 @@ class UserPlantListCreateView(APIView):
 class UserPlantDetailView(APIView):
     permission_classes = [IsAuthenticated]
     """Obtener, actualizar o eliminar una planta específica"""
-    parser_classes = [MultiPartParser, FormParser]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
     def get_object(self, pk):
         try:
             return UserPlant.objects.get(pk=pk)

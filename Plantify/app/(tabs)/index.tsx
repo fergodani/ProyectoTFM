@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.light.tint,
     borderRadius: 8,
     marginBottom: 16,
-    marginHorizontal: 16,
+    marginHorizontal: 4
   },
   warning: {
     backgroundColor: '#fff3cdff',

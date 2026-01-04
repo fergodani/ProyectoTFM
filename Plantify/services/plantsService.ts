@@ -127,13 +127,19 @@ export const PlantService = {
 
   putPlant: async (userPlant: UserPlant, accessToken: string): Promise<UserPlant | null> => {
     try {
+      // Do not send `custom_image` field as JSON (it may be a local URI)
+      const payload: any = { ...userPlant } as any;
+      if (payload.custom_image) {
+        delete payload.custom_image;
+      }
+
       const response = await fetch(`${url}/api/userplant/${userPlant.id}/`, {
         method: "PUT",
         headers: {
           "Authorization": `Bearer ${accessToken}`,
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(userPlant)
+        body: JSON.stringify(payload)
       });
       if (response.status === 401) {
         throw new Error("Unauthorized");

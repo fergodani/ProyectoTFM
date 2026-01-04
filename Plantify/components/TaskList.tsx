@@ -2,19 +2,21 @@ import { Task } from "@/models/Plant";
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";
 import { Colors } from "@/constants/Colors";
-import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Image, useColorScheme, Pressable, Modal } from "react-native";
+import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Image, useColorScheme, Pressable, Modal, RefreshControl } from "react-native";
 import { useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import Button from "./Button";
 import { PlantService } from "@/services/plantsService";
 import { useAuth } from "@/hooks/useAuthContext";
 import { UserService } from "@/services/userService";
+import React from "react";
 
 export default function TaskList({ tasks, isToday, isNext, onRefresh }: Readonly<{
     tasks: Task[] | undefined, isToday?: boolean, isNext?: boolean, onRefresh: () => void
 }>) {
     const plantTaskMap: { [plantId: number]: { user_plant: Task['user_plant'], tasks: Task[] } } = {};
     const { getUserId, accessToken, setTokens, refreshToken } = useAuth();
+    const [refreshing, setRefreshing] = React.useState(false);
 
     tasks?.forEach(task => {
         const plantId = task.user_plant.id;
@@ -92,7 +94,11 @@ export default function TaskList({ tasks, isToday, isNext, onRefresh }: Readonly
     };
 
     return (
-        <ScrollView style={{ padding: 16 }}>
+        <ScrollView
+        style={styles.container}
+        refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
             {tasks?.length === 0 ? (
                 <>
                     {isToday && (
@@ -213,6 +219,9 @@ export default function TaskList({ tasks, isToday, isNext, onRefresh }: Readonly
 }
 
 const styles = StyleSheet.create({
+    container: {
+        padding: 4
+    },
     optionsMenu: {
         position: 'absolute',
         right: 0,
@@ -225,9 +234,6 @@ const styles = StyleSheet.create({
         elevation: 10,
         zIndex: 100,
         padding: 16
-    },
-    container: {
-        paddingHorizontal: 16,
     },
     card: {
         padding: 16,

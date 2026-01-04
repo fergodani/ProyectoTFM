@@ -131,7 +131,7 @@ const GuiaScreen: React.FC = () => {
         >
             <View style={styles.titleContainer}>
                 <ThemedText type="title">Guía de cuidados</ThemedText>
-
+                <ThemedText id='description' type='default'>Consulta información sobre el cuidado de las plantas</ThemedText>
                 <FlatList
                     data={guiasData as GuiaData[]} // Casting simple para asegurar el tipo
                     keyExtractor={(item) => item.id}

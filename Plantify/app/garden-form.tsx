@@ -10,7 +10,7 @@ import { useColorScheme } from "@/hooks/useColorScheme.web";
 import GardensService from "@/services/gardensService";
 import { useAuth } from "@/hooks/useAuthContext";
 import { UserService } from "@/services/userService";
-import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
+// removed native-only TurboModuleRegistry import (not used on web)
 
 const GardenForm = () => {
   const colorScheme = useColorScheme();
