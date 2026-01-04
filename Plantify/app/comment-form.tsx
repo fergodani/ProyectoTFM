@@ -1,7 +1,7 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, ScrollView, Alert, useColorScheme } from "react-native";
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import { router, useLocalSearchParams, useNavigation } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
@@ -14,7 +14,7 @@ const CommentForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const colorScheme = useColorScheme() ?? "light";
   const params = useLocalSearchParams();
-  const { postId } = params;
+  const { postId, commentId, edit } = params;
   const navigation = useNavigation();
   const { getUserId, accessToken, refreshToken } = useAuth();
 
@@ -26,6 +26,21 @@ const CommentForm = () => {
     });
   }, [navigation, colorScheme]);
 
+  useEffect(() => {
+    const loadForEdit = async () => {
+      if (!edit || !commentId || !accessToken) return;
+      try {
+        const existing = await PostService.getCommentById(Number(commentId), accessToken);
+        if (existing) {
+          setContent(existing.content || "");
+        }
+      } catch (e) {
+        console.error('Error loading comment for edit', e);
+      }
+    };
+    loadForEdit();
+  }, [edit, commentId, accessToken]);
+
   const handleSubmit = async () => {
     if (!content.trim() || !content.trim()) {
       Alert.alert("Error", "Please fill in both title and content");
@@ -34,29 +49,38 @@ const CommentForm = () => {
 
     setIsSubmitting(true);
     try {
-      console.log("Creating comment:", { content, postId });
-      const comment: Comment = {
-        content: content,
-        post: Number(postId),
-        author: getUserId()!,
-      };
-      const response = await PostService.createComment(comment, accessToken!)
+      if (edit && commentId) {
+        const updated = await PostService.updateComment(Number(commentId), { content }, accessToken!);
+        if (updated) {
+          Alert.alert("Éxito", "Comentario actualizado", [{ text: "OK", onPress: () => router.replace({ pathname: "/post-details", params: { id: postId } }) }]);
+        } else {
+          Alert.alert("Error", "No se pudo actualizar el comentario. Intenta de nuevo.");
+        }
+      } else {
+        console.log("Creating comment:", { content, postId });
+        const comment: Comment = {
+          content: content,
+          post: Number(postId),
+          author: getUserId()!,
+        };
+        const response = await PostService.createComment(comment, accessToken!)
 
-      console.log("Comment created successfully:", response);
-      
-      Alert.alert(
-        "Success",
-        "Comment created successfully!",
-        [
-          {
-            text: "OK",
-            onPress: () => {
-              // Reemplazar la pantalla actual por PostDetails para forzar recarga
-              router.replace({ pathname: "/post-details", params: { id: postId } });
+        console.log("Comment created successfully:", response);
+        
+        Alert.alert(
+          "Success",
+          "Comment created successfully!",
+          [
+            {
+              text: "OK",
+              onPress: () => {
+                // Reemplazar la pantalla actual por PostDetails para forzar recarga
+                router.replace({ pathname: "/post-details", params: { id: postId } });
+              }
             }
-          }
-        ]
-      );
+          ]
+        );
+      }
     } catch (error) {
       Alert.alert("Error", "Failed to create post. Please try again.");
       console.error("Error creating post:", error);

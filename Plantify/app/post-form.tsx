@@ -1,7 +1,7 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image, ScrollView, Alert, useColorScheme } from "react-native";
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import * as ImagePicker from 'expo-image-picker';
 import { Platform, ActivityIndicator } from 'react-native';
 import { router, useLocalSearchParams, useNavigation } from "expo-router";
@@ -20,21 +20,39 @@ const PostForm = () => {
   const [isUploading, setIsUploading] = useState(false);
   const colorScheme = useColorScheme() ?? "light";
   const params = useLocalSearchParams();
-  const { plant_id, plantName } = params;
+  const { plant_id, plantName, id, edit } = params;
   const navigation = useNavigation();
   const { getUserId, accessToken, refreshToken } = useAuth();
   const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: plantName
+      title: edit ? "Editar publicación" : (plantName
         ? String(plantName).charAt(0).toUpperCase() + String(plantName).slice(1)
-        : "Detalles de la planta",
+        : "Detalles de la planta"),
       headerStyle: {
         backgroundColor: Colors[colorScheme].background,
       },
     });
   }, [navigation, colorScheme]);
+
+  useEffect(() => {
+    const loadPostForEdit = async () => {
+      if (!edit || !id || !accessToken) return;
+      try {
+        const existing = await PostService.getPostById(Number(id), accessToken);
+        if (existing) {
+          setTitle(existing.title || "");
+          setContent(existing.content || "");
+          if (existing.image) setImageUri(existing.image as any);
+        }
+      } catch (e) {
+        console.error('Error loading post for edit', e);
+      }
+    };
+
+    loadPostForEdit();
+  }, [edit, id, accessToken]);
 
   const handleSubmit = async () => {
     if (!title.trim() || !content.trim()) {
@@ -44,30 +62,39 @@ const PostForm = () => {
 
     setIsSubmitting(true);
     try {
-      console.log("Creating post:", { title, content, plant_id });
-      const post: Post = {
-        title: title,
-        content: content,
-        plant_id: Number(plant_id),
-        author: getUserId()!,
-      };
+      if (edit && id) {
+        const updated = await PostService.updatePost(Number(id), { title, content, plant_id: plant_id ? Number(plant_id) : undefined }, accessToken!, imageUri || undefined);
+        if (updated) {
+          Alert.alert("Éxito", "Publicación actualizada correctamente", [{ text: "OK", onPress: () => router.back() }]);
+        } else {
+          Alert.alert("Error", "No se pudo actualizar la publicación. Intenta de nuevo.");
+        }
+      } else {
+        console.log("Creating post:", { title, content, plant_id });
+        const post: Post = {
+          title: title,
+          content: content,
+          plant_id: Number(plant_id),
+          author: getUserId()!,
+        };
 
-      const response = await PostService.createPost(post, accessToken!, imageUri || undefined);
+        const response = await PostService.createPost(post, accessToken!, imageUri || undefined);
 
-      console.log("Post created successfully:", response);
+        console.log("Post created successfully:", response);
 
-      Alert.alert(
-        "Success",
-        "Post created successfully!",
-        [
-          {
-            text: "OK",
-            onPress: () => {
-              router.back();
+        Alert.alert(
+          "Success",
+          "Post created successfully!",
+          [
+            {
+              text: "OK",
+              onPress: () => {
+                router.back();
+              }
             }
-          }
-        ]
-      );
+          ]
+        );
+      }
     } catch (error) {
       Alert.alert("Error", "Failed to create post. Please try again.");
       console.error("Error creating post:", error);
@@ -194,7 +221,7 @@ const PostForm = () => {
                 color="#333"
               />
               <Text style={styles.submitButtonText}>
-                {isSubmitting ? "Creating..." : "Create Post"}
+                {isSubmitting ? "Creating..." : (edit ? "Update Post" : "Create Post")}
               </Text>
             </TouchableOpacity>
           </View>

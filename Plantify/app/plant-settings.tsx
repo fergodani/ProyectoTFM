@@ -573,7 +573,7 @@ export default function PlantSettings() {
                         {modalType === 'custom_name' && (
                             <View>
                                 <TextInput
-                                    style={styles.input}
+                                    style={[styles.input, { minWidth: 200 }]}
                                     value={userPlantTemp.custom_name || ''}
                                     onChangeText={(text) => setUserPlantTemp({ ...userPlantTemp, custom_name: text })}
                                 />

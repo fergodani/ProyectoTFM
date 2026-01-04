@@ -102,6 +102,45 @@ export const PostService = {
         }
     },
 
+    getCommentById: async (commentId: number, accessToken: string): Promise<Comment | null> => {
+        try {
+            const response = await fetch(`${url}/comments/${commentId}/`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                }
+            });
+            if (!response.ok) throw new Error('Failed to fetch comment');
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching comment:', error);
+            return null;
+        }
+    },
+
+    updateComment: async (commentId: number, comment: Partial<Comment>, accessToken: string): Promise<Comment | null> => {
+        try {
+            const response = await fetch(`${url}/comments/${commentId}/`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${accessToken}`,
+                },
+                body: JSON.stringify(comment),
+            });
+            if (!response.ok) {
+                const text = await response.text().catch(() => '');
+                throw new Error(`Failed to update comment: ${response.status} ${text}`);
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error updating comment:', error);
+            return null;
+        }
+    },
+
     // Función genérica para votar (like o dislike)
     votePost: async (postId: number, voteType: VoteType, accessToken: string): Promise<PostVoteResponse | null> => {
         try {
@@ -200,6 +239,60 @@ export const PostService = {
         } catch (error) {
             console.error('Error deleting comment (network):', error);
             return false;
+        }
+    }
+,
+    updatePost: async (postId: number, post: Partial<Post>, accessToken: string, imageUri?: string): Promise<Post | null> => {
+        try {
+            if (imageUri) {
+                const formData = new FormData();
+                if (post.title !== undefined) formData.append('title', post.title as any);
+                if (post.content !== undefined) formData.append('content', post.content as any);
+                if (post.plant_id !== undefined) formData.append('plant_id', String(post.plant_id) as any);
+
+                if (Platform.OS === 'web') {
+                    const res = await fetch(imageUri);
+                    const blob = await res.blob();
+                    formData.append('image', blob, 'photo.jpg');
+                } else {
+                    formData.append('image', {
+                        uri: imageUri,
+                        type: 'image/jpeg',
+                        name: 'photo.jpg',
+                    } as any);
+                }
+
+                const response = await fetch(`${url}/posts/${postId}/`, {
+                    method: 'PATCH',
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Failed to update post: ${response.status}`);
+                }
+                const data = await response.json();
+                return data;
+            } else {
+                const response = await fetch(`${url}/posts/${postId}/`, {
+                    method: 'PATCH',
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                    body: JSON.stringify(post),
+                });
+                if (!response.ok) {
+                    throw new Error("Failed to update post");
+                }
+                const data = await response.json();
+                return data;
+            }
+        } catch (error) {
+            console.error("Error updating post:", error);
+            return null;
         }
     }
 };

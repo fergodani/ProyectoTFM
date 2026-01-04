@@ -3,8 +3,8 @@ import { useAuth } from "@/hooks/useAuthContext";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { Post, CommentVoteResponse } from "@/models/Post";
 import { PostService } from "@/services/postService";
-import { router, useLocalSearchParams, useFocusEffect } from "expo-router";
-import { useEffect, useState, useCallback } from "react";
+import { router, useLocalSearchParams, useFocusEffect, useNavigation } from "expo-router";
+import { useEffect, useState, useCallback, useLayoutEffect } from "react";
 import { Ionicons } from '@expo/vector-icons';
 import { ActivityIndicator, View, StyleSheet, ScrollView, KeyboardAvoidingView, Platform, TouchableOpacity, TextInput, Image, Alert } from "react-native";
 import { Colors } from "@/constants/Colors";
@@ -222,6 +222,34 @@ export default function PostDetails() {
         setVotingComments(new Set());
     }, [id]);
 
+    const navigation = useNavigation();
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => {
+                if (!post) return null;
+                // Mostrar el icono solo si el post pertenece al usuario actual
+                try {
+                    const currentId = Number(getUserId && getUserId());
+                    if (post.author_id && Number(post.author_id) === currentId) {
+                        return (
+                            <TouchableOpacity
+                                onPress={() => router.push({ pathname: '/post-form', params: { id: String(post.id), edit: 'true' } })}
+                                style={{ marginRight: 12 }}
+                                activeOpacity={0.7}
+                            >
+                                <Ionicons name="pencil" size={22} color={buttonBackground} />
+                            </TouchableOpacity>
+                        );
+                    }
+                } catch (e) {
+                    // ignore
+                }
+                return null;
+            }
+        });
+    }, [navigation, post, getUserId, buttonBackground]);
+
     const fetchPost = useCallback(async () => {
         if (!id) return;
         setLoading(true);
@@ -331,61 +359,70 @@ export default function PostDetails() {
                                 <ThemedText type="subtitle">{comment.author} · {new Date(comment.created_at!).toLocaleDateString()}</ThemedText>
                                 <ThemedText type="default">{comment.is_deleted ? 'Comentario eliminado' : (comment.content ?? '')}</ThemedText>
                                 { !comment.is_deleted && (
-                                <View style={{ flexDirection: "row", alignItems: "center", marginTop: 12, paddingVertical: 4 }}>
-                                    <View style={{ flexDirection: "row", alignItems: "center", marginLeft: "auto" }}>
-                                        <TouchableOpacity
-                                            onPress={() => handleLikeComment(comment.id!)}
-                                            style={{
-                                                flexDirection: "row",
-                                                alignItems: "center",
-                                                marginRight: 6,
-                                                opacity: (votingComments.has(comment.id!) || comment.is_deleted) ? 0.6 : 1,
-                                                padding: 3,
-                                                borderRadius: 12,
-                                                backgroundColor: commentVotes[comment.id!] === 'like' ? '#E8F5E8' : 'transparent'
-                                            }}
-                                            disabled={votingComments.has(comment.id!) || comment.is_deleted}
-                                            activeOpacity={0.7}
-                                        >
-                                            <Ionicons
-                                                name="arrow-up-circle"
-                                                size={22}
-                                                color={commentVotes[comment.id!] === 'like' ? '#4CAF50' : buttonBackground}
-                                            />
-                                        </TouchableOpacity>
-                                        <ThemedText style={{ marginLeft: 4, fontSize: 14, fontWeight: '600', minWidth: 24, textAlign: 'center' }}>
-                                            {comment.vote_score || 0}
-                                        </ThemedText>
-                                        <TouchableOpacity
-                                            onPress={() => handleDislikeComment(comment.id!)}
-                                            style={{
-                                                flexDirection: "row",
-                                                alignItems: "center",
-                                                marginLeft: 6,
-                                                opacity: (votingComments.has(comment.id!) || comment.is_deleted) ? 0.6 : 1,
-                                                padding: 3,
-                                                borderRadius: 12,
-                                                backgroundColor: commentVotes[comment.id!] === 'dislike' ? '#FFEBEE' : 'transparent'
-                                            }}
-                                            disabled={votingComments.has(comment.id!) || comment.is_deleted}
-                                            activeOpacity={0.7}
-                                        >
-                                            <Ionicons
-                                                name="arrow-down-circle"
-                                                size={22}
-                                                color={commentVotes[comment.id!] === 'dislike' ? '#f44336' : buttonBackground}
-                                            />
-                                        </TouchableOpacity>
-                                        {votingComments.has(comment.id!) && (
-                                            <ActivityIndicator size="small" color={buttonBackground} style={{ marginLeft: 8 }} />
-                                        )}
+                                <>
+                                    <View style={{ position: 'absolute', right: 12, top: 12, flexDirection: 'row', alignItems: 'center' }}>
                                         {comment.author_id && Number(getUserId && getUserId()) === Number(comment.author_id) && (
-                                            <TouchableOpacity onPress={() => confirmDeleteComment(comment.id)} style={{ marginLeft: 8 }}>
-                                                <Ionicons name="trash" size={20} color={buttonBackground} />
-                                            </TouchableOpacity>
+                                            <>
+                                                <TouchableOpacity onPress={() => router.push({ pathname: '/comment-form', params: { commentId: String(comment.id), postId: String(post.id), edit: 'true' } })} style={[styles.button, { marginRight: 6 }]} activeOpacity={0.7}>
+                                                    <Ionicons name="pencil" size={24} color={buttonBackground} />
+                                                </TouchableOpacity>
+                                                <TouchableOpacity onPress={() => confirmDeleteComment(comment.id)} style={styles.button} activeOpacity={0.7}>
+                                                    <Ionicons name="trash" size={24} color={buttonBackground} />
+                                                </TouchableOpacity>
+                                            </>
                                         )}
                                     </View>
-                                </View>
+                                    <View style={{ flexDirection: "row", alignItems: "center", marginTop: 12, paddingVertical: 4 }}>
+                                        <View style={{ flexDirection: "row", alignItems: "center", marginLeft: "auto" }}>
+                                            <TouchableOpacity
+                                                onPress={() => handleLikeComment(comment.id!)}
+                                                style={{
+                                                    flexDirection: "row",
+                                                    alignItems: "center",
+                                                    marginRight: 6,
+                                                    opacity: (votingComments.has(comment.id!) || comment.is_deleted) ? 0.6 : 1,
+                                                    padding: 3,
+                                                    borderRadius: 12,
+                                                    backgroundColor: commentVotes[comment.id!] === 'like' ? '#E8F5E8' : 'transparent'
+                                                }}
+                                                disabled={votingComments.has(comment.id!) || comment.is_deleted}
+                                                activeOpacity={0.7}
+                                            >
+                                                <Ionicons
+                                                    name="arrow-up-circle"
+                                                    size={22}
+                                                    color={commentVotes[comment.id!] === 'like' ? '#4CAF50' : buttonBackground}
+                                                />
+                                            </TouchableOpacity>
+                                            <ThemedText style={{ marginLeft: 4, fontSize: 14, fontWeight: '600', minWidth: 24, textAlign: 'center' }}>
+                                                {comment.vote_score || 0}
+                                            </ThemedText>
+                                            <TouchableOpacity
+                                                onPress={() => handleDislikeComment(comment.id!)}
+                                                style={{
+                                                    flexDirection: "row",
+                                                    alignItems: "center",
+                                                    marginLeft: 6,
+                                                    opacity: (votingComments.has(comment.id!) || comment.is_deleted) ? 0.6 : 1,
+                                                    padding: 3,
+                                                    borderRadius: 12,
+                                                    backgroundColor: commentVotes[comment.id!] === 'dislike' ? '#FFEBEE' : 'transparent'
+                                                }}
+                                                disabled={votingComments.has(comment.id!) || comment.is_deleted}
+                                                activeOpacity={0.7}
+                                            >
+                                                <Ionicons
+                                                    name="arrow-down-circle"
+                                                    size={22}
+                                                    color={commentVotes[comment.id!] === 'dislike' ? '#f44336' : buttonBackground}
+                                                />
+                                            </TouchableOpacity>
+                                            {votingComments.has(comment.id!) && (
+                                                <ActivityIndicator size="small" color={buttonBackground} style={{ marginLeft: 8 }} />
+                                            )}
+                                        </View>
+                                    </View>
+                                </>
                                 )}
                             </View>
                         ))}
@@ -441,4 +478,8 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 3,
     },
+    button: {
+        padding: 4,
+        marginLeft: 8,
+    }
 });

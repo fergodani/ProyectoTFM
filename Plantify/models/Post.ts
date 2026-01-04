@@ -4,6 +4,7 @@ export interface Post {
     content: string;
     comments?: Comment[];
     author?: number;
+    author_id?: number;
     likes_count?: number;
     dislikes_count?: number;
     vote_score?: number;

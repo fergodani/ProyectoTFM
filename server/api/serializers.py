@@ -57,6 +57,7 @@ class CommentSerializer(serializers.ModelSerializer):
         
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
+    author_id = serializers.IntegerField(source='author.id', read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
     vote_score = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()

@@ -998,7 +998,7 @@ class PlantInfoPostView(APIView):
         return Response(serializer.data)    
     
 class PostDetailView(APIView):
-    parser_classes = [MultiPartParser, FormParser]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
     """Obtener, actualizar o eliminar un post específico"""
     def get_object(self, pk):
         try:
@@ -1027,6 +1027,17 @@ class PostDetailView(APIView):
             return Response(response_serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def patch(self, request, pk):
+        post = self.get_object(pk)
+        if not post:
+            return Response({"error": "Post not found"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = PostSerializer(post, data=request.data, partial=True, context={'request': request})
+        if serializer.is_valid():
+            updated_post = serializer.save()
+            response_serializer = PostSerializer(updated_post, context={'request': request})
+            return Response(response_serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
     def delete(self, request, pk):
         post = self.get_object(pk)
         if not post:
@@ -1051,6 +1062,7 @@ class CommentView(APIView):
 
 class CommentDetailView(APIView):
     permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
     def get_object(self, pk):
         try:
             return Comment.objects.get(pk=pk)
@@ -1062,6 +1074,19 @@ class CommentDetailView(APIView):
             return Response({"error": "Comment not found"}, status=status.HTTP_404_NOT_FOUND)
         serializer = CommentSerializer(comment, context={'request': request})
         return Response(serializer.data)
+    def patch(self, request, pk):
+        comment = self.get_object(pk)
+        if not comment:
+            return Response({"error": "Comment not found"}, status=status.HTTP_404_NOT_FOUND)
+        # Only the author can edit their comment
+        if comment.author != request.user:
+            return Response({"error": "Permission denied"}, status=status.HTTP_403_FORBIDDEN)
+        serializer = CommentSerializer(comment, data=request.data, partial=True, context={'request': request})
+        if serializer.is_valid():
+            updated = serializer.save()
+            response_serializer = CommentSerializer(updated, context={'request': request})
+            return Response(response_serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     def delete(self, request, pk):
         comment = self.get_object(pk)
         if not comment:
