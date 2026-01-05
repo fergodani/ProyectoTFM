@@ -48,6 +48,11 @@ const timeUnitLabels = {
     "month": "Mes"
 };
 
+const timeUnitLabelsLower = {
+    "day": "día",
+    "week": "semana",
+    "month": "mes"
+};
 const potTypeOptions = [
     { value: 'clay', label: 'Arcilla' },
     { value: 'plastic', label: 'Plástico' },
@@ -80,6 +85,12 @@ const drainageLabels = {
     "without_holes": "Sin agujeros"
 };
 
+const wateringTypeLabels = [
+    { value: 'recommended', label: 'Recomendado' },
+    { value: 'manual', label: 'Manual' }
+];
+
+
 
 
 export default function PlantSettings() {
@@ -90,7 +101,7 @@ export default function PlantSettings() {
     const [isWateringEnabled, setIsWateringEnabled] = useState(false);
     const [isFertilityEnabled, setIsFertilityEnabled] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
-    type ModalType = "custom_name" | "height" | "age" | "pruning" | "spraying" | "rotation" | "site" | "pot_type" | "pot_size" | "pot_drainage" | "fertilizing" | null;
+    type ModalType = "watering_manual" | "watering_type" | "custom_name" | "height" | "age" | "pruning" | "spraying" | "rotation" | "site" | "pot_type" | "pot_size" | "pot_drainage" | "fertilizing" | null;
     const [modalType, setModalType] = useState<ModalType>(null);
     const [value, setValue] = useState(0);
     const [stringValue, setStringValue] = useState("");
@@ -230,26 +241,6 @@ export default function PlantSettings() {
 
     return (
         <>
-            {isLoading && (
-                <LinearGradient
-                    colors={['rgba(213, 240, 219, 0.19)', backgroundColor]} // Cambia estos colores a los que quieras
-                    style={[styles.container]}
-                >
-                    <View style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        zIndex: 1000
-                    }}>
-                        <ActivityIndicator size="large" color="#fff" />
-                    </View>
-                </LinearGradient>
-            )}
             <LinearGradient
                 colors={['rgba(213, 240, 219, 0.19)', backgroundColor]} // Cambia estos colores a los que quieras
                 style={[styles.container]}
@@ -361,16 +352,45 @@ export default function PlantSettings() {
                                     />
                                 </View>
                             </View>
+                            <TouchableOpacity
+                                style={styles.innerCard}
+                                onPress={() => { openModal('watering_type') }}
+                            >
+                                <ThemedText type="default" style={{ color: '#333' }}>Tipo</ThemedText>
+                                <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
+                                    <ThemedText type='italic' style={{ color: '#333' }}>{userPlant.watering_type === "recommended" ? "Recomendado" : "Manual"}</ThemedText>
+
+                                    <Ionicons name="chevron-forward" size={16} color={"#333"}></Ionicons>
+                                </View>
+
+                            </TouchableOpacity>
                             <View style={styles.innerCard}>
                                 <ThemedText type="default" style={{ color: '#333' }}>Frecuencia</ThemedText>
-                                {userPlant.watering_period.value === "1" && (
-                                    <ThemedText type="default" style={{ color: '#333' }}>Cada {userPlant.watering_period.unit}</ThemedText>
-                                )}
-                                {userPlant.watering_period.value != "1" && (
+                                {userPlant.isWateringReminder && userPlant.watering_type === "recommended" && (
                                     <ThemedText type="default" style={{ color: '#333' }}>
                                         Cada {userPlant.watering_period.value.includes('-')
                                             ? Math.round((parseInt(userPlant.watering_period.value.split('-')[0]) + parseInt(userPlant.watering_period.value.split('-')[1])) / 2)
                                             : userPlant.watering_period.value} {userPlant.watering_period.unit}
+                                    </ThemedText>
+                                )}
+                                {userPlant.isWateringReminder && userPlant.watering_type === "manual" && (
+                                    <TouchableOpacity
+                                        onPress={() => { openModal('watering_manual') }}
+                                    >
+                                        <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center'}}>
+                                            {userPlant.watering_time ? 
+                                            (<ThemedText type='default' style={{ color: '#333' }}>Cada {userPlant.watering_time == 1 ? "" : userPlant.watering_time} {  timeUnitLabelsLower[userPlant.watering_unit as keyof typeof timeUnitLabelsLower]}{userPlant.watering_time > 1 && userPlant.watering_unit === "month" ? "es" : ""}{userPlant.watering_time > 1 && userPlant.watering_unit != "month" ? "s" : ""}</ThemedText>) 
+                                            : (
+                                                <ThemedText type='italic' style={{ color: '#333' }}>Seleccionar</ThemedText>
+                                            )}
+                                            <Ionicons name="chevron-forward" size={16} color={"#333"}></Ionicons>
+                                        </View>
+
+                                    </TouchableOpacity>
+                                )}
+                                {!userPlant.isWateringReminder && (
+                                    <ThemedText type="default" style={{ color: '#333' }}>
+                                        Pausado
                                     </ThemedText>
                                 )}
                             </View>
@@ -386,7 +406,7 @@ export default function PlantSettings() {
                                         <ThemedText type="default">Fertilización</ThemedText>
                                     </View>
                                     <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                        {userPlant.fertilizing_time ? (<ThemedText type='default'>{userPlant.fertilizing_time} / {timeUnitLabels[userPlant.fertilizing_time_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
+                                        {userPlant.fertilizing_time ? (<ThemedText type='default'>Cada {userPlant.fertilizing_time == 1 ? "" : userPlant.fertilizing_time} {  timeUnitLabelsLower[userPlant.fertilizing_time_unit as keyof typeof timeUnitLabelsLower]}{userPlant.fertilizing_time > 1 && userPlant.fertilizing_time_unit === "month" ? "es" : ""}{userPlant.fertilizing_time > 1 && userPlant.fertilizing_time_unit != "month" ? "s" : ""}</ThemedText>) : (
                                             <ThemedText type='italic'>Seleccionar</ThemedText>
                                         )}
                                         <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
@@ -403,7 +423,7 @@ export default function PlantSettings() {
                                         <ThemedText type='default'>Poda</ThemedText>
                                     </View>
                                     <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                        {userPlant.pruning_time ? (<ThemedText type='default'>{userPlant.pruning_time} / {timeUnitLabels[userPlant.pruning_time_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
+                                        {userPlant.pruning_time ? (<ThemedText type='default'>Cada {userPlant.pruning_time == 1 ? "" : userPlant.pruning_time} {  timeUnitLabelsLower[userPlant.pruning_time_unit as keyof typeof timeUnitLabelsLower]}{userPlant.pruning_time > 1 && userPlant.pruning_time_unit === "month" ? "es" : ""}{userPlant.pruning_time > 1 && userPlant.pruning_time_unit != "month" ? "s" : ""}</ThemedText>) : (
                                             <ThemedText type='italic'>Seleccionar</ThemedText>
                                         )}
                                         <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
@@ -421,7 +441,7 @@ export default function PlantSettings() {
                                         <ThemedText type='default'>Rociado</ThemedText>
                                     </View>
                                     <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                        {userPlant.sprayed_time ? (<ThemedText type='default'>{userPlant.sprayed_time} /{timeUnitLabels[userPlant.sprayed_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
+                                        {userPlant.sprayed_time ? (<ThemedText type='default'>Cada {userPlant.sprayed_time == 1 ? "" : userPlant.sprayed_time} {  timeUnitLabelsLower[userPlant.sprayed_unit as keyof typeof timeUnitLabelsLower]}{userPlant.sprayed_time > 1 && userPlant.sprayed_unit === "month" ? "es" : ""}{userPlant.sprayed_time > 1 && userPlant.sprayed_unit != "month" ? "s" : ""}</ThemedText>) : (
                                             <ThemedText type='italic'>Seleccionar</ThemedText>
                                         )}
                                         <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
@@ -439,7 +459,7 @@ export default function PlantSettings() {
                                         <ThemedText type='default'>Rotación</ThemedText>
                                     </View>
                                     <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                        {userPlant.rotation_time ? (<ThemedText type='default'>{userPlant.rotation_time} / {timeUnitLabels[userPlant.rotation_unit as keyof typeof timeUnitLabels]}</ThemedText>) : (
+                                        {userPlant.rotation_time ? (<ThemedText type='default'>Cada {userPlant.rotation_time == 1 ? "" : userPlant.rotation_time} {  timeUnitLabelsLower[userPlant.rotation_unit as keyof typeof timeUnitLabelsLower]}{userPlant.rotation_time > 1 && userPlant.rotation_unit === "month" ? "es" : ""}{userPlant.rotation_time > 1 && userPlant.rotation_unit != "month" ? "s" : ""}</ThemedText>) : (
                                             <ThemedText type='italic'>Seleccionar</ThemedText>
                                         )}
                                         <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
@@ -597,6 +617,15 @@ export default function PlantSettings() {
                                 enableScrollByTapOnItem={true}
                             />
                         )}
+                        {modalType === 'watering_type' && (
+                            <WheelPicker
+                                data={wateringTypeLabels}
+                                width={200}
+                                value={userPlantTemp.watering_type || ""}
+                                onValueChanged={({ item: { value } }) => setUserPlantTemp({ ...userPlantTemp, watering_type: value })}
+                                enableScrollByTapOnItem={true}
+                            />
+                        )}
                         {modalType === 'fertilizing' && (
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 100 }}>
                                 <WheelPicker
@@ -611,6 +640,28 @@ export default function PlantSettings() {
                                     width={100}
                                     value={userPlantTemp.fertilizing_time_unit || "day"}
                                     onValueChanged={({ item: { value } }) => setUserPlantTemp({ ...userPlantTemp, fertilizing_time_unit: value })}
+                                    enableScrollByTapOnItem={true}
+                                />
+                            </View>
+                        )}
+                        {modalType === 'watering_manual' && (
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 100 }}>
+                                <WheelPicker
+                                    data={data}
+                                    width={100}
+                                    value={userPlantTemp.watering_time || 0}
+                                    onValueChanged={({ item: { value } }) => setUserPlantTemp({
+                                        ...userPlantTemp,
+                                        watering_time: value,
+                                        watering_unit: userPlantTemp.watering_unit || "day"
+                                    })}
+                                    enableScrollByTapOnItem={true}
+                                />
+                                <WheelPicker
+                                    data={timeUnitOptions}
+                                    width={100}
+                                    value={userPlantTemp.watering_unit || "day"}
+                                    onValueChanged={({ item: { value } }) => setUserPlantTemp({ ...userPlantTemp, watering_unit: value })}
                                     enableScrollByTapOnItem={true}
                                 />
                             </View>

@@ -66,6 +66,7 @@ export default function HomeScreen() {
       const { latitude, longitude } = location.coords;
 
       const data = await RecommendationService.getWeather(latitude, longitude);
+      console.log(data)
       setWeatherInfo(data);
     } catch (error) {
       console.error("Error fetching weather data:", error);

@@ -135,6 +135,25 @@ class UserPlant(models.Model):
         null=True
     )
     watering_period = models.JSONField(blank=True, null=True)
+    watering_type = models.CharField(
+        max_length=20,
+        choices=[
+            ('recommended', 'Recommended'),
+            ('manual', 'Manual')
+        ],
+        default='recommended'
+    )
+    watering_time = models.PositiveIntegerField(blank=True, null=True)
+    watering_unit = models.CharField(
+        max_length=10,
+        choices=[
+            ('day', 'Day'),
+            ('week', 'Week'),
+            ('month', 'Month'),
+        ],
+        blank=True,
+        null=True
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
 

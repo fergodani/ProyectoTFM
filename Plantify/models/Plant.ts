@@ -42,6 +42,8 @@ export interface UserPlant {
     sprayed_unit?: string;
     rotation_time?: number;
     rotation_unit?: string;
+    watering_time?: number;
+    watering_unit?: string;
     pot_type?: string;
     pot_size?: number;
     drainage?: string;
@@ -52,6 +54,7 @@ export interface UserPlant {
     isWateringReminder?: boolean;
     fertilizing_time?: number;
     fertilizing_time_unit?: string;
+    watering_type:string;
     posts?: Post[];
 }
 

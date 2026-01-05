@@ -121,7 +121,9 @@ class UserPlantSerializer(serializers.ModelSerializer):
     def get_next_watering_date(self, obj):
         # obj.last_watered_date: fecha de último riego
         # obj.plant.watering_period: JSON con los periodos
-        if obj.last_watered_date and obj.watering_period:
+        if not obj.isWateringReminder:
+            return None
+        if obj.last_watered_date and obj.watering_period and obj.watering_type == 'recommended':
             try:
                 # Si watering_period es un string, conviértelo a lista
                 period = obj.watering_period
@@ -144,6 +146,10 @@ class UserPlantSerializer(serializers.ModelSerializer):
                 return today + timedelta(days=days)
             except Exception:
                 return None
+        if obj.last_watered_date and obj.watering_period and obj.watering_type == 'manual':
+            units = {'day': 1, 'week': 7, 'month': 30}
+            days = obj.watering_time * units.get(obj.watering_unit, 1)
+            return obj.last_watered_date + timedelta(days=days)
         return obj.created_at.date()
 
     def get_next_pruning_date(self, obj):
