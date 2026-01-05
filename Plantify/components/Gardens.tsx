@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, FlatList, StyleSheet, ScrollView, TouchableOpacity, Image, Pressable, Modal, ActivityIndicator } from 'react-native';
 import gardensService from '@/services/gardensService';
 import { Garden, GardenBySuitability } from '@/models/Plant';
 import { ThemedText } from './ThemedText';
@@ -21,6 +21,12 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
     const { getUserId, accessToken, refreshToken, setTokens } = useAuth();
     const [gardens, setGardens] = React.useState<Garden[]>([]);
     const [gardensBySuitability, setGardensBySuitability] = React.useState<GardenBySuitability[]>([]);
+    const [selectedGarden, setSelectedGarden] = useState<Garden | null>(null);
+    const [menuPosition, setMenuPosition] = useState<{ top: number; right: number }>({ top: 0, right: 0 });
+    const [modalVisible, setModalVisible] = useState(false);
+    const [confirmVisible, setConfirmVisible] = useState(false);
+    const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
+    const [isLoading, setIsLoading] = useState(false);
 
     const fetchGardens = async () => {
         if (!getUserId()) {
@@ -28,7 +34,7 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
             return;
         }
         try {
-            
+
             if (plantId) {
                 const suitableGardens = await GardensService.getGardensBySuitability(plantId!, accessToken!);
                 setGardensBySuitability(suitableGardens);
@@ -37,7 +43,7 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
                 const data = await GardensService.getAllGardens(accessToken!);
                 setGardens(data);
             }
-            
+
         } catch (error: any) {
             if (error.message === 'Unauthorized') {
                 // Handle token refresh logic here
@@ -46,7 +52,7 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
                     setTokens(newTokens.access, newTokens.refresh);
                     // Retry fetching gardens with new access token
                     const data = await GardensService.getAllGardens(newTokens.access);
-                    
+
                     setGardens(data);
                 } catch (refreshError) {
                     console.error("Error refreshing tokens:", refreshError);
@@ -54,6 +60,34 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
             }
         }
     };
+
+    const openModal = (garden: Garden, event: any) => {
+        if (modalVisible && selectedGarden?.id === garden.id) {
+            closeModal();
+            return;
+        }
+
+        // Medir la posición del botón
+        event.target.measure((x: number, y: number, width: number, height: number, pageX: number, pageY: number) => {
+            setMenuPosition({
+                top: pageY + height,
+                right: 16
+            });
+            setSelectedGarden(garden);
+            setModalVisible(true);
+        });
+    };
+
+    const closeModal = () => {
+        setModalVisible(false);
+        setSelectedGarden(null);
+    };
+
+    const closeConfirm = () => {
+        setConfirmVisible(false);
+        setSelectedGarden(null);
+    };
+
 
     const handleCreatePlantInGarden = async (gardenId: number) => {
         try {
@@ -79,8 +113,34 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
         router.push("/garden-form");
     };
 
+    const handleDelete = async () => {
+        if (!selectedGarden) return;
+        try {
+            const response = await GardensService.deleteGarden(selectedGarden.id, accessToken!);
+            if (response) {
+                setGardens((prev) => prev.filter((p) => p.id !== selectedGarden.id));
+            }
+        } catch (error) {
+            console.error("Error deleting garden:", error);
+        }
+    };
+
+    const handleSettings = async (gardenId: number) => {
+        try {
+          setIsLoading(true);
+          const gardenDetails = await GardensService.getGardenById(gardenId);
+          closeModal();
+          setIsLoading(false);
+          console.log(gardenDetails);
+          router.push({ pathname: "/garden-settings", params: { gardenString: JSON.stringify(gardenDetails) } });
+        } catch (error) {
+          console.error("Error fetching garden details:", error);
+          setIsLoading(false);
+        }
+      }
+
     useFocusEffect(
-    
+
         React.useCallback(() => {
             fetchGardens();
         }, [])
@@ -88,172 +148,247 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
 
     return (
         <>
-        { !plantId && (
-        <ScrollView style={styles.container}>
-            {gardens.map((garden: Garden) => {
-                // Suponiendo que garden.plants es un array de plantas con propiedad image
-                const plantImages = garden.user_plants?.slice(0, 3).map(p => p.image) || [];
-                return (
-                    <TouchableOpacity
-                        key={garden.id}
-                        onPress={() => {
-                            if (plantId) {
-                                handleCreatePlantInGarden(garden.id);
-                            } else {
-                                router.push({
-                                    pathname: "/garden-details",
-                                    params: { id: garden.id }
-                                })
-                            }
-                        }}
-                    >
-                        <ThemedView key={garden.id} style={styles.gardenCard}>
-                            <View style={styles.mosaicContainer}>
-                                {plantImages.length > 0 && plantImages[0] && (
-                                    <Image
-                                        source={{ uri: plantImages[0] }}
-                                        style={styles.mainImage}
-                                    />
-                                )}
-                                {!plantImages[0] && (
-                                    <Image
-                                        source={require('@/assets/images/plant-placeholder.png')}
-                                        style={styles.mainImage}
-                                    />
-                                )}
-                                <View style={styles.sideImagesContainer}>
-                                    {plantImages[1] && (
-                                        <Image
-                                            source={{ uri: plantImages[1] }}
-                                            style={styles.sideImage}
-                                        />
-                                    )}
-                                    {!plantImages[1] && (
-                                        <Image
-                                            source={require('@/assets/images/plant-placeholder.png')}
-                                            style={styles.sideImage}
-                                        />
-                                    )}
-                                    {plantImages[2] && (
-                                        <Image
-                                            source={{ uri: plantImages[2] }}
-                                            style={styles.sideImage}
-                                        />
-                                    )}
-                                    {!plantImages[2] && (
-                                        <Image
-                                            source={require('@/assets/images/plant-placeholder.png')}
-                                            style={styles.sideImage}
-                                        />
-                                    )}
-                                </View>
-                            </View>
-                            <View style={styles.gardenInfoContainer}>
-                                <ThemedText type='title2'>{garden.name}</ThemedText>
-                                <ThemedText type='default'>{garden.location === 'indoor' ? 'Interior' : garden.location === 'outdoor' ? 'Exterior' : garden.location}</ThemedText>
-                                <ThemedText type='default'>{garden.user_plants?.length} {garden.user_plants?.length == 1 ? 'planta' : 'plantas'}</ThemedText>
-                            </View>
-                            <TouchableOpacity style={styles.buttonMenu} onPress={() => { }}>
-                                <Ionicons name="ellipsis-vertical" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
+            {!plantId && (
+                <ScrollView style={styles.container}>
+                    {isLoading && <ActivityIndicator size="large" style={{ marginTop: 32 }} />}
+                    {gardens.map((garden: Garden) => {
+                        // Suponiendo que garden.plants es un array de plantas con propiedad image
+                        const plantImages = garden.user_plants?.slice(0, 3).map(p => p.image) || [];
+                        return (
+                            <TouchableOpacity
+                                key={garden.id}
+                                onPress={() => {
+                                    if (plantId) {
+                                        handleCreatePlantInGarden(garden.id);
+                                    } else {
+                                        router.push({
+                                            pathname: "/garden-details",
+                                            params: { id: garden.id }
+                                        })
+                                    }
+                                }}
+                            >
+                                <ThemedView key={garden.id} style={styles.gardenCard}>
+                                    <View style={styles.mosaicContainer}>
+                                        {plantImages.length > 0 && plantImages[0] && (
+                                            <Image
+                                                source={{ uri: plantImages[0] }}
+                                                style={styles.mainImage}
+                                            />
+                                        )}
+                                        {!plantImages[0] && (
+                                            <Image
+                                                source={require('@/assets/images/plant-placeholder.png')}
+                                                style={styles.mainImage}
+                                            />
+                                        )}
+                                        <View style={styles.sideImagesContainer}>
+                                            {plantImages[1] && (
+                                                <Image
+                                                    source={{ uri: plantImages[1] }}
+                                                    style={styles.sideImage}
+                                                />
+                                            )}
+                                            {!plantImages[1] && (
+                                                <Image
+                                                    source={require('@/assets/images/plant-placeholder.png')}
+                                                    style={styles.sideImage}
+                                                />
+                                            )}
+                                            {plantImages[2] && (
+                                                <Image
+                                                    source={{ uri: plantImages[2] }}
+                                                    style={styles.sideImage}
+                                                />
+                                            )}
+                                            {!plantImages[2] && (
+                                                <Image
+                                                    source={require('@/assets/images/plant-placeholder.png')}
+                                                    style={styles.sideImage}
+                                                />
+                                            )}
+                                        </View>
+                                    </View>
+                                    <View style={styles.gardenInfoContainer}>
+                                        <ThemedText type='title2'>{garden.name}</ThemedText>
+                                        <ThemedText type='default'>{garden.location === 'indoor' ? 'Interior' : garden.location === 'outdoor' ? 'Exterior' : garden.location}</ThemedText>
+                                        <ThemedText type='default'>{garden.user_plants?.length} {garden.user_plants?.length == 1 ? 'planta' : 'plantas'}</ThemedText>
+                                    </View>
+                                    <TouchableOpacity style={styles.buttonMenu} onPress={(event) => {
+                                        openModal(garden, event)
+                                    }}>
+                                        <Ionicons name="ellipsis-vertical" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
+                                    </TouchableOpacity>
+                                </ThemedView>
                             </TouchableOpacity>
-                        </ThemedView>
-                    </TouchableOpacity>
-                );
-            })}
-            { !plantId && (
-              <Button text="Añadir jardín" onPress={handleAdd} />
-            )}
-            <View style={{ marginBottom: 24 }} />
-        </ScrollView>)}
+                        );
+                    })}
+                    {!plantId && (
+                        <Button text="Añadir jardín" onPress={handleAdd} />
+                    )}
+                    <View style={{ marginBottom: 24 }} />
+                </ScrollView>)}
 
-        { plantId && (
-        <ScrollView style={styles.container}>
-            {gardensBySuitability.map((gardenBySuitability: GardenBySuitability) => {
-                // Suponiendo que garden.plants es un array de plantas con propiedad image
-                const plantImages = gardenBySuitability.garden.user_plants?.slice(0, 3).map(p => p.image) || [];
-                return (
-                    <TouchableOpacity
-                        key={gardenBySuitability.garden.id}
-                        onPress={() => {
-                            if (plantId) {
-                                handleCreatePlantInGarden(gardenBySuitability.garden.id);
-                            } else {
-                                router.push({
-                                    pathname: "/garden-details",
-                                    params: { id: gardenBySuitability.garden.id }
-                                })
-                            }
-                        }}
-                    >
-                        <ThemedView key={gardenBySuitability.garden.id} style={styles.gardenCard}>
-                            <View style={styles.mosaicContainer}>
-                                {plantImages.length > 0 && plantImages[0] && (
-                                    <Image
-                                        source={{ uri: plantImages[0] }}
-                                        style={styles.mainImage}
-                                    />
-                                )}
-                                {!plantImages[0] && (
-                                    <Image
-                                        source={require('@/assets/images/plant-placeholder.png')}
-                                        style={styles.mainImage}
-                                    />
-                                )}
-                                <View style={styles.sideImagesContainer}>
-                                    {plantImages[1] && (
-                                        <Image
-                                            source={{ uri: plantImages[1] }}
-                                            style={styles.sideImage}
-                                        />
-                                    )}
-                                    {!plantImages[1] && (
-                                        <Image
-                                            source={require('@/assets/images/plant-placeholder.png')}
-                                            style={styles.sideImage}
-                                        />
-                                    )}
-                                    {plantImages[2] && (
-                                        <Image
-                                            source={{ uri: plantImages[2] }}
-                                            style={styles.sideImage}
-                                        />
-                                    )}
-                                    {!plantImages[2] && (
-                                        <Image
-                                            source={require('@/assets/images/plant-placeholder.png')}
-                                            style={styles.sideImage}
-                                        />
-                                    )}
-                                </View>
-                            </View>
-                            <View style={styles.gardenInfoContainer}>
-                                <ThemedText type='title2'>{gardenBySuitability.garden.name}</ThemedText>
-                                <ThemedText type='default'>{gardenBySuitability.garden.location === 'indoor' ? 'Interior' : gardenBySuitability.garden.location === 'outdoor' ? 'Exterior' : gardenBySuitability.garden.location}</ThemedText>
-                                <ThemedText type='default'>{gardenBySuitability.garden.user_plants?.length} {gardenBySuitability.garden.user_plants?.length == 1 ? 'planta' : 'plantas'}</ThemedText>
-                                <View>
-                                {gardenBySuitability.is_optimal ? (
-                                    <ThemedText type='default' style={{ color: 'green', fontWeight: 'bold' }}>Óptimo</ThemedText>
-                                ) : (
-                                    <ThemedText type='default' style={{ color: 'red', fontWeight: 'bold' }}>No óptimo</ThemedText>
-                                )}
-                                {gardenBySuitability.reasons.map((reason: string) => {
-                                    return (
-                                        <ThemedText type='subtitle' style={{ color: 'gray' }}>{reason}</ThemedText>
-                                    )
-                                })}
-                                
-                            </View>
-                            </View>
-                        </ThemedView>
-                       
-                    </TouchableOpacity>
-                );
-            })}
-            { !plantId && (
-              <Button text="Añadir jardín" onPress={handleAdd} />
-            )}
-            <View style={{ marginBottom: 24 }} />
-        </ScrollView>)}
+            {plantId && (
+                <ScrollView style={styles.container}>
+                    {gardensBySuitability.map((gardenBySuitability: GardenBySuitability) => {
+                        // Suponiendo que garden.plants es un array de plantas con propiedad image
+                        const plantImages = gardenBySuitability.garden.user_plants?.slice(0, 3).map(p => p.image) || [];
+                        return (
+                            <TouchableOpacity
+                                key={gardenBySuitability.garden.id}
+                                onPress={() => {
+                                    if (plantId) {
+                                        handleCreatePlantInGarden(gardenBySuitability.garden.id);
+                                    } else {
+                                        router.push({
+                                            pathname: "/garden-details",
+                                            params: { id: gardenBySuitability.garden.id }
+                                        })
+                                    }
+                                }}
+                            >
+                                <ThemedView key={gardenBySuitability.garden.id} style={styles.gardenCard}>
+                                    <View style={styles.mosaicContainer}>
+                                        {plantImages.length > 0 && plantImages[0] && (
+                                            <Image
+                                                source={{ uri: plantImages[0] }}
+                                                style={styles.mainImage}
+                                            />
+                                        )}
+                                        {!plantImages[0] && (
+                                            <Image
+                                                source={require('@/assets/images/plant-placeholder.png')}
+                                                style={styles.mainImage}
+                                            />
+                                        )}
+                                        <View style={styles.sideImagesContainer}>
+                                            {plantImages[1] && (
+                                                <Image
+                                                    source={{ uri: plantImages[1] }}
+                                                    style={styles.sideImage}
+                                                />
+                                            )}
+                                            {!plantImages[1] && (
+                                                <Image
+                                                    source={require('@/assets/images/plant-placeholder.png')}
+                                                    style={styles.sideImage}
+                                                />
+                                            )}
+                                            {plantImages[2] && (
+                                                <Image
+                                                    source={{ uri: plantImages[2] }}
+                                                    style={styles.sideImage}
+                                                />
+                                            )}
+                                            {!plantImages[2] && (
+                                                <Image
+                                                    source={require('@/assets/images/plant-placeholder.png')}
+                                                    style={styles.sideImage}
+                                                />
+                                            )}
+                                        </View>
+                                    </View>
+                                    <View style={styles.gardenInfoContainer}>
+                                        <ThemedText type='title2'>{gardenBySuitability.garden.name}</ThemedText>
+                                        <ThemedText type='default'>{gardenBySuitability.garden.location === 'indoor' ? 'Interior' : gardenBySuitability.garden.location === 'outdoor' ? 'Exterior' : gardenBySuitability.garden.location}</ThemedText>
+                                        <ThemedText type='default'>{gardenBySuitability.garden.user_plants?.length} {gardenBySuitability.garden.user_plants?.length == 1 ? 'planta' : 'plantas'}</ThemedText>
+                                        <View>
+                                            {gardenBySuitability.is_optimal ? (
+                                                <ThemedText type='default' style={{ color: 'green', fontWeight: 'bold' }}>Óptimo</ThemedText>
+                                            ) : (
+                                                <ThemedText type='default' style={{ color: 'red', fontWeight: 'bold' }}>No óptimo</ThemedText>
+                                            )}
+                                            {gardenBySuitability.reasons.map((reason: string) => {
+                                                return (
+                                                    <ThemedText type='subtitle' style={{ color: 'gray' }}>{reason}</ThemedText>
+                                                )
+                                            })}
+
+                                        </View>
+                                    </View>
+                                </ThemedView>
+
+                            </TouchableOpacity>
+                        );
+                    })}
+                    {!plantId && (
+                        <Button text="Añadir jardín" onPress={handleAdd} />
+                    )}
+                    <View style={{ marginBottom: 24 }} />
+                </ScrollView>)}
+
+            {/* Modal de opciones del menú */}
+            <Modal
+                visible={modalVisible}
+                transparent
+                animationType="fade"
+                onRequestClose={closeModal}>
+                <TouchableOpacity
+                    style={styles.modalOverlay}
+                    activeOpacity={1}
+                    onPress={closeModal}>
+                    <View style={[styles.optionsMenu, {
+                        backgroundColor,
+                        position: 'absolute',
+                        top: menuPosition.top,
+                        right: menuPosition.right
+                    }]}>
+                        <Pressable style={{ marginBottom: 12 }} onPress={() => {
+                            handleSettings(selectedGarden!.id);
+                        }}>
+                            <ThemedText type="defaultSemiBold">Ajustes del lugar</ThemedText>
+                        </Pressable>
+                        <Pressable onPress={() => {
+                            setConfirmVisible(true);
+                        }}>
+                            <ThemedText type="defaultSemiBold" style={{ fontSize: 16, color: "red" }}>Eliminar</ThemedText>
+                        </Pressable>
+                    </View>
+                </TouchableOpacity>
+            </Modal>
+
+            {/* Modal de confirmación de eliminación */}
+            <Modal
+                visible={confirmVisible}
+                transparent
+                animationType="fade"
+                onRequestClose={closeConfirm}>
+                <View style={{
+                    flex: 1,
+                    backgroundColor: "rgba(0,0,0,0.3)",
+                    justifyContent: "center",
+                    alignItems: "center",
+
+                }}>
+                    <View style={{
+                        backgroundColor: backgroundColor,
+                        borderRadius: 12,
+                        padding: 24,
+                        minWidth: 220,
+                        alignItems: "center",
+                        margin: 36
+                    }}>
+                        <ThemedText type="title2">¿Seguro que quieres eliminar este lugar?</ThemedText>
+                        <ThemedText type="default">Al eliminar el lugar todos los datos se eliminarán, pero no las plantas asociadas. Esta acción no podrá deshacerse.</ThemedText>
+                        <View style={{ display: 'flex', flexDirection: 'row', gap: 12, justifyContent: 'flex-end', width: '100%' }}>
+                            <Pressable style={{ marginBottom: 12 }} onPress={() => {
+                                closeModal();
+                                closeConfirm();
+                            }}>
+                                <ThemedText type="defaultSemiBold">Cancelar</ThemedText>
+                            </Pressable>
+                            <Pressable onPress={() => {
+                                handleDelete();
+                                closeModal();
+                                closeConfirm();
+                            }}>
+                                <ThemedText type="defaultSemiBold" style={{ color: "red" }}>Eliminar</ThemedText>
+                            </Pressable>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
         </>
     );
 }
@@ -338,5 +473,19 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 6,
         top: 12,
-    }
+    },
+    modalOverlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    },
+    optionsMenu: {
+        borderRadius: 12,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 10,
+        padding: 16,
+        minWidth: 200,
+    },
 });

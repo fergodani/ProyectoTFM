@@ -133,6 +133,31 @@ const GardensService = {
     }
   },
 
+  deleteGarden: async (id: number, accessToken: string) => {
+    try {
+      const response = await fetch(`${API_URL}${id}/`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+        }
+      });
+      // Si el backend devuelve 204, no hay contenido
+      if (response.status === 204 || response.status === 200) {
+        return true;
+      }
+      if (response.status === 401) {
+        throw new Error("Unauthorized");
+      }
+      if (!response.ok) {
+        throw new Error("Error deleting garden");
+      }
+      console.log("plant deleted")
+      return response.ok;
+    } catch (error) {
+      throw error;
+    }
+  },
+
 
   /*
 // Obtener todos los jardines

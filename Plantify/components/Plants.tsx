@@ -142,6 +142,11 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
 
   return (
     <>
+      { userPlants.length === 0 && (
+        <View style={styles.container}>
+          <ThemedText type="default">No hay plantas aquí aún. ¡Añade una nueva planta!</ThemedText>
+        </View>
+      )}
       <ScrollView style={styles.container}>
         {userPlants.map((userPlant) => (
           <TouchableOpacity
