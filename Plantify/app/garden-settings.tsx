@@ -66,6 +66,7 @@ export default function GardenSettings() {
     const [isModalVisible, setIsModalVisible] = useState(false);
     type ModalType = "name" | "location" | "sun" | "humidity" | "air" | null;
     const [modalType, setModalType] = useState<ModalType>(null);
+    const [isLoading, setIsLoading] = useState(false);
     const [name, setName] = useState(garden.name);
     const { getUserId, accessToken, refreshToken, setTokens } = useAuth();
 
@@ -78,6 +79,7 @@ export default function GardenSettings() {
     }, []);
 
     const handlePut = async () => {
+        setIsLoading(true);
         try {
             gardenTemp.name = name;
             console.log(gardenTemp);
@@ -100,6 +102,8 @@ export default function GardenSettings() {
                     console.error("Error refreshing tokens:", refreshError);
                 }
             }
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -222,8 +226,19 @@ export default function GardenSettings() {
                             <TouchableOpacity onPress={() => setIsModalVisible(false)}>
                                 <ThemedText type="default" style={{ color: "#000" }}>Cerrar</ThemedText>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => handlePut()}>
-                                <ThemedText type="default" style={{ color: "#000" }}>Aceptar</ThemedText>
+                            <TouchableOpacity 
+                            onPress={() => handlePut()}
+                            style={{ padding: 10, minWidth: 60, alignItems: 'center', backgroundColor: isLoading ? '#ccc' : '#4CAF50', borderRadius: 5, flexDirection: 'row', gap: 8 }}
+                                disabled={isLoading}
+                                >
+                                {isLoading ? (
+                                    <>
+                                        <ActivityIndicator size="small" color="#fff" />
+                                        <ThemedText type="default" style={{ color: "#fff", fontWeight: 'bold' }}>Guardando...</ThemedText>
+                                    </>
+                                ) : (
+                                    <ThemedText type="default" style={{ color: "#fff", fontWeight: 'bold' }}>Aceptar</ThemedText>
+                                )}
                             </TouchableOpacity>
                         </View>
 
@@ -242,8 +257,8 @@ export default function GardenSettings() {
                             <WheelPicker
                                 data={locationOptions}
                                 width={200}
-                                value={garden.location || ""}
-                                onValueChanged={({ item: { value } }) => { gardenTemp.location = value }}
+                                value={gardenTemp.location || ""}
+                                onValueChanged={({ item: { value } }) => setGardenTemp({ ...gardenTemp, location: value })}
                                 enableScrollByTapOnItem={true}
                             />
                         )}
@@ -252,8 +267,8 @@ export default function GardenSettings() {
                                 <WheelPicker
                                     data={sunlightExposureOptions}
                                     width={200}
-                                    value={garden.sunlight_exposure || ""}
-                                    onValueChanged={({ item: { value } }) => { gardenTemp.sunlight_exposure = value }}
+                                    value={gardenTemp.sunlight_exposure || ""}
+                                    onValueChanged={({ item: { value } }) => setGardenTemp({ ...gardenTemp, sunlight_exposure: value })}
                                     enableScrollByTapOnItem={true}
                                 />
                             </View>
@@ -263,8 +278,8 @@ export default function GardenSettings() {
                                 <WheelPicker
                                     data={humidityOptions}
                                     width={200}
-                                    value={garden.humidity || ""}
-                                    onValueChanged={({ item: { value } }) => { gardenTemp.humidity = value }}
+                                    value={gardenTemp.humidity || ""}
+                                    onValueChanged={({ item: { value } }) => setGardenTemp({ ...gardenTemp, humidity: value })}
                                     enableScrollByTapOnItem={true}
                                 />
                             </View>
@@ -278,8 +293,8 @@ export default function GardenSettings() {
                                         { value: false, label: "No" }
                                     ]}
                                     width={100}
-                                    value={garden.air ?? false}
-                                    onValueChanged={({ item: { value } }) => { gardenTemp.air = value; }}
+                                    value={gardenTemp.air ?? false}
+                                    onValueChanged={({ item: { value } }) => setGardenTemp({ ...gardenTemp, air: value })}
                                     enableScrollByTapOnItem={true}
                                 />
                             </View>
