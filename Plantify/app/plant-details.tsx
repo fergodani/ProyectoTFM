@@ -71,7 +71,7 @@ export default function PlantDetails() {
     setShowMenu(false);
     router.push({
       pathname: '/post-form',
-      params: { plant_id: id, plantName: userPlant.common_name }
+      params: { plant_id: userPlant.plant_id, plantName: userPlant.common_name }
     });
   };
 

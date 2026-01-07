@@ -1,3 +1,5 @@
+import { User } from "@/models/User";
+
 const url = process.env.EXPO_PUBLIC_API_BASE_URL;
 
 export const UserService = {
@@ -60,6 +62,72 @@ export const UserService = {
         console.error('Error al registrarse:', e);
         throw new Error('Error al registrarse: ' + e);
     }
-  }
+  },
 
+  getCurrentUser: async (accessToken: string): Promise<User | null> => {
+    try {
+      const response = await fetch(`${url}/api/user/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+      });
+      if (response.status === 401) {
+        throw new Error('Unauthorized');
+      }
+      if (!response.ok) {
+        throw new Error('Error fetching current user');
+      }
+      const data = await response.json();
+      return data;
+    } catch (e) {
+      throw e;
+    }
+  },
+
+  updateUser: async (userData: User, accessToken: string): Promise<User> => {
+    try {
+      const response = await fetch(`${url}/api/user/`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(userData),
+      });
+      if (response.status === 401) {
+        throw new Error('Unauthorized');
+      }
+      if (!response.ok) {
+        throw new Error('Error updating user');
+      }
+      const data = await response.json();
+      return data;
+    } catch (e) {
+      throw e;
+    }
+  },
+
+  changePassword: async (currentPassword: string, newPassword: string, confirmPassword: string, accessToken: string): Promise<void> => {
+    try {
+      const response = await fetch(`${url}/api/user/password/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ current_password: currentPassword, new_password: newPassword, confirm_password: confirmPassword }),
+      });
+      if (response.status === 401) {
+        throw new Error('Unauthorized');
+      }
+     
+      const data = await response.json();
+       console.log(data)
+      return data.message;
+    } catch (e) {
+      throw e;
+    }
+  },
 };

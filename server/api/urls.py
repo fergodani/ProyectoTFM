@@ -1,7 +1,7 @@
 from django.urls import include, path
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from .views import PostVoteView, CommentVoteView, UserPostView, PlantInfoPostView, PostDetailView, CommentView, CommentDetailView, GardenSuitabilityView, WeatherRecommendationView, PredictImageView, GeminiPlantIdentificationView, GardenListNameView, GardenListCreateView, GardenDetailView, PlantInfoDetailView, PlantInfoListView, TrefflePlantDetail, TrefflePlantList, UserPlantDetailView, UserPlantListCreateView, CustomTokenObtainPairView, UserRegisterView, UserTasksView, PerenualPlantListView, PerenualPlantDetailView 
+from .views import PostVoteView, CommentVoteView, UserPostView, PlantInfoPostView, PostDetailView, CommentView, CommentDetailView, GardenSuitabilityView, WeatherRecommendationView, PredictImageView, GeminiPlantIdentificationView, GardenListNameView, GardenListCreateView, GardenDetailView, PlantInfoDetailView, PlantInfoListView, TrefflePlantDetail, TrefflePlantList, UserPlantDetailView, UserPlantListCreateView, CustomTokenObtainPairView, UserRegisterView, UserTasksView, PerenualPlantListView, PerenualPlantDetailView, CurrentUserView, ChangePasswordView 
 
 urlpatterns = [
     path('gardens/', GardenListCreateView.as_view(), name='garden-list-create'),
@@ -17,6 +17,8 @@ urlpatterns = [
     path('login/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('register/', UserRegisterView.as_view(), name='user-register'),
+    path('user/', CurrentUserView.as_view(), name='current-user'),
+    path('user/password/', ChangePasswordView.as_view(), name='change-password'),
     path('user-tasks/', UserTasksView.as_view(), name='user-tasks'),
     path('predict/', PredictImageView.as_view(), name='predict-image'),
     path('weather/', WeatherRecommendationView.as_view(), name='weather-recommendation'),

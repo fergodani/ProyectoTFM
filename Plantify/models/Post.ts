@@ -13,6 +13,8 @@ export interface Post {
     created_at?: string;
     updated_at?: string;
     image?: string;
+    plant_common_name?: string;
+    created_since?: string;
 }
 
 export interface Comment {
@@ -20,7 +22,7 @@ export interface Comment {
     content: string;
     author: number;
     author_id?: number;
-    post: number;
+    post: Post;
     likes_count?: number;
     dislikes_count?: number;
     is_deleted?: boolean;
@@ -28,6 +30,7 @@ export interface Comment {
     user_vote?: VoteType | null; // Voto del usuario actual
     created_at?: string;
     updated_at?: string;
+    created_since?: string;
 }
 
 // Tipos de voto disponibles

@@ -2,6 +2,7 @@ from datetime import date, timedelta
 import json
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import Garden, UserPlant, PlantInfo, Post, Comment, Vote
 from django.utils import timezone
@@ -20,13 +21,21 @@ class VoteSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Cannot vote on both post and comment")
         return data
 
+class PostBriefSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ['id', 'title', 'plant_common_name']
+
 class CommentSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
     author_id = serializers.IntegerField(source='author.id', read_only=True)
+    post = PostBriefSerializer(read_only=True)
     vote_score = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()
+    
     user_vote = serializers.SerializerMethodField()
+    created_since = serializers.SerializerMethodField()
     
     class Meta:
         model = Comment
@@ -54,6 +63,30 @@ class CommentSerializer(serializers.ModelSerializer):
         if request and request.user.is_authenticated:
             return obj.get_user_vote(request.user)
         return None
+    def get_created_since(self, obj):
+        """Devuelve tiempo transcurrido desde la creación en formato compacto.
+        m=minutos, h=horas, d=días, M=meses, a=años
+        """
+        created = getattr(obj, 'created_at', None)
+        if not created:
+            return None
+        now = timezone.now()
+        # Asegurar que no haya negativo por desajuste de reloj
+        delta_seconds = max(0, int((now - created).total_seconds()))
+        minutes = delta_seconds // 60
+        if minutes < 60:
+            return f"{minutes}m"
+        hours = minutes // 60
+        if hours < 24:
+            return f"{hours}h"
+        days = hours // 24
+        if days < 30:
+            return f"{days}d"
+        months = days // 30
+        if months < 12:
+            return f"{months}M"
+        years = months // 12
+        return f"{years}a"
         
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
@@ -63,6 +96,7 @@ class PostSerializer(serializers.ModelSerializer):
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()
     user_vote = serializers.SerializerMethodField()
+    created_since = serializers.SerializerMethodField()
     
     class Meta:
         model = Post
@@ -82,6 +116,31 @@ class PostSerializer(serializers.ModelSerializer):
         if request and request.user.is_authenticated:
             return obj.get_user_vote(request.user)
         return None
+
+    def get_created_since(self, obj):
+        """Devuelve tiempo transcurrido desde la creación en formato compacto.
+        m=minutos, h=horas, d=días, M=meses, a=años
+        """
+        created = getattr(obj, 'created_at', None)
+        if not created:
+            return None
+        now = timezone.now()
+        # Asegurar que no haya negativo por desajuste de reloj
+        delta_seconds = max(0, int((now - created).total_seconds()))
+        minutes = delta_seconds // 60
+        if minutes < 60:
+            return f"{minutes}m"
+        hours = minutes // 60
+        if hours < 24:
+            return f"{hours}h"
+        days = hours // 24
+        if days < 30:
+            return f"{days}d"
+        months = days // 30
+        if months < 12:
+            return f"{months}M"
+        years = months // 12
+        return f"{years}a"
         
 class PlantInfoSerializer(serializers.ModelSerializer):
     posts = PostSerializer(many=True, read_only=True)
@@ -222,3 +281,35 @@ class UserRegisterSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
         return user
+
+# Basic user profile serializer for reading/updating own data
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email']
+
+class UserUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+
+    def update(self, instance, validated_data):
+        instance.username = validated_data.get('username', instance.username)
+        instance.email = validated_data.get('email', instance.email)
+        instance.save()
+        return instance
+
+class ChangePasswordSerializer(serializers.Serializer):
+    current_password = serializers.CharField(write_only=True)
+    new_password = serializers.CharField(write_only=True)
+    confirm_password = serializers.CharField(write_only=True)
+
+    def validate(self, attrs):
+        new_password = attrs.get('new_password')
+        confirm_password = attrs.get('confirm_password')
+        if new_password != confirm_password:
+            raise serializers.ValidationError({'confirm_password': 'Las contraseñas no coinciden'})
+        # Use Django's password validators
+        user = self.context.get('user')
+        validate_password(new_password, user)
+        return attrs

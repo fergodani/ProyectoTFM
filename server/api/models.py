@@ -166,6 +166,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     #plant_info = models.ForeignKey('PlantInfo', on_delete=models.CASCADE, related_name='posts')
     plant_id = models.PositiveIntegerField(default=0)
+    plant_common_name = models.CharField(max_length=255, blank=True, null=True)
     image = models.ImageField(upload_to='posts/', blank=True, null=True)
     like_count = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)

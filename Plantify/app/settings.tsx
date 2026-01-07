@@ -16,6 +16,8 @@ import { useAuth } from "@/hooks/useAuthContext";
 import GardensService from "@/services/gardensService";
 import { PlantService } from "@/services/plantsService";
 import { UserService } from "@/services/userService";
+import { useNavigation, useRouter } from 'expo-router';
+import { User } from "@/models/User";
 
 const data = [...Array(100).keys()].map((index) => ({
     value: index,
@@ -59,13 +61,19 @@ const humidityLabels = {
 };
 
 export default function Settings() {
+    const router = useRouter();
     const params = useLocalSearchParams();
     const [isModalVisible, setIsModalVisible] = useState(false);
-    type ModalType = "name" | "location" | "sun" | "humidity" | "air" | null;
+    type ModalType = "username" | "email" | "password" | "location" | "sun" | "humidity" | "air" | null;
     const [modalType, setModalType] = useState<ModalType>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isNotifications, setIsNotifications] = useState(false);
-    const { getUserId, accessToken, refreshToken, setTokens } = useAuth();
+    const { getUserId, accessToken, refreshToken, logout, setTokens } = useAuth();
+    const [user, setUser] = useState<User>({} as User);
+    const [userTemp, setUserTemp] = useState<User>({} as User);
+    const [actualPassword, setActualPassword] = useState<string>('');
+    const [newPassword, setNewPassword] = useState<string>('');
+    const [confirmNewPassword, setConfirmNewPassword] = useState<string>('');
 
     const openModal = (type: ModalType | ((prevState: ModalType) => ModalType) | null) => {
         setModalType(type);
@@ -73,12 +81,49 @@ export default function Settings() {
     };
 
     useEffect(() => {
-    }, []);
+        const fetchUser = async () => {
+            if (!accessToken) return;
+            try {
+                const data = await UserService.getCurrentUser(accessToken);
+                if (data) {
+                    setUser(data);
+                    setUserTemp(data);
+                }
+            } catch (error: any) {
+                if (error?.message === 'Unauthorized' && refreshToken) {
+                    try {
+                        const newTokens = await UserService.refreshToken(refreshToken);
+                        setTokens(newTokens.access, newTokens.refresh);
+                        const data = await UserService.getCurrentUser(newTokens.access);
+                        if (data) {
+                            setUser(data);
+                            setUserTemp(data);
+                        }
+                    } catch (refreshError) {
+                        console.error('Error refreshing tokens:', refreshError);
+                    }
+                } else {
+                    console.error('Error fetching user:', error);
+                }
+            }
+        };
+        fetchUser();
+    }, [accessToken, refreshToken]);
 
     const handlePut = async () => {
+        if (actualPassword || newPassword || confirmNewPassword) {
+            handleChangePassword();
+            return;
+        }
         setIsLoading(true);
         try {
-          
+            const userToUpdate = {
+                ...userTemp
+            }
+            const updatedUser = await UserService.updateUser(userToUpdate, accessToken!);
+            if (updatedUser) {
+                setUser(updatedUser);
+            }
             setIsModalVisible(false);
         } catch (error: any) {
             if (error.message === 'Unauthorized') {
@@ -86,6 +131,14 @@ export default function Settings() {
                 try {
                     const newTokens = await UserService.refreshToken(refreshToken!);
                     setTokens(newTokens.access, newTokens.refresh);
+
+                    const userToUpdate = {
+                        ...userTemp
+                    }
+                    const updatedUser = await UserService.updateUser(userToUpdate, accessToken!);
+                    if (updatedUser) {
+                        setUser(updatedUser);
+                    }
 
                     setIsModalVisible(false);
                 } catch (refreshError) {
@@ -97,52 +150,90 @@ export default function Settings() {
         }
     }
 
+    const handleChangePassword = async () => {
+        setIsLoading(true);
+        try {
+            const message = await UserService.changePassword(actualPassword, newPassword, confirmNewPassword, accessToken!);
+            alert(message);
+            setIsModalVisible(false);
+        } catch (error: any) {
+            if (error.message === 'Unauthorized') {
+                // Handle token refresh logic here
+                try {
+                    const newTokens = await UserService.refreshToken(refreshToken!);
+                    setTokens(newTokens.access, newTokens.refresh);
+
+                    const message = await UserService.changePassword(actualPassword, newPassword, confirmNewPassword, accessToken!);
+                    alert(message);
+
+                    setIsModalVisible(false);
+                } catch (refreshError) {
+                    console.error("Error refreshing tokens:", refreshError);
+                }
+            }
+        } finally {
+            setIsLoading(false);
+        }
+    }
+
+    const handleLogout = () => {
+        logout();
+        router.back();
+    };
+
+    const handleClose = () => {
+        setIsModalVisible(false);
+        setActualPassword('');
+        setConfirmNewPassword('');
+        setNewPassword('');
+    }
+
 
     return (
         <>
             <ScrollView>
                 <View style={styles.body}>
                     <ThemedView style={styles.card}>
-                        <ThemedText type='title2' style={{marginBottom: 8}}>Cuenta</ThemedText>
+                        <ThemedText type='title2' style={{ marginBottom: 8 }}>Cuenta</ThemedText>
                         {/* Nombre */}
                         <TouchableOpacity
                             style={styles.subcardTouchable}
                             onPress={() => {
-                                openModal('name')
+                                openModal('username')
                             }}
                         >
                             <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
                                 <Ionicons name="create" size={24} color={"#bfd8c5ff"} />
                                 <ThemedText type='default'>Nombre de usuario</ThemedText>
                             </View>
-                            <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                    <ThemedText type='italic'>Cambiar</ThemedText>
+                            <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 6, alignContent: 'center' }}>
+                                <ThemedText type='italic'>{user.username || '—'}</ThemedText>
                                 <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
                             </View>
                         </TouchableOpacity>
-                         <DashedLine />
+                        <DashedLine />
                         {/* Email */}
                         <TouchableOpacity
                             style={styles.subcardTouchable}
                             onPress={() => {
-                                openModal('name')
+                                openModal('email')
                             }}
                         >
                             <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
                                 <Ionicons name="mail" size={24} color={"#bfd8c5ff"} />
                                 <ThemedText type='default'>Email</ThemedText>
                             </View>
-                            <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                    <ThemedText type='italic'>Cambiar</ThemedText>
+                            <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 6, alignContent: 'center' }}>
+                                <ThemedText type='italic'>{user.email || '—'}</ThemedText>
                                 <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
                             </View>
                         </TouchableOpacity>
-                         <DashedLine />
+                        <DashedLine />
                         {/* Contraseña */}
                         <TouchableOpacity
                             style={styles.subcardTouchable}
                             onPress={() => {
-                                openModal('name')
+                                openModal('password')
                             }}
                         >
                             <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
@@ -150,25 +241,25 @@ export default function Settings() {
                                 <ThemedText type='default'>Contraseña</ThemedText>
                             </View>
                             <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                    <ThemedText type='italic'>Cambiar</ThemedText>
+                                <ThemedText type='italic'>Cambiar</ThemedText>
                                 <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
                             </View>
                         </TouchableOpacity>
                     </ThemedView>
 
                     <ThemedView style={styles.card}>
-                        <ThemedText type="title2" style={{marginBottom: 8}}>Posts</ThemedText>
+                        <ThemedText type="title2" style={{ marginBottom: 8 }}>Posts</ThemedText>
                         {/* Posts */}
                         <TouchableOpacity
                             style={styles.subcardTouchable}
-                            onPress={() => { openModal('location'); }}
+                            onPress={() => { router.push('/posts-list'); }}
                         >
                             <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
                                 <Ionicons name="document" size={24} color={"#bfd8c5ff"} />
                                 <ThemedText type='default'>Posts</ThemedText>
                             </View>
                             <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                    <ThemedText type='italic'>Ver todos</ThemedText>
+                                <ThemedText type='italic'>Ver todos</ThemedText>
                                 <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
                             </View>
                         </TouchableOpacity>
@@ -178,40 +269,40 @@ export default function Settings() {
                         {/* Comentarios */}
                         <TouchableOpacity
                             style={styles.subcardTouchable}
-                            onPress={() => { openModal('location'); }}
+                            onPress={() => { router.push('/comments-list'); }}
                         >
                             <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
                                 <Ionicons name="bookmark" size={24} color={"#bfd8c5ff"} />
                                 <ThemedText type='default'>Comentarios</ThemedText>
                             </View>
                             <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                    <ThemedText type='italic'>Ver todos</ThemedText>
+                                <ThemedText type='italic'>Ver todos</ThemedText>
                                 <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
                             </View>
                         </TouchableOpacity>
                     </ThemedView>
                     <ThemedView style={styles.card}>
-                        <ThemedText type="title2" style={{marginBottom: 8}}>Notificaciones</ThemedText>
+                        <ThemedText type="title2" style={{ marginBottom: 8 }}>Notificaciones</ThemedText>
                         {/* Notificaciones */}
-                            <View style={styles.subcardTouchable}>
-                                <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
-                                    <Ionicons name="notifications" size={24} color={"#bfd8c5ff"} />
-                                    <ThemedText type="default">Notificaciones automáticas</ThemedText>
-                                </View>
-                                <View>
-                                    <Switch
-                                        value={isNotifications}
-                                        onValueChange={
-                                            (value) => {
-                                                console.log(value)
-                                                isNotifications ? setIsNotifications(false) : setIsNotifications(true)
-                                            }
-                                        }
-                                        trackColor={{ false: "#ccc", true: Colors.light.tint }}
-                                        thumbColor={isNotifications ? Colors.light.tint : "#f4f3f4"}
-                                    />
-                                </View>
+                        <View style={styles.subcardTouchable}>
+                            <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
+                                <Ionicons name="notifications" size={24} color={"#bfd8c5ff"} />
+                                <ThemedText type="default">Notificaciones automáticas</ThemedText>
                             </View>
+                            <View>
+                                <Switch
+                                    value={isNotifications}
+                                    onValueChange={
+                                        (value) => {
+                                            console.log(value)
+                                            isNotifications ? setIsNotifications(false) : setIsNotifications(true)
+                                        }
+                                    }
+                                    trackColor={{ false: "#ccc", true: Colors.light.tint }}
+                                    thumbColor={isNotifications ? Colors.light.tint : "#f4f3f4"}
+                                />
+                            </View>
+                        </View>
 
                         <DashedLine />
 
@@ -225,13 +316,13 @@ export default function Settings() {
                                 <ThemedText type='default'>Hora</ThemedText>
                             </View>
                             <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                    <ThemedText type='italic'>9:00</ThemedText>
+                                <ThemedText type='italic'>9:00</ThemedText>
                                 <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
                             </View>
                         </TouchableOpacity>
                     </ThemedView>
 
-                    <Button text="Cerrar sesión" onPress={() => { }} />
+                    <Button text="Cerrar sesión" onPress={() => { handleLogout(); }} />
                 </View>
 
             </ScrollView>
@@ -242,14 +333,14 @@ export default function Settings() {
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
-                            <TouchableOpacity onPress={() => setIsModalVisible(false)}>
+                            <TouchableOpacity onPress={() => handleClose()}>
                                 <ThemedText type="default" style={{ color: "#000" }}>Cerrar</ThemedText>
                             </TouchableOpacity>
-                            <TouchableOpacity 
-                            onPress={() => handlePut()}
-                            style={{ padding: 10, minWidth: 60, alignItems: 'center', backgroundColor: isLoading ? '#ccc' : '#4CAF50', borderRadius: 5, flexDirection: 'row', gap: 8 }}
+                            <TouchableOpacity
+                                onPress={() => handlePut()}
+                                style={{ padding: 10, minWidth: 60, alignItems: 'center', backgroundColor: isLoading ? '#ccc' : '#4CAF50', borderRadius: 5, flexDirection: 'row', gap: 8 }}
                                 disabled={isLoading}
-                                >
+                            >
                                 {isLoading ? (
                                     <>
                                         <ActivityIndicator size="small" color="#fff" />
@@ -261,23 +352,62 @@ export default function Settings() {
                             </TouchableOpacity>
                         </View>
 
-                        {modalType === 'name' && (
-                                <View style={styles.searchContainer}>
-                                    <TextInput
-                                        placeholder="Nombre del sitio"
-                                        autoCapitalize="none"
-                                        style={styles.searchInput}
-                                        value={""}
-                                        onChangeText={(text) => {  }}
-                                    />
-                                </View>
+                        {modalType === 'username' && (
+                            <View style={styles.searchContainer}>
+                                <TextInput
+                                    placeholder="Nombre de usuario"
+                                    autoCapitalize="none"
+                                    style={styles.searchInput}
+                                    value={userTemp.username}
+                                    onChangeText={(text) => { setUserTemp({ ...userTemp, username: text }); }}
+                                />
+                            </View>
+                        )}
+                        {modalType === 'email' && (
+                            <View style={styles.searchContainer}>
+                                <TextInput
+                                    placeholder="Correo electrónico"
+                                    autoCapitalize="none"
+                                    style={styles.searchInput}
+                                    value={userTemp.email}
+                                    onChangeText={(text) => { setUserTemp({ ...userTemp, email: text }); }}
+                                />
+                            </View>
+                        )}
+                        {modalType === 'password' && (
+                            <View style={styles.passwordContainer}>
+                                <TextInput
+                                    placeholder="Contraseña actual"
+                                    autoCapitalize="none"
+                                    secureTextEntry
+                                    style={styles.passwordInput}
+                                    value={actualPassword}
+                                    onChangeText={(text) => { setActualPassword(text); }}
+                                />
+                                <TextInput
+                                    placeholder="Contraseña nueva"
+                                    autoCapitalize="none"
+                                    secureTextEntry
+                                    style={styles.passwordInput}
+                                    value={newPassword}
+                                    onChangeText={(text) => { setNewPassword(text); }}
+                                />
+                                <TextInput
+                                    placeholder="Contraseña nueva (confirmación)"
+                                    autoCapitalize="none"
+                                    secureTextEntry
+                                    style={styles.passwordInput}
+                                    value={confirmNewPassword}
+                                    onChangeText={(text) => { setConfirmNewPassword(text); }}
+                                />
+                            </View>
                         )}
                         {modalType === 'location' && (
                             <WheelPicker
                                 data={locationOptions}
                                 width={200}
-                                value={ ""}
-                                onValueChanged={({ item: { value } }) => {}}
+                                value={""}
+                                onValueChanged={({ item: { value } }) => { }}
                                 enableScrollByTapOnItem={true}
                             />
                         )}
@@ -287,7 +417,7 @@ export default function Settings() {
                                     data={sunlightExposureOptions}
                                     width={200}
                                     value={""}
-                                    onValueChanged={({ item: { value } }) => {}}
+                                    onValueChanged={({ item: { value } }) => { }}
                                     enableScrollByTapOnItem={true}
                                 />
                             </View>
@@ -298,7 +428,7 @@ export default function Settings() {
                                     data={humidityOptions}
                                     width={200}
                                     value={""}
-                                    onValueChanged={({ item: { value } }) => {}}
+                                    onValueChanged={({ item: { value } }) => { }}
                                     enableScrollByTapOnItem={true}
                                 />
                             </View>
@@ -313,7 +443,7 @@ export default function Settings() {
                                     ]}
                                     width={100}
                                     value={false}
-                                    onValueChanged={({ item: { value } }) => {}}
+                                    onValueChanged={({ item: { value } }) => { }}
                                     enableScrollByTapOnItem={true}
                                 />
                             </View>
@@ -443,10 +573,27 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.light.tint,
         width: '100%',
     },
+    passwordContainer: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '100%',
+        gap: 10,
+        marginTop: 16,
+    },
     searchInput: {
         flex: 1,
         fontSize: 14,
         color: '#333',
-        
+
     },
+    passwordInput: {
+        flex: 1,
+        fontSize: 14,
+        color: '#333',
+        backgroundColor: Colors.light.tint,
+        borderRadius: 25,
+        paddingHorizontal: 16,
+        paddingVertical: 16,
+        width: '100%',
+    }
 });

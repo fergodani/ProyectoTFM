@@ -52,7 +52,12 @@ export default function TabTwoScreen() {
 
   const handleLogin = () => {
     setMenuVisible(false);
-    router.push('/login');
+    router.push(
+      {
+        pathname: '/login',
+        params: { from: '/(tabs)/profile' }
+      }
+    );
   };
   const handleSignup = () => {
     setMenuVisible(false);

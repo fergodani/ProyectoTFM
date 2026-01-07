@@ -76,6 +76,7 @@ const PostForm = () => {
           content: content,
           plant_id: Number(plant_id),
           author: getUserId()!,
+          plant_common_name: plantName ? String(plantName) : undefined,
         };
 
         const response = await PostService.createPost(post, accessToken!, imageUri || undefined);

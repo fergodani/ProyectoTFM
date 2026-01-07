@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 import requests
 from django.http import JsonResponse
 from .models import Garden, UserPlant, PlantInfo, Post, Comment, Vote
-from .serializers import PostSerializer, CommentSerializer, GardenSimpleSerializer, UserRegisterSerializer, GardenSerializer, UserPlantSerializer, PlantInfoSerializer, CustomTokenObtainPairSerializer, VoteSerializer
+from .serializers import PostSerializer, CommentSerializer, GardenSimpleSerializer, UserRegisterSerializer, GardenSerializer, UserPlantSerializer, PlantInfoSerializer, CustomTokenObtainPairSerializer, VoteSerializer, UserSerializer, UserUpdateSerializer, ChangePasswordSerializer
 from bs4 import BeautifulSoup
 from django.utils import timezone
 from django.db.models import Q
@@ -751,6 +751,56 @@ class UserRegisterView(APIView):
                 "access": str(refresh.access_token)
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class CurrentUserView(APIView):
+    permission_classes = [IsAuthenticated]
+    """Devuelve los datos del usuario autenticado"""
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
+    
+    def put(self, request):
+        """Actualizar username y email del usuario autenticado"""
+        serializer = UserUpdateSerializer(request.user, data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            return Response(UserSerializer(user).data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class ChangePasswordView(APIView):
+    permission_classes = [IsAuthenticated]
+    """Cambiar la contraseña del usuario autenticado"""
+    def post(self, request):
+        serializer = ChangePasswordSerializer(data=request.data, context={'user': request.user})
+        if not serializer.is_valid():
+            # Construir un único mensaje legible a partir de los errores del serializer
+            def _extract_messages(err):
+                msgs = []
+                if isinstance(err, dict):
+                    for v in err.values():
+                        msgs.extend(_extract_messages(v))
+                elif isinstance(err, list):
+                    for item in err:
+                        msgs.extend(_extract_messages(item))
+                else:
+                    msgs.append(str(err))
+                return msgs
+
+            messages = _extract_messages(serializer.errors)
+            return Response({'message': 'La contraseña no es válida. Debe contener al menos 8 caracteres y no ser común.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        current_password = serializer.validated_data.get('current_password')
+        new_password = serializer.validated_data.get('new_password')
+
+        # Validar contraseña actual
+        if not request.user.check_password(current_password):
+            return Response({'message': ['La contraseña actual no es correcta']}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Establecer nueva contraseña
+        request.user.set_password(new_password)
+        request.user.save()
+
+        return Response({'message': 'Contraseña cambiada correctamente'})
     
 class UserTasksView(APIView):
     permission_classes = [IsAuthenticated]
@@ -973,12 +1023,14 @@ class WeatherRecommendationView(APIView):
         })
         
 class UserPostView(APIView):
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
     permission_classes = [IsAuthenticated]
     """CRUD para posts de usuarios"""
-    parser_classes = [MultiPartParser, FormParser]
+    # Permitir tanto JSON como multipart/form-data
     def get(self, request):
         posts = request.user.posts.all()
         serializer = PostSerializer(posts, many=True, context={'request': request})
+        
         return Response(serializer.data)
 
     def post(self, request):
@@ -1049,7 +1101,7 @@ class CommentView(APIView):
     permission_classes = [IsAuthenticated]
     """CRUD para comentarios de usuarios"""
     def get(self, request):
-        comments = request.user.comments.all()
+        comments = request.user.comments.filter(is_deleted=False)
         serializer = CommentSerializer(comments, many=True, context={'request': request})
         return Response(serializer.data)
 

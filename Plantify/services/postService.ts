@@ -27,6 +27,44 @@ export const PostService = {
         }
     },
 
+    getUserPosts: async (accessToken: string): Promise<Post[] | null> => {
+        try {
+            const response = await fetch(`${url}/user-posts/`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+            if (!response.ok) {
+                throw new Error("Failed to fetch post");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("Error fetching post:", error);
+            return null;
+        }
+    },
+
+    getUserComments: async (accessToken: string): Promise<Comment[] | null> => {
+        try {
+            const response = await fetch(`${url}/comments/`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+            if (!response.ok) {
+                throw new Error("Failed to fetch comments");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("Error fetching comments:", error);
+            return null;
+        }
+    },
+
     createPost: async (post: Post, accessToken: string, imageUri?: string): Promise<Post | null> => {
         try {
             if (imageUri) {
@@ -138,6 +176,25 @@ export const PostService = {
         } catch (error) {
             console.error('Error updating comment:', error);
             return null;
+        }
+    },
+
+    deletePost: async (postId: number, accessToken: string): Promise<boolean> => {
+        try {
+            const response = await fetch(`${url}/posts/${postId}/`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+            });
+            if (!response.ok) {
+                const text = await response.text().catch(() => '');
+                throw new Error(`Failed to delete post: ${response.status} ${text}`);
+            }
+            return true;
+        } catch (error) {
+            console.error('Error deleting post:', error);
+            return false;
         }
     },
 
