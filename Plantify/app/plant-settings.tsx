@@ -1,7 +1,7 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Text, View, Image, StyleSheet, ScrollView, ActivityIndicator, useColorScheme, TouchableOpacity, Alert, Pressable, SafeAreaView, TouchableWithoutFeedback, Modal, TextInput } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { Garden, UserPlant } from "@/models/Plant";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
 import { useEffect } from "react";
@@ -103,8 +103,7 @@ export default function PlantSettings() {
     const [isModalVisible, setIsModalVisible] = useState(false);
     type ModalType = "watering_manual" | "watering_type" | "custom_name" | "height" | "age" | "pruning" | "spraying" | "rotation" | "site" | "pot_type" | "pot_size" | "pot_drainage" | "fertilizing" | null;
     const [modalType, setModalType] = useState<ModalType>(null);
-    const [value, setValue] = useState(0);
-    const [stringValue, setStringValue] = useState("");
+    const [confirmVisible, setConfirmVisible] = useState(false);
     const [gardens, setGardens] = useState<Garden[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const { getUserId, accessToken, refreshToken, setTokens } = useAuth();
@@ -237,6 +236,21 @@ export default function PlantSettings() {
             setIsLoading(false);
         }
     }
+
+    const closeConfirm = () => {
+        setConfirmVisible(false);
+    };
+
+    const handleDelete = async () => {
+        try {
+            const response = await PlantService.deletePlant(userPlant.id, accessToken!);
+            if (response) {
+                router.back();
+            }
+        } catch (error) {
+            console.error("Error deleting plant:", error);
+        }
+    };
 
 
     return (
@@ -377,12 +391,12 @@ export default function PlantSettings() {
                                     <TouchableOpacity
                                         onPress={() => { openModal('watering_manual') }}
                                     >
-                                        <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center'}}>
-                                            {userPlant.watering_time ? 
-                                            (<ThemedText type='default' style={{ color: '#333' }}>Cada {userPlant.watering_time == 1 ? "" : userPlant.watering_time} {  timeUnitLabelsLower[userPlant.watering_unit as keyof typeof timeUnitLabelsLower]}{userPlant.watering_time > 1 && userPlant.watering_unit === "month" ? "es" : ""}{userPlant.watering_time > 1 && userPlant.watering_unit != "month" ? "s" : ""}</ThemedText>) 
-                                            : (
-                                                <ThemedText type='italic' style={{ color: '#333' }}>Seleccionar</ThemedText>
-                                            )}
+                                        <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
+                                            {userPlant.watering_time ?
+                                                (<ThemedText type='default' style={{ color: '#333' }}>Cada {userPlant.watering_time == 1 ? "" : userPlant.watering_time} {timeUnitLabelsLower[userPlant.watering_unit as keyof typeof timeUnitLabelsLower]}{userPlant.watering_time > 1 && userPlant.watering_unit === "month" ? "es" : ""}{userPlant.watering_time > 1 && userPlant.watering_unit != "month" ? "s" : ""}</ThemedText>)
+                                                : (
+                                                    <ThemedText type='italic' style={{ color: '#333' }}>Seleccionar</ThemedText>
+                                                )}
                                             <Ionicons name="chevron-forward" size={16} color={"#333"}></Ionicons>
                                         </View>
 
@@ -406,7 +420,7 @@ export default function PlantSettings() {
                                         <ThemedText type="default">Fertilización</ThemedText>
                                     </View>
                                     <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                        {userPlant.fertilizing_time ? (<ThemedText type='default'>Cada {userPlant.fertilizing_time == 1 ? "" : userPlant.fertilizing_time} {  timeUnitLabelsLower[userPlant.fertilizing_time_unit as keyof typeof timeUnitLabelsLower]}{userPlant.fertilizing_time > 1 && userPlant.fertilizing_time_unit === "month" ? "es" : ""}{userPlant.fertilizing_time > 1 && userPlant.fertilizing_time_unit != "month" ? "s" : ""}</ThemedText>) : (
+                                        {userPlant.fertilizing_time ? (<ThemedText type='default'>Cada {userPlant.fertilizing_time == 1 ? "" : userPlant.fertilizing_time} {timeUnitLabelsLower[userPlant.fertilizing_time_unit as keyof typeof timeUnitLabelsLower]}{userPlant.fertilizing_time > 1 && userPlant.fertilizing_time_unit === "month" ? "es" : ""}{userPlant.fertilizing_time > 1 && userPlant.fertilizing_time_unit != "month" ? "s" : ""}</ThemedText>) : (
                                             <ThemedText type='italic'>Seleccionar</ThemedText>
                                         )}
                                         <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
@@ -423,7 +437,7 @@ export default function PlantSettings() {
                                         <ThemedText type='default'>Poda</ThemedText>
                                     </View>
                                     <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                        {userPlant.pruning_time ? (<ThemedText type='default'>Cada {userPlant.pruning_time == 1 ? "" : userPlant.pruning_time} {  timeUnitLabelsLower[userPlant.pruning_time_unit as keyof typeof timeUnitLabelsLower]}{userPlant.pruning_time > 1 && userPlant.pruning_time_unit === "month" ? "es" : ""}{userPlant.pruning_time > 1 && userPlant.pruning_time_unit != "month" ? "s" : ""}</ThemedText>) : (
+                                        {userPlant.pruning_time ? (<ThemedText type='default'>Cada {userPlant.pruning_time == 1 ? "" : userPlant.pruning_time} {timeUnitLabelsLower[userPlant.pruning_time_unit as keyof typeof timeUnitLabelsLower]}{userPlant.pruning_time > 1 && userPlant.pruning_time_unit === "month" ? "es" : ""}{userPlant.pruning_time > 1 && userPlant.pruning_time_unit != "month" ? "s" : ""}</ThemedText>) : (
                                             <ThemedText type='italic'>Seleccionar</ThemedText>
                                         )}
                                         <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
@@ -441,7 +455,7 @@ export default function PlantSettings() {
                                         <ThemedText type='default'>Rociado</ThemedText>
                                     </View>
                                     <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                        {userPlant.sprayed_time ? (<ThemedText type='default'>Cada {userPlant.sprayed_time == 1 ? "" : userPlant.sprayed_time} {  timeUnitLabelsLower[userPlant.sprayed_unit as keyof typeof timeUnitLabelsLower]}{userPlant.sprayed_time > 1 && userPlant.sprayed_unit === "month" ? "es" : ""}{userPlant.sprayed_time > 1 && userPlant.sprayed_unit != "month" ? "s" : ""}</ThemedText>) : (
+                                        {userPlant.sprayed_time ? (<ThemedText type='default'>Cada {userPlant.sprayed_time == 1 ? "" : userPlant.sprayed_time} {timeUnitLabelsLower[userPlant.sprayed_unit as keyof typeof timeUnitLabelsLower]}{userPlant.sprayed_time > 1 && userPlant.sprayed_unit === "month" ? "es" : ""}{userPlant.sprayed_time > 1 && userPlant.sprayed_unit != "month" ? "s" : ""}</ThemedText>) : (
                                             <ThemedText type='italic'>Seleccionar</ThemedText>
                                         )}
                                         <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
@@ -459,7 +473,7 @@ export default function PlantSettings() {
                                         <ThemedText type='default'>Rotación</ThemedText>
                                     </View>
                                     <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                        {userPlant.rotation_time ? (<ThemedText type='default'>Cada {userPlant.rotation_time == 1 ? "" : userPlant.rotation_time} {  timeUnitLabelsLower[userPlant.rotation_unit as keyof typeof timeUnitLabelsLower]}{userPlant.rotation_time > 1 && userPlant.rotation_unit === "month" ? "es" : ""}{userPlant.rotation_time > 1 && userPlant.rotation_unit != "month" ? "s" : ""}</ThemedText>) : (
+                                        {userPlant.rotation_time ? (<ThemedText type='default'>Cada {userPlant.rotation_time == 1 ? "" : userPlant.rotation_time} {timeUnitLabelsLower[userPlant.rotation_unit as keyof typeof timeUnitLabelsLower]}{userPlant.rotation_time > 1 && userPlant.rotation_unit === "month" ? "es" : ""}{userPlant.rotation_time > 1 && userPlant.rotation_unit != "month" ? "s" : ""}</ThemedText>) : (
                                             <ThemedText type='italic'>Seleccionar</ThemedText>
                                         )}
                                         <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
@@ -549,7 +563,7 @@ export default function PlantSettings() {
                                 </View>
                             </TouchableOpacity>
                         </ThemedView>
-                        <Button text="Eliminar esta planta" onPress={() => { }} />
+                        <Button text="Eliminar esta planta" onPress={() => { setConfirmVisible(true); }} />
                     </View>
 
                 </ScrollView>
@@ -771,6 +785,45 @@ export default function PlantSettings() {
                     </View>
                 </View>
             </Modal >
+            {/* Modal de confirmación de eliminación */}
+                  <Modal
+                    visible={confirmVisible}
+                    transparent
+                    animationType="fade"
+                    onRequestClose={closeConfirm}>
+                    <View style={{
+                      flex: 1,
+                      backgroundColor: "rgba(0,0,0,0.3)",
+                      justifyContent: "center",
+                      alignItems: "center",
+            
+                    }}>
+                      <View style={{
+                        backgroundColor: backgroundColor,
+                        borderRadius: 12,
+                        padding: 24,
+                        minWidth: 220,
+                        alignItems: "center",
+                        margin: 36
+                      }}>
+                        <ThemedText type="title2">¿Seguro que quieres eliminar esta planta?</ThemedText>
+                        <ThemedText type="default">Al eliminar la planta todos los datos se eliminarán. Esta acción no podrá deshacerse.</ThemedText>
+                        <View style={{ display: 'flex', flexDirection: 'row', gap: 12, justifyContent: 'flex-end', width: '100%' }}>
+                          <Pressable style={{ marginBottom: 12 }} onPress={() => {
+                            closeConfirm();
+                          }}>
+                            <ThemedText type="defaultSemiBold">Cancelar</ThemedText>
+                          </Pressable>
+                          <Pressable onPress={() => {
+                            handleDelete();
+                            closeConfirm();
+                          }}>
+                            <ThemedText type="defaultSemiBold" style={{ color: "red" }}>Eliminar</ThemedText>
+                          </Pressable>
+                        </View>
+                      </View>
+                    </View>
+                  </Modal>
         </>
     );
 

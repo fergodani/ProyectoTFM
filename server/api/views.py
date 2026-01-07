@@ -154,7 +154,7 @@ class GardenDetailView(APIView):
         if not garden:
             return Response({"error": "Garden not found"}, status=status.HTTP_404_NOT_FOUND)
         garden.delete()
-        return Response({"message": "Garden deleted"}, status=status.HTTP_204_NO_CONTENT)
+        return Response({"message": "Garden deleted"}, status=status.HTTP_200_OK)
 
 class GardenSuitabilityView(APIView):
     permission_classes = [IsAuthenticated]
@@ -370,7 +370,11 @@ class UserPlantListCreateView(APIView):
         serializer = UserPlantSerializer(data=request_data)
         if serializer.is_valid():
             plant = serializer.save()
-            return Response(UserPlantSerializer(plant, context={'request': request}).data, status=status.HTTP_201_CREATED)
+            # Usar self.request (propiedad de APIView) para el contexto del serializer
+            return Response(
+                UserPlantSerializer(plant, context={'request': self.request}).data,
+                status=status.HTTP_201_CREATED
+            )
 
 
 class UserPlantDetailView(APIView):
@@ -579,7 +583,7 @@ class UserPlantDetailView(APIView):
         if not plant:
             return Response({"error": "Plant not found"}, status=status.HTTP_404_NOT_FOUND)
         plant.delete()
-        return Response({"message": "Plant deleted"}, status=status.HTTP_204_NO_CONTENT)
+        return Response({"message": "Plant deleted"}, status=status.HTTP_200_OK)
     
 class TrefflePlantDetail(APIView):
     """Obtener información de plantas desde Treffle API por id o por nombre"""
