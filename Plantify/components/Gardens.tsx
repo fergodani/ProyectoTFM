@@ -70,7 +70,7 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
         // Medir la posición del botón
         event.target.measure((x: number, y: number, width: number, height: number, pageX: number, pageY: number) => {
             setMenuPosition({
-                top: pageY + height,
+                top: pageY + height - 35,
                 right: 16
             });
             setSelectedGarden(garden);

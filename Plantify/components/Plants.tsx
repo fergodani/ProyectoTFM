@@ -32,7 +32,7 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
     // Medir la posición del botón
     event.target.measure((x: number, y: number, width: number, height: number, pageX: number, pageY: number) => {
       setMenuPosition({
-        top: pageY + height,
+        top: pageY + height - 35,
         right: 16
       });
       setSelectedPlant(userPlant);
@@ -186,7 +186,7 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
                   openModal(userPlant, event);
                 }}
               >
-                <Ionicons name="ellipsis-vertical" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
+                <Ionicons name="ellipsis-vertical" size={30} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
               </TouchableOpacity>
 
             </ThemedView>

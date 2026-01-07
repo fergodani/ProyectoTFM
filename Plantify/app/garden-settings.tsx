@@ -1,7 +1,7 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Text, View, Image, StyleSheet, ScrollView, ActivityIndicator, useColorScheme, TouchableOpacity, Alert, Pressable, SafeAreaView, TouchableWithoutFeedback, Modal, TextInput } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 import { Garden, UserPlant } from "@/models/Plant";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
 import { useEffect } from "react";
@@ -68,7 +68,11 @@ export default function GardenSettings() {
     const [modalType, setModalType] = useState<ModalType>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [name, setName] = useState(garden.name);
+    const router = useRouter();
     const { getUserId, accessToken, refreshToken, setTokens } = useAuth();
+    const [confirmVisible, setConfirmVisible] = useState(false);
+    const colorScheme = useColorScheme();
+    const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
 
     const openModal = (type: ModalType | ((prevState: ModalType) => ModalType) | null) => {
         setModalType(type);
@@ -107,6 +111,19 @@ export default function GardenSettings() {
         }
     }
 
+    const handleDelete = async () => {
+        try {
+            const response = await GardensService.deleteGarden(garden.id, accessToken!);
+            router.replace("/(tabs)/profile");
+        } catch (error) {
+            console.error("Error deleting garden:", error);
+        }
+    };
+
+    const closeConfirm = () => {
+        setConfirmVisible(false);
+    };
+
 
     return (
         <>
@@ -114,7 +131,7 @@ export default function GardenSettings() {
                 <View style={styles.body}>
                     <ThemedText type='title'>{garden.name}</ThemedText>
                     <ThemedView style={styles.card}>
-                        <ThemedText type='title2' style={{marginBottom: 8}}>General</ThemedText>
+                        <ThemedText type='title2' style={{ marginBottom: 8 }}>General</ThemedText>
                         {/* Nombre */}
                         <TouchableOpacity
                             style={styles.subcardTouchable}
@@ -155,7 +172,7 @@ export default function GardenSettings() {
                     </ThemedView>
 
                     <ThemedView style={styles.card}>
-                        <ThemedText type="title2" style={{marginBottom: 8}}>Condiciones del lugar</ThemedText>
+                        <ThemedText type="title2" style={{ marginBottom: 8 }}>Condiciones del lugar</ThemedText>
                         {/* Luz */}
                         <TouchableOpacity
                             style={styles.subcardTouchable}
@@ -212,10 +229,49 @@ export default function GardenSettings() {
                         </TouchableOpacity>
                     </ThemedView>
 
-                    <Button text="Eliminar este sitio" onPress={() => { }} />
+                    <Button text="Eliminar este sitio" onPress={() => { setConfirmVisible(true); }} />
                 </View>
 
             </ScrollView>
+            {/* Modal de confirmación de eliminación */}
+            <Modal
+                visible={confirmVisible}
+                transparent
+                animationType="fade"
+                onRequestClose={closeConfirm}>
+                <View style={{
+                    flex: 1,
+                    backgroundColor: "rgba(0,0,0,0.3)",
+                    justifyContent: "center",
+                    alignItems: "center",
+
+                }}>
+                    <View style={{
+                        backgroundColor: backgroundColor,
+                        borderRadius: 12,
+                        padding: 24,
+                        minWidth: 220,
+                        alignItems: "center",
+                        margin: 36
+                    }}>
+                        <ThemedText type="title2">¿Seguro que quieres eliminar este lugar?</ThemedText>
+                        <ThemedText type="default">Al eliminar el lugar todos los datos se eliminarán, pero no las plantas asociadas. Esta acción no podrá deshacerse.</ThemedText>
+                        <View style={{ display: 'flex', flexDirection: 'row', gap: 12, justifyContent: 'flex-end', width: '100%' }}>
+                            <Pressable style={{ marginBottom: 12 }} onPress={() => {
+                                closeConfirm();
+                            }}>
+                                <ThemedText type="defaultSemiBold">Cancelar</ThemedText>
+                            </Pressable>
+                            <Pressable onPress={() => {
+                                handleDelete();
+                                closeConfirm();
+                            }}>
+                                <ThemedText type="defaultSemiBold" style={{ color: "red" }}>Eliminar</ThemedText>
+                            </Pressable>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
             <Modal
                 visible={isModalVisible}
                 transparent={true}
@@ -226,11 +282,11 @@ export default function GardenSettings() {
                             <TouchableOpacity onPress={() => setIsModalVisible(false)}>
                                 <ThemedText type="default" style={{ color: "#000" }}>Cerrar</ThemedText>
                             </TouchableOpacity>
-                            <TouchableOpacity 
-                            onPress={() => handlePut()}
-                            style={{ padding: 10, minWidth: 60, alignItems: 'center', backgroundColor: isLoading ? '#ccc' : '#4CAF50', borderRadius: 5, flexDirection: 'row', gap: 8 }}
+                            <TouchableOpacity
+                                onPress={() => handlePut()}
+                                style={{ padding: 10, minWidth: 60, alignItems: 'center', backgroundColor: isLoading ? '#ccc' : '#4CAF50', borderRadius: 5, flexDirection: 'row', gap: 8 }}
                                 disabled={isLoading}
-                                >
+                            >
                                 {isLoading ? (
                                     <>
                                         <ActivityIndicator size="small" color="#fff" />
@@ -243,15 +299,15 @@ export default function GardenSettings() {
                         </View>
 
                         {modalType === 'name' && (
-                                <View style={styles.searchContainer}>
-                                    <TextInput
-                                        placeholder="Nombre del sitio"
-                                        autoCapitalize="none"
-                                        style={styles.searchInput}
-                                        value={name}
-                                        onChangeText={(text) => { setName(text) }}
-                                    />
-                                </View>
+                            <View style={styles.searchContainer}>
+                                <TextInput
+                                    placeholder="Nombre del sitio"
+                                    autoCapitalize="none"
+                                    style={styles.searchInput}
+                                    value={name}
+                                    onChangeText={(text) => { setName(text) }}
+                                />
+                            </View>
                         )}
                         {modalType === 'location' && (
                             <WheelPicker
@@ -428,6 +484,6 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 14,
         color: '#333',
-        
+
     },
 });

@@ -54,6 +54,7 @@ export default function RootLayout() {
           <Stack.Screen name="post-details" options={{ title: "", headerShown: true }} />
           <Stack.Screen name="post-form" options={{ title: "", headerShown: true }} />
           <Stack.Screen name="comment-form" options={{ title: "Añadir comentario", headerShown: true }} />
+          <Stack.Screen name="settings" options={{ title: "Ajustes", headerShown: true }} />
           <Stack.Screen name="+not-found" />
         </Stack>
         <StatusBar style="auto" />

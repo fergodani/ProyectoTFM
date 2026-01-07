@@ -74,6 +74,16 @@ export default function TabTwoScreen() {
     }
   };
 
+  const handleMenuOptions = (event: any) => {
+    event.target.measure((x: number, y: number, width: number, height: number, pageX: number, pageY: number) => {
+      setMenuPosition({
+        top: pageY + height,
+        right: 16
+      });
+      setMenuVisible(true);
+    });
+  }
+
   return (
     !isAuthenticated ? (
       <LinearGradient
@@ -101,15 +111,12 @@ export default function TabTwoScreen() {
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', gap: 8 }}>
             <ThemedText type="title">Mis plantas</ThemedText>
             <TouchableOpacity onPress={(event) => {
-              event.target.measure((x: number, y: number, width: number, height: number, pageX: number, pageY: number) => {
-                setMenuPosition({ 
-                  top: pageY + height, 
-                  right: 16 
-                });
-                setMenuVisible(true);
+              router.push({
+                pathname: "/settings"
               });
+
             }}>
-              <Ionicons name="ellipsis-vertical" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
+              <Ionicons name="settings" size={30} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
             </TouchableOpacity>
           </View>
           <ThemedText type="default">Añade todas tus plantas para cuidarlas fácilmente</ThemedText>
@@ -130,7 +137,7 @@ export default function TabTwoScreen() {
           />}
         />
         <TouchableOpacity style={styles.fab} onPress={handleAdd}>
-          <Ionicons name="add" size={24} color="#333" />
+          <Ionicons name="add" size={30} color="#333" />
         </TouchableOpacity>
         {/* Menú modal */}
         <Modal visible={menuVisible} transparent animationType="fade" onRequestClose={() => setMenuVisible(false)}>
