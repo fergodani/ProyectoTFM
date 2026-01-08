@@ -44,7 +44,7 @@ export default function RootLayout() {
           <Stack.Screen name="plant-details" options={{ title: "", headerShown: true }} />
           <Stack.Screen name="plant-settings" options={{ title: "Ajustes de planta", headerShown: true }} />
           <Stack.Screen name="plant-search" options={{ title: "", headerShown: false }} />
-          <Stack.Screen name="garden-form" options={{ title: "", headerShown: false }} />
+          <Stack.Screen name="garden-form" options={{ title: "", headerShown: true }} />
           <Stack.Screen name="garden-select" options={{ title: "Selecciona un lugar", headerShown: true }} />
           <Stack.Screen name="garden-details" options={{ title: "", headerShown: true }} />
           <Stack.Screen name="garden-settings" options={{ title: "Ajustes del sitio", headerShown: true }} />

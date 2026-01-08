@@ -36,7 +36,11 @@ class Garden(models.Model):
     air = models.BooleanField(default=False, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='gardens')
+    is_template = models.BooleanField(default=False)
+    custom_image = models.ImageField(upload_to='gardens/', blank=True, null=True)
     def __str__(self):
+        if self.is_template:
+            return f"Template: {self.name}"
         return self.name
 
 class UserPlant(models.Model):

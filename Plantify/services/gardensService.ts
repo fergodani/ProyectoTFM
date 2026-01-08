@@ -74,6 +74,24 @@ const GardensService = {
     }
   },
 
+  getGardenTemplates: async (accessToken: string): Promise<Garden[]> => {
+    try {
+      const response = await fetch(`${API_URL}templates/`, {
+        headers: {
+          "Authorization": `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        }
+      });
+      if (!response.ok) {
+        throw new Error("Error fetching garden templates");
+      }
+      const json = await response.json();
+      return json || [];
+    } catch (error) {
+      throw error;
+    }
+  },
+
   createGarden: async (garden: any, accessToken: string): Promise<Garden> => {
     try {
       const response = await fetch(`${API_URL}`, {

@@ -1,11 +1,12 @@
 from django.urls import include, path
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from .views import PostVoteView, CommentVoteView, UserPostView, PlantInfoPostView, PostDetailView, CommentView, CommentDetailView, GardenSuitabilityView, WeatherRecommendationView, PredictImageView, GeminiPlantIdentificationView, GardenListNameView, GardenListCreateView, GardenDetailView, PlantInfoDetailView, PlantInfoListView, TrefflePlantDetail, TrefflePlantList, UserPlantDetailView, UserPlantListCreateView, CustomTokenObtainPairView, UserRegisterView, UserTasksView, PerenualPlantListView, PerenualPlantDetailView, CurrentUserView, ChangePasswordView 
+from .views import PostVoteView, CommentVoteView, UserPostView, PlantInfoPostView, PostDetailView, CommentView, CommentDetailView, GardenSuitabilityView, WeatherRecommendationView, PredictImageView, GeminiPlantIdentificationView, GardenListNameView, GardenListCreateView, GardenDetailView, PlantInfoDetailView, PlantInfoListView, TrefflePlantDetail, TrefflePlantList, UserPlantDetailView, UserPlantListCreateView, CustomTokenObtainPairView, UserRegisterView, UserTasksView, PerenualPlantListView, PerenualPlantDetailView, CurrentUserView, ChangePasswordView, GardenTemplatesView 
 
 urlpatterns = [
     path('gardens/', GardenListCreateView.as_view(), name='garden-list-create'),
     path('gardens/simple/', GardenListNameView.as_view(), name='user-gardens-simple'),
+    path('gardens/templates/', GardenTemplatesView.as_view(), name='garden-templates'),
     path('gardens/<int:pk>/', GardenDetailView.as_view(), name='garden-detail'),
     path('gardens/suitability/', GardenSuitabilityView.as_view(), name='garden-suitability'),
     path('userplant/', UserPlantListCreateView.as_view(), name='plant-list-create'),

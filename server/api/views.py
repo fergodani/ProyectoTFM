@@ -123,8 +123,18 @@ class GardenListNameView(APIView):
         serializer = GardenSimpleSerializer(gardens, many=True)
         return Response(serializer.data)
 
+class GardenTemplatesView(APIView):
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
+    permission_classes = [IsAuthenticated]
+    """Obtener solo los jardines plantilla (templates)"""
+    def get(self, request):
+        templates = Garden.objects.filter(is_template=True)
+        serializer = GardenSerializer(templates, many=True, context={'request': request})
+        return Response(serializer.data)
+
 
 class GardenDetailView(APIView):
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
     """Obtener, actualizar o eliminar un jardín específico"""
     def get_object(self, pk):
         try:

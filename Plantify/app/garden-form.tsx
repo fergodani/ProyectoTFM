@@ -10,6 +10,8 @@ import { useColorScheme } from "@/hooks/useColorScheme.web";
 import GardensService from "@/services/gardensService";
 import { useAuth } from "@/hooks/useAuthContext";
 import { UserService } from "@/services/userService";
+import { Garden } from "@/models/Plant";
+import { LinearGradient } from 'expo-linear-gradient';
 // removed native-only TurboModuleRegistry import (not used on web)
 
 const GardenForm = () => {
@@ -17,6 +19,7 @@ const GardenForm = () => {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const { getUserId, accessToken, refreshToken, setTokens } = useAuth();
+  const [gardenTemplates, setGardenTemplates] = useState<Garden[]>([]);
   const [formData, setFormData] = useState({
     name: "",
     location: "",
@@ -24,7 +27,36 @@ const GardenForm = () => {
     sunlight_exposure: "",
     owner: "",
   });
+  const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
+  const [isTemplate, setIsTemplate] = useState(false);
 
+  // Helpers to render icons for the selected options
+  const getLocationImage = (loc: string) => {
+    if (loc === 'outdoor') return require('../assets/images/outdoor.png');
+    return require('../assets/images/indoor.png');
+  };
+  const getSunlightImage = (sun: string) => {
+    switch (sun) {
+      case 'full_sun':
+        return require('../assets/images/full-sun.png');
+      case 'partial_sun':
+        return require('../assets/images/partial-sun.png');
+      case 'full_shade':
+        return require('../assets/images/total-shadow.png');
+      default:
+        return require('../assets/images/indirect-light.png');
+    }
+  };
+  const getHumidityImage = (hum: string) => {
+    switch (hum) {
+      case 'high':
+        return require('../assets/images/high-humidity.png');
+      case 'normal':
+        return require('../assets/images/normal-humidity.png');
+      default:
+        return require('../assets/images/low-humidity.png');
+    }
+  };
 
   const locations: any = {
     indoor: { value: "indoor", label: "Interior" },
@@ -44,11 +76,30 @@ const GardenForm = () => {
 
   useEffect(() => {
     const userId = getUserId();
+    fetchGardenTemplates();
     setFormData({ ...formData, ['owner']: userId! + '' });
   }, []);
 
-  const handleNext = () => setStep(step + 1);
-  const handleBack = () => setStep(step - 1);
+  const fetchGardenTemplates = async () => {
+    try {
+      const data = await GardensService.getGardenTemplates(accessToken!);
+      setGardenTemplates(data);
+      console.log("Garden templates fetched:", data);
+    } catch (error) {
+      console.error("Error fetching garden templates:", error);
+    }
+  };
+
+  const handleNext = () => {
+    setStep(step + 1);
+  };
+  const handleBack = () => {
+    if (isTemplate) 
+      setStep(1);
+    else
+      setStep(step - 1);
+    setIsTemplate(false);
+  };
 
   const handleChange = (name: string, value: string) => {
     setFormData({ ...formData, [name]: value });
@@ -56,9 +107,32 @@ const GardenForm = () => {
     if (name === 'humidity') handleNext();
   };
 
+  const handleUseTemplate = (template: Garden) => {
+    setFormData({
+      ...formData,
+      ['name']: template.name!,
+      ['location']: template.location!,
+      ['humidity']: template.humidity!,
+      ['sunlight_exposure']: template.sunlight_exposure!,
+    });
+    setStep(6); // Go to confirmation step
+    setIsTemplate(true);
+  }
+
+  const handleCustom = () => {
+    setFormData({
+      ...formData,
+      ['name']: "",
+      ['location']: "",
+      ['humidity']: "",
+      ['sunlight_exposure']: "",
+    });
+    handleNext();
+  }
+
   const handleSubmit = async () => {
     try {
-      
+
       const data = await GardensService.createGarden(formData, accessToken!);
     } catch (error: any) {
       if (error.message === 'Unauthorized') {
@@ -81,8 +155,46 @@ const GardenForm = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={['rgba(213, 240, 219, 0.19)', backgroundColor]} // Cambia estos colores a los que quieras
+      style={[styles.container]}
+    >
       {step === 1 && (
+        <View style={{ alignItems: 'center' }}>
+          <ThemedText type='title' style={styles.text}>Elije un lugar</ThemedText>
+          <View style={styles.roundedCardsContainer}>
+            {gardenTemplates.map((template) => (
+              <TouchableOpacity
+                style={styles.roundedCard}
+                key={template.id}
+                onPress={() => {
+                  handleUseTemplate(template);
+                }}
+              >
+                <Image
+                  source={{ uri: template.custom_image || require('../assets/images/plant-placeholder.png') }}
+                  style={{ width: 90, height: 90, borderRadius: 50 }}
+                />
+                <ThemedText type="subtitle" style={{ textAlign: 'center' }}>{template.name}</ThemedText>
+              </TouchableOpacity>
+            ))}
+          </View>
+          <TouchableOpacity
+            style={styles.roundedCard}
+            key={'custom'}
+            onPress={() => {
+              handleCustom();
+            }}
+          >
+            <Image
+              source={require('../assets/images/location.png')}
+              style={{ width: 90, height: 90, borderRadius: 50, backgroundColor: '#d3d3d3' }}
+            />
+            <ThemedText type="subtitle" style={{ textAlign: 'center' }}>Personalizado</ThemedText>
+          </TouchableOpacity>
+        </View>
+      )}
+      {step === 2 && (
         <View>
           <ThemedText type='title' style={styles.text}>Nombre del lugar</ThemedText>
           <ThemedText type="subtitle" style={styles.text}>Introduce el nombre del lugar donde se encuentra el jardín.</ThemedText>
@@ -93,14 +205,21 @@ const GardenForm = () => {
               placeholder="Nombre del jardín"
             />
           </View>
-          <Button
-            text="Siguiente"
-            onPress={handleNext}
-            disabled={formData.name.trim() === ""}
-          />
+
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginVertical: 16 }}>
+
+            <View style={{ flex: 1, marginRight: 8 }}>
+              <Button
+                text="Siguiente"
+                onPress={handleNext}
+                disabled={formData.name.trim() === ""}
+              />
+              <Button text="Atrás" onPress={handleBack} />
+            </View>
+          </View>
         </View>
       )}
-      {step === 2 && (
+      {step === 3 && (
         <View>
           <ScrollView>
             <ThemedText type='title' style={styles.text}>Selecciona el tipo de luz que recibe tu jardín.</ThemedText>
@@ -170,7 +289,7 @@ const GardenForm = () => {
           </View>
         </View>
       )}
-      {step == 3 && (
+      {step == 4 && (
         <View>
           <ScrollView>
             <ThemedText type='title' style={styles.text}>Selecciona cuánta humedad hay en el ambiente.</ThemedText>
@@ -224,7 +343,7 @@ const GardenForm = () => {
           </View>
         </View>
       )}
-      {step == 4 && (
+      {step == 5 && (
         <View>
           <ScrollView>
             <ThemedText type='title' style={styles.text}>¿Dónde se ubica el lugar?</ThemedText>
@@ -264,31 +383,62 @@ const GardenForm = () => {
           </View>
         </View>
       )}
-      {step === 5 && (
-        <View style={{ backgroundColor: Colors[colorScheme!].cardBackground, padding: 16, borderRadius: 8, elevation: 3 }}>
-          <ThemedText type='title' style={styles.text}>Confirmar datos</ThemedText>
-          <ThemedText style={styles.text}>Jardín: {formData.name}</ThemedText>
-          <ThemedText style={styles.text}>Ubicación: {locations[formData.location]?.label}</ThemedText>
-          <ThemedText style={styles.text}>Tipo de luz: {sunlightExposures[formData.sunlight_exposure]?.label}</ThemedText>
-          <ThemedText style={styles.text}>Humedad: {humidities[formData.humidity]?.label}</ThemedText>
-          <Button text="Crear" onPress={handleSubmit} />
-          <Button text="Atrás" onPress={handleBack} />
+      {step === 6 && (
+        <View style={{ backgroundColor: Colors[colorScheme!].cardBackground, padding: 16, borderRadius: 12, elevation: 3 }}>
+          <ThemedText type='title' style={styles.text}>Confirma tu lugar</ThemedText>
 
+          {/* Preview avatar + name */}
+          <View style={styles.summaryHeader}>
+            { isTemplate && (<Image
+              source={{ uri: gardenTemplates.find(g => g.name === formData.name)?.custom_image || '' }}
+              style={{ width: 96, height: 96, borderRadius: 48 }}
+            />)}
+            
+            <ThemedText type='title' style={{ marginTop: 8 }}>{formData.name || 'Sin nombre'}</ThemedText>
+          </View>
+
+          {/* Chips with selected options */}
+          <View style={styles.chipRow}>
+            <ThemedView style={styles.chip}>
+              <Image source={getLocationImage(formData.location || 'indoor')} style={styles.chipIcon} />
+              <View style={{ flex: 1 }}>
+                <ThemedText type='subtitle'>Ubicación</ThemedText>
+                <ThemedText style={{color: "#333"}}>{locations[formData.location]?.label || 'Interior'}</ThemedText>
+              </View>
+            </ThemedView>
+
+            <ThemedView style={styles.chip}>
+              <Image source={getSunlightImage(formData.sunlight_exposure || 'indirect_sun')} style={styles.chipIcon} />
+              <View style={{ flex: 1 }}>
+                <ThemedText type='subtitle'>Tipo de luz</ThemedText>
+                <ThemedText style={{color: "#333"}}>{sunlightExposures[formData.sunlight_exposure]?.label || 'Luz solar indirecta'}</ThemedText>
+              </View>
+            </ThemedView>
+
+            <ThemedView style={styles.chip}>
+              <Image source={getHumidityImage(formData.humidity || 'normal')} style={styles.chipIcon} />
+              <View style={{ flex: 1 }}>
+                <ThemedText type='subtitle'>Humedad</ThemedText>
+                <ThemedText style={{color: "#333"}}>{humidities[formData.humidity]?.label || 'Normal'}</ThemedText>
+              </View>
+            </ThemedView>
+          </View>
+
+          {/* Actions */}
+          <View style={{ marginTop: 16 }}>
+            <Button text="Crear" onPress={handleSubmit} />
+            <Button text="Atrás" onPress={handleBack} />
+          </View>
         </View>
       )}
-      <View style={{ marginTop: 16, display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center' }}>
-        <TouchableOpacity onPress={goBack}>
-          <ThemedText type="default">Cancelar</ThemedText>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    marginTop: 64,
+    height: '100%',
   },
   text: {
     textAlign: 'center',
@@ -307,6 +457,12 @@ const styles = StyleSheet.create({
     elevation: 2,
     width: '80%',
   },
+  roundedCardsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 16,
+    flexWrap: 'wrap',
+  },
   card: {
     padding: 16,
     marginVertical: 8,
@@ -320,6 +476,44 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 16,
+  },
+  roundedCard: {
+    width: 100,
+    height: 100,
+    marginVertical: 8,
+    borderRadius: 50,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  summaryHeader: {
+    alignItems: 'center',
+    marginTop: 8,
+    marginBottom: 12,
+  },
+  chipRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    gap: 12,
+  },
+  chip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    padding: 12,
+    borderRadius: 12,
+    elevation: 2,
+    backgroundColor: '#fff',
+    flex: 1,
+    minWidth: '48%',
+  },
+  chipIcon: {
+    width: 55,
+    height: 55,
+    borderRadius: 8,
   },
   searchContainer: {
     flexDirection: 'column',

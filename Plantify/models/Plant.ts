@@ -11,6 +11,7 @@ export interface Garden {
     owner?: number;
     air?: boolean;
     user_plants?: UserPlant[];
+    custom_image?: string;
 }
 
 export interface GardenBySuitability {
