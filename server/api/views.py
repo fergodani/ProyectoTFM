@@ -24,6 +24,7 @@ import cv2
 import os
 import google.generativeai as genai
 from dotenv import load_dotenv
+from urllib.parse import urlparse
 
 # Ensure environment variables are loaded if a .env exists
 load_dotenv()
@@ -32,12 +33,29 @@ TREFLE_API_URL = "https://trefle.io/api/v1/plants"
 TREFLE_TOKEN = "qD5bYaqpif9la_ZYT6zOPTe5icGrGiJAOlDacDK0Fic" 
 
 PERENUAL_API_URL = "https://perenual.com/api/v2"
+PERENUAL_PEST_API_URL = "https://perenual.com/api"
 
 
 # Mock data helpers
 def should_use_mock_data():
     """Determina si debe usar datos mock en lugar de la API real"""
     return os.getenv('USE_MOCK_DATA', 'True').lower() == 'true'
+
+def load_perenual_diseases_cards():
+    """Lee el JSON generado desde perenual_diseases.html y devuelve la lista de enfermedades (tarjetas).
+    Formato esperado: array de objetos con href, image, name, solutions_count.
+    """
+    try:
+        json_path = os.path.join(os.path.dirname(__file__), '..', 'perenual_diseases_list.json')
+        with open(json_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            return data if isinstance(data, list) else []
+    except FileNotFoundError:
+        print("Warning: perenual_diseases_list.json not found")
+        return []
+    except Exception as e:
+        print(f"Error reading perenual_diseases_list.json: {e}")
+        return []
 
 def load_species_details_mock():
     """Carga los datos mock de species-details"""
@@ -55,6 +73,15 @@ def load_species_list_mock():
             return json.load(f)
     except FileNotFoundError:
         print("Warning: species-list-mock.json not found")
+        return {"data": []}
+
+def load_disease_list_mock():
+    """Carga los datos mock de pest/disease list"""
+    try:
+        with open(os.path.join(os.path.dirname(__file__), '..', 'disease-list-mock.json'), 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print("Warning: disease-list-mock.json not found")
         return {"data": []}
 
 def get_mock_species_details(plant_id):
@@ -96,6 +123,45 @@ def search_mock_species_list(query=None, page=1):
         'from': start_index + 1 if plants else 0,
         'last_page': (len(plants) + per_page - 1) // per_page,
         'total': len(plants)
+    }
+
+def search_mock_disease_list(query=None, page=1, item_id=None):
+    """Busca plagas/enfermedades en los datos mock"""
+    mock_data = load_disease_list_mock()
+    items = mock_data.get('data', [])
+
+    # Filtrar por id si se proporciona
+    if item_id:
+        try:
+            item_id_int = int(item_id)
+        except (TypeError, ValueError):
+            item_id_int = None
+        if item_id_int is not None:
+            items = [i for i in items if i.get('id') == item_id_int]
+            return {'data': items, 'total': len(items), 'current_page': 1, 'per_page': len(items), 'from': 1 if items else 0, 'to': len(items), 'last_page': 1}
+
+    if query:
+        query_lower = query.lower()
+        filtered = []
+        for item in items:
+            name = str(item.get('name', '')).lower()
+            desc = str(item.get('description', '')).lower()
+            if query_lower in name or query_lower in desc:
+                filtered.append(item)
+        items = filtered
+
+    # Paginación simple
+    per_page = 30
+    start_index = (page - 1) * per_page
+    end_index = start_index + per_page
+    return {
+        'data': items[start_index:end_index],
+        'to': min(end_index, len(items)),
+        'per_page': per_page,
+        'current_page': page,
+        'from': start_index + 1 if items else 0,
+        'last_page': (len(items) + per_page - 1) // per_page,
+        'total': len(items)
     }
 
 # CRUD para Garden
@@ -897,6 +963,7 @@ class UserTasksView(APIView):
         })
         
 model = YOLO("../model/results/plantify_model_v1/weights/best.pt")
+model_disease = YOLO("../model/results_disease/plantify_disease_model_v1/weights/best.pt")
 
 class PredictImageView(APIView):
     parser_classes = [MultiPartParser]
@@ -971,6 +1038,128 @@ class PredictImageView(APIView):
                 'error': str(e)
             })
 
+class PredictPestDiseaseView(APIView):
+    parser_classes = [MultiPartParser]
+
+    def post(self, request):
+        # Acepta imagen subida por multipart o una URL
+        image_file = request.FILES.get('image')
+        image_url = request.data.get('image_url')
+
+        if not image_file and not image_url:
+            return Response({"error": "No image provided. Upload a file as 'image' or provide 'image_url'."}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            if image_file:
+                # Convertir archivo subido (InMemoryUploadedFile) a np.ndarray soportado por Ultralytics
+                image_file.seek(0)
+                file_bytes = np.frombuffer(image_file.read(), dtype=np.uint8)
+                img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+                if img is None:
+                    return Response({"error": "Unsupported or corrupt image file."}, status=status.HTTP_400_BAD_REQUEST)
+                results = model_disease.predict(img)
+            else:
+                # Si se proporciona URL, Ultralytics acepta rutas/URLs directamente
+                results = model_disease.predict(image_url)
+        except TypeError as te:
+            # Captura el error de tipo de Ultralytics y devuelve un mensaje claro
+            return Response({
+                "error": "Unsupported image type",
+                "detail": str(te),
+                "hint": "Provide a standard image file (jpg, png, webp) or a reachable URL."
+            }, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response({"error": "Failed to process image", "detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Obtener el resultado más probable
+        top1 = results[0].probs.top1
+        confianza = results[0].probs.top1conf.item()
+        nombre_disease = results[0].names[top1]
+        # Extrae nombre de planta y enfermedad del formato "planta___enfermedad" y normaliza la enfermedad
+        plant_name = None
+        disease_label = nombre_disease or ""
+        if "___" in disease_label:
+            plant_name, disease_label = disease_label.split("___", 1)
+        # La enfermedad puede venir separada por guiones bajos: convertirlos a espacios
+        disease_query = disease_label.replace("_", " ").strip()
+
+        print("\n" + "="*30)
+        if plant_name:
+            print(f"🌿 PLANTA DETECTADA: {plant_name}")
+        print(f"🌿 ENFERMEDAD DETECTADA: {disease_query}")
+        print(f"📊 Confianza: {confianza:.2%}")
+        print("="*30 + "\n")
+        # Buscar en Perenual API por nombre de planta
+        try:
+            api_key = os.getenv('PERENUAL_API_KEY')
+            if not api_key:
+                return Response(
+                    {"error": "Perenual API key not configured", "env": "Missing PERENUAL_API_KEY"},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+            # 1) Intentar localizar la URL de detalle con la API (solo para obtener el ID del issue)
+            search_url = f"{PERENUAL_PEST_API_URL}/pest-disease-list"
+            encoded_q = requests.utils.quote(disease_query)
+            full_url = f"{search_url}?key={api_key}&q={encoded_q}"
+            print(f"🔗 Perenual search URL (ID lookup): {full_url}")
+            detail_url = None
+            try:
+                lookup_resp = requests.get(full_url, timeout=15)
+                if lookup_resp.status_code == 200:
+                    lookup_data = lookup_resp.json() or {}
+                    first_item = (lookup_data.get('data') or [])[:1]
+                    if first_item:
+                        issue_id = first_item[0].get('id')
+                        if issue_id:
+                            detail_url = f"https://perenual.com/pest-disease-search-finder/pest-disease/{issue_id}"
+            except Exception:
+                pass
+
+            # 2) Fallback: flujo en dos pasos (abrir página, introducir query y "enter" -> coger primer elemento)
+            if not detail_url:
+                try:
+                    page_url = "https://perenual.com/pest-disease-search-finder"
+                    # Paso 2.1: cargar la página inicial y verificar el input
+                    encoded_q2 = requests.utils.quote(disease_query)
+                    results_url = f"{page_url}?search={encoded_q2}"
+                    res_resp = requests.get(results_url, timeout=15)
+                    if res_resp.status_code == 200:
+                        rsoup = BeautifulSoup(res_resp.text, 'html.parser')
+                        first_a = rsoup.select_one('#search-container-display > a')
+                        if first_a and first_a.get('href'):
+                            href = first_a['href']
+                            detail_url = f"https://perenual.com{href}" if href.startswith('/') else href
+                except Exception:
+                    pass
+
+            if not detail_url:
+                return Response({
+                    'error': 'No se pudo encontrar la página de detalle de la enfermedad en Perenual'
+                }, status=status.HTTP_502_BAD_GATEWAY)
+
+            # 3) Scraping de la página de detalle: imagen principal, título, subtítulo y secciones
+            print(f"🕸️ Scraping detail page: {detail_url}")
+            # Extraer el ID numérico desde la URL de detalle (/pest-disease/{id})
+            issue_id = None
+            try:
+                path = urlparse(detail_url).path if detail_url else ""
+                last_segment = path.rstrip('/').split('/')[-1] if path else None
+                if last_segment:
+                    try:
+                        issue_id = int(last_segment)
+                    except (TypeError, ValueError):
+                        issue_id = last_segment  # devuelve string si no es numérico
+            except Exception:
+                issue_id = None
+            print(f"🔍 Perenual Issue ID: {issue_id}")
+            return Response({
+                'id': issue_id
+            })
+        except Exception as e:
+            print(f"Error buscando en Perenual API: {str(e)}")
+            return Response({
+                'error': str(e)
+            })
         
         
 class WeatherRecommendationView(APIView):
@@ -1035,7 +1224,7 @@ class WeatherRecommendationView(APIView):
             "recommendation": recommendation,
             "condition": mapped_condition
         })
-        
+
 class UserPostView(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
     permission_classes = [IsAuthenticated]
@@ -1445,6 +1634,155 @@ class PerenualPlantDetailView(APIView):
                 {"error": "Error connecting to Perenual API", "details": str(e)}, 
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+class PerenualPestDiseaseView(APIView):
+    """Devuelve la lista local de enfermedades parseadas desde perenual_diseases.html (JSON generado).
+    Soporta filtro opcional por 'q' en el nombre.
+    """
+    def get(self, request):
+        items = load_perenual_diseases_cards()
+        q = request.GET.get('q')
+        if q:
+            ql = q.lower()
+            items = [it for it in items if (it.get('name') or '').lower().find(ql) != -1]
+        return Response(items)
+    
+class PerenualPestDiseaseDetailView(APIView):
+    """Devuelve el href de la enfermedad buscando por id en el JSON local.
+    Se espera `pest_id` en la URL (por ejemplo, /api/perenual/pest-disease/<pest_id>/).
+    """
+    def get(self, request, pest_id):
+        items = load_perenual_diseases_cards()
+        try:
+            target_id = int(pest_id)
+        except (TypeError, ValueError):
+            return Response({"error": "Parámetro id inválido"}, status=status.HTTP_400_BAD_REQUEST)
+        for it in items:
+            if it.get('id') == target_id:
+                href = it.get('href')
+                print(f"🕸️ Scraping detail page for pest disease ID {pest_id}: {href}")
+                dresp = requests.get(href, timeout=20)
+                print(dresp)
+                if dresp.status_code != 200:
+                    return Response({'error': 'No se pudo cargar la página de detalle'}, status=status.HTTP_502_BAD_GATEWAY)
+                dsoup = BeautifulSoup(dresp.text, 'html.parser')
+
+                # Título (visible en el header)
+                title = None
+                header_title_div = dsoup.select_one('.text-5xl.font-bold')
+                if header_title_div:
+                    raw = header_title_div.get_text(separator=' ', strip=True)
+                    print(header_title_div)
+                    parts = [p.strip() for p in raw.split('>') if p.strip()]
+                    if parts:
+                        title = parts[-1]
+
+                # Subtítulo (nombre científico)
+                scientific_name = None
+                sci_block = dsoup.select_one('.italic.main-t-c.my-2')
+                if sci_block:
+                    scientific_name = sci_block.get_text(strip=True)
+
+                # Imagen principal dentro de main (evitando logos)
+                image_url = None
+                candidate_imgs = dsoup.select('main img') or []
+                for im in candidate_imgs:
+                    src = im.get('src') or ''
+                    alt = (im.get('alt') or '').lower()
+                    if 'logo' in src or 'logo' in alt:
+                        continue
+                    if 'storage' in src or 'perenual.com/storage' in src:
+                        image_url = src
+                        break
+                if not image_url:
+                    for im in candidate_imgs:
+                        src = im.get('src') or ''
+                        if 'logo' not in src:
+                            image_url = src
+                            break
+
+                # Secciones (clase exacta indicada)
+                sections = []
+                for sec in dsoup.select('div.rounded-md.shadow.p-3.mb-2.text-sm'):
+                    text = sec.get_text('\n', strip=True)
+                    if text:
+                        sections.append(text)
+                # Formatear secciones para el frontend: títulos, párrafos y viñetas
+                def _format_sections(raw_sections):
+                    import re
+                    formatted = []
+                    for raw in raw_sections:
+                        lines = [l.strip() for l in raw.split('\n') if l.strip()]
+                        current = None
+                        para_buf = []
+
+                        def flush_para():
+                            nonlocal para_buf, current
+                            if para_buf:
+                                text = ' '.join(para_buf)
+                                if current is None:
+                                    current = {'title': None, 'subtitle': None, 'paragraphs': [], 'bullets': []}
+                                current['paragraphs'].append(text)
+                                para_buf = []
+
+                        def is_heading(line: str) -> bool:
+                            # Casos típicos: "Symptoms", "Solutions", líneas que acaban en '?' o patrones "N - Subtítulo"
+                            if line in ('Symptoms', 'Solutions'):
+                                return True
+                            if line.endswith('?') and len(line) < 200:
+                                return True
+                            if re.match(r'^\d+\s*-\s+.+', line):
+                                return True
+                            # Título corto con inicial mayúscula y sin punto final
+                            if len(line) <= 80 and re.match(r'^[A-Z][A-Za-z0-9\-\(\)\s]+$', line) and not line.endswith('.'):
+                                return True
+                            return False
+
+                        def is_bullet(line: str) -> bool:
+                            return bool(re.match(r'^[•\-\*]\s+', line)) or line.startswith('•') or line.startswith('- ') or line.startswith('* ')
+
+                        for ln in lines:
+                            if is_heading(ln):
+                                flush_para()
+                                # cerrar sección previa
+                                if current:
+                                    formatted.append(current)
+                                # iniciar nueva
+                                current = {'title': ln, 'subtitle': None, 'paragraphs': [], 'bullets': []}
+                                m = re.match(r'^\s*(\d+)\s*-\s*(.+)$', ln)
+                                if m:
+                                    # usar texto tras el número como título y guardar el número como subtítulo opcional
+                                    current['title'] = m.group(2)
+                                    current['subtitle'] = f"{m.group(1)}"
+                                continue
+                            if is_bullet(ln):
+                                flush_para()
+                                if current is None:
+                                    current = {'title': None, 'subtitle': None, 'paragraphs': [], 'bullets': []}
+                                bullet = re.sub(r'^[•\-\*]\s*', '', ln)
+                                current['bullets'].append(bullet)
+                            else:
+                                para_buf.append(ln)
+                        # cerrar buffers al terminar
+                        flush_para()
+                        if current:
+                            formatted.append(current)
+                    return formatted
+
+                structured_sections = _format_sections(sections)
+
+                print(f"✅ Found disease detail: {title}, scientific name: {scientific_name}, image: {image_url}, sections: {len(sections)}")
+                print("="*30 + "\n")
+                print(structured_sections[:2])  # muestra las 2 primeras secciones formateadas
+
+                return Response({
+                    'name': title,
+                    'scientific_name': scientific_name,
+                    'image': image_url,
+                    'sections': structured_sections,
+                })
+
+        return Response({"error": "Enfermedad no encontrada"}, status=status.HTTP_404_NOT_FOUND)
 
 class GeminiPlantIdentificationView(APIView):
     parser_classes = [MultiPartParser]

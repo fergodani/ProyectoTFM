@@ -226,7 +226,7 @@ export const PlantService = {
         response = await fetch(`${url}/api/perenual/plants?format=json&page=${page}&q=${encodeURIComponent(filter)}`);
       } else if (type) {
         response = await fetch(`${url}/api/perenual/plants?format=json&page=${page}&type=${encodeURIComponent(type)}`);
-      }else {
+      } else {
         response = await fetch(`${url}/api/perenual/plants?format=json&page=${page}`);
       }
 
@@ -268,7 +268,7 @@ export const PlantService = {
     }
   },
   */
- getPlantInfoById: async (id: number): Promise<PlantInfo> => {
+  getPlantInfoById: async (id: number): Promise<PlantInfo> => {
     try {
       const response = await fetch(`${url}/api/perenual/plants/${id}?format=json`);
       if (!response.ok) {
@@ -303,7 +303,7 @@ export const PlantService = {
     }
   },
 
-  sendPhoto: async (photoUri: string): Promise<Prediction> => {
+  sendPhoto: async (photoUri: string, isPest: boolean = false): Promise<Prediction> => {
     const formData = new FormData();
 
     // En web, FormData necesita un Blob/File real. En móvil, RN usa el objeto con uri.
@@ -339,11 +339,18 @@ export const PlantService = {
       } as any);
     }
     try {
-      //const response = await fetch(`${url}/api/predict/`, {
-      const response = await fetch(`${url}/api/predict/`, {
-        method: 'POST',
-        body: formData,
-      });
+      let response;
+      if (isPest) {
+        response = await fetch(`${url}/api/predict/pest/`, {
+          method: 'POST',
+          body: formData,
+        });
+      } else {
+        response = await fetch(`${url}/api/predict/`, {
+          method: 'POST',
+          body: formData,
+        });
+      }
 
       const data = await response.json();
       console.log('Prediction result:', data);

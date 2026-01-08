@@ -1,0 +1,1794 @@
+[
+  {
+    "id": 1,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/1",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/1_agrocybe/medium/Fairy_ring_-_Lindsey.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=1d93576ead7eadc2a6b12f5d3da547537f5d2dd1f7c6629b995e946f3550877d",
+    "name": "Fairy ring",
+    "solutions_count": 2
+  },
+  {
+    "id": 2,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/2",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/2__panaeolus_foenisecii_/medium/Panaeolus_foenisecii_124316833.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=24d27feb7bd6ef71fe50d765fda1a1a49ff0a6f578bc66536df4b0c406f3a64c",
+    "name": "Fungi Nuisance",
+    "solutions_count": 1
+  },
+  {
+    "id": 3,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/3",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Grease spot (Pythium blight)",
+    "solutions_count": 5
+  },
+  {
+    "id": 4,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/4",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/4_coprinus_comatus/medium/2560px-Coprinus_comatus_G4.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=2014f601b9f48d8cfd62289a2ad858ad3089141c5ec809a40ed82a0d9c22ddc9",
+    "name": "Mushrooms",
+    "solutions_count": 4
+  },
+  {
+    "id": 5,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/5",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/5_erysiphe_graminis/medium/2560px-Hordeum_vulgare_Erysiphe_graminis_f._hordei_28129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=e4f9189d31e23a8f97abb9fb3cef5116262a543ad3ed959fed0f3beab2fc825f",
+    "name": "Powdery mildew",
+    "solutions_count": 8
+  },
+  {
+    "id": 6,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/6",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/6_puccinia_spp/medium/13034637154_1c0ffb57b9_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=6c493130f2080a189a0fa8a5198b21c665e971e764d521f6157af50201f235be",
+    "name": "Rust",
+    "solutions_count": 2
+  },
+  {
+    "id": 7,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/7",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/7_xylella_fastidiosa/medium/Ahorn_Krankheit_9980.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a1089ce2e9aa71a11c251bac99f866766e642c00d9a1ea8ecde9f382674e97ab",
+    "name": "Almond leaf scorch (Bacterial leaf scorch)",
+    "solutions_count": 3
+  },
+  {
+    "id": 8,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/8",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/8_armillaria_mellea/medium/2560px-Armillaria_mellea2C_Honey_Fungus2C_UK_1.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=631e8b45976deecb00dc5f61579ef25ea1913231322da7f896f387317e0656a9",
+    "name": "Armillaria root rot (Oak root fungus)",
+    "solutions_count": 3
+  },
+  {
+    "id": 9,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/9",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/9_pseudomonas_syringae/medium/Pseudomonas_syringae_a2_28429.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=32c764d0c5d84440409d2148a8d06a38c6aa4a08b9545965847a520e0210c89e",
+    "name": "Bacterial canker",
+    "solutions_count": 3
+  },
+  {
+    "id": 10,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/10",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/10_monilinia_spp/medium/Monilinia-fruchtfaeule.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=d56443592fa0896cc479a5483c6fb25314c7cb1c144849118b5dc2a4f33b4c0c",
+    "name": "Brown rot",
+    "solutions_count": 2
+  },
+  {
+    "id": 11,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/11",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/11_wilsonomyces_carpophilus/medium/Peach_shot_hole_disease.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=9d79769dc7c3a57c6d7887e102155fce71fec3f45d6ed782ec83c49e2c1f7023",
+    "name": "Coryneum blight (Shot hole disease)",
+    "solutions_count": 2
+  },
+  {
+    "id": 12,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/12",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/12_agrobacterium_tumefaciens/medium/32589809932_e084021094_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=57c059d3341b089a3686da7487f9974013c68d69b8c63462a25c0a7b5ee6da05",
+    "name": "Crown gall",
+    "solutions_count": 2
+  },
+  {
+    "id": 13,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/13",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/13_phytophthora_spp/medium/Carex_michelii3.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=edca858f628bab2f18591ee79c289490880f638731a7e7fdab48d419f4814ec0",
+    "name": "Phytophthora root and crown rot",
+    "solutions_count": 2
+  },
+  {
+    "id": 14,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/14",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/14_cladosporium_syn_fusicladium_carpophilum/medium/pear-tree-nature-light.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=59d566013a7d924db4a459b05d7c21ce7785f2d000dd5b323b21a4d1bc7fe730",
+    "name": "Scab",
+    "solutions_count": 2
+  },
+  {
+    "id": 15,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/15",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Scab",
+    "solutions_count": null
+  },
+  {
+    "id": 16,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/16",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/16_verticillium__dahliae/medium/29491771515_ac80d9e010_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=13cdd8c6e234ec2cc5806e21f83f54ed60fc5b9c0cdc281dd4cbe4909f2e7f7d",
+    "name": "Verticillium wilt",
+    "solutions_count": 3
+  },
+  {
+    "id": 17,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/17",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/17_plasmodiophora_brassicae/medium/Knolvoet_bij_bloemkool_28Plasmodiophora_brassicae_on_cauliflower29.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ff4f2a81cff13dcfc93ee9733299d2cf34ae5c1428b530c26a3b6bca569798b6",
+    "name": "Clubroot",
+    "solutions_count": 3
+  },
+  {
+    "id": 18,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/18",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/18_rhizoctonia_solani/medium/9737590164_e32057b741_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ff10040ea85860a9398fc8feade96e11ecb70dd0f9fbbf795a5da0e5efa9ce73",
+    "name": "Brown patch (large patch or Rhizoctonia blight )",
+    "solutions_count": 2
+  },
+  {
+    "id": 19,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/19",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/19_sclerotinia_homoecarpa_%C2%A0lanzia/medium/15489837762_0b9ab08177_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ccdf780e9954d5b3188f82e9fd504059d28e21153253922bc70c37e110545f61",
+    "name": "Dollar spot",
+    "solutions_count": 2
+  },
+  {
+    "id": 20,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/20",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/20_microdochium_nivale/medium/2314px-Microdochium_nivale_28Fr.29_Samuels_26_I.C._Hallett_562903.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=3f6693fd506380f215d4d2f954ea6efc241375d831720eeba69bcd769980ae77",
+    "name": "Fusarium patch (Microdochium patch or pink snow mold)",
+    "solutions_count": 3
+  },
+  {
+    "id": 21,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/21",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/21_ilarvirus/medium/PanaC5A1ovC3A1nC3AD_listu_jablonC49B.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=faa01c0ba81cab0a5c49348811533ac13fb3e46c6284818a554406f61cfae2e8",
+    "name": "Apple mosaic",
+    "solutions_count": 3
+  },
+  {
+    "id": 22,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/22",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/22_venturia_inaequalis/medium/Appelschurft.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=8be4042482e0550b3732a053e7f52478ad9dd7b2d2babe92a69c6f1e69558db3",
+    "name": "Apple scab",
+    "solutions_count": 2
+  },
+  {
+    "id": 23,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/23",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/23_nectria_galligena/medium/Baumkrebs_28Nectria_galligena29.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=64a20d08e09553d7ccb70e904568297df2a66203797cfc8d0daaf39ab3b2c8b5",
+    "name": "European canker (Necria canker)",
+    "solutions_count": 2
+  },
+  {
+    "id": 24,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/24",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/24_erwinia_amylovora/medium/Apple_tree_with_fire_blight.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=426d1dc482f41199b54c618ef25a0878fc9dddddad8520b471d25f10ab5f7fce",
+    "name": "Fire blight",
+    "solutions_count": 3
+  },
+  {
+    "id": 25,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/25",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/25_trametes_versicolor/medium/41856600312_fdbd3236f8_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=fb5422cea3b3ce2421071ccc880faf786ef343ecc9a3a5fac2ff4f8ac3c2648e",
+    "name": "Papery bark (Sappy bark)",
+    "solutions_count": 2
+  },
+  {
+    "id": 26,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/26",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/26_podosphaera_leucotricha/medium/9010271992_4f2c71e479_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=2a8bbbc359f446ad6e1cfda04e6e38b163c48ed2f3586b3f665a1db4e499f39a",
+    "name": "Powdery mildew",
+    "solutions_count": 3
+  },
+  {
+    "id": 27,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/27",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/27_ganoderma_lucidum/medium/Ganoderma_lucidum_48805944.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=1ab32060544760d7945f3537bfe70243d330d9772ff37846913baa59e19cff84",
+    "name": "Varnish fungus rot",
+    "solutions_count": 3
+  },
+  {
+    "id": 28,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/28",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/28_eutypa_lata/medium/Eutypa_acharii_194287.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=fe3acccc59b85b3cac315512a1e3aa86047bafe9ac7f850a03acc94320b2a072",
+    "name": "Eutypa dieback",
+    "solutions_count": 3
+  },
+  {
+    "id": 29,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/29",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/29_podosphaera_tridactyla/medium/15789581864_33756b29ea_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=272e4a7287a90824a66c3ff59ee3dbbc50d09ba00be9380b4182215a8e20b023",
+    "name": "Powdery mildew",
+    "solutions_count": 2
+  },
+  {
+    "id": 30,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/30",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/30_sphaerotheca_pannosa/medium/5832752111_ae2df1c129_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=33574d2eb50544f9dfa155cdc120d1304b77a5db161e0b6798193e8b69cc95a0",
+    "name": "Powdery mildew",
+    "solutions_count": 6
+  },
+  {
+    "id": 31,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/31",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/31_botrytis__cinerea/medium/33938535226_6eb3e7a8a8_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=91c624fd461326ab28f01d9900ce433e3ee7cfd59120facbbd986fd71a567d47",
+    "name": "Botrytis rot (gray mold)",
+    "solutions_count": 5
+  },
+  {
+    "id": 32,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/32",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/32_botrytis_cinerea/medium/33859218262_9ce14263c2_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=62f3abfe2be08c52cb4bb84e188a9a0363e3140365e9a8793053e254102d8db7",
+    "name": "Gray mold (Botrytis rot)",
+    "solutions_count": null
+  },
+  {
+    "id": 33,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/33",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/33_leveillula_taurica/medium/9077261153_b358d0a039_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ed7b5a49a279482f34ca0575843d913b4a5237bdd2919dfad9f34bc115a4aa01",
+    "name": "Powdery mildew",
+    "solutions_count": 6
+  },
+  {
+    "id": 34,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/34",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/34_discula_fraxinea/medium/9540312937_b354a55b92_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=913e20435b049b8718579f64f0e69dd373169df0fde8e78d5bfbf4f46435651c",
+    "name": "Anthracnose",
+    "solutions_count": 3
+  },
+  {
+    "id": 35,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/35",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/35_botryosphaeria_stevensii/medium/1346px-Anthracnose_-_canker_-_Baumkrebs_-_Pflanzenkrebs_-_Chancre_-_antracnosis_-_01a.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=012e1ef9266e4c2dd197e4e5844b1a66610252ee9db66250d3667225019049b2",
+    "name": "Ash dieback",
+    "solutions_count": 5
+  },
+  {
+    "id": 36,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/36",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/36_fusarium_oxysporum/medium/13960296920_9a3fd55696_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=14df82cf5676295070ead766adb9b8e4f06a785a86fb1cad67af2fc020b3769e",
+    "name": "Fusarium wilt",
+    "solutions_count": 8
+  },
+  {
+    "id": 37,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/37",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/37_puccinia_asparagi/medium/9685492848_33a85eb8a3_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=1c6064ba2627dc25a5dc82d806f049a5012e084699fb118752e49b1cd9503fc7",
+    "name": "Rust",
+    "solutions_count": 6
+  },
+  {
+    "id": 38,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/38",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/38_septoria_spp/medium/16400699744_5a10c11d38_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=fe90e3540445017eeb84244e00de9017befba1324d6d1afd21b3f8abdb9d3fcf",
+    "name": "Leaf spot diseases",
+    "solutions_count": 3
+  },
+  {
+    "id": 40,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/40",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/40_phytophthora_cinnamomi/medium/12105344686_394f58bb91_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=399523309401916a7f26f43b19a222407f89bfedf94cb6338aff161399a76796",
+    "name": "Avocado root rot",
+    "solutions_count": 6
+  },
+  {
+    "id": 41,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/41",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/41_xanthomonas_campestris/medium/2560px-Panax_28Polyscias_guilfoylei29_Bacterial_leaf_blight_caused_by_Xanthomonas_campestris_pv._hederae_281406353044229.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=5af7d9ada4ffb76ebd4fdcca6d05aea3b62e61de7107f2c2af47e689278e3f3a",
+    "name": "Bacterial canker",
+    "solutions_count": 6
+  },
+  {
+    "id": 42,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/42",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/42_botryosphaeria_spp/medium/15117960869_215abc3ca7_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=2e195b2c7329cc6e10a1da4ca19c7a1518accccba4ea9db70c4768a6b092aa85",
+    "name": "Dothiorella canker",
+    "solutions_count": 3
+  },
+  {
+    "id": 43,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/43",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/43_neofusicoccum_spp/medium/Botryosphaeria_canker.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=3dd69e3031a72e4784c1cafc76866149ac1c4e3931dc4d8841dea8496d887df7",
+    "name": "Dothiorella canker",
+    "solutions_count": 3
+  },
+  {
+    "id": 44,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/44",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/44_avocado_sunblotch_viroid/medium/5688739048_29968a5283_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=5f8908cbffa8379e53a9e66f389fb5a9a7562282c16c0ef16ecca4c8adcf6863",
+    "name": "Sunblotch",
+    "solutions_count": 2
+  },
+  {
+    "id": 45,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/45",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Ovulinia petal blight",
+    "solutions_count": 3
+  },
+  {
+    "id": 46,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/46",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/46_alternaria_gerberae/medium/Hibiscus_Bacterial_leaf_spot_caused_by_Pseudomonas_cichorii_28568457581829.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ac6c721446202481910bf916073bfbbcd9d7d79e0bc7b80869a30c426ddd62bb",
+    "name": "Leaf spot diseases",
+    "solutions_count": 4
+  },
+  {
+    "id": 47,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/47",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/47_ascochyta_gerberae/medium/19101655946_4513eac162_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=6be570a7a6502c1fedf734cd5d3febc199cc2fdd3650b496934d0812e0cf4f26",
+    "name": "Leaf spot diseases",
+    "solutions_count": 5
+  },
+  {
+    "id": 48,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/48",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/48_uromyces_phaseoli/medium/Roest_op_stoksperzieboon_28Uromyces_appendiculatus_var._appendiculatus29.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=bec85ccf4182325635123e7484ed2dcb389035301ac1c50c6cf0394b078554a6",
+    "name": "Bean rust",
+    "solutions_count": 3
+  },
+  {
+    "id": 49,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/49",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/49_beet_curly_top_virus__bctv/medium/Beet_curly_top_virus_geminiviridae_common_bean.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=3b184fe073e83121fa786b7e97d7eaaead32385f19d5cea2e2f6c7e8be4a702a",
+    "name": "Curly top",
+    "solutions_count": 5
+  },
+  {
+    "id": 50,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/50",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/50_pythium__spp/medium/2560px-Fusarium_oxysporum_a1_28229.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=7916dfdc60b759965da5c911b9fd56d48cad174abaaa993d74872aeee992bbc5",
+    "name": "Damping off",
+    "solutions_count": 4
+  },
+  {
+    "id": 51,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/51",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/51_fusarium_solani/medium/Rhododendron-Phytophthora_Root_Rot_28229.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=76a822a08d97338698afa3d2563e70737d6346e0e26417bd0e6ae03c4c54eea3",
+    "name": "Fusarium root rot",
+    "solutions_count": 5
+  },
+  {
+    "id": 52,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/52",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/52_/medium/14910134358_09777babd6_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=cd077d36a0b82e48dd5f30c1a4614f76719d61b73e729f75d117e4242ff6e8c2",
+    "name": "Mosaic viruses",
+    "solutions_count": 2
+  },
+  {
+    "id": 53,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/53",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/53_erysiphe_polygoni/medium/40162585395_640d299711_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=cd8dec28c4eb1bbb3e79f6aaff17c0af54fbd1d6f9d86fb2b2c9836bea2261be",
+    "name": "Powdery mildew",
+    "solutions_count": 4
+  },
+  {
+    "id": 54,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/54",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/54_sphaerotheca_fuliginea/medium/2560px-Sphaerotheca_fusca_on_Cucumber_leaves.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=cf0feac7b87828a7fbf626f915ddfefe2fd5c266a5a2b4beee4b9849647833c7",
+    "name": "Powdery mildew",
+    "solutions_count": 4
+  },
+  {
+    "id": 55,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/55",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/55_sclerotinia_sclerotiorum/medium/Sclerotinia_sclerotiorum_at_Phaseolus_vulgaris2C_sclerotiC3ABnrot_stamsperzieboon.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=53281dd282f19aa0db9d93dfe3261b4625f156bd640ac2dce89bc73fc9f797fc",
+    "name": "White mold",
+    "solutions_count": 3
+  },
+  {
+    "id": 56,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/56",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/56_erwinia_spp/medium/5832793333_206e828baa_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=9603b138cc0e3036b98659f91018253d4d5a205add36caa4395454a25cd323b9",
+    "name": "Bacterial soft rots leaf spots blights wilts",
+    "solutions_count": 3
+  },
+  {
+    "id": 57,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/57",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Leaf spot diseases",
+    "solutions_count": 2
+  },
+  {
+    "id": 58,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/58",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/58_golovinomyces_cichoracearum/medium/Golovinomyces_cichoracearum_a1_28229.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=b308dddfbd9f5a066b9d967dbf1502f6b3f709d14b6b31d0d610c82dc83e2f44",
+    "name": "Powdery mildew",
+    "solutions_count": 4
+  },
+  {
+    "id": 59,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/59",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/59_laetisaria_fuciformis/medium/31579500936_953c3fc5e2_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=fe16e8c576429fb7d3d3715d4a543c7c0be3fdf28cfa8d7a9eb16c009c246ebc",
+    "name": "Red thread",
+    "solutions_count": 1
+  },
+  {
+    "id": 60,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/60",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Take-all patch",
+    "solutions_count": 4
+  },
+  {
+    "id": 61,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/61",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/61_bipolaris_spp/medium/leaf_light_shine_through_leaf_veins_veins_poplar_poplar_leaf_bastard_black_poplar-1244410.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=5c7474daf896bfba2fcb8638db1915db1f2d01cc2a1bdfc33e0e5801e989e500",
+    "name": "Leaf spot",
+    "solutions_count": 2
+  },
+  {
+    "id": 62,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/62",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Spring dead spot",
+    "solutions_count": 3
+  },
+  {
+    "id": 63,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/63",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/63_magnaporthe_poae/medium/14747617254_dd85aea258_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a35ed31992996fcc4c3e4f8cbd6e4b2190d7ca91965f0711f2a9a0d82e60564a",
+    "name": "Summer patch",
+    "solutions_count": 2
+  },
+  {
+    "id": 64,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/64",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Pseudonectria canker (Volutella canker and blight)",
+    "solutions_count": 2
+  },
+  {
+    "id": 65,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/65",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/65_phytophthora_megasperma/medium/Rhododendron-Phytophthora_Root_Rot_28329.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=60ba10d32272dc056ef2f18b714262cfaf16a7c72da3a2359a7f25cb9e876417",
+    "name": "Phytophthora root rot",
+    "solutions_count": 3
+  },
+  {
+    "id": 66,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/66",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/66_erysiphe_cruciferarum/medium/2560px-Erysiphe_cruciferarum_on_Alliaria_petiolata_284547438165229.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=0d790586a8ceee1cafac072c9e20e22230bc7e837ad4b3e52a5b4323f61a80e0",
+    "name": "Powdery mildew",
+    "solutions_count": 4
+  },
+  {
+    "id": 67,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/67",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/67_mycosphaerella_brassicicola/medium/Mycosphaerella_brassicicola_02.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=c6cd379ec6a30085d4e58010a9f6469fcf95cb4e2b50cc20287d00b2a45dd12b",
+    "name": "Black blight (Ringspot)",
+    "solutions_count": 2
+  },
+  {
+    "id": 68,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/68",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Branch and twig dieback",
+    "solutions_count": null
+  },
+  {
+    "id": 69,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/69",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/69_fusarium__oxysporum/medium/2560px-Elbwiesen_-_Winterkohl_28229.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ede1a5bbe151da0d35078d678f60ce80a6f94273c6e50709e2f5c16824c81ead",
+    "name": "Fusarium wilt (yellows)",
+    "solutions_count": null
+  },
+  {
+    "id": 70,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/70",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/70_anisogramma_anomala/medium/Anisogramma_anomala.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=d00a8a287ef8f24998965248c2d814d8733f73e1c637686505d03b97bb4d71d3",
+    "name": "Eastern filbert blight",
+    "solutions_count": 4
+  },
+  {
+    "id": 71,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/71",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/71_ciborinia_camelliae/medium/flower-flower-of-camellia-flower-wilt-camelia.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=7fa34461d86f4964a8d74f1f800dacb556d8d1007bd55039d3f48b893f32f42c",
+    "name": "Camellia petal and flower blight",
+    "solutions_count": 3
+  },
+  {
+    "id": 72,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/72",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/72_elsinoe_spp/medium/15803235321_1fd37f67ae_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ea25b91cd0eb98a040a1ee7ba528eff7fd07007ac25522db2894c6ef82a2738a",
+    "name": "Anthracnose",
+    "solutions_count": 2
+  },
+  {
+    "id": 75,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/75",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/75_peronospora_sparsa/medium/2560px-Peronospora_sparsa_G44_28429.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=9cea0acf00eea0653ce2c86766894f4e4930ba4791199b1fcfba26e340be1c95",
+    "name": "Downy mildew",
+    "solutions_count": 3
+  },
+  {
+    "id": 76,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/76",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/76_mycosphaerella_rubi/medium/2560px-Mycosphaerella_rubi_a1_28329.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=c62bbe6865da2c49915f7360549254e880672d2583f8d111061fcedecf39d948",
+    "name": "Leaf spot",
+    "solutions_count": 2
+  },
+  {
+    "id": 77,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/77",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/77_arthuriomyces_peckianus/medium/2560px-Arthuriomyces_peckianus.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=195d4f2144a637f414f0b323baf197731bb09034c56d1129ce339d0e9de4a15e",
+    "name": "Orange rust",
+    "solutions_count": 2
+  },
+  {
+    "id": 78,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/78",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/78_gymnoconia_nitens/medium/39006550150_32cdba6ae0_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=bd6699f610f2618d9ea8acc2ec9873b499d48258257f0ffa0286acefa53d5828",
+    "name": "Orange rust",
+    "solutions_count": null
+  },
+  {
+    "id": 79,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/79",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/79_sphaerotheca_macularis/medium/Mycosphaerella_fragariae.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=efb48767557c5205d30f3b4b456311765e9c78a18cacdf6c0e045370365090da",
+    "name": "Powdery mildew",
+    "solutions_count": 3
+  },
+  {
+    "id": 80,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/80",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/80_septocyta_ruborum/medium/Septocyta_ruborum_at_blackberry2C_bruine_stengelvlekkenziekte_op_braam.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=c56b7301e0ffef01dde254c001a9a57484bdc844971ed47ffa5d047d7e1fade4",
+    "name": "Purple blotch",
+    "solutions_count": 2
+  },
+  {
+    "id": 82,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/82",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/82_phragmidium_rubi-idaei/medium/Phragmidium_rubi-idaei_a1_28129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=8bdb2a754fc25ec7944ee1e6d33299ef4c65fd93876b535087b30ed6181473cb",
+    "name": "Yellow rust",
+    "solutions_count": 2
+  },
+  {
+    "id": 83,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/83",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/83_alternaria_spp/medium/8227641316_9695d1d63f_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=5a3dcb2595bc23bd79a797eb6cdc64951b3375eefc580b2e6d3e25a7906c728e",
+    "name": "Alternaria blight",
+    "solutions_count": 2
+  },
+  {
+    "id": 84,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/84",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Bacterial soft rots leaf spots blights wilts",
+    "solutions_count": 2
+  },
+  {
+    "id": 85,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/85",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Fairy-ring leaf spot",
+    "solutions_count": 3
+  },
+  {
+    "id": 86,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/86",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/86_septoria_dianthi/medium/Septoria_scabiosicola_WF3_28129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=f26d86490a194ad10513d28c639c44d9dd8604089680ae6b943b18c7955bb87f",
+    "name": "Leaf spot Septoria",
+    "solutions_count": 2
+  },
+  {
+    "id": 87,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/87",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/87_alternaria_dauci/medium/2560px-Alternaria_solani_a1_28229.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=f7053b3372ff6e192b39f4688d3605cfeda74a02bedca9625eed2f7666f700e9",
+    "name": "Alternaria leaf blight",
+    "solutions_count": 3
+  },
+  {
+    "id": 88,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/88",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/88_erwinia_carotovora/medium/39935058221_6fde99b08e_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=0b485c009b3dee9d033251513cb9911e4403f269bf2ba78e7778dbc4ec2697b0",
+    "name": "Bacterial soft rot",
+    "solutions_count": 1
+  },
+  {
+    "id": 89,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/89",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Beet leafhopper transmitted virescence agent (BLTVA)",
+    "solutions_count": 1
+  },
+  {
+    "id": 90,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/90",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "BLTVA (beet leafhopper transmitted virescence agent)",
+    "solutions_count": null
+  },
+  {
+    "id": 91,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/91",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Cavity spot",
+    "solutions_count": 2
+  },
+  {
+    "id": 92,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/92",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/92_cercospora_carotae/medium/3024px-Spinach-_Cercospora_leaf_spot_-_2.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=de947674dd15793148e3cf9dda66ac4583d5ea4efa3896662831b909a1bdfb03",
+    "name": "Cercospora leaf spot",
+    "solutions_count": 4
+  },
+  {
+    "id": 93,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/93",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/93_erysiphe_heraclei/medium/2560px-Erysiphe_heraclei_a1_28229.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=d5e24561261a86408a36af561ad2b1adcd4cbc31f4dfadc0803db36d4baef416",
+    "name": "Powdery mildew",
+    "solutions_count": 3
+  },
+  {
+    "id": 94,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/94",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Cherry buckskin (X-disease)",
+    "solutions_count": 4
+  },
+  {
+    "id": 95,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/95",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/95_blumeriella_jaapii/medium/Blumeriella_jaapii_01.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=dde8b7e70ebd9b627bc50a9395cf6ccce98a2423bc8ed526372e247bb9ec44d6",
+    "name": "Cherry leaf spot",
+    "solutions_count": 2
+  },
+  {
+    "id": 96,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/96",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/96_trametes_hirsuta/medium/2560px-thumbnail.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a2a30095aa00bef7b8adb63e471b203152eafd8095eb6ba256050bb86cdb5e2c",
+    "name": "Hairy turkey tail",
+    "solutions_count": 2
+  },
+  {
+    "id": 97,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/97",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/97_stereum_spp/medium/Hairy_Parchment_28206196478129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=68ae7c84e97f92e2cbcb315693b9ecc42a69a875efa9fa527a67af154fbe2c25",
+    "name": "Parchment fungus",
+    "solutions_count": 2
+  },
+  {
+    "id": 98,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/98",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/98_podosphaera_clandestina/medium/14804678499_389825150e_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=5496fc6fc331bda5ba726f66856fccf044fbef66a9328d43455fb66273523726",
+    "name": "Powdery mildew",
+    "solutions_count": 3
+  },
+  {
+    "id": 99,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/99",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/99_laetiporus_sulphureus/medium/Laetiporus_sulphureus_JPG01.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=aa57e1c41a980c9c71d9b6862b03156de4142982802c731b703f0639cb77c693",
+    "name": "Sulfur fungus",
+    "solutions_count": 2
+  },
+  {
+    "id": 100,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/100",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/100_verticillium_spp/medium/e113884e265236116e8cbf70d8c3aad8c1ed4594.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=94614bb4f467384970fc2b67c4271844cd643a3bb111885a04387bb85c22e5b8",
+    "name": "Verticillium wilt",
+    "solutions_count": null
+  },
+  {
+    "id": 101,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/101",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/101_septoria_chrysanthemi/medium/Septoria_quercicola_a1_28429.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=49bbe6ea1070d8198ee6254d66f51ee107ee2bddc2b02de434f77ffe3f5b1c3b",
+    "name": "Leaf spot Septoria",
+    "solutions_count": 2
+  },
+  {
+    "id": 103,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/103",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Alternaria rot",
+    "solutions_count": 2
+  },
+  {
+    "id": 104,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/104",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/104_collectotrichum_gloeosporioides/medium/15085900645_f4932bf337_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=d1187193b9c153a602d4dda8d42a3ebc69f3c45902de0e359663d8959fbdf493",
+    "name": "Anthracnose",
+    "solutions_count": 2
+  },
+  {
+    "id": 105,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/105",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Anthracnose",
+    "solutions_count": 2
+  },
+  {
+    "id": 106,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/106",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/106_ganoderma_applanatum/medium/2560px-Ganoderma_applanatum_4977.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=481c7ccc3e5f7ce08b10f8141640a53323bc1881a033f1193c0c5962b7b6e6ca",
+    "name": "Artist's conk",
+    "solutions_count": 2
+  },
+  {
+    "id": 107,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/107",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/107_candidatus_liberibacter_asiaticus/medium/49644705696_48ed89eca2_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=8774da308d51bb11d0e1ad2ae9ec91eb2a0f0dfdc46880cfdcafec35407ad865",
+    "name": "Citrus greening (Huanglongbing disease)",
+    "solutions_count": 2
+  },
+  {
+    "id": 108,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/108",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Exocortis",
+    "solutions_count": 2
+  },
+  {
+    "id": 109,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/109",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/109_tristeza_virus/medium/8980758301_7949b545da_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=92459006470aa5c4822555d8aba58713140f88df668e9cfa3a1bf677247db500",
+    "name": "Tristeza disease complex",
+    "solutions_count": 2
+  },
+  {
+    "id": 110,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/110",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/110_peronospora_parasitica/medium/Hyaloperonospora_brassicae.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=294df79670be537037e9b2ebce1a83b032e669fbd8a2588be08a74b96bc5440b",
+    "name": "Downy mildew",
+    "solutions_count": 3
+  },
+  {
+    "id": 111,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/111",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Lettuce drop (white mold)",
+    "solutions_count": 3
+  },
+  {
+    "id": 113,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/113",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/113_heterobasidion_annosum/medium/Heterobasidion.annosum_G4.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=79b5e703a9ed87a896ced364ff3d01dca6aa97286149a3c6476beca441b46728",
+    "name": "Annosus root disease",
+    "solutions_count": 3
+  },
+  {
+    "id": 114,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/114",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Needle cast fungi",
+    "solutions_count": 2
+  },
+  {
+    "id": 115,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/115",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/115_puccinia_sorghi/medium/Puccinia_sorghi_Schwein._5465568.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=b83b559fbf2bfb7dd4c1eaa69e7eca4a03bb9da2d9e96370579375b880123d90",
+    "name": "Common rust",
+    "solutions_count": 1
+  },
+  {
+    "id": 116,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/116",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/116_ustilago_maydis/medium/Ustilago_maydis_J1a.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=f89890be3e00faf57ce769f6dbb1dff621dd9bcba4be15eed211cb2201b46cf8",
+    "name": "Common smut",
+    "solutions_count": 3
+  },
+  {
+    "id": 117,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/117",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Fusarium ear and stalk rot",
+    "solutions_count": 3
+  },
+  {
+    "id": 118,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/118",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Head smut",
+    "solutions_count": 2
+  },
+  {
+    "id": 119,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/119",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/119_maize_dwarf_mosaic_virus/medium/37873426034_5f85fe28cf_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=85d2ef355418818c6f5f22fc601c5c504727c75ad3b79c9abcd7a8b8efb11d34",
+    "name": "Maize dwarf mosaic",
+    "solutions_count": 2
+  },
+  {
+    "id": 120,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/120",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/120_erysiphe_lagerstroemiae/medium/pexels-photo-10623129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=81aff8c10b98e20821fcf3ad4fe05b83a66e2f3a5195ffffcf121d67aaa7743b",
+    "name": "Powdery mildew",
+    "solutions_count": 4
+  },
+  {
+    "id": 121,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/121",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/121_pestalotiopsis_funerea/medium/tree-log-branches-fir.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ff296438217e5eba5cf32e8490cf1377ac81b8d547b6f391dfcea6f76e1e12c2",
+    "name": "Cryptomeria blight",
+    "solutions_count": null
+  },
+  {
+    "id": 122,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/122",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/122_erysiphe_cichoracearum/medium/Powdery_mildew.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=dc4eea2e272b35f4c5bd98aae18aaa24d32d4232e04170c017385c877f7b1410",
+    "name": "Powdery mildew",
+    "solutions_count": null
+  },
+  {
+    "id": 123,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/123",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/123_pseudoperonospora_cubensis/medium/Pseudoperonospora_cubensis_a2_28329.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=493f92d8c33448ad1df43feb68d11e804e4e1724d37fb530cf66bf7f71b65522",
+    "name": "Downy mildew",
+    "solutions_count": 2
+  },
+  {
+    "id": 124,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/124",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/124_stromatinia_gladioli/medium/Ruhland2C_Grenzstr._32C_SC3A4mling_einer_Stieleiche2C_Wurzel_mit_Mykorrhiza2C_01.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=d54841b9ff018f1ade337caa371b486382218712c65423073f619d2d6abeded7",
+    "name": "Dry rot",
+    "solutions_count": 2
+  },
+  {
+    "id": 125,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/125",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Smoulder",
+    "solutions_count": 2
+  },
+  {
+    "id": 126,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/126",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Smoulder",
+    "solutions_count": null
+  },
+  {
+    "id": 127,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/127",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/127_sclerotium_rolfsii/medium/18691015770_b343561816_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=f93e8e2ab79dcc522a18747f4dcfe48a125202cabb242284c2614c6f7d8ae2e9",
+    "name": "Southern blight",
+    "solutions_count": 4
+  },
+  {
+    "id": 128,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/128",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/128_elsinoe_corni/medium/8292226888_7eff652322_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=3e2213b24d0b0341f54f62137805a03cccabb541eaead24ab6fe6864dd26e5a4",
+    "name": "Anthracnose",
+    "solutions_count": 4
+  },
+  {
+    "id": 131,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/131",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/131_ophiostoma_ulmi/medium/13412325123_f25a97c46c_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=78d148fe1ef20491b6818058e83085690fee3c3a49839beadf2e2c9998a9eb7a",
+    "name": "Dutch elm disease",
+    "solutions_count": 3
+  },
+  {
+    "id": 132,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/132",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/132_/medium/Dendrothele_nivosa.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=bc68377bb6e7be17a950cc55abceb8a4538bae440ce16e1b890f1a083dd93f8b",
+    "name": "Foamy canker (alcoholic flux)",
+    "solutions_count": 2
+  },
+  {
+    "id": 133,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/133",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/133_pyriculria_grisea/medium/43511169572_8707b1f8fe_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=150a2b64d32b351feb84b855f95227a68230fc8946036bb8f408c545cca10c36",
+    "name": "Gray leaf spot",
+    "solutions_count": 2
+  },
+  {
+    "id": 134,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/134",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/134_fig_mosaic_emaravirus/medium/24819920704_4217db7da1_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=06da8043ee4526fc9b62c6eaab5402f3ee5bb043b2d5ba7f71d69ea73342de31",
+    "name": "Fig mosaic",
+    "solutions_count": 2
+  },
+  {
+    "id": 135,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/135",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/135_phomopsis_spp/medium/5816154916_3108197ae1_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=9d47ecada9dca6dc23c586f6afd0362a4a9c1b39b16c906f7b576ae5cf1f8740",
+    "name": "Phomopsis canker",
+    "solutions_count": 3
+  },
+  {
+    "id": 136,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/136",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Souring",
+    "solutions_count": null
+  },
+  {
+    "id": 137,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/137",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/137_alternaria_alternata/medium/33948498812_47804f2f62_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=df7ebd252800be01c33d5f50f86406c7152d8c3a5f276a6ef167afb42e689cf9",
+    "name": "Alternaria leaf spot",
+    "solutions_count": 4
+  },
+  {
+    "id": 138,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/138",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/138_curvularia_spp/medium/Leaf_spot_on_oil_palm_from_which_Curvularia_oryzae_was_isolated.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=45e88bce47e08a322064604960a72ba79f99964a4ab62fdca452d9d82f4278e1",
+    "name": "Curvularia leaf spot",
+    "solutions_count": 3
+  },
+  {
+    "id": 139,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/139",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/139_stemphylium_spp/medium/2560px-Ahorn-Runzelschorf-Rhytisma-acerinum.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=54b96f7de25cf496645828c8169a25790a3656cc51a69bfeb4d41e9bdba2bef7",
+    "name": "Leaf spot Stemphylium",
+    "solutions_count": null
+  },
+  {
+    "id": 140,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/140",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Scab",
+    "solutions_count": 2
+  },
+  {
+    "id": 141,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/141",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/141_plasmopara_viticola/medium/Plasmopara_viticola_a1_28429.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=5b94825b023b0a6a932d655d343f1854dd1b6d1ac641c97d02bcb0e48c2bd2c2",
+    "name": "Downy mildew",
+    "solutions_count": 2
+  },
+  {
+    "id": 142,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/142",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/142_phomopsis_viticola/medium/Cercospora_Melonganae.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=4c185a3af9d052ebf27c072865fc57cc8112b137698652036cdfe609a1b21baf",
+    "name": "Leaf spot and Phomopsis cane",
+    "solutions_count": 2
+  },
+  {
+    "id": 143,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/143",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Measles",
+    "solutions_count": 2
+  },
+  {
+    "id": 144,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/144",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/144_erysiphe_necator/medium/UncinulaNecatorOnGrapes.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=70603a38c2d51fadc3afb4905fbdcbe3fdda63fd0c4cf11687dbeecf51e146f1",
+    "name": "Powdery mildew",
+    "solutions_count": 3
+  },
+  {
+    "id": 145,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/145",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Escallonia dieback",
+    "solutions_count": 3
+  },
+  {
+    "id": 146,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/146",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/146_kabatina_juniperi/medium/Kabatina_juniperi_a1_28129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=038063a51a3d7dc415b94a153a678c90e5562a091ccc9fc075b5691609aa0b86",
+    "name": "Twig blights",
+    "solutions_count": 2
+  },
+  {
+    "id": 147,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/147",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/147_heterosporium_gracile/medium/41217367730_63fc7b2df1_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=679c2f65f184a1bbf5204ee4767cb2ea8f9e6e0da4a9b014bda03b0ebf759c56",
+    "name": "Fire spot",
+    "solutions_count": 2
+  },
+  {
+    "id": 148,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/148",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Ink spot",
+    "solutions_count": 2
+  },
+  {
+    "id": 149,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/149",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/149_phomopsis_juniperovora/medium/Kabatina_juniperi_a1_28129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=18a4266c261b5ab23fc66e6a1e3926ebd5d84a8ee3ba25e88cb50ec354710c73",
+    "name": "Twig blights",
+    "solutions_count": 2
+  },
+  {
+    "id": 150,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/150",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/150_colletotrichum_graminicola/medium/Kabatina_juniperi_a1_28429.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=01e262450113a7cff2838fa5a2dceef4364ddaf90cc8fcbb794bc086de2cc43b",
+    "name": "Anthracnose",
+    "solutions_count": 2
+  },
+  {
+    "id": 151,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/151",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Big vein",
+    "solutions_count": 3
+  },
+  {
+    "id": 152,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/152",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/152_bremia_lactucae/medium/25611229128_c816ece963_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=730bcf52cab728ebb4f0a5055da04d86ffa4c47feafba40c24334050c1e5408e",
+    "name": "Downy mildew",
+    "solutions_count": 3
+  },
+  {
+    "id": 153,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/153",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/153_erwinia_quercina/medium/3064px-Fagaceae_Scruboak_Quercus_berberidifolia.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=84e797c52b9cc26ad1eb5c12919fa8af5b5860a73f0f1d01d55eb694918ffeb7",
+    "name": "Drippy acorns (Drippy oak)",
+    "solutions_count": 2
+  },
+  {
+    "id": 154,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/154",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/154_ceratocystis_fimbriata/medium/2560px-Canker_on_prunus_01.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=885422ba27e4a0639ddb18cec32896889ff12047656503cf3d64ceea4f39e7fe",
+    "name": "Canker stain (Ceratocystis canker)",
+    "solutions_count": 2
+  },
+  {
+    "id": 155,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/155",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/155_taphrina_deformans/medium/2560px-Taphrina_deformans_sur_pC3AAcher.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=8e1ecc5e455cd04ffc5fd6e12c6fe89b1afdf1b811a3d28335af4a1e27ada1dc",
+    "name": "Peach leaf curl",
+    "solutions_count": 2
+  },
+  {
+    "id": 156,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/156",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/156_tranzschelia_discolor/medium/2008-05-01_Tranzschelia_pruni-spinosae_28Pers.29_Diet_221248.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=5aef02de1689c388b391815adf8be5aaef8ee4a7fe8c291f5639ace45e2a12a5",
+    "name": "Rust",
+    "solutions_count": 3
+  },
+  {
+    "id": 157,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/157",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/157_gloesporium_quercum/medium/5863696238_f9c1d42767_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=672ad0bbacdeb9083896151476cbadbf4128a94de8976c159ad5d259db50c777",
+    "name": "Anthracnose",
+    "solutions_count": 2
+  },
+  {
+    "id": 158,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/158",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Oak branch dieback",
+    "solutions_count": 1
+  },
+  {
+    "id": 159,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/159",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/159_cryptocline_cinerescens/medium/oak-foliage-yellow-golden.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=dd70cbf0fa688b2baaa524653f20fe423634c9cb84ee96aef97bcc73696686c5",
+    "name": "Oak twig blight",
+    "solutions_count": 3
+  },
+  {
+    "id": 160,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/160",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Oleander knot",
+    "solutions_count": 2
+  },
+  {
+    "id": 161,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/161",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Olive knot",
+    "solutions_count": null
+  },
+  {
+    "id": 162,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/162",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/162_erwinia__pseudomonas_/medium/1536px-Napa_Cabbage_28Won_Bok2C_Chinese_Cabbage2C_Celery_Cabbage29_Bacterial_soft_rot_283546827275229.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=91cc1cc1f6bd406850b603cce9f436962744257c284787b4b8d6004b00bffd5e",
+    "name": "Bacterial soft rots",
+    "solutions_count": null
+  },
+  {
+    "id": 163,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/163",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/163_aspergillus_niger/medium/Scale_and_sooty_mold_on_a_Eucalyptus_tree.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=bb628b96490aebd39c689ff7b3618bea022f0fc7f1e03753ece3215227863d86",
+    "name": "Black mold",
+    "solutions_count": 2
+  },
+  {
+    "id": 164,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/164",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/164_penicillium_spp/medium/11467426074_ebea9bd9c0_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=1141ae4c3fefb21b3250b8ce12debdd3755f39b73a33499ff909a7d5449e0381",
+    "name": "Blue mold rot",
+    "solutions_count": 2
+  },
+  {
+    "id": 165,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/165",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/165_botrytis_spp/medium/15994536572_5d91be3385_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=1016b208edf1962353c6f2c334319398adca1e2e1149cc785af0c870b4bfedf1",
+    "name": "Botrytis bulb rot (Neck rot)",
+    "solutions_count": 2
+  },
+  {
+    "id": 166,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/166",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/166_peronospora_destructor/medium/5836365277_c3dd8a4dac_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=1deea2d3d4c9fc55f042ea7bf16bc1b1804ffc3d9c92f985c39dfd93ab42ef82",
+    "name": "Downy mildew",
+    "solutions_count": 3
+  },
+  {
+    "id": 167,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/167",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Pink root",
+    "solutions_count": 2
+  },
+  {
+    "id": 168,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/168",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/168_alternaria_porri/medium/Persicaria_decipiens_leaf1_NC_281719168102229.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=4376a33647db0ef2f5f99db92019cd1becce7f7acf0fb34096260eead448318f",
+    "name": "Purple blotch",
+    "solutions_count": 3
+  },
+  {
+    "id": 169,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/169",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/169_stemphylium_vesicarium/medium/2560px-Syngonium_Bacterial_leaf_blight_281284371713529.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=c36be9cbf2cbfc0064318b6bec7d57201ae8c03be5356c06e11eadd0bd56dc76",
+    "name": "Stemphylium leaf blight",
+    "solutions_count": 2
+  },
+  {
+    "id": 170,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/170",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "White rot",
+    "solutions_count": 2
+  },
+  {
+    "id": 171,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/171",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/171_phaeochoropsis_neowashingtoniae/medium/14808967733_49969d7f68_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=8f6cc2fd431fd6711a53f3feecc1460597392729bb6ee84864c6176a37dfd65b",
+    "name": "Palm diseases",
+    "solutions_count": 2
+  },
+  {
+    "id": 172,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/172",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/172_cercospora_spp/medium/21212367372_568b95ac2c_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a3110427da6199780e5fb6cd6a38a03763fda493fccc0819a4e1bceb825772c3",
+    "name": "Leaf spot diseases",
+    "solutions_count": 3
+  },
+  {
+    "id": 173,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/173",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/173_ascochyta_spp/medium/2048px-Ascochyta_gossypii.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=b46bf204b5d74e865b58101c64fdc7fa77db605d4d7dadf4edbe645acf5de4b1",
+    "name": "Ascochyta blight",
+    "solutions_count": 3
+  },
+  {
+    "id": 174,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/174",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Damping off and root rot",
+    "solutions_count": null
+  },
+  {
+    "id": 175,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/175",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/175_peronospora_viciae_fsp_pisi/medium/26140461895_989f46d13d_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=b9c77dd96b123c3bbb9403c4e5c52aabb8270439bd1610b19d6e20090280dc4e",
+    "name": "Downy mildew",
+    "solutions_count": 2
+  },
+  {
+    "id": 176,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/176",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/176_erysiphe_pisi/medium/2560px-Erysiphe_pisi_DK16_28129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=58afbeaa2e9f022b31d4fcdf8d785c6a5f599077314678e135f7b9c591380451",
+    "name": "Powdery mildew",
+    "solutions_count": 3
+  },
+  {
+    "id": 177,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/177",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Virus diseases",
+    "solutions_count": null
+  },
+  {
+    "id": 178,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/178",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Pear decline",
+    "solutions_count": 1
+  },
+  {
+    "id": 179,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/179",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/179_gymnosporangium_libocedri/medium/9102442560_d72deb2333_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=6e95764a20f02585fd53c18a57346efdf43e196fd2a1a8c4a4917f835dc9d0b0",
+    "name": "Pear rust",
+    "solutions_count": 3
+  },
+  {
+    "id": 180,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/180",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/180_venturia_pirina/medium/Pears_-_Pyrus_sp._01.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=6c4f756df419df6e95a22278d48ec32f5ae3c139ffeee8203baa8c0d31ffda7d",
+    "name": "Pear scab",
+    "solutions_count": 3
+  },
+  {
+    "id": 181,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/181",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/181_cladosporium_paeoniae/medium/Guignardia_aesculi_leaf_blotch.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=315afe0d9173de5547e1bae96abb0e265e1e9c436b151261dfff4fab0ffaccd4",
+    "name": "Leaf blotch",
+    "solutions_count": 2
+  },
+  {
+    "id": 182,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/182",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/182_tomato_spotted_wilt_virus/medium/Pepper_infected_with_tomato_spotted_wilt_virus.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=3edbbc31af7272b7a78050ce90199b4c1cd27278d85487ad1f28db69c3030734",
+    "name": "Spotted wilt virus",
+    "solutions_count": 3
+  },
+  {
+    "id": 183,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/183",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/183_fusarium_circinatum/medium/Fusarium_circinatum_Nirenberg_26_O27Donnell_1247233.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=0f9f3f23a80f23efd3fd32abfebe96fe72efdef9a8a242b6dab8a1d341f7b9ae",
+    "name": "Pitch canker",
+    "solutions_count": 3
+  },
+  {
+    "id": 184,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/184",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/184_clavibacter_michiganensis/medium/2560px-TomateFruchtVogelaugenCorynebacteriummichiganense.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=9e29a21c82585435f0c9aca4cc1c63319b22bd9b7aa8f4861d972c3f99e79b7a",
+    "name": "Bacterial ring rot",
+    "solutions_count": 3
+  },
+  {
+    "id": 185,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/185",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/185_streptomyces_spp/medium/Streptomyces_Scabies.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=9abfd4bbbcf88201b2b4aeb3d272293f03c01a1f8578a3b9c7b73cb5b7a3c15a",
+    "name": "Common scab",
+    "solutions_count": 3
+  },
+  {
+    "id": 186,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/186",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/186_alternaria_solani/medium/2560px-Alternaria_solani_IMG_1661.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=a73a0a5253dad9d370e47f86dbbf353ed01d0afbfc68a23b9117575f0b94bc71",
+    "name": "Early blight",
+    "solutions_count": 4
+  },
+  {
+    "id": 187,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/187",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/187_phytophthora_infestans/medium/Phytophthora_infestans_a1_28129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=61aa0ba2437cf022b99cea33f72bc6775cf3efb973cedeffa4c89b627b89bb18",
+    "name": "Late blight",
+    "solutions_count": 3
+  },
+  {
+    "id": 188,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/188",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/188_potato_leaf_roll_virus/medium/2560px-Solanum_tuberosum_Berlichingen.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=84f4d8600e60fa3dc53c971a8cde878b3c8efc51c1cdc35f2e1149af7541038b",
+    "name": "Potato leafroll",
+    "solutions_count": 3
+  },
+  {
+    "id": 189,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/189",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/189_spongospora_subterranea/medium/Parch_prC3B3szysty_ziemniaka.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=49af20688e5f4eb3111acbc6f52c2dfadae39dd90781cd93202ad2bb93453369",
+    "name": "Powdery scab",
+    "solutions_count": 4
+  },
+  {
+    "id": 190,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/190",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/190_ramularia_primulae/medium/2560px-Spinach-_Cercospora_leaf_spot.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=5d2a4f04dc2fd8a386a97076f88249ebbca3aabe95c58f8ab9031f191a67fc10",
+    "name": "Leaf spot diseases",
+    "solutions_count": 2
+  },
+  {
+    "id": 191,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/191",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/191_sphaceloma_rosarum/medium/Sphaceloma_rosarum_01.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=bfef56f34d89b7bd655cb99b130c6e27778d926c4ca21b66952917fcd5b2c52a",
+    "name": "Anthracnose",
+    "solutions_count": 2
+  },
+  {
+    "id": 192,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/192",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/192_diplocarpon_rosae/medium/Diplocarpon_rosae_49825552.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=05f522fed0e2268cae604e6325448ebf32c12500693aacd9ba497f8e29d8e2d7",
+    "name": "Black spot",
+    "solutions_count": 2
+  },
+  {
+    "id": 193,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/193",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/193_podosphaera_pannosa/medium/Podosphaera_pannosa_G44_28529.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=891bb53b46dc25ae1024f0314596ab7dd01ba347a04d3f6aa62d700ff365096a",
+    "name": "Powdery mildew",
+    "solutions_count": 3
+  },
+  {
+    "id": 194,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/194",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/194_phragmidium_mucronatum_/medium/Phragmidium_mucronatum_a1_28529.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=e4ccbe23ca27e0a43ed223956b10dfd20decb68729704f3c6c10be1d610bd05f",
+    "name": "Rust",
+    "solutions_count": 2
+  },
+  {
+    "id": 195,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/195",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/195_podosphaera_/medium/2560px-Podosphaera_mors-uvae_05.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=68c1b1f3ac1db8242008536fd8a7f90eece6bb1d3ac7b8a1a4046208de75479b",
+    "name": "Viruses",
+    "solutions_count": null
+  },
+  {
+    "id": 196,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/196",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/196_peronospora_farinosa/medium/Pseudoperonospora_farinosa_f.sp._spinaciae_at_Spinacia_oleracea_28629.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=bb1de0aea939e0bc453f1d0bc45f7f2096435bdbecf5d2101415c006958c9e0f",
+    "name": "Downy mildew",
+    "solutions_count": 3
+  },
+  {
+    "id": 197,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/197",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/197_cytospora_spp/medium/16979168156_eeee28f17b_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=5deb8e3a17e151cd2ee5eb319a4abea6ebda9679216fe3cb67a264b84df8ef75",
+    "name": "Cytospora canker",
+    "solutions_count": 3
+  },
+  {
+    "id": 198,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/198",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/198_xanthamonas_fragariae/medium/9686976497_296462530c_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=9c89c05a5ad32739846705ee8c761a5e9d91ae2c77adaedf05dc4c15e3ac5204",
+    "name": "Angular leaf spot",
+    "solutions_count": 3
+  },
+  {
+    "id": 199,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/199",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/199_pythium_and_cylindrocarpon/medium/9786498721_6516992ca8_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=5cd26929aad6e131677f5842698eaf7d7fae5e84cd54ad63dddf0f283035f2e7",
+    "name": "Black root rot",
+    "solutions_count": 3
+  },
+  {
+    "id": 200,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/200",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/200_mycosphaerella_fragariae/medium/Ramularia_grevilleana_a1.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=87240bfc6350c9233ae7dde928dbd5a0ada8d6e13da9352552253a0675858298",
+    "name": "Common leaf spot",
+    "solutions_count": 3
+  },
+  {
+    "id": 201,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/201",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/201_ramularia_tulasnei/medium/13359010323_bde1c1c30b_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=78f514eea1aa8c111a4f85212131b518fe3f5a96de8e2c73ec405242f5e4c998",
+    "name": "Common leaf spot",
+    "solutions_count": null
+  },
+  {
+    "id": 202,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/202",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/202_gnomonia_fragariae/medium/26807823534_16eedeb919_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=8dceebfc7ac3b5be3c554c4cadac448ca4b671fda846207d8c9edd55f783ece8",
+    "name": "Leaf blotch",
+    "solutions_count": 2
+  },
+  {
+    "id": 203,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/203",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Leaf blotch",
+    "solutions_count": null
+  },
+  {
+    "id": 204,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/204",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/204_diplocarpon_earlianum/medium/Rode-vlekkenziekte_28Diplocarpon_earlianum29.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=1a59ec67f3abf057b97162f5ad37d501458a448f78c73d3d79e5bb6dd5354203",
+    "name": "Leaf scorch",
+    "solutions_count": 2
+  },
+  {
+    "id": 206,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/206",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/206_rhizopus_spp/medium/2013-12-14_Rhizopus_stolonifer_28Ehrenb.29_Vuill_391621.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=4dc6313f16980438dff028c8450e419ead09d91336053f069cb740d32c0d0f65",
+    "name": "Leak (Rhizopus rot)",
+    "solutions_count": 2
+  },
+  {
+    "id": 207,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/207",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/207_phomopsis_obscurans/medium/Cercospora_Melonganae.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=7584a403685cde5f43c36ca6b8e8adc9f93a1c3c08605e79814a34b46f2d6e7b",
+    "name": "Phomopsis leaf blight",
+    "solutions_count": 4
+  },
+  {
+    "id": 209,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/209",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/209_ramularia_deusta/medium/Fungi-Ramularia-rubella-201304280006.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=f7751626b479dbe9b06744b3b02973bbeb025ff2096b69117e03fa180570eb53",
+    "name": "Leaf spot Ramularia",
+    "solutions_count": 3
+  },
+  {
+    "id": 210,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/210",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/210_apiognomonia_veneta/medium/2118px-Apiognomonia_veneta_leaf.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=6ab7d71b11fef5602f75025a074df6c44215abcea4a11fe4bb2d453382f9f44b",
+    "name": "Anthracnose",
+    "solutions_count": 2
+  },
+  {
+    "id": 211,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/211",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/211_erysiphe_lycopersici/medium/Tomate_Mehltau_Blatt.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=9859d9afd0cb4606e3a72663e7398825966e81ba9aa67bd142ac1220482bd068",
+    "name": "Powdery mildew",
+    "solutions_count": 3
+  },
+  {
+    "id": 212,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/212",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/212_tobacco_mosaic_virus_%C3%82/medium/Alfalfa_mosaic_virus.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=07b0057424518aba7e7fb05d63912738cccd59b2697111eaeaee83e048e459a8",
+    "name": "Tobacco mosaic",
+    "solutions_count": 4
+  },
+  {
+    "id": 213,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/213",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/213_aster_yellows_mlo/medium/8250018711_9255e0e76e_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=7f4b3785cda72698462cacfb52ad65a802a173ada294de0084703706a1507ec9",
+    "name": "Aster yellows",
+    "solutions_count": 2
+  },
+  {
+    "id": 214,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/214",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/214_xanthomonas_spp/medium/12843721925_1975e80e11_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=11dab8a0dcc9b5ed8ba99079e2fd3cd6ef0dfcdaf268b58dc01814bab5d8baf9",
+    "name": "Bacterial soft rots leaf spots blights wilts",
+    "solutions_count": 2
+  },
+  {
+    "id": 215,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/215",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/215_plasmopara_syn_peronospora_spp/medium/Powdery_mildew.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=e16e2139489402fd8dcad9170d1f67c6aa4e9534c4e6123642978e99d06122e8",
+    "name": "Downy mildew",
+    "solutions_count": 3
+  },
+  {
+    "id": 216,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/216",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Fasciation",
+    "solutions_count": 2
+  },
+  {
+    "id": 217,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/217",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/217_phyllosticta/medium/Phyllosticta_cruenta_DK17_28329.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=feafedc54f7420f75100010ddd61db0ed12fac7ad4f13c77ec12f6e4bff5e482",
+    "name": "Leaf spot diseases",
+    "solutions_count": null
+  },
+  {
+    "id": 218,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/218",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/218_fusarium__pythium__phytophthora__and_rhizoctonia_/medium/Carex_michelii3.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=c1a8d8feadf18b39047b114388b12c4ac6e1bdc9125d616688d89c73373677a6",
+    "name": "Root stem and crown rot",
+    "solutions_count": 3
+  },
+  {
+    "id": 219,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/219",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Alcoholic flux (Foamy canker)",
+    "solutions_count": 2
+  },
+  {
+    "id": 220,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/220",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Hairy root",
+    "solutions_count": 2
+  },
+  {
+    "id": 221,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/221",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/221_capnodium/medium/Capnodium_sp._01.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=52a49121c5f6e9bbdcf524316975bbebd0543ff01cc12d9bfc76ba67cb30094e",
+    "name": "Sooty mold",
+    "solutions_count": 3
+  },
+  {
+    "id": 222,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/222",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Anthracnose",
+    "solutions_count": 3
+  },
+  {
+    "id": 223,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/223",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/223_botryosphaeria__cytospora/medium/9497388360_802da0dd72_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=53235d98a63ff05e0d584b75ed3ab83059ba34d5f23a7a55eefc56743cfee771",
+    "name": "Canker diseases",
+    "solutions_count": 3
+  },
+  {
+    "id": 224,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/224",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/224_schizophyllum_commune/medium/37495958774_295f4a85c8_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ce52f4ec4c1086fc56d039dda408fb5ba7b2bb054ddc543933a58599eebcdf3c",
+    "name": "Common split gill",
+    "solutions_count": 3
+  },
+  {
+    "id": 225,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/225",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Damping off diseases",
+    "solutions_count": 2
+  },
+  {
+    "id": 226,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/226",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Dematophora root rot (Rosellinia root rot)",
+    "solutions_count": 3
+  },
+  {
+    "id": 227,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/227",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Dematophora root rot (Rosellinia root rot)",
+    "solutions_count": null
+  },
+  {
+    "id": 228,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/228",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/228_entomosporium_spp/medium/49773387991_2a9b61483e_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=0b1fb686d3838a1c8c4b6eba2499e0dfa6c370d9bc3bb2233382f95665474a24",
+    "name": "Entomosporium leaf spot",
+    "solutions_count": 2
+  },
+  {
+    "id": 229,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/229",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Leaf gall",
+    "solutions_count": 3
+  },
+  {
+    "id": 230,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/230",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/230_taphrina_spp/medium/Taphrina_caerulescens_Quercus_alba.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=10b161c4f36d5547d086a280a14dd41c6f2a9330b1272b5aa0eb1ca64dc4ddb3",
+    "name": "Oak leaf blister (Taphrina leaf curl)",
+    "solutions_count": 2
+  },
+  {
+    "id": 231,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/231",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/231_pleurotus_ostreatus/medium/Pleurotus_ostreatus_-_Pleurote_en_huC3AEtre.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=9015f346e68b069e52c12cef614872ac6511dda713f38401dc8274752b6cdf35",
+    "name": "Oyster mushroom",
+    "solutions_count": 2
+  },
+  {
+    "id": 232,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/232",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/232_fusicladium__spilocaea_/medium/Frutti_infetti_28mummie29_di_Fusicladium_eriobotryae.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=5f12e464fa4164a4e9ee920c672ff60407f3c12f5d6a8ba3f3f478d36f5b9a8c",
+    "name": "Scab",
+    "solutions_count": 2
+  },
+  {
+    "id": 233,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/233",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/233_botryosphaeria_dothidea/medium/RN_Ulmus_hollandica_Major2C_corky_wings.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ebb3faaf30085a2662c69dcc67a2258e3975f454675a0de11eac1aa0c701053c",
+    "name": "Stem cankers and dieback",
+    "solutions_count": 3
+  },
+  {
+    "id": 234,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/234",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/234_phytophthora_ramorum/medium/46741806334_943c1d3646_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=6f823b0a43d858391a2b35813c57c0dc6067baf878fb883c42aabc8bcfed2a17",
+    "name": "Sudden oak death",
+    "solutions_count": 3
+  },
+  {
+    "id": 235,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/235",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Wetwood or slime flux",
+    "solutions_count": 2
+  },
+  {
+    "id": 236,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/236",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/236_gymnosporangium/medium/2560px-Gymnosporangium_juniperi-virginianae_gall_sprouting.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=d0e51a510aa41735314c0b355b5f3ce1f5f29a90cfdf077762d875be1a8861a3",
+    "name": "Witches' broom",
+    "solutions_count": 3
+  },
+  {
+    "id": 237,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/237",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Basal stem rots",
+    "solutions_count": 2
+  },
+  {
+    "id": 238,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/238",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Basal stem rots",
+    "solutions_count": 2
+  },
+  {
+    "id": 239,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/239",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "Damping off and seed rots",
+    "solutions_count": 3
+  },
+  {
+    "id": 240,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/240",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/240_septoria_verbenae/medium/5833876039_0b028589de_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=f1dfb708d1bfe0b4968af6845e8b629c97545d6e387b7bdb595f27ecb0bb1646",
+    "name": "Leaf spot diseases",
+    "solutions_count": null
+  },
+  {
+    "id": 241,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/241",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/241_gnomonia_leptostyla/medium/Gnomonia_leptostyla_on_Juglans_regia_Buccaneer.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=01d82f0c8f8cb71d8815ee44c74363f47c5c1bb6beb6f4b96ada5a68b05a5958",
+    "name": "Anthracnose",
+    "solutions_count": 2
+  },
+  {
+    "id": 242,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/242",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/242_cherry_leaf_roll_virus/medium/Rose_Mosaic_disease_28234690911629.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=ce8fb88dc5958bb7a6a8f2c5a551868e8601fa6e51d18ed0e6700de4a5b99e3a",
+    "name": "Blackline",
+    "solutions_count": 2
+  },
+  {
+    "id": 243,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/243",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/243_hendersonula_tortuloidea/medium/upwk61770635-wikimedia-image.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=de5610471f2e66423c4e13e262f9c537b763f8724e10e576da5916b78e0e9152",
+    "name": "Branch wilt",
+    "solutions_count": 2
+  },
+  {
+    "id": 244,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/244",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/244_erwinia_rubrifaciens/medium/Bark_peeling_and_stem_blight_or_stem_canker_of_citrus_281598962657129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=3774fb36e2f9e69cb5d522356dabb9c36a3e30a5cac07c133ded5701d6d2b5a8",
+    "name": "Deep bark canker",
+    "solutions_count": 2
+  },
+  {
+    "id": 245,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/245",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/245_erwinia_nigrifluens/medium/15412199651_413fec499b_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=99808a60f8ce5a9b66f05a119a68cddb643b366b170d0178b408d31008cf251a",
+    "name": "Shallow bark canker",
+    "solutions_count": 2
+  },
+  {
+    "id": 246,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/246",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/246_xanthamonas_campestris/medium/2560px-Panax_28Polyscias_guilfoylei29_Bacterial_leaf_blight_caused_by_Xanthomonas_campestris_pv._hederae_281406353044229.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=bd5693c2fe8ef65ffaafb91781939cf547ef0bc2d32b93bbd54c3290c7d65bf4",
+    "name": "Walnut blight",
+    "solutions_count": 2
+  },
+  {
+    "id": 247,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/247",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/247_phyllosticta_zinniae/medium/5684575818_b891efdaae_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=0a1f6e18814f526acd4b2dafb5d66a54c6dd558482acac9244a1d499d7730617",
+    "name": "Leaf spot diseases",
+    "solutions_count": 3
+  },
+  {
+    "id": 248,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/248",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "wilt",
+    "solutions_count": null
+  },
+  {
+    "id": 249,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/249",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "blight",
+    "solutions_count": null
+  },
+  {
+    "id": 250,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/250",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "rice bacterial blight",
+    "solutions_count": 2
+  },
+  {
+    "id": 251,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/251",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "canker",
+    "solutions_count": null
+  },
+  {
+    "id": 253,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/253",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "black knot",
+    "solutions_count": 2
+  },
+  {
+    "id": 254,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/254",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/254_/medium/Chestnut_blight_on_tree_in_Adams_County_Ohio.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=4d0b97640ee0a1296d4c9fa32b56d3621e812ff693a7567583583bac723515a4",
+    "name": "chestnut blight",
+    "solutions_count": 2
+  },
+  {
+    "id": 255,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/255",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "damping-off",
+    "solutions_count": null
+  },
+  {
+    "id": 256,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/256",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/256_/medium/Ergot_-_Flickr_-_Stiller_Beobachter.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=c82d434c54926ac788928ac76139beffb0c9b0e17791360fbf32413dcf6015d1",
+    "name": "ergot",
+    "solutions_count": 3
+  },
+  {
+    "id": 257,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/257",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/257_/medium/fl49970126523-image-kycipogf.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=429190a688b23e189b8eb8735c4188f44f965188228fb70185269dc09c69f548",
+    "name": "Panama disease",
+    "solutions_count": 3
+  },
+  {
+    "id": 258,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/258",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "leaf blister",
+    "solutions_count": 2
+  },
+  {
+    "id": 261,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/261",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/261_/medium/9679441095_73822ed95e_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=242c293a99b86bcca77c057eb32d3df1231af82b4181c831f7ee13271a06188d",
+    "name": "heart rot",
+    "solutions_count": 3
+  },
+  {
+    "id": 262,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/262",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "blister rust",
+    "solutions_count": 2
+  },
+  {
+    "id": 263,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/263",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/263_/medium/51160622653_cde2def17f_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=3e426917c8a48293178ce4c5e7b93f594f4cbb71c0a368b5e28f031085d581f1",
+    "name": "cedar-apple rust",
+    "solutions_count": 2
+  },
+  {
+    "id": 264,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/264",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "coffee rust",
+    "solutions_count": 2
+  },
+  {
+    "id": 265,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/265",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/265_/medium/Corn_smut_-_Ustilago_maydis_284484679228129.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=f3b5749ebe7b062d3ad49e3093b2a09226ab991243cb63e9d586836b5ce7f91c",
+    "name": "smut",
+    "solutions_count": null
+  },
+  {
+    "id": 266,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/266",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "bunt",
+    "solutions_count": 2
+  },
+  {
+    "id": 267,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/267",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/267_/medium/8233539584_41ebb94619_b.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=447200b4925363ee281da52bb0d4eff6c3161de8fc7c733bf6f929eb9b27d080",
+    "name": "corn smut",
+    "solutions_count": null
+  },
+  {
+    "id": 268,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/268",
+    "image": "https://s3.us-central-1.wasabisys.com/perenual/species_disease/268_/medium/2560px-Snow_mold_and_snow_on_turf.jpg?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=0MPGHU7CIPXNPMVWMXUW%2F20260108%2Fus-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260108T193730Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=5be27b61e4e11e53f02eaf2985e115778b3d41b320115c3cf123ceee3c351348",
+    "name": "snow mold",
+    "solutions_count": 3
+  },
+  {
+    "id": 270,
+    "href": "https://perenual.com/pest-disease-search-finder/pest-disease/270",
+    "image": "https://perenual.com/storage/image/missing_image.jpg",
+    "name": "psorosis",
+    "solutions_count": 2
+  }
+]

@@ -57,6 +57,7 @@ export default function RootLayout() {
           <Stack.Screen name="settings" options={{ title: "Ajustes", headerShown: true }} />
           <Stack.Screen name="posts-list" options={{ title: "Listado de publicaciones", headerShown: true }} />
           <Stack.Screen name="comments-list" options={{ title: "Listado de comentarios", headerShown: true }} />
+          <Stack.Screen name="pests-search" options={{ title: "Listado de plagas y enfermedades", headerShown: true }} />
           <Stack.Screen name="+not-found" />
         </Stack>
         <StatusBar style="auto" />

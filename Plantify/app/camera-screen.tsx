@@ -2,12 +2,13 @@ import { Colors } from '@/constants/Colors';
 import { PlantService } from '@/services/plantsService';
 import { Ionicons } from '@expo/vector-icons';
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
-import { useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View, Image, ActivityIndicator } from 'react-native';
 
 export default function CameraScreen() {
-
+    const params = useLocalSearchParams();
+    const { isPest } = params;
     const [facing, setFacing] = useState<CameraType>('back');
     const [permission, requestPermission] = useCameraPermissions();
     const cameraRef = useRef<CameraView>(null);
@@ -42,17 +43,18 @@ export default function CameraScreen() {
     }
 
     async function sendPhoto() {
+        console.log('Camera for pest: ', isPest);
         if (photoUri) {
             setIsLoading(true);
             try {
-                const data = await PlantService.sendPhoto(photoUri);
-                if (data.plant_id) {
+                const data = await PlantService.sendPhoto(photoUri, isPest === 'true');
+                if (data.id) {
                     router.push({
-                        pathname: "/plant-info-details",
-                        params: { id: data.plant_id }
+                        pathname: isPest === 'true' ? '/pest-details' : '/plant-details',
+                        params: { id: data.id }
                     });
                 } else {
-                    alert("No se pudo identificar la planta. Inténtalo de nuevo.");
+                    alert("No se pudo identificar la imagen. Inténtalo de nuevo.");
                 }
             } catch (error) {
                 console.error('Error sending photo:', error);
@@ -106,7 +108,11 @@ export default function CameraScreen() {
                 <View style={styles.loaderOverlay}>
                     <View style={styles.loaderContainer}>
                         <ActivityIndicator size="large" color={Colors.light.tint} />
-                        <Text style={styles.loaderText}>Identificando planta...</Text>
+                        { isPest === 'true' ? (
+                            <Text style={styles.loaderText}>Identificando plaga o enfermedad...</Text>
+                        ) : (
+                            <Text style={styles.loaderText}>Identificando planta...</Text>
+                        ) }
                     </View>
                 </View>
             )}

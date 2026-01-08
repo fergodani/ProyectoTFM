@@ -1,7 +1,39 @@
 from django.urls import include, path
 from rest_framework_simplejwt.views import TokenRefreshView
 
-from .views import PostVoteView, CommentVoteView, UserPostView, PlantInfoPostView, PostDetailView, CommentView, CommentDetailView, GardenSuitabilityView, WeatherRecommendationView, PredictImageView, GeminiPlantIdentificationView, GardenListNameView, GardenListCreateView, GardenDetailView, PlantInfoDetailView, PlantInfoListView, TrefflePlantDetail, TrefflePlantList, UserPlantDetailView, UserPlantListCreateView, CustomTokenObtainPairView, UserRegisterView, UserTasksView, PerenualPlantListView, PerenualPlantDetailView, CurrentUserView, ChangePasswordView, GardenTemplatesView 
+from .views import (
+    PerenualPestDiseaseDetailView,
+    PerenualPestDiseaseView,
+    PredictPestDiseaseView,
+    PostVoteView,
+    CommentVoteView,
+    UserPostView,
+    PlantInfoPostView,
+    PostDetailView,
+    CommentView,
+    CommentDetailView,
+    GardenSuitabilityView,
+    WeatherRecommendationView,
+    PredictImageView,
+    GeminiPlantIdentificationView,
+    GardenListNameView,
+    GardenListCreateView,
+    GardenDetailView,
+    PlantInfoDetailView,
+    PlantInfoListView,
+    TrefflePlantDetail,
+    TrefflePlantList,
+    UserPlantDetailView,
+    UserPlantListCreateView,
+    CustomTokenObtainPairView,
+    UserRegisterView,
+    UserTasksView,
+    PerenualPlantListView,
+    PerenualPlantDetailView,
+    CurrentUserView,
+    ChangePasswordView,
+    GardenTemplatesView,
+)
 
 urlpatterns = [
     path('gardens/', GardenListCreateView.as_view(), name='garden-list-create'),
@@ -22,6 +54,7 @@ urlpatterns = [
     path('user/password/', ChangePasswordView.as_view(), name='change-password'),
     path('user-tasks/', UserTasksView.as_view(), name='user-tasks'),
     path('predict/', PredictImageView.as_view(), name='predict-image'),
+    path('predict/pest/', PredictPestDiseaseView.as_view(), name='predict-pest-image'),
     path('weather/', WeatherRecommendationView.as_view(), name='weather-recommendation'),
     path('user-posts/', UserPostView.as_view(), name='user-posts'),
     path('posts/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
@@ -33,4 +66,6 @@ urlpatterns = [
     path('predict-gemini/', GeminiPlantIdentificationView.as_view(), name='predict-gemini'),
     path('perenual/plants/', PerenualPlantListView.as_view(), name='perenual-plant-list'),
     path('perenual/plants/<int:plant_id>/', PerenualPlantDetailView.as_view(), name='perenual-plant-detail'),
+    path('perenual/pests/', PerenualPestDiseaseView.as_view(), name='perenual-pest-disease'),
+    path('perenual/pests/<int:pest_id>/', PerenualPestDiseaseDetailView.as_view(), name='perenual-pest-disease'),
 ]

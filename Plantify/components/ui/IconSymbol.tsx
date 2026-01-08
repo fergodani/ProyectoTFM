@@ -18,6 +18,7 @@ const MAPPING = {
   'alarm': 'alarm',
   'camera': 'camera-alt',
   'book': 'book',
+  'monitor-heart': 'monitor-heart',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],

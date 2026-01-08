@@ -106,7 +106,7 @@ const GuideCard: React.FC<GuideCardProps> = ({ item }) => {
                                 })()}
                             </View>
                         )
-                        
+
                     ))}
                 </View>
             )}
@@ -127,7 +127,7 @@ const GuiaScreen: React.FC = () => {
     return (
         <LinearGradient
             colors={['rgba(213, 240, 219, 0.19)', backgroundColor]} // Cambia estos colores a los que quieras
-            style={globalStyles.body}
+            style={[styles.container, { paddingVertical: 16 }]}
         >
             <View style={styles.titleContainer}>
                 <ThemedText type="title">Guía de cuidados</ThemedText>
@@ -149,6 +149,9 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         backgroundColor: '#FFFFFF',
+    },
+    container: {
+        flex: 1,
     },
     titleContainer: {
         marginTop: 64,

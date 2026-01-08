@@ -189,7 +189,5 @@ export interface PlantInfo {
 }
 
 export interface Prediction {
-    plant_id: number;
-    class: string;
-    probabilities: number[];
+    id: number;
 }
