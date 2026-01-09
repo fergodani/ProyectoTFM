@@ -828,8 +828,8 @@ class UserTasksView(APIView):
             "previous_tasks": previous_tasks
         })
         
-model = YOLO("../model/results/plantify_model_v1/weights/best.pt")
-model_disease = YOLO("../model/results_disease/plantify_disease_model_v1/weights/best.pt")
+model = YOLO("./model/results/plantify_model_v1/weights/best.pt")
+model_disease = YOLO("./model/results_disease/plantify_disease_model_v1/weights/best.pt")
 
 class PredictImageView(APIView):
     parser_classes = [MultiPartParser]
