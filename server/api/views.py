@@ -27,9 +27,6 @@ from urllib.parse import urlparse
 # Ensure environment variables are loaded if a .env exists
 load_dotenv()
 
-TREFLE_API_URL = "https://trefle.io/api/v1/plants"
-TREFLE_TOKEN = "qD5bYaqpif9la_ZYT6zOPTe5icGrGiJAOlDacDK0Fic" 
-
 PERENUAL_API_URL = "https://perenual.com/api/v2"
 PERENUAL_PEST_API_URL = "https://perenual.com/api"
 
@@ -168,7 +165,7 @@ class GardenListCreateView(APIView):
     """Obtener todos los jardines o crear uno nuevo"""
     def get(self, request):
         gardens = Garden.objects.filter(owner=request.user)
-        serializer = GardenSerializer(gardens, many=True)
+        serializer = GardenSerializer(gardens, many=True, context={'request': request})
         return Response(serializer.data)
 
     def post(self, request):
@@ -391,7 +388,7 @@ class UserPlantListCreateView(APIView):
                             {"error": "Plant not found in mock data"},
                             status=status.HTTP_404_NOT_FOUND
                         )
-                    return self.set_perenual_info(request.data, perenual_data, serializer)
+                    return self.set_perenual_info(request.data, perenual_data, serializer, plant_id)
                 else:
                     print("Fetching plant details from Perenual API")
                     api_key = os.getenv('PERENUAL_API_KEY')
@@ -410,7 +407,7 @@ class UserPlantListCreateView(APIView):
                         # Actualizar datos del request con información de Perenual
                         request_data = request.data.copy()
 
-                        return self.set_perenual_info(request_data, perenual_data, serializer)
+                        return self.set_perenual_info(request_data, perenual_data, serializer, plant_id)
                     else:
                         return Response(response.json(), status=status.HTTP_429_TOO_MANY_REQUESTS)
             except Exception as e:
@@ -418,7 +415,7 @@ class UserPlantListCreateView(APIView):
         
         return Response({}, status=status.HTTP_400_BAD_REQUEST)
     
-    def set_perenual_info(self, request_data, perenual_data, serializer):
+    def set_perenual_info(self, request_data, perenual_data, serializer, plant_id):
         if not request_data.get('common_name') and perenual_data.get('common_name'):
             request_data['common_name'] = perenual_data['common_name']
                 
@@ -436,9 +433,33 @@ class UserPlantListCreateView(APIView):
                     value = parts[0]  # "7-10"
                     unit = ' '.join(parts[1:])  # "days"
                     request_data['watering_period'] = {"value": value, "unit": unit}
-                
-        if not request_data.get('image') and perenual_data.get('default_image', {}).get('regular_url'):
-            request_data['image'] = perenual_data['default_image']['regular_url']
+        
+        perenual_url = "https://perenual.com/plant-species-database-search-finder/species/" + str(plant_id)
+        
+        print(perenual_url)
+        dresp = requests.get(perenual_url, timeout=20)
+        if dresp.status_code != 200:
+            return Response({'error': 'Se ha producido un error'}, status=status.HTTP_502_BAD_GATEWAY)
+        dsoup = BeautifulSoup(dresp.text, 'html.parser')
+        image_url = None
+        candidate_imgs = dsoup.select('main img') or []
+        for im in candidate_imgs:
+            src = im.get('src') or ''
+            alt = (im.get('alt') or '').lower()
+            if 'logo' in src or 'logo' in alt:
+                continue
+            if 'storage' in src or 'perenual.com/storage' in src:
+                image_url = src
+                break
+        if not image_url:
+            for im in candidate_imgs:
+                src = im.get('src') or ''
+                if 'logo' not in src:
+                    image_url = src
+                    break
+        request_data['image'] = image_url
+        #if not request_data.get('image') and perenual_data.get('default_image', {}).#get('regular_url'):
+        #    request_data['image'] = perenual_data['default_image']['regular_url']
                 
         # Recrear el serializer con los datos actualizados
         serializer = UserPlantSerializer(data=request_data)

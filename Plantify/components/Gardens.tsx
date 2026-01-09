@@ -42,6 +42,7 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
             } else {
                 const data = await GardensService.getAllGardens(accessToken!);
                 setGardens(data);
+                console.log(data)
             }
 
         } catch (error: any) {
@@ -153,7 +154,7 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
                     {isLoading && <ActivityIndicator size="large" style={{ marginTop: 32 }} />}
                     {gardens.map((garden: Garden) => {
                         // Suponiendo que garden.plants es un array de plantas con propiedad image
-                        const plantImages = garden.user_plants?.slice(0, 3).map(p => p.image) || [];
+                        const plantImages = garden.user_plants?.slice(0, 3).map(p => p.custom_image ? p.custom_image : p.image) || [];
                         return (
                             <TouchableOpacity
                                 key={garden.id}
