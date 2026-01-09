@@ -9,6 +9,7 @@ db.sqlite3
 staticfiles/
 static/
 .env
+.env.*
 *.log
 
 # VS Code
