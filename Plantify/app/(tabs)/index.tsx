@@ -9,7 +9,7 @@ import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { globalStyles } from '@/styles/global-styles';
 import { useAuth } from "@/hooks/useAuthContext";
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, use } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -24,6 +24,8 @@ import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
 import React from 'react';
 import TaskList from '@/components/TaskList';
 import { RecommendationService } from '@/services/recommendationService';
+import { NotificationService } from '@/services/notificationService';
+import { StorageService } from '@/services/storageService';
 
 const routes = [
   { key: 'previous', title: 'Previous' },
@@ -50,6 +52,19 @@ export default function HomeScreen() {
     today: () => <TaskList tasks={tasks?.today_tasks} isToday={true} isNext={false} onRefresh={loadTasksData} />,
     next: () => <TaskList tasks={tasks?.next_tasks} isToday={false} isNext={true} onRefresh={loadTasksData} />,
   });
+
+  // Establecer notificaciones al iniciar la app
+  useEffect(() => {
+    const initializeNotifications = async () => {
+      const hasPermission = await NotificationService.requestPermissions();
+      const hour = await StorageService.getNotificationTime();
+      if (hasPermission) {
+        await NotificationService.scheduleDailyReminder(hour);
+      }
+    };
+
+    initializeNotifications();
+  }, []);
 
 
   // Función para obtener datos del tiempo (memoizada)

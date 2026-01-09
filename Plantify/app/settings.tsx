@@ -18,21 +18,40 @@ import { PlantService } from "@/services/plantsService";
 import { UserService } from "@/services/userService";
 import { useNavigation, useRouter } from 'expo-router';
 import { User } from "@/models/User";
+import { StorageService } from "@/services/storageService";
+import { NotificationService } from "@/services/notificationService";
 
 const data = [...Array(100).keys()].map((index) => ({
     value: index,
     label: index.toString(),
 }))
 
-const locationOptions = [
-    { value: 'indoor', label: 'Interior' },
-    { value: 'outdoor', label: 'Exterior' }
+const hourOptions = [
+    { value: '0', label: '00:00' },
+    { value: '1', label: '01:00' },
+    { value: '2', label: '02:00' },
+    { value: '3', label: '03:00' },
+    { value: '4', label: '04:00' },
+    { value: '5', label: '05:00' },
+    { value: '6', label: '06:00' },
+    { value: '7', label: '07:00' },
+    { value: '8', label: '08:00' },
+    { value: '9', label: '09:00' },
+    { value: '10', label: '10:00' },
+    { value: '11', label: '11:00' },
+    { value: '12', label: '12:00' },
+    { value: '13', label: '13:00' },
+    { value: '14', label: '14:00' },
+    { value: '15', label: '15:00' },
+    { value: '16', label: '16:00' },
+    { value: '17', label: '17:00' },
+    { value: '18', label: '18:00' },
+    { value: '19', label: '19:00' },
+    { value: '20', label: '20:00' },
+    { value: '21', label: '21:00' },
+    { value: '22', label: '22:00' },
+    { value: '23', label: '23:00' }
 ];
-
-const locationLabels = {
-    "indoor": "Interior",
-    "outdoor": "Exterior"
-}
 
 const sunlightExposureOptions = [
     { value: 'full_sun', label: 'Sol directo' },
@@ -64,7 +83,7 @@ export default function Settings() {
     const router = useRouter();
     const params = useLocalSearchParams();
     const [isModalVisible, setIsModalVisible] = useState(false);
-    type ModalType = "username" | "email" | "password" | "location" | "sun" | "humidity" | "air" | null;
+    type ModalType = "username" | "email" | "password" | "hour" | "sun" | "humidity" | "air" | null;
     const [modalType, setModalType] = useState<ModalType>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isNotifications, setIsNotifications] = useState(false);
@@ -74,6 +93,8 @@ export default function Settings() {
     const [actualPassword, setActualPassword] = useState<string>('');
     const [newPassword, setNewPassword] = useState<string>('');
     const [confirmNewPassword, setConfirmNewPassword] = useState<string>('');
+    const [selectedHour, setSelectedHour] = useState<number>(9);
+    const [selectedHourTemp, setSelectedHourTemp] = useState<number>(9);
 
     const openModal = (type: ModalType | ((prevState: ModalType) => ModalType) | null) => {
         setModalType(type);
@@ -107,10 +128,21 @@ export default function Settings() {
                 }
             }
         };
+        const loadNotificationTime = async () => {
+            const hour = await StorageService.getNotificationTime();
+            setSelectedHour(hour);
+            setSelectedHourTemp(hour);
+        }
+        loadNotificationTime();
         fetchUser();
     }, [accessToken, refreshToken]);
 
     const handlePut = async () => {
+        if (selectedHour !== selectedHourTemp) {
+            console.log("La hora ha cambiado:", selectedHour);
+            handleTimeChange(selectedHourTemp);
+            return;
+        }
         if (actualPassword || newPassword || confirmNewPassword) {
             handleChangePassword();
             return;
@@ -150,6 +182,24 @@ export default function Settings() {
         }
     }
 
+    const handleTimeChange = async (selectedHour?: number) => {
+
+        console.log("Hora seleccionada:", selectedHour);
+        // Actualizamos estado visual
+        setSelectedHour(selectedHour!);
+        setSelectedHourTemp(selectedHour!);
+
+        // 2. GUARDADO: Persistir la preferencia en el teléfono
+        await StorageService.saveNotificationTime(selectedHour!);
+
+        // 3. AGENDADO: Reprogramar la notificación real
+        const hasPermission = await NotificationService.requestPermissions();
+        if (hasPermission) {
+            await NotificationService.scheduleDailyReminder(selectedHour!);
+        }
+        setIsModalVisible(false);
+    };
+
     const handleChangePassword = async () => {
         setIsLoading(true);
         try {
@@ -181,11 +231,14 @@ export default function Settings() {
         router.back();
     };
 
-    const handleClose = () => {
+    const handleClose = async () => {
         setIsModalVisible(false);
         setActualPassword('');
         setConfirmNewPassword('');
         setNewPassword('');
+        const hour = await StorageService.getNotificationTime();
+        setSelectedHour(hour);
+        setSelectedHourTemp(hour);
     }
 
 
@@ -309,14 +362,14 @@ export default function Settings() {
                         {/* Horario notificaciones */}
                         <TouchableOpacity
                             style={styles.subcardTouchable}
-                            onPress={() => { openModal('location'); }}
+                            onPress={() => { openModal('hour'); }}
                         >
                             <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
                                 <Ionicons name="alarm" size={24} color={"#bfd8c5ff"} />
                                 <ThemedText type='default'>Hora</ThemedText>
                             </View>
                             <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
-                                <ThemedText type='italic'>9:00</ThemedText>
+                                <ThemedText type='italic'>{selectedHourTemp}:00</ThemedText>
                                 <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
                             </View>
                         </TouchableOpacity>
@@ -402,52 +455,16 @@ export default function Settings() {
                                 />
                             </View>
                         )}
-                        {modalType === 'location' && (
+                        {modalType === 'hour' && (
                             <WheelPicker
-                                data={locationOptions}
+                                data={hourOptions}
                                 width={200}
-                                value={""}
-                                onValueChanged={({ item: { value } }) => { }}
+                                value={selectedHourTemp.toString()}
+                                onValueChanged={({ item: { value } }) => { setSelectedHourTemp(Number(value)); }}
                                 enableScrollByTapOnItem={true}
                             />
                         )}
-                        {modalType === 'sun' && (
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 100 }}>
-                                <WheelPicker
-                                    data={sunlightExposureOptions}
-                                    width={200}
-                                    value={""}
-                                    onValueChanged={({ item: { value } }) => { }}
-                                    enableScrollByTapOnItem={true}
-                                />
-                            </View>
-                        )}
-                        {modalType === 'humidity' && (
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 100 }}>
-                                <WheelPicker
-                                    data={humidityOptions}
-                                    width={200}
-                                    value={""}
-                                    onValueChanged={({ item: { value } }) => { }}
-                                    enableScrollByTapOnItem={true}
-                                />
-                            </View>
-                        )}
-                        {modalType === 'air' && (
-                            <View style={{ display: "flex", alignItems: "center", flexDirection: 'column' }}>
-                                <ThemedText type="default" style={{ color: "#000" }}>¿Suele haber corrientes de aire?</ThemedText>
-                                <WheelPicker
-                                    data={[
-                                        { value: true, label: "Sí" },
-                                        { value: false, label: "No" }
-                                    ]}
-                                    width={100}
-                                    value={false}
-                                    onValueChanged={({ item: { value } }) => { }}
-                                    enableScrollByTapOnItem={true}
-                                />
-                            </View>
-                        )}
+
                     </View>
                 </View>
             </Modal >

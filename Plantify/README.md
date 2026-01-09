@@ -25,6 +25,10 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
+### How to build an app
+
+1. npx expo run:android or npx expo run:ios
+
 ## Get a fresh project
 
 When you're ready, run:
