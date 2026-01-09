@@ -1,10 +1,11 @@
 #!/bin/sh
 set -e
 
-# Wait for the database to be ready (simple loop)
+## Wait for the database to be ready (use python resolver/connect loop)
 if [ -n "$DB_HOST" ]; then
-  echo "Waiting for database at $DB_HOST:$DB_PORT..."
-  until nc -z $DB_HOST ${DB_PORT:-5432}; do
+  echo "Waiting for database at $DB_HOST:${DB_PORT:-5432}..."
+  # use Python script to wait for DB to be resolvable and accepting connections
+  until python /app/wait_for_db.py; do
     echo "Waiting for postgres..."
     sleep 1
   done

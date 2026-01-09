@@ -4,7 +4,7 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import Garden, UserPlant, PlantInfo, Post, Comment, Vote
+from .models import Garden, UserPlant, Post, Comment, Vote
 from django.utils import timezone
 
 # Serializers
@@ -141,12 +141,6 @@ class PostSerializer(serializers.ModelSerializer):
             return f"{months}M"
         years = months // 12
         return f"{years}a"
-        
-class PlantInfoSerializer(serializers.ModelSerializer):
-    posts = PostSerializer(many=True, read_only=True)
-    class Meta:
-        model = PlantInfo
-        fields = '__all__'
         
 class UserPlantSerializer(serializers.ModelSerializer):
     #plant = PlantInfoSerializer(read_only=True)

@@ -6,8 +6,8 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 import requests
 from django.http import JsonResponse
-from .models import Garden, UserPlant, PlantInfo, Post, Comment, Vote
-from .serializers import PostSerializer, CommentSerializer, GardenSimpleSerializer, UserRegisterSerializer, GardenSerializer, UserPlantSerializer, PlantInfoSerializer, CustomTokenObtainPairSerializer, VoteSerializer, UserSerializer, UserUpdateSerializer, ChangePasswordSerializer
+from .models import Garden, UserPlant, Post, Comment, Vote
+from .serializers import PostSerializer, CommentSerializer, GardenSimpleSerializer, UserRegisterSerializer, GardenSerializer, UserPlantSerializer, CustomTokenObtainPairSerializer, VoteSerializer, UserSerializer, UserUpdateSerializer, ChangePasswordSerializer
 from bs4 import BeautifulSoup
 from django.utils import timezone
 from django.db.models import Q
@@ -678,160 +678,7 @@ class UserPlantDetailView(APIView):
         if not plant:
             return Response({"error": "Plant not found"}, status=status.HTTP_404_NOT_FOUND)
         plant.delete()
-        return Response({"message": "Plant deleted"}, status=status.HTTP_200_OK)
-    
-class TrefflePlantDetail(APIView):
-    """Obtener información de plantas desde Treffle API por id o por nombre"""
-    def get(self, request):
-        plant_id = request.GET.get('id')
-        url = f"https://trefle.io/api/v1/plants/{plant_id}"
-        params = {
-            'token': TREFLE_TOKEN
-        }
-        response = requests.get(url, params=params)
-        data = response.json()
-        
-        # Scrapeo información adicional de perenual
-        plant_name = data.get('data', {}).get('common_name') or data.get('data', {}).get('scientific_name')
-        if plant_name:
-            search_url = f"https://perenual.com/plant-database-search-guide?search={plant_name}"
-            search_resp = requests.get(search_url)
-            soup = BeautifulSoup(search_resp.text, "html.parser")
-            # Encuentra el primer enlace de ficha de planta
-            main_tag = soup.find("main")
-            plant_link = main_tag.find("a") if main_tag else None
-            if plant_link and plant_link['href']:
-                ficha_url = plant_link['href']
-                ficha_resp = requests.get(ficha_url)
-                ficha_soup = BeautifulSoup(ficha_resp.text, "html.parser")
-                watering_section = ficha_soup.find("h3", string="watering")
-                watering_info = None
-                if watering_section:
-                    parent_div = watering_section.find_parent("div", class_="rounded-md shadow p-3")
-                    if parent_div:
-                        watering_p = parent_div.find("p")
-                        if watering_p:
-                            watering_info = watering_p.get_text(strip=True)
-                sunlight_info = None
-                sunlight_section = ficha_soup.find("h3", string="sunlight")
-                if sunlight_section:
-                    parent_div = sunlight_section.find_parent("div", class_="rounded-md shadow p-3")
-                    if parent_div:
-                        sunlight_p = parent_div.find("p")
-                        if sunlight_p:
-                            sunlight_info = sunlight_p.get_text(strip=True)
-
-                pruning_info = None
-                pruning_section = ficha_soup.find("h3", string="pruning")
-                if pruning_section:
-                    parent_div = pruning_section.find_parent("div", class_="rounded-md shadow p-3")
-                    if parent_div:
-                        pruning_p = parent_div.find("p")
-                        if pruning_p:
-                            pruning_info = pruning_p.get_text(strip=True)
-
-                data['sunlight_info'] = sunlight_info
-                data['pruning_info'] = pruning_info
-                data['watering_info'] = watering_info
-        
-        # Elimina campos no deseados del diccionario 'data'
-        campos_a_eliminar = ['main_species', 'species', 'sources']  # Ejemplo de campos a quitar
-        if 'data' in data and isinstance(data['data'], dict):
-            for campo in campos_a_eliminar:
-                data['data'].pop(campo, None)
-            
-        return JsonResponse(data)
-    
-class TrefflePlantList(APIView):
-    """Obtener una lista de plantas desde Treffle API"""
-    def get(self, request):
-        page = request.GET.get('page', 1)
-        plant_id = request.GET.get('id')
-        common_name = request.GET.get('common_name')
-        scientific_name = request.GET.get('scientific_name')
-
-        if plant_id:
-            return self.get_by_id(plant_id, page)
-        elif common_name:
-            return self.get_by_common_name(common_name, page)
-        elif scientific_name:
-            return self.get_by_scientific_name(scientific_name, page)
-        else:
-            url = "https://trefle.io/api/v1/plants"
-            params = {
-                'token': TREFLE_TOKEN,
-                'page': page
-            }
-            response = requests.get(url, params=params)
-            data = response.json()
-            return JsonResponse(data)
-
-    def get_by_id(self, plant_id, page):
-        url = f"https://trefle.io/api/v1/plants/{plant_id}"
-        params = {
-            'token': TREFLE_TOKEN,
-            'page': page
-        }
-        response = requests.get(url, params=params)
-        data = response.json()
-        return JsonResponse(data)
-
-    def get_by_common_name(self, name, page):
-        url = "https://trefle.io/api/v1/plants"
-        params = {
-            'token': TREFLE_TOKEN,
-            'filter[common_name]': name,
-            'page': page
-        }
-        response = requests.get(url, params=params)
-        data = response.json()
-        return JsonResponse(data)
-
-    def get_by_scientific_name(self, name, page):
-        url = "https://trefle.io/api/v1/plants"
-        params = {
-            'token': TREFLE_TOKEN,
-            'filter[scientific_name]': name,
-            'page': page
-        }
-        response = requests.get(url, params=params)
-        data = response.json()
-        return JsonResponse(data)
-    
-class PlantInfoListView(generics.ListAPIView):
-    queryset = PlantInfo.objects.all()
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        name = self.request.GET.get('name')
-        plant_type = self.request.GET.get('type')
-        if name:
-            queryset = queryset.filter(
-                Q(common_name__icontains=name) | Q(scientific_name__icontains=name)
-            )
-        if plant_type:
-            queryset = queryset.filter(type__iexact=plant_type)
-        try:
-            page = int(self.request.GET.get('page', 1))
-        except (TypeError, ValueError):
-            page = 1
-        page_size = 20
-        start = (page - 1) * page_size
-        end = start + page_size
-        return queryset[start:end]
-    
-    serializer_class = PlantInfoSerializer
-    
-    
-class PlantInfoDetailView(APIView):
-    """Obtener información de PlantInfo por id"""
-    def get(self, request, pk):
-        try:
-            plant_info = PlantInfo.objects.get(pk=pk)
-        except PlantInfo.DoesNotExist:
-            return Response({"error": "PlantInfo not found"}, status=status.HTTP_404_NOT_FOUND)
-        serializer = PlantInfoSerializer(plant_info)
-        return Response(serializer.data)
+        return Response({"message": "Plant deleted"}, status=status.HTTP_200_OK)  
     
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
@@ -1262,14 +1109,7 @@ class UserPostView(APIView):
             # Devolver el post creado con el contexto para incluir user_vote
             response_serializer = PostSerializer(post, context={'request': request})
             return Response(response_serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-class PlantInfoPostView(APIView):
-    """Obtener todos los posts de una planta específica"""
-    def get(self, request, pk):
-        posts = Post.objects.filter(plant_info_id=pk)
-        serializer = PostSerializer(posts, many=True, context={'request': request})
-        return Response(serializer.data)    
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
     
 class PostDetailView(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
