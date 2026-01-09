@@ -57,6 +57,11 @@ export default function HomeScreen() {
   useEffect(() => {
     const initializeNotifications = async () => {
       const hasPermission = await NotificationService.requestPermissions();
+      const enabled = await StorageService.getIsNotificationsEnabled();
+      if (!enabled) {
+        console.log("Notificaciones desactivadas por el usuario");
+        return;
+      }
       const hour = await StorageService.getNotificationTime();
       if (hasPermission) {
         await NotificationService.scheduleDailyReminder(hour);
@@ -81,7 +86,6 @@ export default function HomeScreen() {
       const { latitude, longitude } = location.coords;
 
       const data = await RecommendationService.getWeather(latitude, longitude);
-      console.log(data)
       setWeatherInfo(data);
     } catch (error) {
       console.error("Error fetching weather data:", error);
@@ -125,7 +129,6 @@ export default function HomeScreen() {
   const fetchTasksPromise = async () => {
     try {
       const data = await PlantService.getTasks(accessToken!);
-      console.log("Tasks data:", data);
       return data;
     } catch (error: any) {
       if (error.message === 'Unauthorized') {
@@ -135,7 +138,6 @@ export default function HomeScreen() {
           setTokens(newTokens.access, newTokens.refresh);
 
           const data = await PlantService.getTasks(newTokens.access);
-          console.log("Tasks data:", data);
           return data;
         } catch (refreshError) {
           throw refreshError;

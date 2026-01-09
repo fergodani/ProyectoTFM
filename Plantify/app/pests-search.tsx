@@ -24,7 +24,6 @@ export default function PestsScreen() {
         const pests = await PestsService.getAllPests(1, searchText.trim());
         setResults(pests);
         console.log(pests);
-        console.log(results);
       } catch (e) {
         setResults([]);
       }

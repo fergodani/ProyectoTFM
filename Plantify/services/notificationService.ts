@@ -45,6 +45,7 @@ export const NotificationService = {
                 type: Notifications.SchedulableTriggerInputTypes.DAILY,
             },
         });
+        console.log(`Notificación diaria programada para las ${hour}:00`);
     },
 
     /**

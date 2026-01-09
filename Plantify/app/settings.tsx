@@ -133,7 +133,12 @@ export default function Settings() {
             setSelectedHour(hour);
             setSelectedHourTemp(hour);
         }
+        const loadIsNotificationsEnabled = async () => {
+            const enabled = await StorageService.getIsNotificationsEnabled();
+            setIsNotifications(enabled);
+        }
         loadNotificationTime();
+        loadIsNotificationsEnabled();
         fetchUser();
     }, [accessToken, refreshToken]);
 
@@ -223,6 +228,19 @@ export default function Settings() {
             }
         } finally {
             setIsLoading(false);
+        }
+    }
+
+    const handleIsNotificationsChange = async (value: boolean) => {
+        setIsNotifications(value);
+        await StorageService.saveIsNotificationsEnabled(value);
+        if (value) {
+            const hasPermission = await NotificationService.requestPermissions();
+            if (hasPermission) {
+                await NotificationService.scheduleDailyReminder(selectedHour);
+            }
+        } else {
+            await NotificationService.disableNotifications();
         }
     }
 
@@ -347,7 +365,7 @@ export default function Settings() {
                                     value={isNotifications}
                                     onValueChange={
                                         (value) => {
-                                            console.log(value)
+                                            handleIsNotificationsChange(value);
                                             isNotifications ? setIsNotifications(false) : setIsNotifications(true)
                                         }
                                     }

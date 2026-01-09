@@ -16,13 +16,11 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
-from tensorflow.keras.models import load_model
 import numpy as np
 import json
 from ultralytics import YOLO
 import cv2
 import os
-import google.generativeai as genai
 from dotenv import load_dotenv
 from urllib.parse import urlparse
 

@@ -36,5 +36,27 @@ export const StorageService = {
       console.error('Error leyendo la hora', e);
       return 9; // Fallback seguro
     }
+  },
+
+  async saveIsNotificationsEnabled(enabled: boolean): Promise<void> {
+    try {
+      await AsyncStorage.setItem('USER_NOTIFICATIONS_ENABLED', JSON.stringify(enabled));
+      console.log('Estado de notificaciones guardado:', enabled);
+    } catch (e) {
+      console.error('Error guardando el estado de notificaciones', e);
+    }
+  },
+
+  async getIsNotificationsEnabled(): Promise<boolean> {
+    try {
+      const storedValue = await AsyncStorage.getItem('USER_NOTIFICATIONS_ENABLED');
+      if (storedValue !== null) {
+        return JSON.parse(storedValue);
+      }
+      return false; // Valor por defecto si no está guardado
+    } catch (e) {
+      console.error('Error leyendo el estado de notificaciones', e);
+      return false; // Fallback seguro
+    }
   }
 };
