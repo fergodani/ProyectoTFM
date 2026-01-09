@@ -24,8 +24,9 @@ services:
       - media_volume:/app/media
     depends_on:
       - db
-    expose:
-      - "8000"
+    # Mapea el puerto 8000 del contenedor al host (acceso <host>:8000)
+    ports:
+      - "8888:8000"
 
 volumes:
   postgres_data:
