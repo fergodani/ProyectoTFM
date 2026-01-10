@@ -5,7 +5,6 @@
         "humidity": "normal",
         "sunlight": "partial_sun",
         "air": "False",
-        "owner": "admin",
         "image": "gardens/salon.jpg"
     },
     {
@@ -14,7 +13,6 @@
         "humidity": "normal",
         "sunlight": "indirect_sunlight",
         "air": "False",
-        "owner": "admin",
         "image": "gardens/cocina.jpg"
     },
     {
@@ -23,7 +21,6 @@
         "humidity": "normal",
         "sunlight": "partial_sun",
         "air": "False",
-        "owner": "admin",
         "image": "gardens/dormitorio.jpg"
     },
     {
@@ -32,7 +29,6 @@
         "humidity": "high",
         "sunlight": "full_shade",
         "air": "False",
-        "owner": "admin",
         "image": "gardens/baño.jpg"
     },
     {
@@ -41,7 +37,6 @@
         "humidity": "normal",
         "sunlight": "partial_sun",
         "air": "False",
-        "owner": "admin",
         "image": "gardens/oficina.jpg"
     },
     {
@@ -50,7 +45,6 @@
         "humidity": "normal",
         "sunlight": "partial_sun",
         "air": "True",
-        "owner": "admin",
         "image": "gardens/terraza.jpg"
     },
     {
@@ -59,7 +53,6 @@
         "humidity": "normal",
         "sunlight": "partial_sun",
         "air": "False",
-        "owner": "admin",
         "image": "gardens/jardin.jpg"
     },
     {
@@ -68,7 +61,6 @@
         "humidity": "normal",
         "sunlight": "full_shade",
         "air": "False",
-        "owner": "admin",
         "image": "gardens/patio.jpg"
     },
     {
@@ -77,7 +69,6 @@
         "humidity": "normal",
         "sunlight": "full_sun",
         "air": "True",
-        "owner": "admin",
         "image": "gardens/balcon.jpg"
     }
 ]

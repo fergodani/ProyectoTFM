@@ -20,8 +20,8 @@ const renderScene = SceneMap({
 });
 
 const routes = [
-  { key: 'plants', title: 'Plants' },
-  { key: 'gardens', title: 'Gardens' },
+  { key: 'plants', title: 'Plantas' },
+  { key: 'gardens', title: 'Lugares' },
 ];
 
 export default function TabTwoScreen() {

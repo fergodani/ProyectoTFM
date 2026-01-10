@@ -149,6 +149,11 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
 
     return (
         <>
+            { gardens.length === 0 && (
+                    <View style={{ paddingHorizontal: 16 }}>
+                      <ThemedText type="default">No hay lugares aquí aún. ¡Añade un nuevo lugar!</ThemedText>
+                    </View>
+                  )}
             {!plantId && (
                 <ScrollView style={styles.container}>
                     {isLoading && <ActivityIndicator size="large" style={{ marginTop: 32 }} />}
@@ -225,7 +230,7 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
                         );
                     })}
                     {!plantId && (
-                        <Button text="Añadir jardín" onPress={handleAdd} />
+                        <Button text="Añadir lugar" onPress={handleAdd} />
                     )}
                     <View style={{ marginBottom: 24 }} />
                 </ScrollView>)}
@@ -314,7 +319,7 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
                         );
                     })}
                     {!plantId && (
-                        <Button text="Añadir jardín" onPress={handleAdd} />
+                        <Button text="Añadir lugar" onPress={handleAdd} />
                     )}
                     <View style={{ marginBottom: 24 }} />
                 </ScrollView>)}

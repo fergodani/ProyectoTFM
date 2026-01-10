@@ -1,3 +1,4 @@
+import { ThemedText } from '@/components/ThemedText';
 import { Colors } from '@/constants/Colors';
 import { PlantService } from '@/services/plantsService';
 import { Ionicons } from '@expo/vector-icons';
@@ -25,8 +26,8 @@ export default function CameraScreen() {
         // Camera permissions are not granted yet.
         return (
             <View style={styles.container}>
-                <Text style={styles.message}>We need your permission to show the camera</Text>
-                <Button onPress={requestPermission} title="grant permission" />
+                <ThemedText style={styles.message}>Necesitamos permisos para mostrar la cámara</ThemedText>
+                <Button onPress={requestPermission} title="Conceder permiso" />
             </View>
         );
     }

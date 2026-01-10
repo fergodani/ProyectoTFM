@@ -57,11 +57,10 @@ export default function LoginScreen() {
             <ThemedText type="title">Iniciar sesión</ThemedText>
             <View style={{ display: 'flex', gap: 12 }}>
                 <View>
-                    <ThemedText type="subtitle">Correo electrónico</ThemedText>
+                    <ThemedText type="subtitle">Nombre de usuario</ThemedText>
                     <View style={styles.searchContainer}>
                         <TextInput
-                            placeholder="Introduce tu correo"
-                            keyboardType="email-address"
+                            placeholder="Introduce tu nombre de usuario"
                             autoCapitalize="none"
                             style={styles.searchInput}
                             value={email}

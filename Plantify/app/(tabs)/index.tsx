@@ -28,9 +28,9 @@ import { NotificationService } from '@/services/notificationService';
 import { StorageService } from '@/services/storageService';
 
 const routes = [
-  { key: 'previous', title: 'Previous' },
-  { key: 'today', title: 'Today' },
-  { key: 'next', title: 'Upcoming' },
+  { key: 'previous', title: 'Pasadas' },
+  { key: 'today', title: 'Hoy' },
+  { key: 'next', title: 'Próximas' },
 ];
 
 export default function HomeScreen() {
@@ -277,8 +277,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 4
   },
   warning: {
-    backgroundColor: '#fff3cdff',
-    borderColor: '#ffd558ff',
+    backgroundColor: 'rgb(255, 230, 147)',
+    borderColor: 'rgb(252, 198, 36)',
     borderWidth: 4,
     borderRadius: 8,
     flexDirection: 'row',

@@ -10,9 +10,15 @@ class ApiConfig(AppConfig):
     def ready(self):
         from django.db.utils import OperationalError
         from .models import Garden
+        from django.contrib.auth import get_user_model
         try:
             if Garden.objects.filter(is_template=True).exists():
                 print("Las plantillas de jardines ya existen. No se realizará ninguna acción.")
+                return
+            User = get_user_model()
+            admin_user = User.objects.filter(username='admin').first()
+            if not admin_user:
+                print("El usuario 'admin' no existe. No se creará automáticamente.")
                 return
         except OperationalError:
             print("Error al conectar con la base de datos. Asegúrate de que el servidor esté en funcionamiento.")
@@ -27,7 +33,7 @@ class ApiConfig(AppConfig):
                     humidity=template['humidity'],
                     sunlight_exposure=template['sunlight'],
                     air=template['air'],
-                    owner=template["owner"],
+                    owner=admin_user,
                     custom_image=template['image'],
                     is_template=True
                 )
