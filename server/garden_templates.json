@@ -1,0 +1,83 @@
+[
+    {
+        "name": "Salón",
+        "location": "indoor",
+        "humidity": "normal",
+        "sunlight": "partial_sun",
+        "air": "false",
+        "owner": "admin",
+        "image": "gardens/salon.jpg"
+    },
+    {
+        "name": "Cocina",
+        "location": "indoor",
+        "humidity": "normal",
+        "sunlight": "indirect_sunlight",
+        "air": "false",
+        "owner": "admin",
+        "image": "gardens/cocina.jpg"
+    },
+    {
+        "name": "Dormitorio",
+        "location": "indoor",
+        "humidity": "normal",
+        "sunlight": "partial_sun",
+        "air": "false",
+        "owner": "admin",
+        "image": "gardens/dormitorio.jpg"
+    },
+    {
+        "name": "Baño",
+        "location": "indoor",
+        "humidity": "high",
+        "sunlight": "full_shade",
+        "air": "false",
+        "owner": "admin",
+        "image": "gardens/baño.jpg"
+    },
+    {
+        "name": "Oficina",
+        "location": "indoor",
+        "humidity": "normal",
+        "sunlight": "partial_sun",
+        "air": "false",
+        "owner": "admin",
+        "image": "gardens/oficina.jpg"
+    },
+    {
+        "name": "Terraza",
+        "location": "outdoor",
+        "humidity": "normal",
+        "sunlight": "partial_sun",
+        "air": "true",
+        "owner": "admin",
+        "image": "gardens/terraza.jpg"
+    },
+    {
+        "name": "Jardín",
+        "location": "outdoor",
+        "humidity": "normal",
+        "sunlight": "partial_sun",
+        "air": "false",
+        "owner": "admin",
+        "image": "gardens/jardin.jpg"
+    },
+    {
+        "name": "Patio",
+        "location": "outdoor",
+        "humidity": "normal",
+        "sunlight": "full_shade",
+        "air": "false",
+        "owner": "admin",
+        "image": "gardens/patio.jpg"
+    },
+    {
+        "name": "Balcón",
+        "location": "outdoor",
+        "humidity": "normal",
+        "sunlight": "full_sun",
+        "air": "true",
+        "owner": "admin",
+        "image": "gardens/balcon.jpg"
+    }
+]

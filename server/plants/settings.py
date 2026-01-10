@@ -37,6 +37,13 @@ DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
+# CSRF trusted origins (comma-separated, include scheme, e.g. https://example.com)
+_raw_csrf = os.getenv('CSRF_TRUSTED_ORIGINS', '')
+if _raw_csrf:
+    CSRF_TRUSTED_ORIGINS = [o.strip() for o in _raw_csrf.split(',') if o.strip()]
+else:
+    CSRF_TRUSTED_ORIGINS = []
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -56,6 +63,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -169,6 +177,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Static root for collectstatic (used in production / Docker)
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Serve static files with WhiteNoise when no dedicated static server is present
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Production security defaults (can be overridden via env)
 if os.getenv('ENVIRONMENT') == 'production':
