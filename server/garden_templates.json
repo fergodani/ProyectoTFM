@@ -4,7 +4,7 @@
         "location": "indoor",
         "humidity": "normal",
         "sunlight": "partial_sun",
-        "air": "false",
+        "air": "False",
         "owner": "admin",
         "image": "gardens/salon.jpg"
     },
@@ -13,7 +13,7 @@
         "location": "indoor",
         "humidity": "normal",
         "sunlight": "indirect_sunlight",
-        "air": "false",
+        "air": "False",
         "owner": "admin",
         "image": "gardens/cocina.jpg"
     },
@@ -22,7 +22,7 @@
         "location": "indoor",
         "humidity": "normal",
         "sunlight": "partial_sun",
-        "air": "false",
+        "air": "False",
         "owner": "admin",
         "image": "gardens/dormitorio.jpg"
     },
@@ -31,7 +31,7 @@
         "location": "indoor",
         "humidity": "high",
         "sunlight": "full_shade",
-        "air": "false",
+        "air": "False",
         "owner": "admin",
         "image": "gardens/baño.jpg"
     },
@@ -40,7 +40,7 @@
         "location": "indoor",
         "humidity": "normal",
         "sunlight": "partial_sun",
-        "air": "false",
+        "air": "False",
         "owner": "admin",
         "image": "gardens/oficina.jpg"
     },
@@ -49,7 +49,7 @@
         "location": "outdoor",
         "humidity": "normal",
         "sunlight": "partial_sun",
-        "air": "true",
+        "air": "True",
         "owner": "admin",
         "image": "gardens/terraza.jpg"
     },
@@ -58,7 +58,7 @@
         "location": "outdoor",
         "humidity": "normal",
         "sunlight": "partial_sun",
-        "air": "false",
+        "air": "False",
         "owner": "admin",
         "image": "gardens/jardin.jpg"
     },
@@ -67,7 +67,7 @@
         "location": "outdoor",
         "humidity": "normal",
         "sunlight": "full_shade",
-        "air": "false",
+        "air": "False",
         "owner": "admin",
         "image": "gardens/patio.jpg"
     },
@@ -76,7 +76,7 @@
         "location": "outdoor",
         "humidity": "normal",
         "sunlight": "full_sun",
-        "air": "true",
+        "air": "True",
         "owner": "admin",
         "image": "gardens/balcon.jpg"
     }

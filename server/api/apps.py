@@ -18,7 +18,7 @@ class ApiConfig(AppConfig):
             print("Error al conectar con la base de datos. Asegúrate de que el servidor esté en funcionamiento.")
             return
         try:
-            with open(os.path.join(os.path.dirname(__file__), './garden_templates.json')) as f:
+            with open("./garden_templates.json", 'r', encoding='utf-8') as f:
                 garden_templates = json.load(f)
             for template in garden_templates:
                 Garden.objects.get_or_create(
