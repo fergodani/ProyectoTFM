@@ -24,7 +24,7 @@ jobs:
           else
             npm install
           fi
-        working-directory: .
+        working-directory: Plantify
 
       - name: Generate native Android project if missing
         run: |
@@ -33,7 +33,7 @@ jobs:
           else
             echo "android/ already exists, skipping prebuild"
           fi
-        working-directory: .
+        working-directory: Plantify
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -71,7 +71,7 @@ jobs:
           echo "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin" >> $GITHUB_PATH
 
       - name: Build release APK
-        working-directory: android
+        working-directory: Plantify/android
         run: |
           chmod +x ./gradlew
           ./gradlew assembleRelease --no-daemon
@@ -80,4 +80,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-release-apk
-          path: android/app/build/outputs/**/*.apk
+          path: Plantify/android/app/build/outputs/**/*.apk
