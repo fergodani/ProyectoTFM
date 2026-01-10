@@ -76,6 +76,12 @@ jobs:
           chmod +x ./gradlew
           ./gradlew assembleRelease --no-daemon
 
+      - name: Prebundle JS and assets (avoid Metro start during Gradle build)
+        working-directory: Plantify
+        run: |
+          mkdir -p android/app/src/main/assets android/app/src/main/res
+          npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res || true
+
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
