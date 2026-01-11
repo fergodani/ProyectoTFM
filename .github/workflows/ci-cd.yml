@@ -6,6 +6,7 @@ on:
 
 jobs:
   deploy:
+    if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: [self-hosted, linux, deploy]
     steps:
       - name: Deploy on host (use existing repo path)

@@ -73,8 +73,8 @@ export default function PestsScreen() {
           return (
             <TouchableOpacity key={item.id} activeOpacity={0.8} onPress={() => router.push({ pathname: '/pest-details', params: { id: String(item.id) } })}>
               <ThemedView style={styles.card}>
-                {item.image ? (
-                  <Image source={{ uri: item.image }} style={{ width: 80, height: 80, borderRadius: 8 }} />
+                {item.local_image ? (
+                  <Image source={{ uri: `${process.env.EXPO_PUBLIC_API_BASE_URL}${item.local_image}` }} style={{ width: 80, height: 80, borderRadius: 8 }} />
                 ) : (
                   <View style={[styles.placeholder, { backgroundColor: '#e8e8e8' }]}> 
                     <Ionicons name="bug" size={28} color="#666" />

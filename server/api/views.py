@@ -6,6 +6,7 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 import requests
 from django.http import JsonResponse
+from django.core.files.uploadedfile import SimpleUploadedFile
 from .models import Garden, UserPlant, Post, Comment, Vote
 from .serializers import PostSerializer, CommentSerializer, GardenSimpleSerializer, UserRegisterSerializer, GardenSerializer, UserPlantSerializer, CustomTokenObtainPairSerializer, VoteSerializer, UserSerializer, UserUpdateSerializer, ChangePasswordSerializer
 from bs4 import BeautifulSoup
@@ -434,32 +435,22 @@ class UserPlantListCreateView(APIView):
                     unit = ' '.join(parts[1:])  # "days"
                     request_data['watering_period'] = {"value": value, "unit": unit}
         
-        perenual_url = "https://perenual.com/plant-species-database-search-finder/species/" + str(plant_id)
-        
-        print(perenual_url)
-        dresp = requests.get(perenual_url, timeout=20)
-        if dresp.status_code != 200:
-            return Response({'error': 'Se ha producido un error'}, status=status.HTTP_502_BAD_GATEWAY)
-        dsoup = BeautifulSoup(dresp.text, 'html.parser')
-        image_url = None
-        candidate_imgs = dsoup.select('main img') or []
-        for im in candidate_imgs:
-            src = im.get('src') or ''
-            alt = (im.get('alt') or '').lower()
-            if 'logo' in src or 'logo' in alt:
-                continue
-            if 'storage' in src or 'perenual.com/storage' in src:
-                image_url = src
-                break
-        if not image_url:
-            for im in candidate_imgs:
-                src = im.get('src') or ''
-                if 'logo' not in src:
-                    image_url = src
-                    break
-        request_data['image'] = image_url
-        #if not request_data.get('image') and perenual_data.get('default_image', {}).#get('regular_url'):
-        #    request_data['image'] = perenual_data['default_image']['regular_url']
+        try:
+            img_url = perenual_data['default_image']['original_url']
+            print(img_url)
+            img_resp = requests.get(img_url, timeout=20)
+            if img_resp.status_code == 200:
+                print("Image downloaded successfully")
+                img_content = img_resp.content
+                filename = os.path.basename(urlparse(img_url).path) or f"plant_{plant_id}.jpg"
+                content_type = img_resp.headers.get('Content-Type', 'image/jpeg')
+                request_data['image'] = SimpleUploadedFile(filename, img_content, content_type=content_type)
+            else:
+                # fallback to keeping the URL (original behavior) if download failed
+                request_data['image'] = img_url
+        except Exception as e:
+            # on any error, fallback to the URL so the flow doesn't break
+            request_data['image'] = perenual_data['default_image']['original_url']
                 
         # Recrear el serializer con los datos actualizados
         serializer = UserPlantSerializer(data=request_data)
@@ -470,6 +461,8 @@ class UserPlantListCreateView(APIView):
                 UserPlantSerializer(plant, context={'request': self.request}).data,
                 status=status.HTTP_201_CREATED
             )
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserPlantDetailView(APIView):
@@ -1643,154 +1636,3 @@ class PerenualPestDiseaseDetailView(APIView):
 
         return Response({"error": "Enfermedad no encontrada"}, status=status.HTTP_404_NOT_FOUND)
 
-class GeminiPlantIdentificationView(APIView):
-    parser_classes = [MultiPartParser]
-    """Identificación de plantas usando Gemini AI"""
-    
-    def post(self, request):
-        # Verificar que se envió una imagen
-        if 'image' not in request.FILES:
-            return Response(
-                {"error": "No image provided"}, 
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        
-        image_file = request.FILES['image']
-        
-        try:
-            # Cargar variables de entorno
-            load_dotenv()
-            api_key = os.getenv('GEMINI_API_KEY')
-            
-            if not api_key:
-                return Response(
-                    {"error": "Gemini API key not configured"}, 
-                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
-                )
-            
-            # Configurar cliente de Gemini
-            client = genai.Client(api_key=api_key)
-            
-            # Leer los datos de la imagen
-            image_data = image_file.read()
-            
-            # Determinar el tipo MIME de la imagen
-            content_type = image_file.content_type
-            if not content_type or not content_type.startswith('image/'):
-                content_type = 'image/jpeg'  # Fallback por defecto
-            
-            # Hacer la petición a Gemini
-            response = client.models.generate_content(
-                model='gemini-2.5-flash',
-                contents=[
-                    types.Part.from_bytes(
-                        data=image_data,
-                        mime_type=content_type,
-                    ),
-                    '''Identify this plant and provide only the scientific names. List 3-5 potential identifications with their complete scientific names only, one per line, without numbers, formatting, or additional text.'''
-                ]
-            )
-            
-            # Procesar la respuesta de Gemini
-            gemini_response = response.text.strip()
-            print("Gemini response:", gemini_response)
-            scientific_names = [name.strip() for name in gemini_response.split('\n') if name.strip()]
-            print("Identified scientific names:", scientific_names)
-            
-            # Buscar plantas en la base de datos
-            found_plants = []
-            suggestions = []
-            
-            for scientific_name in scientific_names:
-                # Buscar coincidencia exacta primero
-                plant_info = PlantInfo.objects.filter(
-                    scientific_name__iexact=scientific_name
-                ).first()
-                
-                if plant_info:
-                    found_plants.append({
-                        'plant_info': PlantInfoSerializer(plant_info).data,
-                        'confidence': 'high',
-                        'match_type': 'exact',
-                        'scientific_name': scientific_name
-                    })
-                else:
-                    # Buscar coincidencias parciales
-                    partial_matches = PlantInfo.objects.filter(
-                        scientific_name__icontains=scientific_name.split()[0]  # Buscar por género
-                    )[:3]
-                    
-                    for match in partial_matches:
-                        suggestions.append({
-                            'plant_info': PlantInfoSerializer(match).data,
-                            'confidence': 'medium',
-                            'match_type': 'partial',
-                            'scientific_name': scientific_name,
-                            'matched_name': match.scientific_name
-                        })
-            
-            # Si no encontramos coincidencias exactas, buscar por nombre común
-            if not found_plants:
-                for scientific_name in scientific_names:
-                    common_name_matches = PlantInfo.objects.filter(
-                        common_name__icontains=scientific_name.split()[0]
-                    )[:2]
-                    
-                    for match in common_name_matches:
-                        suggestions.append({
-                            'plant_info': PlantInfoSerializer(match).data,
-                            'confidence': 'low',
-                            'match_type': 'common_name',
-                            'scientific_name': scientific_name,
-                            'matched_name': match.common_name
-                        })
-            
-            # Determinar la planta primaria basada en el primer resultado de Gemini
-            primary_plant = None
-            primary_plant_id = None
-            confidence = 'low'  # Por defecto
-            primary_scientific_name = scientific_names[0] if scientific_names else None
-            
-            if primary_scientific_name:
-                # Intentar coincidencia exacta con el primer nombre
-                primary = PlantInfo.objects.filter(
-                    scientific_name__iexact=primary_scientific_name
-                ).first()
-                
-                if primary:
-                    primary_plant = primary
-                    primary_plant_id = primary.id
-                    confidence = 'high'
-                else:
-                    # Intentar coincidencias parciales por género (primer token)
-                    genus = primary_scientific_name.split()[0]
-                    partial = PlantInfo.objects.filter(scientific_name__icontains=genus).first()
-                    if partial:
-                        primary_plant = partial
-                        primary_plant_id = partial.id
-                        confidence = 'medium'
-                    else:
-                        # Intentar por nombre común
-                        common = PlantInfo.objects.filter(common_name__icontains=genus).first()
-                        if common:
-                            primary_plant = common
-                            primary_plant_id = common.id
-                            confidence = 'low'
-            
-            return Response({
-                'class': primary_scientific_name,
-                'confidence': confidence,
-                'plant_id': primary_plant_id,
-                'plant_info': PlantInfoSerializer(primary_plant).data if primary_plant else None,
-                'gemini_response': gemini_response,
-                'identified_names': scientific_names
-            })
-            
-        except Exception as e:
-            return Response(
-                {
-                    "error": "Failed to identify plant",
-                    "details": str(e)
-                }, 
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )

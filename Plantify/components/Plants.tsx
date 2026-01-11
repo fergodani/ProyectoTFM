@@ -56,6 +56,7 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
       return;
     }
     try {
+      setIsLoading(true);
       if (gardenId) {
         const data = await PlantService.getPlantsByGarden(gardenId, accessToken!);
         setUserPlants(data);
@@ -68,6 +69,7 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
       if (error.message === 'Unauthorized') {
         // Handle token refresh logic here
         try {
+          setIsLoading(true);
           const newTokens = await UserService.refreshToken(refreshToken!);
           setTokens(newTokens.access, newTokens.refresh);
           // Retry fetching plants with new access token
@@ -82,6 +84,8 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
           console.error("Error refreshing tokens:", refreshError);
         }
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 

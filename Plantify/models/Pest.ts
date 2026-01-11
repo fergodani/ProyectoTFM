@@ -30,6 +30,7 @@ export interface PestParsed {
 	id: number;
 	href: string;
 	image: string;
+	local_image?: string;
 	name: string;
 	solutions_count: number;
 }
