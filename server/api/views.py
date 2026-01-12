@@ -948,6 +948,11 @@ class PredictPestDiseaseView(APIView):
         print(f"🌿 ENFERMEDAD DETECTADA: {disease_query}")
         print(f"📊 Confianza: {confianza:.2%}")
         print("="*30 + "\n")
+        
+        if disease_query.lower() == "healthy":
+            return Response({
+                'id': -1
+            })
         # Buscar en Perenual API por nombre de planta
         try:
             api_key = os.getenv('PERENUAL_API_KEY')

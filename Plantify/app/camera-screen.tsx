@@ -49,11 +49,13 @@ export default function CameraScreen() {
             setIsLoading(true);
             try {
                 const data = await PlantService.sendPhoto(photoUri, isPest === 'true');
-                if (data.id) {
+                if (data.id && data.id !== -1 ) {
                     router.push({
                         pathname: isPest === 'true' ? '/pest-details' : '/plant-details',
                         params: { id: data.id }
                     });
+                } else if (data.id === -1) {
+                    alert("La planta está sana. No se detectaron plagas o enfermedades.");
                 } else {
                     alert("No se pudo identificar la imagen. Inténtalo de nuevo.");
                 }
