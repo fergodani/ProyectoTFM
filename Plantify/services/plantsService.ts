@@ -132,6 +132,9 @@ export const PlantService = {
       if (payload.custom_image) {
         delete payload.custom_image;
       }
+      if (payload.image) {
+        delete payload.image;
+      }
 
       const response = await fetch(`${url}/api/userplant/${userPlant.id}/`, {
         method: "PUT",

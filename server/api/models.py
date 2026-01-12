@@ -50,7 +50,7 @@ class UserPlant(models.Model):
     last_pruning_date = models.DateField(blank=True, null=True)
     last_rotating_date = models.DateField(blank=True, null=True)
     last_spraying_date = models.DateField(blank=True, null=True)
-    garden = models.ForeignKey(Garden, on_delete=models.CASCADE, related_name='user_plants',null=True)
+    garden = models.ForeignKey(Garden, on_delete=models.CASCADE, related_name='user_plants',null=True, blank=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='plants') 
     plant_id = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='userplants/', blank=True, null=True)

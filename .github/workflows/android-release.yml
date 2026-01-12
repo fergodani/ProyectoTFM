@@ -29,6 +29,12 @@ jobs:
           fi
         working-directory: Plantify
 
+      - name: Create .env file
+        run: |
+          echo "EXPO_PUBLIC_API_BASE_URL=${{ secrets.EXPO_PUBLIC_API_BASE_URL }}" > .env
+          echo "EXPO_PUBLIC_API_BASE_URL_HTTP=${{ secrets.EXPO_PUBLIC_API_BASE_URL_HTTP }}" >> .env
+        working-directory: Plantify
+
       - name: Generate native Android project if missing
         run: |
           if [ ! -d android ]; then
