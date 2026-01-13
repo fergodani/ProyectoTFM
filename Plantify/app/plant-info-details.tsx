@@ -10,6 +10,8 @@ import Ionicons from "@expo/vector-icons/build/Ionicons";
 import { useAuth } from "@/hooks/useAuthContext";
 import { Colors } from "@/constants/Colors";
 import { LinearGradient } from 'expo-linear-gradient';
+import GardensService from "@/services/gardensService";
+import { Garden } from "@/models/Plant";
 
 export default function PlantInfoDetails() {
   // Recibe los parámetros por router
@@ -18,10 +20,12 @@ export default function PlantInfoDetails() {
   const [plant, setPlant] = useState<PlantInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
+  const { getUserId, accessToken, isAuthenticated } = useAuth();
   const colorScheme = useColorScheme() ?? "light";
   const { } = useAuth();
   const cardBackground = colorScheme === "dark" ? "#222" : "#fff";
   const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
+  const [gardens, setGardens] = useState<Garden[]>([]);
 
   // Función para cargar los datos de la planta
   const fetchPlant = useCallback(async () => {
@@ -41,8 +45,20 @@ export default function PlantInfoDetails() {
 
   // Efecto inicial para cargar los datos
   useEffect(() => {
+    const fetchGardens = async () => {
+      try {
+        const response = await GardensService.getGardensName(accessToken!);
+        setGardens(response);
+      } catch (error) {
+        console.error("Error fetching gardens:", error);
+      }
+    };
+    if (isAuthenticated) {
+      fetchGardens();
+    }
     fetchPlant();
   }, [fetchPlant]);
+
 
   // Recargar datos cuando la pantalla regaina el foco
   useFocusEffect(
@@ -83,16 +99,34 @@ export default function PlantInfoDetails() {
 
   const handleAddToGarden = () => {
     setShowMenu(false);
-    console.log(plant.default_image.original_url);
+    if (gardens.length === 0) {
+      handleSkip();
+      return;
+    }
     router.push({
       pathname: "/garden-select",
       params: {
-        id,
-        watering_period: plant.watering_general_benchmark ? JSON.stringify(plant.watering_general_benchmark) : "",
-        image_url: plant.default_image?.original_url || "",
-        common_name: plant.common_name || "",
+        id
       }
     })
+  };
+
+  const handleSkip = async () => {
+    try {
+      const userPlant = {
+        plant_id: id,
+        owner: getUserId()!
+      }
+      setLoading(true);
+      await PlantService.createPlant(userPlant, accessToken!);
+      setLoading(false)
+      router.replace("/(tabs)/profile");
+    } catch (error) {
+      //console.error("Error adding plant:", error);
+      alert("Error al agregar la planta.");
+      setLoading(false)
+      router.replace("/(tabs)/profile");
+    }
   };
 
   const handleCreatePost = () => {
@@ -105,7 +139,7 @@ export default function PlantInfoDetails() {
 
   return (
     <View style={{ flex: 1 }}
-        >
+    >
       <ParallaxScrollView
         headerImage={
           <Image
@@ -424,7 +458,7 @@ export default function PlantInfoDetails() {
         {plant.posts && plant.posts.length == 0 && (
           <ThemedText type="default">No posts for this plant.</ThemedText>
         )}
-      
+
       </ParallaxScrollView>
       {/* Menú desplegable */}
       {showMenu && (
@@ -455,14 +489,15 @@ export default function PlantInfoDetails() {
           activeOpacity={1}
         />
       )}
-
-      <TouchableOpacity style={styles.fab} onPress={handleAdd}>
-        <Ionicons
-          name={showMenu ? "close" : "add"}
-          size={24}
-          color="#333"
-        />
-      </TouchableOpacity>
+      {isAuthenticated && (
+        <TouchableOpacity style={styles.fab} onPress={handleAdd}>
+          <Ionicons
+            name={showMenu ? "close" : "add"}
+            size={24}
+            color="#333"
+          />
+        </TouchableOpacity>
+      )}
     </View>
   );
 }

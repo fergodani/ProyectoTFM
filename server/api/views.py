@@ -353,7 +353,7 @@ class GardenSuitabilityView(APIView):
                 texto = "Este jardín NO es óptimo para la planta: " + " ".join(reasons)
         
             results.append({
-                "garden": GardenSerializer(garden).data,
+                "garden": GardenSerializer(garden, context={'request': request}).data,
                 "is_optimal": is_optimal,
                 "reasons": reasons,
             })
@@ -414,7 +414,7 @@ class UserPlantListCreateView(APIView):
             except Exception as e:
                 print(f"Error fetching plant details from Perenual: {str(e)}")
         
-        return Response({}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"error": "Se ha producido un error"}, status=status.HTTP_400_BAD_REQUEST)
     
     def set_perenual_info(self, request_data, perenual_data, serializer, plant_id):
         if not request_data.get('common_name') and perenual_data.get('common_name'):
@@ -445,12 +445,8 @@ class UserPlantListCreateView(APIView):
                 filename = os.path.basename(urlparse(img_url).path) or f"plant_{plant_id}.jpg"
                 content_type = img_resp.headers.get('Content-Type', 'image/jpeg')
                 request_data['image'] = SimpleUploadedFile(filename, img_content, content_type=content_type)
-            else:
-                # fallback to keeping the URL (original behavior) if download failed
-                request_data['image'] = img_url
         except Exception as e:
-            # on any error, fallback to the URL so the flow doesn't break
-            request_data['image'] = perenual_data['default_image']['original_url']
+            return Response({"error": "Se ha producido un error"}, status=status.HTTP_400_BAD_REQUEST)
                 
         # Recrear el serializer con los datos actualizados
         serializer = UserPlantSerializer(data=request_data)

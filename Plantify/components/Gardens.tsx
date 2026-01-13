@@ -15,7 +15,7 @@ import { UserService } from '@/services/userService';
 import Button from './Button';
 import { PlantService } from '@/services/plantsService';
 
-export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name }: Readonly<{ plantId: number | null; imageUrl?: string; wateringPeriod?: string; common_name?: string }>) {
+export default function Gardens({ plantId }: Readonly<{ plantId: number | null }>) {
     const colorScheme = useColorScheme();
     const router = useRouter();
     const { getUserId, accessToken, refreshToken, setTokens } = useAuth();
@@ -34,15 +34,14 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
             return;
         }
         try {
-
+            setIsLoading(true);
             if (plantId) {
                 const suitableGardens = await GardensService.getGardensBySuitability(plantId!, accessToken!);
                 setGardensBySuitability(suitableGardens);
-                console.log("Suitable gardens:", suitableGardens);
+                console.log(suitableGardens[0].garden.user_plants);
             } else {
                 const data = await GardensService.getAllGardens(accessToken!);
                 setGardens(data);
-                console.log(data)
             }
 
         } catch (error: any) {
@@ -59,6 +58,8 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
                     console.error("Error refreshing tokens:", refreshError);
                 }
             }
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -92,21 +93,19 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
 
     const handleCreatePlantInGarden = async (gardenId: number) => {
         try {
-            console.log(imageUrl)
             const userPlant = {
                 plant_id: plantId,
                 garden: Number(gardenId),
                 owner: getUserId()!,
-                watering_period: wateringPeriod ? JSON.parse(wateringPeriod) : null,
-                image: imageUrl || null,
-                common_name: common_name || null,
             }
-            console.log(userPlant)
+            setIsLoading(true);
             await PlantService.createPlant(userPlant, accessToken!);
             router.replace("/(tabs)/profile");
         } catch (error) {
             alert("Error al agregar la planta.");
             router.replace("/(tabs)/profile");
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -128,17 +127,17 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
 
     const handleSettings = async (gardenId: number) => {
         try {
-          setIsLoading(true);
-          const gardenDetails = await GardensService.getGardenById(gardenId);
-          closeModal();
-          setIsLoading(false);
-          console.log(gardenDetails);
-          router.push({ pathname: "/garden-settings", params: { gardenString: JSON.stringify(gardenDetails) } });
+            setIsLoading(true);
+            const gardenDetails = await GardensService.getGardenById(gardenId);
+            closeModal();
+            setIsLoading(false);
+            console.log(gardenDetails);
+            router.push({ pathname: "/garden-settings", params: { gardenString: JSON.stringify(gardenDetails) } });
         } catch (error) {
-          console.error("Error fetching garden details:", error);
-          setIsLoading(false);
+            console.error("Error fetching garden details:", error);
+            setIsLoading(false);
         }
-      }
+    }
 
     useFocusEffect(
 
@@ -151,98 +150,99 @@ export default function Gardens({ plantId, imageUrl, wateringPeriod, common_name
         <>
             {!plantId && (
                 <>
-                { gardens.length === 0 && (
-                    <View style={{ paddingHorizontal: 16 }}>
-                      <ThemedText type="default">No hay lugares aquí aún. ¡Añade un nuevo lugar!</ThemedText>
-                    </View>
-                  )}
-                <ScrollView style={styles.container}>
-                    {isLoading && <ActivityIndicator size="large" style={{ marginTop: 32 }} />}
-                    {gardens.map((garden: Garden) => {
-                        // Suponiendo que garden.plants es un array de plantas con propiedad image
-                        const plantImages = garden.user_plants?.slice(0, 3).map(p => p.custom_image ? p.custom_image : p.image) || [];
-                        return (
-                            <TouchableOpacity
-                                key={garden.id}
-                                onPress={() => {
-                                    if (plantId) {
-                                        handleCreatePlantInGarden(garden.id);
-                                    } else {
-                                        router.push({
-                                            pathname: "/garden-details",
-                                            params: { id: garden.id }
-                                        })
-                                    }
-                                }}
-                            >
-                                <ThemedView key={garden.id} style={styles.gardenCard}>
-                                    <View style={styles.mosaicContainer}>
-                                        {plantImages.length > 0 && plantImages[0] && (
-                                            <Image
-                                                source={{ uri: plantImages[0] }}
-                                                style={styles.mainImage}
-                                            />
-                                        )}
-                                        {!plantImages[0] && (
-                                            <Image
-                                                source={require('@/assets/images/plant-placeholder.png')}
-                                                style={styles.mainImage}
-                                            />
-                                        )}
-                                        <View style={styles.sideImagesContainer}>
-                                            {plantImages[1] && (
-                                                <Image
-                                                    source={{ uri: plantImages[1] }}
-                                                    style={styles.sideImage}
-                                                />
-                                            )}
-                                            {!plantImages[1] && (
-                                                <Image
-                                                    source={require('@/assets/images/plant-placeholder.png')}
-                                                    style={styles.sideImage}
-                                                />
-                                            )}
-                                            {plantImages[2] && (
-                                                <Image
-                                                    source={{ uri: plantImages[2] }}
-                                                    style={styles.sideImage}
-                                                />
-                                            )}
-                                            {!plantImages[2] && (
-                                                <Image
-                                                    source={require('@/assets/images/plant-placeholder.png')}
-                                                    style={styles.sideImage}
-                                                />
-                                            )}
-                                        </View>
-                                    </View>
-                                    <View style={styles.gardenInfoContainer}>
-                                        <ThemedText type='title2'>{garden.name}</ThemedText>
-                                        <ThemedText type='default'>{garden.location === 'indoor' ? 'Interior' : garden.location === 'outdoor' ? 'Exterior' : garden.location}</ThemedText>
-                                        <ThemedText type='default'>{garden.user_plants?.length} {garden.user_plants?.length == 1 ? 'planta' : 'plantas'}</ThemedText>
-                                    </View>
-                                    <TouchableOpacity style={styles.buttonMenu} onPress={(event) => {
-                                        openModal(garden, event)
-                                    }}>
-                                        <Ionicons name="ellipsis-vertical" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
-                                    </TouchableOpacity>
-                                </ThemedView>
-                            </TouchableOpacity>
-                        );
-                    })}
-                    {!plantId && (
-                        <Button text="Añadir lugar" onPress={handleAdd} />
+                    {gardens.length === 0 && (
+                        <View style={{ paddingHorizontal: 16 }}>
+                            <ThemedText type="default">No hay lugares aquí aún. ¡Añade un nuevo lugar!</ThemedText>
+                        </View>
                     )}
-                    <View style={{ marginBottom: 24 }} />
-                </ScrollView>
+                    <ScrollView style={styles.container}>
+                        {isLoading && <ActivityIndicator size="large" style={{ marginTop: 32 }} />}
+                        {gardens.map((garden: Garden) => {
+                            // Suponiendo que garden.plants es un array de plantas con propiedad image
+                            const plantImages = garden.user_plants?.slice(0, 3).map(p => p.custom_image ? p.custom_image : p.image) || [];
+                            return (
+                                <TouchableOpacity
+                                    key={garden.id}
+                                    onPress={() => {
+                                        if (plantId) {
+                                            handleCreatePlantInGarden(garden.id);
+                                        } else {
+                                            router.push({
+                                                pathname: "/garden-details",
+                                                params: { id: garden.id }
+                                            })
+                                        }
+                                    }}
+                                >
+                                    <ThemedView key={garden.id} style={styles.gardenCard}>
+                                        <View style={styles.mosaicContainer}>
+                                            {plantImages.length > 0 && plantImages[0] && (
+                                                <Image
+                                                    source={{ uri: plantImages[0] }}
+                                                    style={styles.mainImage}
+                                                />
+                                            )}
+                                            {!plantImages[0] && (
+                                                <Image
+                                                    source={require('@/assets/images/plant-placeholder.png')}
+                                                    style={styles.mainImage}
+                                                />
+                                            )}
+                                            <View style={styles.sideImagesContainer}>
+                                                {plantImages[1] && (
+                                                    <Image
+                                                        source={{ uri: plantImages[1] }}
+                                                        style={styles.sideImage}
+                                                    />
+                                                )}
+                                                {!plantImages[1] && (
+                                                    <Image
+                                                        source={require('@/assets/images/plant-placeholder.png')}
+                                                        style={styles.sideImage}
+                                                    />
+                                                )}
+                                                {plantImages[2] && (
+                                                    <Image
+                                                        source={{ uri: plantImages[2] }}
+                                                        style={styles.sideImage}
+                                                    />
+                                                )}
+                                                {!plantImages[2] && (
+                                                    <Image
+                                                        source={require('@/assets/images/plant-placeholder.png')}
+                                                        style={styles.sideImage}
+                                                    />
+                                                )}
+                                            </View>
+                                        </View>
+                                        <View style={styles.gardenInfoContainer}>
+                                            <ThemedText type='title2'>{garden.name}</ThemedText>
+                                            <ThemedText type='default'>{garden.location === 'indoor' ? 'Interior' : garden.location === 'outdoor' ? 'Exterior' : garden.location}</ThemedText>
+                                            <ThemedText type='default'>{garden.user_plants?.length} {garden.user_plants?.length == 1 ? 'planta' : 'plantas'}</ThemedText>
+                                        </View>
+                                        <TouchableOpacity style={styles.buttonMenu} onPress={(event) => {
+                                            openModal(garden, event)
+                                        }}>
+                                            <Ionicons name="ellipsis-vertical" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
+                                        </TouchableOpacity>
+                                    </ThemedView>
+                                </TouchableOpacity>
+                            );
+                        })}
+                        {!plantId && (
+                            <Button text="Añadir lugar" onPress={handleAdd} />
+                        )}
+                        <View style={{ marginBottom: 24 }} />
+                    </ScrollView>
                 </>
-                )}
+            )}
 
             {plantId && (
                 <ScrollView style={styles.container}>
+                    {isLoading && <ActivityIndicator size="large" style={{ marginTop: 32 }} />}
                     {gardensBySuitability.map((gardenBySuitability: GardenBySuitability) => {
                         // Suponiendo que garden.plants es un array de plantas con propiedad image
-                        const plantImages = gardenBySuitability.garden.user_plants?.slice(0, 3).map(p => p.image) || [];
+                        const plantImages = gardenBySuitability.garden.user_plants?.slice(0, 3).map(p => p.custom_image ? p.custom_image : p.image) || [];
                         return (
                             <TouchableOpacity
                                 key={gardenBySuitability.garden.id}
