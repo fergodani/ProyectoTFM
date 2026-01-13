@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, ScrollView, TouchableOpacity, Image, Pressable, Modal, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, StyleSheet, ScrollView, TouchableOpacity, Image, Pressable, Modal, ActivityIndicator, RefreshControl } from 'react-native';
 import gardensService from '@/services/gardensService';
 import { Garden, GardenBySuitability } from '@/models/Plant';
 import { ThemedText } from './ThemedText';
@@ -155,7 +155,10 @@ export default function Gardens({ plantId }: Readonly<{ plantId: number | null }
                             <ThemedText type="default">No hay lugares aquí aún. ¡Añade un nuevo lugar!</ThemedText>
                         </View>
                     )}
-                    <ScrollView style={styles.container}>
+                    <ScrollView style={styles.container}
+                        refreshControl={
+                            <RefreshControl refreshing={isLoading} onRefresh={fetchGardens} />
+                        }>
                         {isLoading && <ActivityIndicator size="large" style={{ marginTop: 32 }} />}
                         {gardens.map((garden: Garden) => {
                             // Suponiendo que garden.plants es un array de plantas con propiedad image

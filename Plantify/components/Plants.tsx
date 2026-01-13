@@ -1,7 +1,7 @@
 import { Garden, UserPlant } from "@/models/Plant";
 import { PlantService } from "@/services/plantsService";
 import React, { useEffect, useState } from "react";
-import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Image, useColorScheme, Pressable, Modal, ActivityIndicator } from "react-native";
+import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Image, useColorScheme, Pressable, Modal, ActivityIndicator, RefreshControl } from "react-native";
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";
 import { useAuth } from "@/hooks/useAuthContext";
@@ -92,7 +92,6 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
   useFocusEffect(
     React.useCallback(() => {
       fetchPlants();
-      console.log(userPlants)
     }, [])
   );
 
@@ -151,7 +150,10 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
           <ThemedText type="default">No hay plantas aquí aún. ¡Añade una nueva planta!</ThemedText>
         </View>
       )}
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container}
+      refreshControl={
+                  <RefreshControl refreshing={isLoading} onRefresh={fetchPlants} />
+                }>
         {userPlants.map((userPlant) => (
           <TouchableOpacity
             key={userPlant.id}

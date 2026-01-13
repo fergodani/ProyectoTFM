@@ -174,7 +174,60 @@ export default function PlantSettings() {
 
     const openModal = (type: ModalType | ((prevState: ModalType) => ModalType) | null) => {
         // Sincronizar userPlantTemp con userPlant cada vez que se abre el modal
-        setUserPlantTemp({ ...userPlant });
+        // crear copia base
+        const base = { ...userPlant } as UserPlant;
+
+        // Rellenar valores por defecto según el tipo de modal para que
+        // el valor mostrado por el WheelPicker esté reflejado en userPlantTemp
+        // incluso si el usuario no mueve la rueda.
+        switch (type) {
+            case 'height':
+                base.height = (base.height ?? 0) as any;
+                break;
+            case 'age':
+                base.age = base.age ?? ageOptions[0].value;
+                break;
+            case 'watering_type':
+                base.watering_type = base.watering_type ?? 'recommended';
+                break;
+            case 'fertilizing':
+                base.fertilizing_time = base.fertilizing_time ?? 0;
+                base.fertilizing_time_unit = base.fertilizing_time_unit ?? 'day';
+                break;
+            case 'watering_manual':
+                base.watering_time = base.watering_time ?? 0;
+                base.watering_unit = base.watering_unit ?? 'day';
+                break;
+            case 'pruning':
+                base.pruning_time = base.pruning_time ?? 0;
+                base.pruning_time_unit = base.pruning_time_unit ?? 'day';
+                break;
+            case 'spraying':
+                base.sprayed_time = base.sprayed_time ?? 0;
+                base.sprayed_unit = base.sprayed_unit ?? 'day';
+                break;
+            case 'rotation':
+                base.rotation_time = base.rotation_time ?? 0;
+                base.rotation_unit = base.rotation_unit ?? 'day';
+                break;
+            case 'site':
+                base.garden = base.garden ?? (gardens && gardens.length > 0 ? gardens[0].id : 0);
+                break;
+            case 'pot_type':
+                base.pot_type = base.pot_type ?? potTypeOptions[0].value;
+                break;
+            case 'pot_size':
+                base.pot_size = base.pot_size ?? 0;
+                break;
+            case 'pot_drainage':
+                base.drainage = base.drainage ?? drainageOptions[0].value;
+                break;
+            case 'custom_name':
+            default:
+                break;
+        }
+
+        setUserPlantTemp(base);
         setModalType(type);
         setIsModalVisible(true);
     };

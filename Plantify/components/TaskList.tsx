@@ -50,7 +50,6 @@ export default function TaskList({ tasks, isToday, isNext, onRefresh }: Readonly
                 break;
         }
         try {
-            console.log(task.user_plant)
             const plant = await PlantService.putPlant(task.user_plant, accessToken!);
             if (plant) {
                 const updatedTasks = tasks?.filter(t => t.user_plant.id !== task.user_plant.id);
