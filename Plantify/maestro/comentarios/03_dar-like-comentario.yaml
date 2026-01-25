@@ -1,0 +1,9 @@
+appId: com.uniovi.Plantify
+---
+# Flow de dar like a comentario
+# Prerequisito: Usuario ya autenticado y hay comentarios disponibles
+
+- tapOn:
+    text: 
+    index: 1
+- assertVisible: "1"

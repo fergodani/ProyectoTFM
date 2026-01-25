@@ -5,8 +5,57 @@ on:
     branches: [ main ]
 
 jobs:
+  test-backend:
+    if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
+    runs-on: [self-hosted, linux]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          cd server
+          pip install -r requirements.txt
+        shell: bash
+
+      - name: Run Django tests
+        run: |
+          cd server
+          python manage.py test --verbosity=2
+        shell: bash
+
+  test-frontend:
+    if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
+    runs-on: [self-hosted, linux]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          cd Plantify
+          npm ci
+        shell: bash
+
+      - name: Run Jest tests
+        run: |
+          cd Plantify
+          npm test -- --watchAll=false --coverage
+        shell: bash
+
   deploy:
     if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')"
+    needs: [test-backend, test-frontend]
     runs-on: [self-hosted, linux, deploy]
     steps:
       - name: Deploy on host (use existing repo path)

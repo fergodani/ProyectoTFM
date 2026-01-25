@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ParallaxScrollView Component matches snapshot 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "#FFFFFF",
+      },
+      {
+        "flex": 1,
+      },
+    ]
+  }
+>
+  <RCTScrollView
+    collapsable={false}
+    contentContainerStyle={
+      {
+        "paddingBottom": 80,
+      }
+    }
+    scrollEventThrottle={16}
+    scrollIndicatorInsets={
+      {
+        "bottom": 80,
+      }
+    }
+  >
+    <View>
+      <View
+        style={
+          [
+            {
+              "height": 250,
+              "overflow": "hidden",
+            },
+            {
+              "backgroundColor": "#fff",
+            },
+            {
+              "transform": [
+                {
+                  "translateY": undefined,
+                },
+                {
+                  "scale": undefined,
+                },
+              ],
+            },
+          ]
+        }
+      >
+        <View />
+      </View>
+      <View
+        style={
+          [
+            {
+              "backgroundColor": "#FFFFFF",
+            },
+            {
+              "flex": 1,
+              "gap": 16,
+              "overflow": "hidden",
+              "padding": 16,
+            },
+          ]
+        }
+      >
+        <Text>
+          Snapshot
+        </Text>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;

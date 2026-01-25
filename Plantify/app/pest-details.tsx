@@ -6,7 +6,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
-import { Pest, PestDetailParsed } from '@/models/Pest';
+import { PestDetail } from '@/models/Pest';
 import { globalStyles } from '@/styles/global-styles';
 import { PestsService } from '@/services/pestsService';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -17,7 +17,7 @@ export default function PestDetails() {
     const { id } = useLocalSearchParams<{ id?: string }>();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [pest, setPest] = useState<PestDetailParsed | null>(null);
+    const [pest, setPest] = useState<PestDetail | null>(null);
     const colorScheme = useColorScheme();
     const navigation = useNavigation();
     const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;

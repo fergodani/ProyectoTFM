@@ -31,7 +31,6 @@ export default function TaskList({ tasks, isToday, isNext, onRefresh }: Readonly
     const colorScheme = useColorScheme();
 
     const completeTask = async (task: Task) => {
-        console.log("Completing task:", task);
         switch (task.type) {
             case 'watering':
                 task.user_plant.last_watered_date = new Date().toISOString().slice(0, 10);
@@ -90,6 +89,14 @@ export default function TaskList({ tasks, isToday, isNext, onRefresh }: Readonly
         spraying: "water",
         rotating: "sync",
         fertilizing: "archive"
+    };
+
+    const taskTypeLabels: Record<Task['type'], string> = {
+        watering: "Riego",
+        pruning: "Poda",
+        spraying: "Rociado",
+        rotating: "Rotación",
+        fertilizing: "Fertilización"
     };
 
     return (
@@ -153,13 +160,15 @@ export default function TaskList({ tasks, isToday, isNext, onRefresh }: Readonly
                                 ) : (
                                     <Image source={{ uri: user_plant.image }} style={{ width: 50, height: 50 }} />
                                 )}
-                            {user_plant.custom_name ? (
-                                <ThemedText type="title2">{user_plant.custom_name.charAt(0).toUpperCase() + user_plant.custom_name.slice(1)}</ThemedText>
-                            ) : (
-                                <ThemedText type="title2">{user_plant.common_name
-                                ? user_plant.common_name.charAt(0).toUpperCase() + user_plant.common_name.slice(1)
-                                : ""}</ThemedText>
-                            )}
+                            <View style={{ flex: 1, marginRight: 8 }}>
+                                {user_plant.custom_name ? (
+                                    <ThemedText type="title2" numberOfLines={2} ellipsizeMode="tail" style={{ flexShrink: 1, flexWrap: 'wrap' }}>{user_plant.custom_name.charAt(0).toUpperCase() + user_plant.custom_name.slice(1)}</ThemedText>
+                                ) : (
+                                    <ThemedText type="title2" numberOfLines={2} ellipsizeMode="tail" style={{ flexShrink: 1, flexWrap: 'wrap' }}>{user_plant.common_name
+                                    ? user_plant.common_name.charAt(0).toUpperCase() + user_plant.common_name.slice(1)
+                                    : ""}</ThemedText>
+                                )}
+                            </View>
                             
                             <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
                                 <View style={styles.taskCount}>
@@ -190,7 +199,7 @@ export default function TaskList({ tasks, isToday, isNext, onRefresh }: Readonly
                                         }}
                                     >
                                         <Ionicons name={taskTypeIcons[task.type]} size={16} color={"#333"} />
-                                        <ThemedText style={{ color: "#222", fontWeight: "bold" }}>{task.type.charAt(0).toUpperCase() + task.type.slice(1)}</ThemedText>
+                                        <ThemedText style={{ color: "#222", fontWeight: "bold" }}>{taskTypeLabels[task.type] ?? (task.type.charAt(0).toUpperCase() + task.type.slice(1))}</ThemedText>
                                     </View>
                                     <View style={{ justifyContent: 'center', alignSelf: "center" }}>
                                         <ThemedText>{(() => {

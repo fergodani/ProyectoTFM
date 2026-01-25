@@ -84,7 +84,6 @@ const GardenForm = () => {
     try {
       const data = await GardensService.getGardenTemplates(accessToken!);
       setGardenTemplates(data);
-      console.log("Garden templates fetched:", data);
     } catch (error) {
       console.error("Error fetching garden templates:", error);
     }
@@ -197,12 +196,13 @@ const GardenForm = () => {
       {step === 2 && (
         <View>
           <ThemedText type='title' style={styles.text}>Nombre del lugar</ThemedText>
-          <ThemedText type="subtitle" style={styles.text}>Introduce el nombre del lugar donde se encuentra el jardín.</ThemedText>
+          <ThemedText type="subtitle" style={styles.text}>Introduce el nombre del lugar.</ThemedText>
           <View style={styles.searchContainer}>
             <TextInput
               value={formData.name}
+              placeholderTextColor={colorScheme === 'dark' ? Colors.dark.placeholder : Colors.light.placeholder}
               onChangeText={value => handleChange("name", value)}
-              placeholder="Nombre del jardín"
+              placeholder="Nombre del lugar"
             />
           </View>
 

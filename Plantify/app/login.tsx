@@ -36,7 +36,6 @@ export default function LoginScreen() {
 
     const handleLogin = async () => {
         setError('');
-        console.log("Attempting to log in with:", email);
         if (!email || !password){
             setError('Por favor, completa todos los campos.');
             return;
@@ -61,6 +60,7 @@ export default function LoginScreen() {
                     <View style={styles.searchContainer}>
                         <TextInput
                             placeholder="Introduce tu nombre de usuario"
+                            placeholderTextColor={colorScheme === 'dark' ? Colors.dark.placeholder : Colors.light.placeholder}
                             autoCapitalize="none"
                             style={styles.searchInput}
                             value={email}
@@ -73,6 +73,7 @@ export default function LoginScreen() {
                     <View style={styles.searchContainer}>
                         <TextInput
                             placeholder="Introduce tu contraseña"
+                            placeholderTextColor={colorScheme === 'dark' ? Colors.dark.placeholder : Colors.light.placeholder}
                             secureTextEntry
                             style={styles.searchInput}
                             value={password}

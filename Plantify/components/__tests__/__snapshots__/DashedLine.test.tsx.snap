@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DashedLine Component matches snapshot 1`] = `
+<View
+  style={
+    {
+      "borderBottomWidth": 1,
+      "borderColor": "#ccc",
+      "borderStyle": "dashed",
+      "marginVertical": 16,
+      "width": "100%",
+    }
+  }
+/>
+`;

@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GardenSelect matches snapshot 1`] = `
+[
+  <View
+    style={
+      {
+        "padding": 16,
+      }
+    }
+  >
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#bfd8c5ff",
+          "borderRadius": 25,
+          "elevation": 5,
+          "height": 50,
+          "justifyContent": "center",
+          "marginTop": 16,
+          "opacity": 1,
+          "shadowColor": "#000",
+          "shadowOffset": {
+            "height": 2,
+            "width": 0,
+          },
+          "shadowOpacity": 0.3,
+          "shadowRadius": 4,
+          "width": "100%",
+        }
+      }
+    >
+      <Text
+        style={
+          {
+            "color": "#11181C",
+            "fontSize": 16,
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Saltar
+      </Text>
+    </View>
+  </View>,
+  <View>
+    <Text>
+      Jardín 1
+    </Text>
+    <Text>
+      Jardín 2
+    </Text>
+  </View>,
+]
+`;

@@ -1,0 +1,20 @@
+appId: com.uniovi.Plantify
+---
+# Flow de eliminación de un lugar
+# Prerequisito: Usuario ya autenticado y tiene al menos un lugar creado sin plantas
+
+- launchApp
+
+- tapOn: "Perfil de usuario"
+- tapOn: Lugares
+- tapOn:
+    point: 92%,32%
+- tapOn: Eliminar
+- tapOn: Eliminar
+
+# Se hace dos veces para eliminar los dos lugares creados
+- tapOn:
+    point: 92%,32%
+- tapOn: Eliminar
+- tapOn: Eliminar
+- assertVisible: No hay lugares aquí aún. ¡Añade un nuevo lugar y agrupa tus plantas!

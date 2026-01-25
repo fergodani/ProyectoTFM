@@ -1,0 +1,22 @@
+appId: com.uniovi.Plantify
+---
+# Flow de creación de lugar personalizado
+# Prerequisito: Usuario ya autenticado
+
+- launchApp
+- tapOn: Perfil de usuario
+- tapOn: Lugares
+- tapOn: Añadir lugar
+- tapOn: Personalizado
+- tapOn: Nombre del lugar
+- inputText: "test"
+- tapOn: Siguiente
+- tapOn: Luz solar indirecta
+- tapOn: Poca humedad
+- tapOn: Exterior
+- assertVisible: test
+- assertVisible: Exterior
+- assertVisible: Luz solar indirecta
+- assertVisible: Baja
+- tapOn: Crear
+- assertVisible: test

@@ -1,0 +1,12 @@
+appId: com.uniovi.Plantify
+---
+# Flow de creación de lugar usando un template
+# Prerequisito: Usuario ya autenticado
+
+- launchApp
+- tapOn: Perfil de usuario
+- tapOn: Lugares
+- tapOn: Añadir lugar
+- tapOn: Balcón
+- tapOn: Crear
+- assertVisible: Balcón

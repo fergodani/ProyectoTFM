@@ -1,0 +1,15 @@
+appId: com.uniovi.Plantify
+---
+# Flow de modificar apodo de planta
+# Prerequisito: Usuario ya autenticado y tiene al menos una planta
+
+- launchApp
+- tapOn: Perfil de usuario
+- tapOn: Menú de opciones
+- tapOn: Ajustes de la planta
+- tapOn:
+    id: "custom_name"
+- tapOn: Nombre de la planta
+- inputText: "test"
+- tapOn: Aceptar
+- assertVisible: test

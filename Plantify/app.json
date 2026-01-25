@@ -10,14 +10,14 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.Plantify"
+      "bundleIdentifier": "com.uniovi.Plantify"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.Plantify"
+      "package": "com.uniovi.Plantify"
     },
     "web": {
       "output": "static",

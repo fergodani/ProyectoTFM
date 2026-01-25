@@ -1,0 +1,8 @@
+appId: com.uniovi.Plantify
+---
+# Flow de retirar voto de publicación
+# Prerequisito: Usuario ya autenticado y ha votado (like o dislike) en una publicación
+
+- tapOn:
+    point: 28%,27%
+- assertVisible: "0"

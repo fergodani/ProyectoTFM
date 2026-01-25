@@ -1,0 +1,2409 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlantSettings matches snapshot 1`] = `
+<ViewManagerAdapter_ExpoLinearGradient
+  colors={
+    [
+      819327195,
+      4294769398,
+    ]
+  }
+  style={
+    [
+      {
+        "flex": 1,
+      },
+    ]
+  }
+>
+  <RCTScrollView>
+    <View>
+      <View
+        style={
+          {
+            "flex": 1,
+            "gap": 16,
+            "padding": 16,
+          }
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "backgroundColor": "rgb(252, 250, 246)",
+              },
+              {
+                "borderBottomLeftRadius": 8,
+                "borderBottomRightRadius": 8,
+                "borderTopLeftRadius": 8,
+                "borderTopRightRadius": 8,
+                "display": "flex",
+                "elevation": 3,
+                "flexDirection": "column",
+                "padding": 16,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 2,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.1,
+                "shadowRadius": 4,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "display": "flex",
+                "flexDirection": "row",
+                "gap": 12,
+                "marginBottom": 16,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "borderRadius": 8,
+                  "height": 100,
+                  "overflow": "hidden",
+                  "position": "relative",
+                  "width": 100,
+                }
+              }
+            >
+              <Image
+                source={
+                  {
+                    "uri": undefined,
+                  }
+                }
+                style={
+                  {
+                    "height": "100%",
+                    "width": "100%",
+                  }
+                }
+              />
+              <View
+                style={
+                  {
+                    "bottom": 6,
+                    "position": "absolute",
+                    "right": 6,
+                  }
+                }
+              >
+                <View
+                  style={
+                    {
+                      "alignItems": "center",
+                      "backgroundColor": "#fff",
+                      "borderRadius": 16,
+                      "elevation": 2,
+                      "height": 28,
+                      "justifyContent": "center",
+                      "width": 28,
+                    }
+                  }
+                >
+                  <Text
+                    allowFontScaling={false}
+                    selectable={false}
+                    style={
+                      [
+                        {
+                          "color": "#bfd8c5ff",
+                          "fontSize": 16,
+                        },
+                        undefined,
+                        {
+                          "fontFamily": "ionicons",
+                          "fontStyle": "normal",
+                          "fontWeight": "normal",
+                        },
+                        {},
+                      ]
+                    }
+                  >
+                    
+                  </Text>
+                </View>
+              </View>
+              <View
+                accessibilityState={
+                  {
+                    "busy": undefined,
+                    "checked": undefined,
+                    "disabled": undefined,
+                    "expanded": undefined,
+                    "selected": undefined,
+                  }
+                }
+                accessibilityValue={
+                  {
+                    "max": undefined,
+                    "min": undefined,
+                    "now": undefined,
+                    "text": undefined,
+                  }
+                }
+                accessible={true}
+                collapsable={false}
+                focusable={true}
+                onClick={[Function]}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  {
+                    "alignItems": "center",
+                    "height": "100%",
+                    "justifyContent": "center",
+                    "left": 0,
+                    "opacity": 1,
+                    "position": "absolute",
+                    "top": 0,
+                    "width": "100%",
+                  }
+                }
+              />
+            </View>
+            <View
+              style={{}}
+            >
+              <View>
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#11181C",
+                      },
+                      undefined,
+                      undefined,
+                      {
+                        "fontFamily": "LexendDeca",
+                        "fontSize": 18,
+                        "fontWeight": "bold",
+                      },
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                    ]
+                  }
+                />
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#11181C",
+                      },
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      {
+                        "fontFamily": "LexendDeca",
+                        "fontSize": 16,
+                        "fontStyle": "italic",
+                        "lineHeight": 24,
+                        "opacity": 0.8,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  Test Scientific Name
+                </Text>
+              </View>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+              testID="custom_name"
+            >
+              <Text
+                allowFontScaling={false}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "#bfd8c5ff",
+                      "fontSize": 20,
+                    },
+                    undefined,
+                    {
+                      "fontFamily": "ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    {},
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              {
+                "borderBottomWidth": 1,
+                "borderColor": "#ccc",
+                "borderStyle": "dashed",
+                "marginVertical": 16,
+                "width": "100%",
+              }
+            }
+          />
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "display": "flex",
+                "flexDirection": "row",
+                "gap": 8,
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "gap": 8,
+                }
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "#bfd8c5ff",
+                      "fontSize": 24,
+                    },
+                    undefined,
+                    {
+                      "fontFamily": "ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    {},
+                  ]
+                }
+              >
+                
+              </Text>
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#11181C",
+                    },
+                    {
+                      "fontFamily": "LexendDeca",
+                      "fontSize": 16,
+                      "lineHeight": 24,
+                    },
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                  ]
+                }
+              >
+                Altura de la planta
+              </Text>
+            </View>
+            <View
+              style={
+                {
+                  "alignContent": "center",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "gap": 2,
+                }
+              }
+            >
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#11181C",
+                    },
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    {
+                      "fontFamily": "LexendDeca",
+                      "fontSize": 16,
+                      "fontStyle": "italic",
+                      "lineHeight": 24,
+                      "opacity": 0.8,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Seleccionar
+              </Text>
+              <Text
+                allowFontScaling={false}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "#bfd8c5ff",
+                      "fontSize": 16,
+                    },
+                    undefined,
+                    {
+                      "fontFamily": "ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    {},
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              {
+                "borderBottomWidth": 1,
+                "borderColor": "#ccc",
+                "borderStyle": "dashed",
+                "marginVertical": 16,
+                "width": "100%",
+              }
+            }
+          />
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "display": "flex",
+                "flexDirection": "row",
+                "gap": 8,
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "gap": 8,
+                }
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "#bfd8c5ff",
+                      "fontSize": 24,
+                    },
+                    undefined,
+                    {
+                      "fontFamily": "ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    {},
+                  ]
+                }
+              >
+                
+              </Text>
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#11181C",
+                    },
+                    {
+                      "fontFamily": "LexendDeca",
+                      "fontSize": 16,
+                      "lineHeight": 24,
+                    },
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                  ]
+                }
+              >
+                Tiempo de plantación
+              </Text>
+            </View>
+            <View
+              style={
+                {
+                  "alignContent": "center",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "gap": 2,
+                }
+              }
+            >
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#11181C",
+                    },
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    {
+                      "fontFamily": "LexendDeca",
+                      "fontSize": 16,
+                      "fontStyle": "italic",
+                      "lineHeight": 24,
+                      "opacity": 0.8,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Seleccionar
+              </Text>
+              <Text
+                allowFontScaling={false}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "#bfd8c5ff",
+                      "fontSize": 16,
+                    },
+                    undefined,
+                    {
+                      "fontFamily": "ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    {},
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            [
+              {
+                "backgroundColor": "rgb(252, 250, 246)",
+              },
+              {
+                "borderBottomLeftRadius": 8,
+                "borderBottomRightRadius": 8,
+                "borderTopLeftRadius": 8,
+                "borderTopRightRadius": 8,
+                "display": "flex",
+                "elevation": 3,
+                "flexDirection": "column",
+                "padding": 16,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 2,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.1,
+                "shadowRadius": 4,
+              },
+            ]
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "color": "#11181C",
+                },
+                undefined,
+                undefined,
+                {
+                  "fontFamily": "LexendDeca",
+                  "fontSize": 18,
+                  "fontWeight": "bold",
+                },
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                {
+                  "fontWeight": "bold",
+                },
+              ]
+            }
+          >
+            Horario de cuidado de plantas
+          </Text>
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "display": "flex",
+                "flexDirection": "row",
+                "gap": 8,
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "gap": 8,
+                }
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "#bfd8c5ff",
+                      "fontSize": 24,
+                    },
+                    undefined,
+                    {
+                      "fontFamily": "ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    {},
+                  ]
+                }
+              >
+                
+              </Text>
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#11181C",
+                    },
+                    {
+                      "fontFamily": "LexendDeca",
+                      "fontSize": 16,
+                      "lineHeight": 24,
+                    },
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                  ]
+                }
+              >
+                Riego
+              </Text>
+            </View>
+            <View>
+              <RCTSwitch
+                accessibilityRole="switch"
+                onChange={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                onTintColor="#bfd8c5ff"
+                style={
+                  {
+                    "alignSelf": "flex-start",
+                  }
+                }
+                thumbTintColor="#f4f3f4"
+                tintColor="#ccc"
+                value={false}
+              />
+            </View>
+          </View>
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "backgroundColor": "#b1b1b1ff",
+                "borderRadius": 8,
+                "display": "flex",
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "marginTop": 8,
+                "opacity": 1,
+                "padding": 12,
+              }
+            }
+          >
+            <Text
+              style={
+                [
+                  {
+                    "color": "#11181C",
+                  },
+                  {
+                    "fontFamily": "LexendDeca",
+                    "fontSize": 16,
+                    "lineHeight": 24,
+                  },
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  {
+                    "color": "#333",
+                  },
+                ]
+              }
+            >
+              Tipo
+            </Text>
+            <View
+              style={
+                {
+                  "alignContent": "center",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "gap": 2,
+                }
+              }
+            >
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#11181C",
+                    },
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    {
+                      "fontFamily": "LexendDeca",
+                      "fontSize": 16,
+                      "fontStyle": "italic",
+                      "lineHeight": 24,
+                      "opacity": 0.8,
+                    },
+                    {
+                      "color": "#333",
+                    },
+                  ]
+                }
+              >
+                Manual
+              </Text>
+              <Text
+                allowFontScaling={false}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "#333",
+                      "fontSize": 16,
+                    },
+                    undefined,
+                    {
+                      "fontFamily": "ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    {},
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              {
+                "backgroundColor": "#b1b1b1ff",
+                "borderRadius": 8,
+                "display": "flex",
+                "flexDirection": "row",
+                "justifyContent": "space-between",
+                "marginTop": 8,
+                "padding": 12,
+              }
+            }
+          >
+            <Text
+              style={
+                [
+                  {
+                    "color": "#11181C",
+                  },
+                  {
+                    "fontFamily": "LexendDeca",
+                    "fontSize": 16,
+                    "lineHeight": 24,
+                  },
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  {
+                    "color": "#333",
+                  },
+                ]
+              }
+            >
+              Frecuencia
+            </Text>
+            <Text
+              style={
+                [
+                  {
+                    "color": "#11181C",
+                  },
+                  {
+                    "fontFamily": "LexendDeca",
+                    "fontSize": 16,
+                    "lineHeight": 24,
+                  },
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  undefined,
+                  {
+                    "color": "#333",
+                  },
+                ]
+              }
+            >
+              Pausado
+            </Text>
+          </View>
+          <View
+            style={
+              {
+                "borderBottomWidth": 1,
+                "borderColor": "#ccc",
+                "borderStyle": "dashed",
+                "marginVertical": 16,
+                "width": "100%",
+              }
+            }
+          />
+          <View
+            style={
+              {
+                "flex": 1,
+                "gap": 8,
+              }
+            }
+          >
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "gap": 8,
+                  "justifyContent": "space-between",
+                  "marginBottom": 16,
+                  "opacity": 1,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "gap": 8,
+                  }
+                }
+              >
+                <Text
+                  allowFontScaling={false}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "#bfd8c5ff",
+                        "fontSize": 24,
+                      },
+                      undefined,
+                      {
+                        "fontFamily": "ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                      {},
+                    ]
+                  }
+                >
+                  
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#11181C",
+                      },
+                      {
+                        "fontFamily": "LexendDeca",
+                        "fontSize": 16,
+                        "lineHeight": 24,
+                      },
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                    ]
+                  }
+                >
+                  Fertilización
+                </Text>
+              </View>
+              <View
+                style={
+                  {
+                    "alignContent": "center",
+                    "alignItems": "center",
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "gap": 2,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#11181C",
+                      },
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      {
+                        "fontFamily": "LexendDeca",
+                        "fontSize": 16,
+                        "fontStyle": "italic",
+                        "lineHeight": 24,
+                        "opacity": 0.8,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  Seleccionar
+                </Text>
+                <Text
+                  allowFontScaling={false}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "#bfd8c5ff",
+                        "fontSize": 16,
+                      },
+                      undefined,
+                      {
+                        "fontFamily": "ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                      {},
+                    ]
+                  }
+                >
+                  
+                </Text>
+              </View>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "gap": 8,
+                  "justifyContent": "space-between",
+                  "marginBottom": 16,
+                  "opacity": 1,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "gap": 8,
+                  }
+                }
+              >
+                <Text
+                  allowFontScaling={false}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "#bfd8c5ff",
+                        "fontSize": 24,
+                      },
+                      undefined,
+                      {
+                        "fontFamily": "ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                      {},
+                    ]
+                  }
+                >
+                  
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#11181C",
+                      },
+                      {
+                        "fontFamily": "LexendDeca",
+                        "fontSize": 16,
+                        "lineHeight": 24,
+                      },
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                    ]
+                  }
+                >
+                  Poda
+                </Text>
+              </View>
+              <View
+                style={
+                  {
+                    "alignContent": "center",
+                    "alignItems": "center",
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "gap": 2,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#11181C",
+                      },
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      {
+                        "fontFamily": "LexendDeca",
+                        "fontSize": 16,
+                        "fontStyle": "italic",
+                        "lineHeight": 24,
+                        "opacity": 0.8,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  Seleccionar
+                </Text>
+                <Text
+                  allowFontScaling={false}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "#bfd8c5ff",
+                        "fontSize": 16,
+                      },
+                      undefined,
+                      {
+                        "fontFamily": "ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                      {},
+                    ]
+                  }
+                >
+                  
+                </Text>
+              </View>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "gap": 8,
+                  "justifyContent": "space-between",
+                  "marginBottom": 16,
+                  "opacity": 1,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "gap": 8,
+                  }
+                }
+              >
+                <Text
+                  allowFontScaling={false}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "#bfd8c5ff",
+                        "fontSize": 24,
+                      },
+                      undefined,
+                      {
+                        "fontFamily": "ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                      {},
+                    ]
+                  }
+                >
+                  
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#11181C",
+                      },
+                      {
+                        "fontFamily": "LexendDeca",
+                        "fontSize": 16,
+                        "lineHeight": 24,
+                      },
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                    ]
+                  }
+                >
+                  Rociado
+                </Text>
+              </View>
+              <View
+                style={
+                  {
+                    "alignContent": "center",
+                    "alignItems": "center",
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "gap": 2,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#11181C",
+                      },
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      {
+                        "fontFamily": "LexendDeca",
+                        "fontSize": 16,
+                        "fontStyle": "italic",
+                        "lineHeight": 24,
+                        "opacity": 0.8,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  Seleccionar
+                </Text>
+                <Text
+                  allowFontScaling={false}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "#bfd8c5ff",
+                        "fontSize": 16,
+                      },
+                      undefined,
+                      {
+                        "fontFamily": "ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                      {},
+                    ]
+                  }
+                >
+                  
+                </Text>
+              </View>
+            </View>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "gap": 8,
+                  "justifyContent": "space-between",
+                  "marginBottom": 16,
+                  "opacity": 1,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                    "gap": 8,
+                  }
+                }
+              >
+                <Text
+                  allowFontScaling={false}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "#bfd8c5ff",
+                        "fontSize": 24,
+                      },
+                      undefined,
+                      {
+                        "fontFamily": "ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                      {},
+                    ]
+                  }
+                >
+                  
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#11181C",
+                      },
+                      {
+                        "fontFamily": "LexendDeca",
+                        "fontSize": 16,
+                        "lineHeight": 24,
+                      },
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                    ]
+                  }
+                >
+                  Rotación
+                </Text>
+              </View>
+              <View
+                style={
+                  {
+                    "alignContent": "center",
+                    "alignItems": "center",
+                    "display": "flex",
+                    "flexDirection": "row",
+                    "gap": 2,
+                  }
+                }
+              >
+                <Text
+                  style={
+                    [
+                      {
+                        "color": "#11181C",
+                      },
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      undefined,
+                      {
+                        "fontFamily": "LexendDeca",
+                        "fontSize": 16,
+                        "fontStyle": "italic",
+                        "lineHeight": 24,
+                        "opacity": 0.8,
+                      },
+                      undefined,
+                    ]
+                  }
+                >
+                  Seleccionar
+                </Text>
+                <Text
+                  allowFontScaling={false}
+                  selectable={false}
+                  style={
+                    [
+                      {
+                        "color": "#bfd8c5ff",
+                        "fontSize": 16,
+                      },
+                      undefined,
+                      {
+                        "fontFamily": "ionicons",
+                        "fontStyle": "normal",
+                        "fontWeight": "normal",
+                      },
+                      {},
+                    ]
+                  }
+                >
+                  
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            [
+              {
+                "backgroundColor": "rgb(252, 250, 246)",
+              },
+              [
+                {
+                  "borderBottomLeftRadius": 8,
+                  "borderBottomRightRadius": 8,
+                  "borderTopLeftRadius": 8,
+                  "borderTopRightRadius": 8,
+                  "display": "flex",
+                  "elevation": 3,
+                  "flexDirection": "column",
+                  "padding": 16,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 2,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.1,
+                  "shadowRadius": 4,
+                },
+                {
+                  "gap": 16,
+                },
+              ],
+            ]
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "color": "#11181C",
+                },
+                undefined,
+                undefined,
+                {
+                  "fontFamily": "LexendDeca",
+                  "fontSize": 18,
+                  "fontWeight": "bold",
+                },
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                {
+                  "fontWeight": "bold",
+                },
+              ]
+            }
+          >
+            Establecer sitio
+          </Text>
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": true,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={false}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "display": "flex",
+                "flexDirection": "row",
+                "gap": 8,
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "gap": 8,
+                }
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "#bfd8c5ff",
+                      "fontSize": 24,
+                    },
+                    undefined,
+                    {
+                      "fontFamily": "ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    {},
+                  ]
+                }
+              >
+                
+              </Text>
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#11181C",
+                    },
+                    {
+                      "fontFamily": "LexendDeca",
+                      "fontSize": 16,
+                      "lineHeight": 24,
+                    },
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                  ]
+                }
+              >
+                Lugar
+              </Text>
+            </View>
+            <View
+              style={
+                {
+                  "alignContent": "center",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "gap": 2,
+                }
+              }
+            >
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#11181C",
+                    },
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    {
+                      "fontFamily": "LexendDeca",
+                      "fontSize": 16,
+                      "fontStyle": "italic",
+                      "lineHeight": 24,
+                      "opacity": 0.8,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                No hay lugares
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            [
+              {
+                "backgroundColor": "rgb(252, 250, 246)",
+              },
+              [
+                {
+                  "borderBottomLeftRadius": 8,
+                  "borderBottomRightRadius": 8,
+                  "borderTopLeftRadius": 8,
+                  "borderTopRightRadius": 8,
+                  "display": "flex",
+                  "elevation": 3,
+                  "flexDirection": "column",
+                  "padding": 16,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 2,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.1,
+                  "shadowRadius": 4,
+                },
+                {
+                  "gap": 16,
+                },
+              ],
+            ]
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "color": "#11181C",
+                },
+                undefined,
+                undefined,
+                {
+                  "fontFamily": "LexendDeca",
+                  "fontSize": 18,
+                  "fontWeight": "bold",
+                },
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                {
+                  "fontWeight": "bold",
+                },
+              ]
+            }
+          >
+            Maceta
+          </Text>
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "display": "flex",
+                "flexDirection": "row",
+                "gap": 8,
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "gap": 8,
+                }
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "#bfd8c5ff",
+                      "fontSize": 24,
+                    },
+                    undefined,
+                    {
+                      "fontFamily": "ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    {},
+                  ]
+                }
+              >
+                
+              </Text>
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#11181C",
+                    },
+                    {
+                      "fontFamily": "LexendDeca",
+                      "fontSize": 16,
+                      "lineHeight": 24,
+                    },
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                  ]
+                }
+              >
+                Tipo
+              </Text>
+            </View>
+            <View
+              style={
+                {
+                  "alignContent": "center",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "gap": 2,
+                }
+              }
+            >
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#11181C",
+                    },
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    {
+                      "fontFamily": "LexendDeca",
+                      "fontSize": 16,
+                      "fontStyle": "italic",
+                      "lineHeight": 24,
+                      "opacity": 0.8,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Seleccionar
+              </Text>
+              <Text
+                allowFontScaling={false}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "#bfd8c5ff",
+                      "fontSize": 16,
+                    },
+                    undefined,
+                    {
+                      "fontFamily": "ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    {},
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "display": "flex",
+                "flexDirection": "row",
+                "gap": 8,
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "gap": 8,
+                }
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "#bfd8c5ff",
+                      "fontSize": 24,
+                    },
+                    undefined,
+                    {
+                      "fontFamily": "ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    {},
+                  ]
+                }
+              >
+                
+              </Text>
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#11181C",
+                    },
+                    {
+                      "fontFamily": "LexendDeca",
+                      "fontSize": 16,
+                      "lineHeight": 24,
+                    },
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                  ]
+                }
+              >
+                Tamaño
+              </Text>
+            </View>
+            <View
+              style={
+                {
+                  "alignContent": "center",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "gap": 2,
+                }
+              }
+            >
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#11181C",
+                    },
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    {
+                      "fontFamily": "LexendDeca",
+                      "fontSize": 16,
+                      "fontStyle": "italic",
+                      "lineHeight": 24,
+                      "opacity": 0.8,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Seleccionar
+              </Text>
+              <Text
+                allowFontScaling={false}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "#bfd8c5ff",
+                      "fontSize": 16,
+                    },
+                    undefined,
+                    {
+                      "fontFamily": "ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    {},
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "display": "flex",
+                "flexDirection": "row",
+                "gap": 8,
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "gap": 8,
+                }
+              }
+            >
+              <Text
+                allowFontScaling={false}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "#bfd8c5ff",
+                      "fontSize": 24,
+                    },
+                    undefined,
+                    {
+                      "fontFamily": "ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    {},
+                  ]
+                }
+              >
+                
+              </Text>
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#11181C",
+                    },
+                    {
+                      "fontFamily": "LexendDeca",
+                      "fontSize": 16,
+                      "lineHeight": 24,
+                    },
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                  ]
+                }
+              >
+                Drenaje
+              </Text>
+            </View>
+            <View
+              style={
+                {
+                  "alignContent": "center",
+                  "alignItems": "center",
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "gap": 2,
+                }
+              }
+            >
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#11181C",
+                    },
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    undefined,
+                    {
+                      "fontFamily": "LexendDeca",
+                      "fontSize": 16,
+                      "fontStyle": "italic",
+                      "lineHeight": 24,
+                      "opacity": 0.8,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Seleccionar
+              </Text>
+              <Text
+                allowFontScaling={false}
+                selectable={false}
+                style={
+                  [
+                    {
+                      "color": "#bfd8c5ff",
+                      "fontSize": 16,
+                    },
+                    undefined,
+                    {
+                      "fontFamily": "ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                    {},
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "alignItems": "center",
+              "backgroundColor": "#bfd8c5ff",
+              "borderRadius": 25,
+              "elevation": 5,
+              "height": 50,
+              "justifyContent": "center",
+              "marginTop": 16,
+              "opacity": 1,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 2,
+                "width": 0,
+              },
+              "shadowOpacity": 0.3,
+              "shadowRadius": 4,
+              "width": "100%",
+            }
+          }
+        >
+          <Text
+            style={
+              {
+                "color": "#11181C",
+                "fontSize": 16,
+                "fontWeight": "bold",
+              }
+            }
+          >
+            Eliminar esta planta
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</ViewManagerAdapter_ExpoLinearGradient>
+`;

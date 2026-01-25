@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlantDetails matches snapshot 1`] = `
+<ActivityIndicator
+  size="large"
+  style={
+    {
+      "marginTop": 32,
+    }
+  }
+/>
+`;

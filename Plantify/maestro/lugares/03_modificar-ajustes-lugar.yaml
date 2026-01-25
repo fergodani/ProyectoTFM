@@ -1,0 +1,17 @@
+appId: com.uniovi.Plantify
+---
+# Flow de modificación de ajustes de un lugar
+# Prerequisito: Usuario ya autenticado y tiene al menos un lugar creado
+
+- launchApp
+- tapOn: Perfil de usuario
+- tapOn: Lugares
+- tapOn:
+    point: 92%,32%
+- tapOn: Ajustes del lugar
+- tapOn: Nombre
+- tapOn: Nombre del sitio
+- eraseText
+- inputText: "test2"
+- tapOn: "Aceptar"
+- assertVisible: "test2"

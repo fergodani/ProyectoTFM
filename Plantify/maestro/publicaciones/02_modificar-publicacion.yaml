@@ -1,0 +1,21 @@
+appId: com.uniovi.Plantify
+---
+# Flow de modificar publicación
+# Prerequisito: Usuario ya autenticado y tiene al menos una publicación creada
+- tapOn: test
+- tapOn:
+    point: 90%,9%
+- tapOn: Título...
+- eraseText
+- inputText: "test_modificado"
+- tapOn: Escribe el contenido de la publicación...
+- eraseText
+- inputText: "test_modificado"
+- tapOn: Actualizar
+- tapOn: OK
+- assertVisible:
+    text: test_modificado
+    index: 0
+- tapOn:
+    text: test_modificado
+    index: 1

@@ -1,0 +1,11 @@
+appId: com.uniovi.Plantify
+---
+# Flow de retirar voto de comentario
+# Prerequisito: Usuario ya autenticado y ha votado en un comentario
+
+- tapOn:
+    text: 
+    index: 1
+- assertVisible:
+    text: "0"
+    index: 1

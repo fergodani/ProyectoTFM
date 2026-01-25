@@ -1,0 +1,44 @@
+appId: com.uniovi.Plantify
+---
+# Flow de asignar planta a lugar
+# Prerequisito: Usuario ya autenticado y tiene al menos una planta y un lugar creados
+
+- launchApp
+
+- tapOn: Perfil de usuario
+- tapOn: Lugares
+- tapOn: Añadir lugar
+- tapOn: Balcón
+- tapOn: Crear
+
+- tapOn: Perfil de usuario
+- tapOn: Lugares
+- tapOn: Añadir lugar
+- tapOn: Terraza
+- tapOn: Crear
+
+- tapOn: Plantas
+- tapOn: Menú de opciones
+- tapOn: Ajustes de la planta
+- scrollUntilVisible:
+    element:
+      text: "Lugar"
+- tapOn: Lugar
+- tapOn: Terraza
+- tapOn: Aceptar
+- assertVisible: Terraza
+- tapOn: Navigate up
+- assertVisible: Terraza
+
+- tapOn: Lugares
+- tapOn:
+    point: 92%,32%
+- tapOn: Eliminar
+- tapOn: Eliminar
+
+- tapOn: Lugares
+- tapOn:
+    point: 92%,32%
+- tapOn: Eliminar
+- tapOn: Eliminar
+- assertVisible: No hay lugares aquí aún. ¡Añade un nuevo lugar y agrupa tus plantas!

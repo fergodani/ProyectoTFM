@@ -73,7 +73,6 @@ data_augmentation = keras.Sequential(
 )
 
 
-# Create the model
 model = Sequential([
     data_augmentation,
   layers.Rescaling(1./255, input_shape=(IMG_SIZE[0], IMG_SIZE[1], 3)),
@@ -95,7 +94,7 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
 # Train the model
-epochs = 30
+epochs = 50
 history = model.fit(
     train_ds,
     validation_data=val_ds,

@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams, useNavigation } from "expo-router";
-import { View, Image, StyleSheet, ScrollView, ActivityIndicator, useColorScheme, TouchableOpacity } from "react-native";
+import { View, Image, StyleSheet, ScrollView, ActivityIndicator, useColorScheme, TouchableOpacity, Text } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { PlantDetailTrefle, PlantTrefle } from "@/models/PlanTrefle";
 import { useEffect, useLayoutEffect, useState, useCallback } from "react";
@@ -8,7 +8,6 @@ import { ThemedView } from "@/components/ThemedView";
 import { PlantInfo } from "@/models/PlantInfo";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
-import PlantWateringChart from "@/components/PlantWateringChart";
 import { UserPlant } from "@/models/Plant";
 import { useAuth } from "@/hooks/useAuthContext";
 import { Colors } from "@/constants/Colors";
@@ -128,7 +127,7 @@ export default function PlantDetails() {
           <ThemedText type="title2">{userPlant.perenual_details!.description}</ThemedText>
         </ThemedView>
         <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-          <ThemedText type="title2">📋 Basic Information</ThemedText>
+          <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="clipboard">📋</Text> Basic Information</ThemedText>
           <View style={styles.infoRow}>
             <ThemedText style={styles.infoLabel}>Family:</ThemedText>
             <ThemedText style={styles.infoValue}>{userPlant.perenual_details!.family || 'N/A'}</ThemedText>
@@ -158,7 +157,7 @@ export default function PlantDetails() {
         {/* Descripción */}
         {userPlant.perenual_details!.description && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-            <ThemedText type="title2">📝 Description</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="memo">📝</Text> Description</ThemedText>
             <ThemedText style={styles.description}>{userPlant.perenual_details!.description}</ThemedText>
           </ThemedView>
         )}
@@ -166,7 +165,7 @@ export default function PlantDetails() {
         {/* Dimensiones */}
         {userPlant.perenual_details!.dimensions && userPlant.perenual_details!.dimensions.length > 0 && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-            <ThemedText type="title2">📏 Dimensions</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="ruler">📏</Text> Dimensions</ThemedText>
             {userPlant.perenual_details!.dimensions.map((dimension, index) => (
               <View key={index} style={styles.infoRow}>
                 <ThemedText style={styles.infoLabel}>{dimension.type}:</ThemedText>
@@ -184,7 +183,7 @@ export default function PlantDetails() {
         {/* Anatomía de la planta */}
         {userPlant.perenual_details!.plant_anatomy && userPlant.perenual_details!.plant_anatomy.length > 0 && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-            <ThemedText type="title2">🌿 Plant Anatomy</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="herb">🌿</Text> Plant Anatomy</ThemedText>
             {userPlant.perenual_details!.plant_anatomy.map((anatomy, index) => (
               <View key={index} style={styles.infoRow}>
                 <ThemedText style={styles.infoLabel}>{anatomy.part.charAt(0).toUpperCase() + anatomy.part.slice(1)}:</ThemedText>
@@ -197,7 +196,7 @@ export default function PlantDetails() {
         {/* Hardiness */}
         {userPlant.perenual_details!.hardiness && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-            <ThemedText type="title2">❄️ Cold Resistance</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="snowflake">❄️</Text> Cold Resistance</ThemedText>
             <View style={styles.infoRow}>
               <ThemedText style={styles.infoLabel}>Zone:</ThemedText>
               <ThemedText style={styles.infoValue}>
@@ -215,18 +214,18 @@ export default function PlantDetails() {
 
         {/* Características de cuidado */}
         <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-          <ThemedText type="title2">🌱 Care Information</ThemedText>
+          <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="seedling">🌱</Text> Care Information</ThemedText>
           <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between" }}>
             {[
-              userPlant.perenual_details!.care_level && { label: "🪴 Care Level", value: userPlant.perenual_details!.care_level },
-              userPlant.perenual_details!.cycle && { label: "🔄 Cycle", value: userPlant.perenual_details!.cycle },
-              userPlant.perenual_details!.growth_rate && { label: "📈 Growth Rate", value: userPlant.perenual_details!.growth_rate },
-              userPlant.perenual_details!.maintenance && { label: "🛠️ Maintenance", value: userPlant.perenual_details!.maintenance },
-              userPlant.perenual_details!.watering && { label: "💧 Watering", value: userPlant.perenual_details!.watering },
-              userPlant.perenual_details!.drought_tolerant !== undefined && { label: "🌵 Drought Tolerant", value: userPlant.perenual_details!.drought_tolerant ? 'Yes' : 'No' },
-              userPlant.perenual_details!.salt_tolerant !== undefined && { label: "🧂 Salt Tolerant", value: userPlant.perenual_details!.salt_tolerant ? 'Yes' : 'No' },
-              userPlant.perenual_details!.indoor !== undefined && { label: "🏠 Indoor", value: userPlant.perenual_details!.indoor ? 'Yes' : 'No' },
-              userPlant.perenual_details!.tropical !== undefined && { label: "🌴 Tropical", value: userPlant.perenual_details!.tropical ? 'Yes' : 'No' },
+              userPlant.perenual_details!.care_level && { label: <><Text accessibilityRole="image" accessibilityLabel="potted plant">🪴</Text> Care Level</>, value: userPlant.perenual_details!.care_level },
+              userPlant.perenual_details!.cycle && { label: <><Text accessibilityRole="image" accessibilityLabel="cycle arrows">🔄</Text> Cycle</>, value: userPlant.perenual_details!.cycle },
+              userPlant.perenual_details!.growth_rate && { label: <><Text accessibilityRole="image" accessibilityLabel="chart increasing">📈</Text> Growth Rate</>, value: userPlant.perenual_details!.growth_rate },
+              userPlant.perenual_details!.maintenance && { label: <><Text accessibilityRole="image" accessibilityLabel="tools">🛠️</Text> Maintenance</>, value: userPlant.perenual_details!.maintenance },
+              userPlant.perenual_details!.watering && { label: <><Text accessibilityRole="image" accessibilityLabel="droplet">💧</Text> Watering</>, value: userPlant.perenual_details!.watering },
+              userPlant.perenual_details!.drought_tolerant !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="cactus">🌵</Text> Drought Tolerant</>, value: userPlant.perenual_details!.drought_tolerant ? 'Yes' : 'No' },
+              userPlant.perenual_details!.salt_tolerant !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="salt">🧂</Text> Salt Tolerant</>, value: userPlant.perenual_details!.salt_tolerant ? 'Yes' : 'No' },
+              userPlant.perenual_details!.indoor !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="house">🏠</Text> Indoor</>, value: userPlant.perenual_details!.indoor ? 'Yes' : 'No' },
+              userPlant.perenual_details!.tropical !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="palm tree">🌴</Text> Tropical</>, value: userPlant.perenual_details!.tropical ? 'Yes' : 'No' },
             ]
               .filter(Boolean)
               .map((item, idx) =>
@@ -242,17 +241,17 @@ export default function PlantDetails() {
 
         {/* Características físicas */}
         <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-          <ThemedText type="title2">🌸 Physical Characteristics</ThemedText>
+          <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="cherry blossom">🌸</Text> Physical Characteristics</ThemedText>
           <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between" }}>
             {[
-              userPlant.perenual_details!.flowers !== undefined && { label: "🌼 Flowers", value: userPlant.perenual_details!.flowers ? 'Yes' : 'No' },
-              userPlant.perenual_details!.cones !== undefined && { label: "🌲 Cones", value: userPlant.perenual_details!.cones ? 'Yes' : 'No' },
-              userPlant.perenual_details!.fruits !== undefined && { label: "🍎 Fruits", value: userPlant.perenual_details!.fruits ? 'Yes' : 'No' },
-              userPlant.perenual_details!.leaf !== undefined && { label: "🍃 Leaf", value: userPlant.perenual_details!.leaf ? 'Yes' : 'No' },
-              userPlant.perenual_details!.thorny !== undefined && { label: "🌵 Thorny", value: userPlant.perenual_details!.thorny ? 'Yes' : 'No' },
-              userPlant.perenual_details!.seeds !== undefined && { label: "🌰 Seeds", value: userPlant.perenual_details!.seeds ? 'Yes' : 'No' },
-              userPlant.perenual_details!.flowering_season && { label: "🌸 Flowering Season", value: userPlant.perenual_details!.flowering_season },
-              userPlant.perenual_details!.harvest_season && { label: "🌾 Harvest Season", value: userPlant.perenual_details!.harvest_season },
+              userPlant.perenual_details!.flowers !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="blossom">🌼</Text> Flowers</>, value: userPlant.perenual_details!.flowers ? 'Yes' : 'No' },
+              userPlant.perenual_details!.cones !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="evergreen tree">🌲</Text> Cones</>, value: userPlant.perenual_details!.cones ? 'Yes' : 'No' },
+              userPlant.perenual_details!.fruits !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="red apple">🍎</Text> Fruits</>, value: userPlant.perenual_details!.fruits ? 'Yes' : 'No' },
+              userPlant.perenual_details!.leaf !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="leaf">🍃</Text> Leaf</>, value: userPlant.perenual_details!.leaf ? 'Yes' : 'No' },
+              userPlant.perenual_details!.thorny !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="cactus">🌵</Text> Thorny</>, value: userPlant.perenual_details!.thorny ? 'Yes' : 'No' },
+              userPlant.perenual_details!.seeds !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="chestnut">🌰</Text> Seeds</>, value: userPlant.perenual_details!.seeds ? 'Yes' : 'No' },
+              userPlant.perenual_details!.flowering_season && { label: <><Text accessibilityRole="image" accessibilityLabel="cherry blossom">🌸</Text> Flowering Season</>, value: userPlant.perenual_details!.flowering_season },
+              userPlant.perenual_details!.harvest_season && { label: <><Text accessibilityRole="image" accessibilityLabel="sheaf of rice">🌾</Text> Harvest Season</>, value: userPlant.perenual_details!.harvest_season },
             ]
               .filter(Boolean)
               .map((item, idx) =>
@@ -268,16 +267,16 @@ export default function PlantDetails() {
 
         {/* Características de uso */}
         <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-          <ThemedText type="title2">🍽️ Usage & Safety</ThemedText>
+          <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="fork and knife with plate">🍽️</Text> Usage & Safety</ThemedText>
           <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between" }}>
             {[
-              userPlant.perenual_details!.edible_fruit !== undefined && { label: "🍏 Edible Fruit", value: userPlant.perenual_details!.edible_fruit ? 'Yes' : 'No' },
-              userPlant.perenual_details!.edible_leaf !== undefined && { label: "🥬 Edible Leaf", value: userPlant.perenual_details!.edible_leaf ? 'Yes' : 'No' },
-              userPlant.perenual_details!.cuisine !== undefined && { label: "🍽️ Cuisine", value: userPlant.perenual_details!.cuisine ? 'Yes' : 'No' },
-              userPlant.perenual_details!.medicinal !== undefined && { label: "💊 Medicinal", value: userPlant.perenual_details!.medicinal ? 'Yes' : 'No' },
-              userPlant.perenual_details!.poisonous_to_humans !== undefined && { label: "☠️ Poisonous to Humans", value: userPlant.perenual_details!.poisonous_to_humans ? 'Yes' : 'No' },
-              userPlant.perenual_details!.poisonous_to_pets !== undefined && { label: "🐾 Poisonous to Pets", value: userPlant.perenual_details!.poisonous_to_pets ? 'Yes' : 'No' },
-              userPlant.perenual_details!.invasive !== undefined && { label: "🚫 Invasive", value: userPlant.perenual_details!.invasive ? 'Yes' : 'No' },
+              userPlant.perenual_details!.edible_fruit !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="green apple">🍏</Text> Edible Fruit</>, value: userPlant.perenual_details!.edible_fruit ? 'Yes' : 'No' },
+              userPlant.perenual_details!.edible_leaf !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="leafy green">🥬</Text> Edible Leaf</>, value: userPlant.perenual_details!.edible_leaf ? 'Yes' : 'No' },
+              userPlant.perenual_details!.cuisine !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="fork and knife with plate">🍽️</Text> Cuisine</>, value: userPlant.perenual_details!.cuisine ? 'Yes' : 'No' },
+              userPlant.perenual_details!.medicinal !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="pill">💊</Text> Medicinal</>, value: userPlant.perenual_details!.medicinal ? 'Yes' : 'No' },
+              userPlant.perenual_details!.poisonous_to_humans !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="skull and crossbones">☠️</Text> Poisonous to Humans</>, value: userPlant.perenual_details!.poisonous_to_humans ? 'Yes' : 'No' },
+              userPlant.perenual_details!.poisonous_to_pets !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="paw prints">🐾</Text> Poisonous to Pets</>, value: userPlant.perenual_details!.poisonous_to_pets ? 'Yes' : 'No' },
+              userPlant.perenual_details!.invasive !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="prohibited">🚫</Text> Invasive</>, value: userPlant.perenual_details!.invasive ? 'Yes' : 'No' },
             ]
               .filter(Boolean)
               .map((item, idx) =>
@@ -294,7 +293,7 @@ export default function PlantDetails() {
         {/* Propagación */}
         {userPlant.perenual_details!.propagation && userPlant.perenual_details!.propagation.length > 0 && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-            <ThemedText type="title2">🌱 Propagation Methods</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="seedling">🌱</Text> Propagation Methods</ThemedText>
             <View style={styles.tagContainer}>
               {userPlant.perenual_details!.propagation.map((method, index) => (
                 <View key={index} style={styles.tag}>
@@ -308,7 +307,7 @@ export default function PlantDetails() {
         {/* Atracciones (si hay) */}
         {userPlant.perenual_details!.attracts && userPlant.perenual_details!.attracts.length > 0 && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-            <ThemedText type="title2">🦋 Attracts</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="butterfly">🦋</Text> Attracts</ThemedText>
             <View style={styles.tagContainer}>
               {userPlant.perenual_details!.attracts.map((attraction, index) => (
                 <View key={index} style={styles.tag}>
@@ -320,7 +319,7 @@ export default function PlantDetails() {
         )}
         {userPlant.perenual_details!.watering_general_benchmark && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-            <ThemedText type="title2">💧 Watering Information</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="droplet">💧</Text> Watering Information</ThemedText>
             <View style={styles.infoRow}>
               <ThemedText style={styles.infoLabel}>Frequency:</ThemedText>
               <ThemedText style={styles.infoValue}>{userPlant.perenual_details!.watering || 'N/A'}</ThemedText>
@@ -342,7 +341,7 @@ export default function PlantDetails() {
             styles.card,
             { backgroundColor: cardBackground }
           ]}>
-            <ThemedText type="title2">☀️ Sunlight Requirements</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="sun">☀️</Text> Sunlight Requirements</ThemedText>
             <View style={styles.tagContainer}>
               {userPlant.perenual_details!.sunlight.map((lightType, index) => (
                 <View key={index} style={styles.tag}>
@@ -360,7 +359,7 @@ export default function PlantDetails() {
             styles.card,
             { backgroundColor: cardBackground }
           ]}>
-            <ThemedText type="title2">✂️ Pruning Information</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="scissors">✂️</Text> Pruning Information</ThemedText>
             {userPlant.perenual_details!.pruning_month && userPlant.perenual_details!.pruning_month.length > 0 && (
               <View>
                 <View style={styles.infoRow}>
@@ -384,7 +383,7 @@ export default function PlantDetails() {
         {/* Guías de cuidado */}
         {userPlant.perenual_details!.care_guides && typeof userPlant.perenual_details!.care_guides === 'object' && userPlant.perenual_details!.care_guides.data && userPlant.perenual_details!.care_guides.data.length > 0 && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-            <ThemedText type="title2">📖 Care Guides</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="open book">📖</Text> Care Guides</ThemedText>
             {userPlant.perenual_details!.care_guides.data.map((guide: any, guideIndex: number) => (
               <View key={guideIndex}>
                 {guide.section && guide.section.map((section: any, sectionIndex: number) => (

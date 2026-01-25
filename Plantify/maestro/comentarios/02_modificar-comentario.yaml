@@ -1,0 +1,14 @@
+appId: com.uniovi.Plantify
+---
+# Flow de modificar comentario
+# Prerequisito: Usuario ya autenticado y tiene al menos un comentario creado
+
+- tapOn:
+    text: 
+    index: 1
+- tapOn: Escribe tu comentario...
+- eraseText
+- inputText: "test modificado"
+- tapOn: Actualizar
+- tapOn: ACEPTAR
+- assertVisible: test modificado

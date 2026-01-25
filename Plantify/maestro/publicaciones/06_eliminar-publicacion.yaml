@@ -1,0 +1,18 @@
+appId: com.uniovi.Plantify
+---
+# Flow de eliminar publicación
+# Prerequisito: Usuario ya autenticado y tiene al menos una publicación creada
+
+- launchApp
+
+- tapOn: Perfil de usuario
+- tapOn:
+    id: settings
+- tapOn:
+    text: Publicaciones
+    index: 1
+- tapOn:
+    point: 89%,16%
+- tapOn: Eliminar
+- tapOn: Eliminar
+- assertVisible: No hay publicaciones disponibles.

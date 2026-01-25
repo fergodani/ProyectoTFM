@@ -1,0 +1,8 @@
+appId: com.uniovi.Plantify
+---
+# Flow de eliminar comentario
+# Prerequisito: Usuario ya autenticado y tiene al menos un comentario creado
+
+- tapOn: 
+- tapOn: ELIMINAR
+- assertVisible: Comentario eliminado

@@ -30,7 +30,6 @@ def descargar_plantas():
         "Aloe vera", 
         "Aechmea fasciata", 
         "Alocasia amazonica", 
-        "Dieffenbachia seguine", 
     ]
 
     for planta in plantas_top_20:

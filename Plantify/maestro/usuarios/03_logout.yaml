@@ -1,0 +1,26 @@
+appId: com.uniovi.Plantify
+---
+# Flow de cerrar sesión
+# Prerequisito: Usuario ya autenticado
+
+- launchApp
+
+# Navegar a la pestaña de perfil
+- tapOn: "Perfil de usuario"
+- assertVisible: "Mis plantas"
+
+# Abrir ajustes
+- tapOn:
+    id: ".*settings.*"
+
+# Verificar que estamos en ajustes
+- assertVisible: "Cuenta"
+
+# Hacer scroll hasta el botón de cerrar sesión
+- scroll
+
+# Hacer clic en cerrar sesión
+- tapOn: "Cerrar sesión"
+
+# Verificar que volvemos a la pantalla sin autenticar
+- assertVisible: "No estás autenticado"

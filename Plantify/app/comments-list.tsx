@@ -98,12 +98,12 @@ export default function CommentsList() {
                         comments.map((comment) => (
                             <TouchableOpacity
                                 onPress={(event) => {
-                                    goToPostDetails(comment.post.id!);
+                                    goToPostDetails(comment.post!.id!);
                                 }}
                                 key={comment.id} style={[styles.card, { backgroundColor: cardBackground }]}>
 
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                    <ThemedText type="title2">{comment.post.title}</ThemedText>
+                                    <ThemedText type="title2">{comment.post!.title}</ThemedText>
                                     <TouchableOpacity
                                         style={styles.buttonMenu}
                                         onPress={(event) => {
@@ -114,7 +114,7 @@ export default function CommentsList() {
                                     </TouchableOpacity>
                                 </View>
                                 <View style={{ flexDirection: 'row', justifyContent: 'flex-start', gap: 12 }}>
-                                    <ThemedText type="subtitle">{comment.post.plant_common_name}</ThemedText>
+                                    <ThemedText type="subtitle">{comment.post!.plant_common_name}</ThemedText>
                                     <ThemedText type="subtitle">{comment.created_since}</ThemedText>
                                 </View>
                                 <ThemedText type="default" numberOfLines={3} ellipsizeMode="tail">{comment.content}</ThemedText>

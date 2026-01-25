@@ -93,7 +93,7 @@ export default function TabTwoScreen() {
     !isAuthenticated ? (
       <LinearGradient
         colors={['rgba(213, 240, 219, 0.19)', backgroundColor]} // Cambia estos colores a los que quieras
-        style={[styles.container, {paddingVertical: 16}]}
+        style={[styles.container, { paddingVertical: 16 }]}
       >
         <View style={styles.titleContainer}>
           <ThemedText type="title">No estás autenticado</ThemedText>
@@ -110,17 +110,20 @@ export default function TabTwoScreen() {
 
       <LinearGradient
         colors={['rgba(213, 240, 219, 0.19)', backgroundColor]} // Cambia estos colores a los que quieras
-        style={[styles.container, {paddingVertical: 16}]}
+        style={[styles.container, { paddingVertical: 16 }]}
       >
         <View style={styles.titleContainer}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignContent: 'center', gap: 8 }}>
             <ThemedText type="title">Mis plantas</ThemedText>
-            <TouchableOpacity onPress={(event) => {
-              router.push({
-                pathname: "/settings"
-              });
+            <TouchableOpacity
+              testID='settings'
+              style={{ paddingVertical: 8 }}
+              onPress={(event) => {
+                router.push({
+                  pathname: "/settings"
+                });
 
-            }}>
+              }}>
               <Ionicons name="settings" size={30} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
             </TouchableOpacity>
           </View>

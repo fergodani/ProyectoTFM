@@ -56,7 +56,7 @@ const PostForm = () => {
 
   const handleSubmit = async () => {
     if (!title.trim() || !content.trim()) {
-      Alert.alert("Error", "Please fill in both title and content");
+      Alert.alert("Error", "Por favor, completa el título y el contenido");
       return;
     }
 
@@ -70,7 +70,6 @@ const PostForm = () => {
           Alert.alert("Error", "No se pudo actualizar la publicación. Intenta de nuevo.");
         }
       } else {
-        console.log("Creating post:", { title, content, plant_id });
         const post: Post = {
           title: title,
           content: content,
@@ -81,14 +80,12 @@ const PostForm = () => {
 
         const response = await PostService.createPost(post, accessToken!, imageUri || undefined);
 
-        console.log("Post created successfully:", response);
-
         Alert.alert(
-          "Success",
-          "Post created successfully!",
+          "Éxito",
+          "¡Publicación creada correctamente!",
           [
             {
-              text: "OK",
+              text: "Aceptar",
               onPress: () => {
                 router.back();
               }
@@ -97,7 +94,7 @@ const PostForm = () => {
         );
       }
     } catch (error) {
-      Alert.alert("Error", "Failed to create post. Please try again.");
+      Alert.alert("Error", "No se pudo crear la publicación. Intenta de nuevo.");
       console.error("Error creating post:", error);
     } finally {
       setIsSubmitting(false);
@@ -107,7 +104,7 @@ const PostForm = () => {
   const pickImage = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!permissionResult.granted) {
-      Alert.alert('Permission required', 'Permission to access the media library is required.');
+      Alert.alert('Permiso requerido', 'Se requiere permiso para acceder a la biblioteca de medios.');
       return;
     }
 
@@ -149,7 +146,7 @@ const PostForm = () => {
                   color: colorScheme === 'dark' ? '#fff' : '#000'
                 }
               ]}
-              placeholder="Title..."
+              placeholder="Título..."
               placeholderTextColor={colorScheme === 'dark' ? '#999' : '#666'}
               value={title}
               onChangeText={setTitle}
@@ -163,7 +160,7 @@ const PostForm = () => {
               <TouchableOpacity onPress={pickImage} style={{ padding: 6, borderRadius: 8, backgroundColor: '#f5f5f5' }}>
                 <Ionicons name="image" size={20} color="#666" />
               </TouchableOpacity>
-              <ThemedText>Attach an image (optional)</ThemedText>
+              <ThemedText>Adjuntar imagen (opcional)</ThemedText>
             </View>
             {imageUri ? (
               <View style={{ marginTop: 12 }}>
@@ -182,7 +179,7 @@ const PostForm = () => {
                   color: colorScheme === 'dark' ? '#fff' : '#000'
                 }
               ]}
-              placeholder="Write your post content here..."
+              placeholder="Escribe el contenido de la publicación..."
               placeholderTextColor={colorScheme === 'dark' ? '#999' : '#666'}
               value={content}
               onChangeText={setContent}
@@ -192,7 +189,7 @@ const PostForm = () => {
               maxLength={1000}
             />
             <ThemedText style={styles.charCounter}>
-              {content.length}/1000 characters
+              {content.length}/1000 caracteres
             </ThemedText>
           </View>
 
@@ -204,7 +201,7 @@ const PostForm = () => {
               disabled={isSubmitting}
             >
               <Ionicons name="close" size={20} color="#666" />
-              <Text style={styles.cancelButtonText}>Cancel</Text>
+              <Text style={styles.cancelButtonText}>Cancelar</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -222,7 +219,7 @@ const PostForm = () => {
                 color="#333"
               />
               <Text style={styles.submitButtonText}>
-                {isSubmitting ? "Creating..." : (edit ? "Update Post" : "Create Post")}
+                {isSubmitting ? "Creando..." : (edit ? "Actualizar" : "Crear")}
               </Text>
             </TouchableOpacity>
           </View>

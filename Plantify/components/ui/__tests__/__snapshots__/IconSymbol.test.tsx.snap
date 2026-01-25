@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IconSymbol Component matches snapshot 1`] = `
+<SymbolView
+  name="house.fill"
+  resizeMode="scaleAspectFit"
+  style={
+    [
+      {
+        "height": 24,
+        "width": 24,
+      },
+      undefined,
+    ]
+  }
+  tintColor="#007AFF"
+  weight="regular"
+/>
+`;

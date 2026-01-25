@@ -1,7 +1,6 @@
 import { View, Image, Text, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator, FlatList, ScrollView, useColorScheme } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // Asegúrate de instalar @expo/vector-icons si no lo tienes
 
-import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';

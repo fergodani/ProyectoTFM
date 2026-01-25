@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RootLayout matches snapshot 1`] = `
+[
+  <Stack>
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+    <StackScreen />
+  </Stack>,
+  <StatusBar
+    style="auto"
+  />,
+]
+`;

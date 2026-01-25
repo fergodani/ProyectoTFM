@@ -1,6 +1,6 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { Text, View, Image, StyleSheet, ScrollView, ActivityIndicator, useColorScheme, TouchableOpacity, Alert, Pressable, SafeAreaView, TouchableWithoutFeedback, Modal, TextInput } from "react-native";
+import { Text, View, Image, StyleSheet, ScrollView, ActivityIndicator, useColorScheme, TouchableOpacity, Alert, Pressable, SafeAreaView, TouchableWithoutFeedback, Modal, TextInput, KeyboardAvoidingView, Platform } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { Garden, UserPlant } from "@/models/Plant";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
@@ -42,10 +42,10 @@ const timeUnitOptions = [
     { value: 'month', label: 'Mes' }
 ];
 
-const timeUnitLabels = {
-    "day": "Día",
-    "week": "Semana",
-    "month": "Mes"
+const timeUnitLabelsPerenual = {
+    "days": "día",
+    "weekw": "semana",
+    "months": "mes"
 };
 
 const timeUnitLabelsLower = {
@@ -127,8 +127,6 @@ export default function PlantSettings() {
             aspect: [4, 3],
             quality: 0.8,
         });
-
-        console.log(result);
 
         const canceled = (result as any).canceled ?? (result as any).cancelled ?? false;
         let selectedUri: string | undefined;
@@ -253,11 +251,9 @@ export default function PlantSettings() {
                 ...userPlantTemp,
                 plant_id: userPlantTemp.perenual_details!.id
             };
-            console.log(plantToUpdate);
             const plant = await PlantService.putPlant(plantToUpdate, accessToken!);
             if (plant) {
                 setUserPlant(plant);
-                console.log("Plant updated successfully:", plant);
             }
             setIsModalVisible(false);
         } catch (error: any) {
@@ -275,7 +271,6 @@ export default function PlantSettings() {
                     const plant = await PlantService.putPlant(plantToUpdate, newTokens.access);
                     if (plant) {
                         setUserPlant(plant);
-                        console.log("Plant updated successfully after refresh:", plant);
                     }
                     setIsModalVisible(false);
                 } catch (refreshError) {
@@ -345,6 +340,7 @@ export default function PlantSettings() {
                                 </View>
                                 <TouchableOpacity
                                     style={{ position: 'absolute', top: 0, right: 0 }}
+                                    testID="custom_name"
                                     onPress={() => {
                                         openModal('custom_name')
                                     }}
@@ -409,7 +405,6 @@ export default function PlantSettings() {
                                         value={userPlant.isWateringReminder}
                                         onValueChange={
                                             (value) => {
-                                                console.log(value)
                                                 userPlantTemp.isWateringReminder = value;
                                                 handlePut();
                                             }
@@ -437,7 +432,7 @@ export default function PlantSettings() {
                                     <ThemedText type="default" style={{ color: '#333' }}>
                                         Cada {userPlant.watering_period.value.includes('-')
                                             ? Math.round((parseInt(userPlant.watering_period.value.split('-')[0]) + parseInt(userPlant.watering_period.value.split('-')[1])) / 2)
-                                            : userPlant.watering_period.value} {userPlant.watering_period.unit}
+                                            : userPlant.watering_period.value} {timeUnitLabelsPerenual[userPlant.watering_period.unit as keyof typeof timeUnitLabelsPerenual]}{(userPlant.watering_period.value.includes('-') || Number(userPlant.watering_period.value) > 1) && userPlant.watering_period.unit === "month" ? "es" : ""}{(userPlant.watering_period.value.includes('-') || Number(userPlant.watering_period.value) > 1) && userPlant.watering_period.unit != "month" ? "s" : ""}
                                     </ThemedText>
                                 )}
                                 {userPlant.isWateringReminder && userPlant.watering_type === "manual" && (
@@ -541,6 +536,7 @@ export default function PlantSettings() {
                             <TouchableOpacity
                                 style={styles.subcardTouchable}
                                 onPress={() => { openModal('site') }}
+                                disabled={gardens.length === 0}
                             >
                                 <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
                                     <Ionicons name="location" size={24} color={"#bfd8c5ff"} />
@@ -548,9 +544,11 @@ export default function PlantSettings() {
                                 </View>
                                 <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
                                     {userPlant.garden_name ? (<ThemedText type='default'>{userPlant.garden_name}</ThemedText>) : (
-                                        <ThemedText type='italic'>Seleccionar</ThemedText>
+                                        <ThemedText type='italic'>{gardens.length == 0 ? "No hay lugares" : "Seleccionar"}</ThemedText>
                                     )}
-                                    <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
+                                    {gardens.length !== 0 &&
+                                        <Ionicons name="chevron-forward" size={16} color={"#bfd8c5ff"}></Ionicons>
+                                    }
                                 </View>
 
                             </TouchableOpacity>
@@ -625,12 +623,14 @@ export default function PlantSettings() {
                 visible={isModalVisible}
                 transparent={true}
                 animationType="slide">
+                <KeyboardAvoidingView
+                    style={styles.centeredView}
+                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginBottom: 20 }}>
                             <TouchableOpacity
                                 onPress={() => {
-                                    console.log("Cerrar button pressed");
                                     setIsModalVisible(false);
                                 }}
                                 style={{ padding: 10, minWidth: 60, alignItems: 'center' }}
@@ -640,8 +640,6 @@ export default function PlantSettings() {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={() => {
-                                    console.log("Aceptar button pressed");
-                                    console.log("Current userPlantTemp:", userPlantTemp);
                                     handlePut();
                                 }}
                                 style={{ padding: 10, minWidth: 60, alignItems: 'center', backgroundColor: isLoading ? '#ccc' : '#4CAF50', borderRadius: 5, flexDirection: 'row', gap: 8 }}
@@ -658,9 +656,12 @@ export default function PlantSettings() {
                             </TouchableOpacity>
                         </View>
                         {modalType === 'custom_name' && (
-                            <View>
+                            <View style={styles.searchContainer}>
                                 <TextInput
-                                    style={[styles.input, { minWidth: 200 }]}
+                                    placeholder="Nombre de la planta"
+                                    placeholderTextColor={colorScheme === 'dark' ? Colors.dark.placeholder : Colors.light.placeholder}
+                                    autoCapitalize="none"
+                                    style={styles.searchInput}
                                     value={userPlantTemp.custom_name || ''}
                                     onChangeText={(text) => setUserPlantTemp({ ...userPlantTemp, custom_name: text })}
                                 />
@@ -837,46 +838,47 @@ export default function PlantSettings() {
                         )}
                     </View>
                 </View>
+                </KeyboardAvoidingView>
             </Modal >
             {/* Modal de confirmación de eliminación */}
-                  <Modal
-                    visible={confirmVisible}
-                    transparent
-                    animationType="fade"
-                    onRequestClose={closeConfirm}>
+            <Modal
+                visible={confirmVisible}
+                transparent
+                animationType="fade"
+                onRequestClose={closeConfirm}>
+                <View style={{
+                    flex: 1,
+                    backgroundColor: "rgba(0,0,0,0.3)",
+                    justifyContent: "center",
+                    alignItems: "center",
+
+                }}>
                     <View style={{
-                      flex: 1,
-                      backgroundColor: "rgba(0,0,0,0.3)",
-                      justifyContent: "center",
-                      alignItems: "center",
-            
-                    }}>
-                      <View style={{
                         backgroundColor: backgroundColor,
                         borderRadius: 12,
                         padding: 24,
                         minWidth: 220,
                         alignItems: "center",
                         margin: 36
-                      }}>
+                    }}>
                         <ThemedText type="title2">¿Seguro que quieres eliminar esta planta?</ThemedText>
                         <ThemedText type="default">Al eliminar la planta todos los datos se eliminarán. Esta acción no podrá deshacerse.</ThemedText>
                         <View style={{ display: 'flex', flexDirection: 'row', gap: 12, justifyContent: 'flex-end', width: '100%' }}>
-                          <Pressable style={{ marginBottom: 12 }} onPress={() => {
-                            closeConfirm();
-                          }}>
-                            <ThemedText type="defaultSemiBold">Cancelar</ThemedText>
-                          </Pressable>
-                          <Pressable onPress={() => {
-                            handleDelete();
-                            closeConfirm();
-                          }}>
-                            <ThemedText type="defaultSemiBold" style={{ color: "red" }}>Eliminar</ThemedText>
-                          </Pressable>
+                            <Pressable style={{ marginBottom: 12 }} onPress={() => {
+                                closeConfirm();
+                            }}>
+                                <ThemedText type="defaultSemiBold">Cancelar</ThemedText>
+                            </Pressable>
+                            <Pressable onPress={() => {
+                                handleDelete();
+                                closeConfirm();
+                            }}>
+                                <ThemedText type="defaultSemiBold" style={{ color: "red" }}>Eliminar</ThemedText>
+                            </Pressable>
                         </View>
-                      </View>
                     </View>
-                  </Modal>
+                </View>
+            </Modal>
         </>
     );
 
@@ -896,6 +898,26 @@ const styles = StyleSheet.create({
         height: 200,
         borderRadius: 16,
         marginBottom: 16,
+    },
+    searchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderRadius: 25,
+        paddingHorizontal: 16,
+        paddingVertical: 16,
+        marginTop: 16,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 2,
+        backgroundColor: Colors.light.tint,
+        width: '100%',
+    },
+    searchInput: {
+        flex: 1,
+        fontSize: 14,
+        color: '#333',
     },
     card: {
         padding: 16,

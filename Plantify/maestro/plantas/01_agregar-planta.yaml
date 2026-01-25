@@ -1,0 +1,14 @@
+appId: com.uniovi.Plantify
+---
+# Flow de añadir una planta
+# Prerequisito: Usuario ya autenticado
+
+- launchApp
+- tapOn: Perfil de usuario
+- tapOn: Añadir planta
+- tapOn: Buscar plantas...
+- inputText: "fir"
+- tapOn:
+    point: 82%,25%
+- tapOn: Saltar
+- assertVisible: European Silver Fir

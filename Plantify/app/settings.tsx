@@ -1,6 +1,6 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { Text, View, Image, StyleSheet, ScrollView, ActivityIndicator, useColorScheme, TouchableOpacity, Alert, Pressable, SafeAreaView, TouchableWithoutFeedback, Modal, TextInput } from "react-native";
+import { Text, View, Image, StyleSheet, ScrollView, ActivityIndicator, useColorScheme, TouchableOpacity, Alert, Pressable, SafeAreaView, TouchableWithoutFeedback, Modal, TextInput, KeyboardAvoidingView, Platform } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Garden, UserPlant } from "@/models/Plant";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
@@ -20,6 +20,7 @@ import { useNavigation, useRouter } from 'expo-router';
 import { User } from "@/models/User";
 import { StorageService } from "@/services/storageService";
 import { NotificationService } from "@/services/notificationService";
+import { KeyboardAwareScrollView, KeyboardToolbar } from 'react-native-keyboard-controller';
 
 const data = [...Array(100).keys()].map((index) => ({
     value: index,
@@ -95,6 +96,7 @@ export default function Settings() {
     const [confirmNewPassword, setConfirmNewPassword] = useState<string>('');
     const [selectedHour, setSelectedHour] = useState<number>(9);
     const [selectedHourTemp, setSelectedHourTemp] = useState<number>(9);
+    const colorScheme = useColorScheme() ?? 'light';
 
     const openModal = (type: ModalType | ((prevState: ModalType) => ModalType) | null) => {
         setModalType(type);
@@ -144,7 +146,6 @@ export default function Settings() {
 
     const handlePut = async () => {
         if (selectedHour !== selectedHourTemp) {
-            console.log("La hora ha cambiado:", selectedHour);
             handleTimeChange(selectedHourTemp);
             return;
         }
@@ -188,8 +189,6 @@ export default function Settings() {
     }
 
     const handleTimeChange = async (selectedHour?: number) => {
-
-        console.log("Hora seleccionada:", selectedHour);
         // Actualizamos estado visual
         setSelectedHour(selectedHour!);
         setSelectedHourTemp(selectedHour!);
@@ -275,7 +274,7 @@ export default function Settings() {
                         >
                             <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
                                 <Ionicons name="create" size={24} color={"#bfd8c5ff"} />
-                                <ThemedText type='default'>Nombre de usuario</ThemedText>
+                                <ThemedText type='default'>Usuario</ThemedText>
                             </View>
                             <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 6, alignContent: 'center' }}>
                                 <ThemedText type='italic'>{user.username || '—'}</ThemedText>
@@ -319,7 +318,7 @@ export default function Settings() {
                     </ThemedView>
 
                     <ThemedView style={styles.card}>
-                        <ThemedText type="title2" style={{ marginBottom: 8 }}>Posts</ThemedText>
+                        <ThemedText type="title2" style={{ marginBottom: 8 }}>Publicaciones</ThemedText>
                         {/* Posts */}
                         <TouchableOpacity
                             style={styles.subcardTouchable}
@@ -327,7 +326,7 @@ export default function Settings() {
                         >
                             <View style={{ flexDirection: "row", alignItems: "center", gap: 8 }}>
                                 <Ionicons name="document" size={24} color={"#bfd8c5ff"} />
-                                <ThemedText type='default'>Posts</ThemedText>
+                                <ThemedText type='default'>Publicaciones</ThemedText>
                             </View>
                             <View style={{ display: 'flex', alignItems: "center", flexDirection: "row", gap: 2, alignContent: 'center' }}>
                                 <ThemedText type='italic'>Ver todos</ThemedText>
@@ -395,18 +394,22 @@ export default function Settings() {
 
                     <Button text="Cerrar sesión" onPress={() => { handleLogout(); }} />
                 </View>
-
             </ScrollView>
+
+
             <Modal
                 visible={isModalVisible}
                 transparent={true}
                 animationType="slide">
-                <View style={styles.centeredView}>
+                <KeyboardAvoidingView
+                            style={styles.centeredView}
+                            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
                     <View style={styles.modalView}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
                             <TouchableOpacity onPress={() => handleClose()}>
                                 <ThemedText type="default" style={{ color: "#000" }}>Cerrar</ThemedText>
                             </TouchableOpacity>
+
                             <TouchableOpacity
                                 onPress={() => handlePut()}
                                 style={{ padding: 10, minWidth: 60, alignItems: 'center', backgroundColor: isLoading ? '#ccc' : '#4CAF50', borderRadius: 5, flexDirection: 'row', gap: 8 }}
@@ -422,69 +425,72 @@ export default function Settings() {
                                 )}
                             </TouchableOpacity>
                         </View>
-
-                        {modalType === 'username' && (
-                            <View style={styles.searchContainer}>
-                                <TextInput
-                                    placeholder="Nombre de usuario"
-                                    autoCapitalize="none"
-                                    style={styles.searchInput}
-                                    value={userTemp.username}
-                                    onChangeText={(text) => { setUserTemp({ ...userTemp, username: text }); }}
+                        
+                            {modalType === 'username' && (
+                                <View style={styles.searchContainer}>
+                                    <TextInput
+                                        placeholder="Nombre de usuario"
+                                        placeholderTextColor={colorScheme === 'dark' ? Colors.dark.placeholder : Colors.light.placeholder}
+                                        autoCapitalize="none"
+                                        style={styles.searchInput}
+                                        value={userTemp.username}
+                                        onChangeText={(text) => { setUserTemp({ ...userTemp, username: text }); }}
+                                    />
+                                </View>
+                            )}
+                            {modalType === 'email' && (
+                                <View style={styles.searchContainer}>
+                                    <TextInput
+                                        placeholder="Correo electrónico"
+                                        placeholderTextColor={colorScheme === 'dark' ? Colors.dark.placeholder : Colors.light.placeholder}
+                                        autoCapitalize="none"
+                                        style={styles.searchInput}
+                                        value={userTemp.email}
+                                        onChangeText={(text) => { setUserTemp({ ...userTemp, email: text }); }}
+                                    />
+                                </View>
+                            )}
+                            {modalType === 'password' && (
+                                <View style={styles.passwordContainer}>
+                                    <TextInput
+                                        placeholder="Contraseña actual"
+                                        autoCapitalize="none"
+                                        secureTextEntry
+                                        style={styles.passwordInput}
+                                        value={actualPassword}
+                                        onChangeText={(text) => { setActualPassword(text); }}
+                                    />
+                                    <TextInput
+                                        placeholder="Contraseña nueva"
+                                        autoCapitalize="none"
+                                        secureTextEntry
+                                        style={styles.passwordInput}
+                                        value={newPassword}
+                                        onChangeText={(text) => { setNewPassword(text); }}
+                                    />
+                                    <TextInput
+                                        placeholder="Contraseña nueva (confirmación)"
+                                        autoCapitalize="none"
+                                        secureTextEntry
+                                        style={styles.passwordInput}
+                                        value={confirmNewPassword}
+                                        onChangeText={(text) => { setConfirmNewPassword(text); }}
+                                    />
+                                </View>
+                            )}
+                            {modalType === 'hour' && (
+                                <WheelPicker
+                                    data={hourOptions}
+                                    width={200}
+                                    value={selectedHourTemp.toString()}
+                                    onValueChanged={({ item: { value } }) => { setSelectedHourTemp(Number(value)); }}
+                                    enableScrollByTapOnItem={true}
                                 />
-                            </View>
-                        )}
-                        {modalType === 'email' && (
-                            <View style={styles.searchContainer}>
-                                <TextInput
-                                    placeholder="Correo electrónico"
-                                    autoCapitalize="none"
-                                    style={styles.searchInput}
-                                    value={userTemp.email}
-                                    onChangeText={(text) => { setUserTemp({ ...userTemp, email: text }); }}
-                                />
-                            </View>
-                        )}
-                        {modalType === 'password' && (
-                            <View style={styles.passwordContainer}>
-                                <TextInput
-                                    placeholder="Contraseña actual"
-                                    autoCapitalize="none"
-                                    secureTextEntry
-                                    style={styles.passwordInput}
-                                    value={actualPassword}
-                                    onChangeText={(text) => { setActualPassword(text); }}
-                                />
-                                <TextInput
-                                    placeholder="Contraseña nueva"
-                                    autoCapitalize="none"
-                                    secureTextEntry
-                                    style={styles.passwordInput}
-                                    value={newPassword}
-                                    onChangeText={(text) => { setNewPassword(text); }}
-                                />
-                                <TextInput
-                                    placeholder="Contraseña nueva (confirmación)"
-                                    autoCapitalize="none"
-                                    secureTextEntry
-                                    style={styles.passwordInput}
-                                    value={confirmNewPassword}
-                                    onChangeText={(text) => { setConfirmNewPassword(text); }}
-                                />
-                            </View>
-                        )}
-                        {modalType === 'hour' && (
-                            <WheelPicker
-                                data={hourOptions}
-                                width={200}
-                                value={selectedHourTemp.toString()}
-                                onValueChanged={({ item: { value } }) => { setSelectedHourTemp(Number(value)); }}
-                                enableScrollByTapOnItem={true}
-                            />
-                        )}
-
+                            )}
+                        
                     </View>
-                </View>
+                </KeyboardAvoidingView>
+                
             </Modal >
         </>
     );
@@ -496,6 +502,11 @@ const styles = StyleSheet.create({
         padding: 16,
         flex: 1,
         gap: 16,
+        marginBottom: 30
+    },
+    container: {
+        gap: 16,
+        padding: 16,
     },
     image: {
         width: 200,

@@ -1,0 +1,37 @@
+appId: com.uniovi.Plantify
+---
+# Flow de crear nuevo comentario
+# Prerequisito: Usuario ya autenticado y hay publicaciones disponibles
+
+- launchApp
+- tapOn: Buscar plantas
+- tapOn: Ver todas las plantas
+- tapOn: European Silver Fir
+- tapOn:
+    point: 88%,93%
+- tapOn: Create Post
+- tapOn: Título...
+- inputText: "test"
+- tapOn: Escribe el contenido de la publicación...
+- inputText: "test"
+- tapOn: Crear
+- tapOn: ACEPTAR
+- scroll
+- scroll
+- scroll
+- scroll
+- scroll
+- scroll
+- scroll
+- scroll
+- scroll
+- scroll
+- scroll
+- scroll
+- tapOn: test
+- tapOn: Escribe un comentario...
+- tapOn: Escribe tu comentario...
+- inputText: "comentario test"
+- tapOn: Crear
+- tapOn: ACEPTAR
+- assertVisible: comentario test

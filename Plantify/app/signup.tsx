@@ -2,7 +2,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { Colors } from '@/constants/Colors';
 import { UserService } from '@/services/userService';
 import * as React from 'react';
-import { View, useWindowDimensions, Text, StatusBar, TextInput, TouchableOpacity, StyleSheet, useColorScheme } from 'react-native';
+import { View, useWindowDimensions, Text, StatusBar, TextInput, TouchableOpacity, StyleSheet, useColorScheme, KeyboardAvoidingView, Platform } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
@@ -24,23 +24,20 @@ export default function SignupScreen() {
     const handleSignup = async () => {
 
         setError('');
-        console.log("Attempting to sign up with:", email);
         if (!email || !password) {
             setError('Por favor, completa todos los campos.');
             return;
         }
-        console.log(password)
-        console.log(confirmPassword)
-        console.log(password !==confirmPassword)
+
         if (password !== confirmPassword) {
-            console.log("Passwords do not match")
             setError('Las contraseñas no coinciden.');
             return;
         }
+        
         try {
             await signup(username, email, password);
-        } catch (e) {
-            setError('Error al crear la cuenta.');
+        } catch (e: any) {
+            setError(e.message || 'Error al crear la cuenta.');
             return;
         }
 
@@ -56,12 +53,12 @@ export default function SignupScreen() {
                       style={[styles.body, { padding: 16 }]}
                     >
             <ThemedText type="title">Crear una cuenta</ThemedText>
-            <View style={{ display: 'flex', gap: 12 }}>
                 <View>
                     <ThemedText type="subtitle">Nombre de usuario</ThemedText>
                     <View style={styles.searchContainer}>
                         <TextInput
                             placeholder="Introduce tu nombre de usuario"
+                            placeholderTextColor={colorScheme === 'dark' ? Colors.dark.placeholder : Colors.light.placeholder}
                             autoCapitalize="none"
                             style={styles.searchInput}
                             value={username}
@@ -79,6 +76,7 @@ export default function SignupScreen() {
                             style={styles.searchInput}
                             value={email}
                             onChangeText={setEmail}
+                            placeholderTextColor={colorScheme === 'dark' ? Colors.dark.placeholder : Colors.light.placeholder}
                         />
                     </View>
                 </View>
@@ -87,10 +85,12 @@ export default function SignupScreen() {
                     <View style={styles.searchContainer}>
                         <TextInput
                             placeholder="Introduce tu contraseña"
+                            accessibilityLabel="Introduce tu contraseña"
                             secureTextEntry
                             style={styles.searchInput}
                             value={password}
                             onChangeText={setPassword}
+                            placeholderTextColor={colorScheme === 'dark' ? Colors.dark.placeholder : Colors.light.placeholder}
                         />
                     </View>
                 </View>
@@ -98,11 +98,13 @@ export default function SignupScreen() {
                     <ThemedText type="subtitle">Confirmar contraseña</ThemedText>
                     <View style={styles.searchContainer}>
                         <TextInput
-                            placeholder="Introduce tu contraseña"
+                            placeholder="Confirma tu contraseña"
+                            accessibilityLabel="Confirma tu contraseña"
                             secureTextEntry
                             style={styles.searchInput}
                             value={confirmPassword}
                             onChangeText={setConfirmPassword}
+                            placeholderTextColor={colorScheme === 'dark' ? Colors.dark.placeholder : Colors.light.placeholder}
                         />
                     </View>
                 </View>
@@ -112,7 +114,6 @@ export default function SignupScreen() {
                     </Text>
                 ) : null}
                 <Button text="Registrarse" onPress={handleSignup} />
-            </View>
         </LinearGradient>
     )
 }

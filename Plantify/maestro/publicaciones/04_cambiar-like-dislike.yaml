@@ -1,0 +1,8 @@
+appId: com.uniovi.Plantify
+---
+# Flow de cambiar like a dislike en publicación
+# Prerequisito: Usuario ya autenticado y ha dado like a una publicación
+
+- tapOn:
+    point: 28%,27%
+- assertVisible: "0"

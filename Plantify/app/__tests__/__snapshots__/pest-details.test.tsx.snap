@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PestDetails matches snapshot 1`] = `
+<View
+  style={
+    {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      [
+        {
+          "backgroundColor": "rgb(252, 250, 246)",
+        },
+        {
+          "flex": 1,
+        },
+      ]
+    }
+  >
+    <RCTScrollView
+      collapsable={false}
+      contentContainerStyle={
+        {
+          "paddingBottom": 80,
+        }
+      }
+      scrollEventThrottle={16}
+      scrollIndicatorInsets={
+        {
+          "bottom": 80,
+        }
+      }
+    >
+      <View>
+        <View
+          style={
+            [
+              {
+                "height": 250,
+                "overflow": "hidden",
+              },
+              {
+                "backgroundColor": "#4CAF50",
+              },
+              {
+                "transform": [
+                  {
+                    "translateY": undefined,
+                  },
+                  {
+                    "scale": undefined,
+                  },
+                ],
+              },
+            ]
+          }
+        >
+          <Image
+            resizeMode="cover"
+            source={
+              {
+                "uri": undefined,
+              }
+            }
+            style={
+              {
+                "height": 250,
+                "width": "100%",
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            [
+              {
+                "backgroundColor": "rgb(252, 250, 246)",
+              },
+              {
+                "flex": 1,
+                "gap": 16,
+                "overflow": "hidden",
+                "padding": 16,
+              },
+            ]
+          }
+        >
+          <Text
+            style={
+              [
+                {
+                  "color": "#11181C",
+                },
+                {
+                  "fontFamily": "LexendDeca",
+                  "fontSize": 16,
+                  "lineHeight": 24,
+                },
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                {
+                  "color": "#c00",
+                  "margin": 16,
+                },
+              ]
+            }
+          >
+            Cannot read properties of undefined (reading 'getPestDetails')
+          </Text>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;

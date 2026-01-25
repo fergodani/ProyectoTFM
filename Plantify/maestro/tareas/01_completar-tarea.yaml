@@ -1,0 +1,22 @@
+appId: com.uniovi.Plantify
+---
+# Flow de completar tarea
+# Prerequisito: Usuario ya autenticado y tiene al menos una tarea pendiente para hoy
+
+- launchApp
+
+- tapOn: Buscar plantas
+- tapOn: Ver todas las plantas
+- tapOn:
+    text: 
+    index: 0
+- tapOn: Inicio
+- assertVisible: 1 tarea
+- tapOn: 
+- assertVisible: Todo completado
+- tapOn: Próximas
+- assertVisible: En 8 días
+- tapOn: Perfil de usuario
+- tapOn: Menú de opciones
+- tapOn: Eliminar
+- tapOn: Eliminar

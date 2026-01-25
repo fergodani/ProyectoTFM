@@ -1,7 +1,6 @@
 import { View, Image, Text, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator, useColorScheme } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // Asegúrate de instalar @expo/vector-icons si no lo tienes
 
-import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -48,9 +47,8 @@ export default function SearchScreen() {
             });
     };
 
-    const fetchPlants = async () => {
+    const goToPlantList = async () => {
         const accessToken = await AsyncStorage.getItem('accessToken');
-        console.log(accessToken);
         try {
             router.push({
                 pathname: "/plant-list",
@@ -90,7 +88,7 @@ export default function SearchScreen() {
                     <Ionicons name="camera" size={120} color="#11181C" />
                 </TouchableOpacity>
             </View>
-            <Button text="Ver todas las plantas" onPress={fetchPlants} />
+            <Button text="Ver todas las plantas" onPress={goToPlantList} />
         </LinearGradient>
     );
 }

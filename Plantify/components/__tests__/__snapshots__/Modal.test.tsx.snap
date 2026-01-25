@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomModal Component matches snapshot 1`] = `
+<Modal
+  onRequestClose={[Function]}
+  visible={true}
+>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessible={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "backgroundColor": "rgba(0,0,0,0.3)",
+        "bottom": 0,
+        "height": "100%",
+        "left": 0,
+        "paddingBottom": 100,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "flex-end",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "white",
+          "borderRadius": 20,
+          "elevation": 5,
+          "margin": 20,
+          "padding": 35,
+          "shadowColor": "#000",
+          "shadowOffset": {
+            "height": 2,
+            "width": 0,
+          },
+          "shadowOpacity": 0.25,
+          "shadowRadius": 4,
+        }
+      }
+    >
+      <Text>
+        Snapshot Test
+      </Text>
+    </View>
+  </View>
+</Modal>
+`;

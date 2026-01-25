@@ -1,0 +1,857 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GuideScreen matches snapshot 1`] = `
+<LinearGradient
+  colors={
+    [
+      "rgba(213, 240, 219, 0.19)",
+      "rgb(252, 250, 246)",
+    ]
+  }
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      {
+        "paddingVertical": 16,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      {
+        "gap": 8,
+        "marginTop": 64,
+        "paddingHorizontal": 16,
+      }
+    }
+  >
+    <Text
+      style={
+        [
+          {
+            "color": "#11181C",
+          },
+          undefined,
+          {
+            "fontFamily": "LexendDeca",
+            "fontSize": 32,
+            "fontWeight": "bold",
+            "lineHeight": 32,
+            "paddingVertical": 8,
+          },
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+        ]
+      }
+    >
+      Guía de cuidados
+    </Text>
+    <Text
+      id="description"
+      style={
+        [
+          {
+            "color": "#11181C",
+          },
+          {
+            "fontFamily": "LexendDeca",
+            "fontSize": 16,
+            "lineHeight": 24,
+          },
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+        ]
+      }
+    >
+      Consulta información sobre el cuidado de las plantas
+    </Text>
+    <RCTScrollView
+      contentContainerStyle={
+        {
+          "paddingBottom": 40,
+          "paddingHorizontal": 5,
+        }
+      }
+      data={
+        [
+          {
+            "colorFondo": "#E3F2FD",
+            "colorTexto": "#1565C0",
+            "consejos": [
+              {
+                "contenido": "Nunca riegues por calendario (ej: 'cada lunes'). Toca la tierra: introduce el dedo unos 2-3 cm. Si sale seco, riega. Si sale húmedo, espera unos días más.",
+                "tema": "La Regla de Oro",
+              },
+              {
+                "contenido": "Asegúrate de que tu maceta tenga agujeros abajo. Si el agua se estanca en el fondo, las raíces se pudrirán. Si usas cubremacetas decorativos, tira el agua sobrante 10 minutos después de regar.",
+                "tema": "El Drenaje es Vital",
+              },
+              {
+                "contenido": "Síntomas: Hojas amarillas (especialmente las bajas), tallos blandos o negruzcos y presencia de mosquitos en la tierra. Solución: Deja secar el sustrato por completo antes de volver a regar.",
+                "tema": "¿Me he pasado de agua?",
+              },
+              {
+                "contenido": "Cactus y Suculentas: Almacenan agua en sus hojas y tallos, por lo que requieres un riego esporádico, generalmente cada 2-3 semanas. Arbustos y árboles: Necesitan riegos más profundos y menos frecuentes para fomentar el crecimiento de raíces fuertes. Plantas de flor: Requieren riegos regulares debido a una demanada mayor de hidratación para sostener la floración, aunque sin llegar a encharcar.",
+                "tema": "Tipos de planta y sus necesidades",
+              },
+              {
+                "contenido": "En verano, el calor hace que el agua se evapore más rápido, por lo que es necesario regar con mayor frecuencia, especialmente en suelos arenosos. En invierno, muchas plantas reducen su actividad y necesitan menos agua. 	En climas secos y ventosos, el riego debe ser más regular, mientras que en climas húmedos se debe evitar el exceso de agua para prevenir hongos y enfermedades.",
+                "tema": "Clima y temperatura",
+              },
+              {
+                "contenido": "El tipo de suelo influye directamente en la cantidad de agua que las plantas pueden absorber. Los suelos arcillosos retienen más agua, por lo que necesitan riegos menos frecuentes, mientras que los suelos arenosos drenan rápido y requieren riegos más constantes. Adaptar el riego a la capacidad de retención del suelo evitará el exceso o la falta de hidratación.",
+                "tema": "Tipos de suelo",
+              },
+              {
+                "contenido": "El riego de las plantas de interior depende de la especie y las condiciones del hogar. Generalmente, necesitan agua una o dos veces por semana, evitando encharcar la tierra.",
+                "tema": "Plantas de interior",
+              },
+              {
+                "contenido": "Las plantas de exterior requieren un riego adaptado a la temporada. En verano, es recomendable regarlas temprano en la mañana o al atardecer para evitar la evaporación. En invierno, es mejor reducir la frecuencia para evitar el exceso de humedad, especialmente en suelos que retienen agua.",
+                "tema": "Plantas de exterior",
+              },
+            ],
+            "icono": "💧",
+            "id": "riego",
+            "titulo": "Riego Maestro",
+          },
+          {
+            "colorFondo": "#FFF8E1",
+            "colorTexto": "#F57F17",
+            "consejos": [
+              {
+                "tema": "Tipos de luz en interiores",
+                "titulo": "true",
+              },
+              {
+                "contenido": "La luz directa es aquella que proviene directamente del sol sin obstáculos que la filtren. Esto ocurre cuando los rayos solares entran por una ventana abierta o el balcón y tocan directamente las hojas de tus plantas. Las plantas que disfrutan de luz directa suelen ser las que prosperan en climas soleados, como los cactus, suculentas y algunas hierbas aromáticas. Si tienes ventanas orientadas al sur, ese es el lugar perfecto para colocar plantas que necesiten un alto nivel de exposición solar.",
+                "tema": "Luz directa",
+              },
+              {
+                "contenido": "La luz indirecta puede ser brillante o moderada. La brillante es la luz solar que ha sido filtrada o reflejada. No llega a las plantas de manera directa, pero aún así ofrece la cantidad suficiente para que crezcan con vigor. Este tipo de luz es ideal para la mayoría de las plantas de interior, como los ficus, helechos y filodendros. Mientras que la moderada es menos intensa y se puede encontrar en habitaciones con ventanas orientadas al este o al oeste, o en zonas que reciben luz difusa durante unas pocas horas al día. Plantas como la hoja elegante, la monstera o las zamioculcas prosperan en estas condiciones.",
+                "tema": "Luz indirecta o semisombra",
+              },
+              {
+                "contenido": "La sombra no significa ausencia total de luz, sino que la planta recibe muy poca exposición solar. Este tipo de luz es ideal para plantas que han evolucionado para sobrevivir bajo la sombra en su hábitat natural, como la Cuna de Moises o las sansevierias (lengua de suegra). Aunque estas plantas pueden tolerar niveles bajos de luz, es importante recordar que crecerán más lentamente y pueden requerir menos agua que aquellas que reciben más luz.",
+                "tema": "Sombra",
+              },
+              {
+                "tema": "¿Cómo saber cuánta luz recibe tu espacio?",
+                "titulo": "true",
+              },
+              {
+                "contenido": "Observa cómo entra la luz en las distintas habitaciones durante el día. Las ventanas orientadas al sur suelen recibir la mayor cantidad de luz directa, mientras que las orientadas al este o al oeste reciben luz moderada y las del norte muy poca luz directa.",
+                "tema": "Observa el movimiento del sol",
+              },
+              {
+                "contenido": "Al mediodía, pon tu mano entre la ventana y la planta. Si tu sombra es negra y definida, es luz fuerte. Si es borrosa y suave, es luz indirecta (la favorita de casi todas).",
+                "tema": "La prueba de la sombra",
+              },
+              {
+                "contenido": "Si quieres ser más preciso, puedes invertir en un medidor de luz que te indicará los niveles de luz en lúmenes o footcandles. Esto te dará una idea más clara sobre si tu planta está recibiendo suficiente luz para crecer de manera óptima.",
+                "tema": "Usa un medidor de luz",
+              },
+              {
+                "tema": "Consejos para la iluminación de plantas de interior",
+                "titulo": "true",
+              },
+              {
+                "contenido": "Las plantas crecen buscando la luz. Gira tu maceta 90 grados cada vez que riegues para que crezca recta y frondosa por todos lados.",
+                "tema": "Rotación",
+              },
+              {
+                "contenido": "Es importante mantener un horario regular de iluminación para tus plantas de interior. Idealmente, deben recibir luz durante 12 a 16 horas al día, imitando el ciclo natural de luz del sol.",
+                "tema": "Duración y consistencia",
+              },
+              {
+                "contenido": "Asegúrate de ajustar la distancia entre las luces y las plantas según la intensidad de la luz emitida. Demasiada luz puede quemar las hojas, mientras que muy poca puede inhibir el crecimiento.",
+                "tema": "Distancia e intensidad",
+              },
+              {
+                "contenido": "Observa de cerca el crecimiento y la salud de tus plantas. Si notas hojas amarillentas o un crecimiento lento, podría ser una señal de que necesitan más luz.",
+                "tema": "Monitoreo del crecimiento",
+              },
+            ],
+            "icono": "☀️",
+            "id": "luz",
+            "titulo": "Iluminación",
+          },
+          {
+            "colorFondo": "#E0F2F1",
+            "colorTexto": "#00695C",
+            "consejos": [
+              {
+                "contenido": "Las hojas de vuelven marrones.	La planta empieza a marchitarse por la evaporación excesiva.	Las plantas pueden crecer más despacio y sus hojas pueden ser más pequeñas.	Las hojas empiezan a rizarse o incluso a caerse.",
+                "tema": "Signos de estrés por altas temperatura",
+              },
+              {
+                "contenido": "Las hojas y las plantas empiezan a marchitarse por los daños del frío. Las hojas y los tallos se vuelven marrones, negros. Las partes marrones o ennegrecidas de la planta se vuelven blandas o inlcuso pastosas. El crecimiento de la planta se ralentiza o entra en un periodo de latencia.",
+                "tema": "Signos de estrés por bajas temperatura",
+              },
+              {
+                "tema": "¿Cómo mantener la temperatura?",
+                "titulo": "true",
+              },
+              {
+                "contenido": "Un invernadero es una opción para mantener la temperatura estable y proteger tus plantas de las condiciones extremas.",
+                "tema": "Utiliza un (mini)invernadero",
+              },
+              {
+                "contenido": "Es normal querer proteger a tus plantas del frío subiendo el termostato, pero demasiado calor puede ser una amnenza igual de grande para ellas.",
+                "tema": "Cuidado con el sobrecalentamiento",
+              },
+              {
+                "contenido": "El enemigo silencioso. Evita poner tus plantas justo en la línea de flujo del Aire Acondicionado, calefacción o ventanas que se abren mucho en invierno.",
+                "tema": "Corrientes de aire",
+              },
+              {
+                "contenido": "Si agrupas tus plantas, el aire y la humedad quedan atrapados entre cada una de ellas. De este modo, también se mantienen unas a otras un poco más calientes.",
+                "tema": "Agrupa tus plantas",
+              },
+              {
+                "tema": "Niveles de humedad",
+                "titulo": "true",
+              },
+              {
+                "contenido": "Es ideal para casi todas las plantas tropicales de interior. Sin embargo, es difícil de mantener en interiores. Puedes mantener este nivel con un terrario cerrado o un pequeño invernadero.",
+                "tema": "Humedad alta (60-80%)",
+              },
+              {
+                "contenido": "La mayoría de las plantas de interior comunes prosperan en este rango. La mayoría de las casas tienen este nivel de humedad en verano. Algunas plantas siguen necesitando algo de ayuda, entonces puedes nebulizarlas o colocar una bandeja de agua cerca",
+                "tema": "Humedad media (40-60%)",
+              },
+              {
+                "contenido": "Este rango es adecuado para las plantas que prosperan en condiciones áridas. El aire suele secarse así cuando se utiliza la calefacción. A los cactus y suculentas les irá bien, pero la mayoría de las plantas tendrán problemas con las hojas.",
+                "tema": "Humedad baja (20-40%)",
+              },
+              {
+                "tema": "Signos de estrés por humedad alta",
+                "titulo": "true",
+              },
+              {
+                "contenido": "",
+                "tema": "Puntas de las hojas marrones",
+              },
+              {
+                "contenido": "",
+                "tema": "Bordes de las hojas amarillentos",
+              },
+              {
+                "contenido": "",
+                "tema": "Las hojas se secan y se arrugan o encogen",
+              },
+              {
+                "tema": "Signos de estrés por humedad baja",
+                "titulo": "true",
+              },
+              {
+                "contenido": "",
+                "tema": "Hongos (moho) en las hojas",
+              },
+              {
+                "contenido": "",
+                "tema": "Hongos (moho) en la tierra de la maceta",
+              },
+              {
+                "contenido": "",
+                "tema": "Las hojas y los tallos empiezan a mostrar signos de podredumbre",
+              },
+              {
+                "tema": "¿Cómo mantener los niveles de humedad adecuados?",
+                "titulo": "true",
+              },
+              {
+                "contenido": "Basta con nebulizar agua tibia sobre las hojas con un pulverizador. Recuerda que tendrás que nebulizar con frecuencia, ya que este efecto es temporal.",
+                "tema": "Nebulización",
+              },
+              {
+                "contenido": "Si juntas las plantas en grupos, el aire y la humedad quedan atrapados entre cada una de ellas. También pueden aprovechar la humedad del suelo de las demás. Si haces esto, tienes que dejar algo de espacio (de crecimiento) entre las plantas.",
+                "tema": "Agrupa las plantas",
+              },
+              {
+                "contenido": "La bandeja consiste en pequeños guijarros o hidrogranos cubiertos de agua. El agua debe estar justo por debajo de la parte superior de los guijarros para que la planta no absorba agua y se mantenga bien aireada.",
+                "tema": "Bandeja con guijarros o hidrogranos",
+              },
+              {
+                "contenido": "Un humidificador es un aparato que añade humedad al aire mediante la evaporación. Es probablemente la forma más fácil de aumentar la humedad de tu habitación.",
+                "tema": "Humidificador",
+              },
+              {
+                "contenido": "También puedes tender la ropa en casa (cerca de las plantas) después de lavarla. Esto aumenta la humedad del aire al evaporarse el agua de la ropa.",
+                "tema": "Cuelga la ropa para que se seque",
+              },
+              {
+                "contenido": "Un invernadero es otra opción para mantener un mayor nivel de humedad para tus plantas. Si tienes plantas tropicales, una humedad baja puede matarlas",
+                "tema": "Utiliza un (mini)invernadero",
+              },
+            ],
+            "icono": "☁️",
+            "id": "humedad",
+            "titulo": "Humedad y Temperatura",
+          },
+          {
+            "colorFondo": "#F3E5F5",
+            "colorTexto": "#6A1B9A",
+            "consejos": [
+              {
+                "tema": "Principales tipos de plagas",
+                "titulo": "true",
+              },
+              {
+                "contenido": "Atacan brotes tiernos, hojas nuevas o tallos blandos. Se alimentan chupando la savia de la planta, lo que puede debilitarla y deformar el crecimiento, además de facilitar que entren hongos u otras plagas.",
+                "imagen": "https://gargofumigaciones.com/wp-content/uploads/2025/11/plagas_en_plantas_pulgones.webp",
+                "tema": "Pulgones",
+              },
+              {
+                "contenido": "Es un ácaro diminuto que perfora las células de las hojas para alimentarse, causando manchas amarillas o blancas y una apariencia polvorienta. En infestaciones severas, puede provocar la caída de las hojas y debilitar la planta.",
+                "imagen": "https://gargofumigaciones.com/wp-content/uploads/2025/11/plagas_en_plantas_arana_roja.webp",
+                "tema": "Araña roja",
+              },
+              {
+                "contenido": "Estos insectos succionan la savia y se esconden en el envés de las hojas o en los tallos. Pueden causar amarillamiento, deformación de las hojas y debilitamiento general de la planta, además de producir melaza que atrae hongos.",
+                "imagen": "https://gargofumigaciones.com/wp-content/uploads/2025/11/plagas_en_plantas_mosca_blanca.webp",
+                "tema": "Mosca blanca / Cochinilla / Escamas",
+              },
+              {
+                "contenido": "Las orugas devoran hojas, las cuales pueden quedar con agujeros o completamente comidas. Los minadores de hojas crean túneles dentro de las hojas, lo que puede causar manchas y debilitamiento de la planta.",
+                "imagen": "https://gargofumigaciones.com/wp-content/uploads/2025/11/plagas_en_plantas_orugas.webp",
+                "tema": "Orugas y minadores de hojas",
+              },
+              {
+                "tema": "¿Cómo eliminar plagas de las plantas?",
+                "titulo": "true",
+              },
+              {
+                "contenido": "Para evitar que la plaga se propague a otras plantas, es importante aislar la planta afectada tan pronto como se detecte el problema.",
+                "tema": "Aislar la planta afectada",
+              },
+              {
+                "contenido": "Limpiar las hojas con un paño húmedo o una solución suave de agua y jabón puede ayudar a eliminar las plagas visibles y sus huevos.",
+                "tema": "Limpiar las hojas",
+              },
+              {
+                "contenido": "Investiga el tipo de plaga que afecta a tu planta y utiliza insecticidas o remedios caseros específicos para esa plaga. Asegúrate de seguir las instrucciones del producto para evitar dañar la planta.",
+                "tema": "Usar tratamientos adecuados al tipo de plaga",
+              },
+              {
+                "contenido": "Mantén tus plantas saludables mediante un riego adecuado, buena iluminación y ventilación. Las plantas fuertes son menos susceptibles a las plagas.",
+                "tema": "Prevención",
+              },
+              {
+                "contenido": "Revisa tus plantas con frecuencia para detectar signos tempranos de plagas, como hojas pegajosas, manchas o deformaciones. La detección temprana facilita el control de las plagas antes de que se conviertan en un problema grave.",
+                "tema": "Inspección regular",
+              },
+            ],
+            "icono": "✨",
+            "id": "limpieza",
+            "titulo": "Limpieza y Plagas",
+          },
+        ]
+      }
+      getItem={[Function]}
+      getItemCount={[Function]}
+      keyExtractor={[Function]}
+      onContentSizeChange={[Function]}
+      onLayout={[Function]}
+      onMomentumScrollBegin={[Function]}
+      onMomentumScrollEnd={[Function]}
+      onScroll={[Function]}
+      onScrollBeginDrag={[Function]}
+      onScrollEndDrag={[Function]}
+      removeClippedSubviews={false}
+      renderItem={[Function]}
+      scrollEventThrottle={0.0001}
+      showsVerticalScrollIndicator={false}
+      stickyHeaderIndices={[]}
+      viewabilityConfigCallbackPairs={[]}
+    >
+      <View>
+        <View
+          onFocusCapture={[Function]}
+          onLayout={[Function]}
+          style={null}
+        >
+          <View
+            style={
+              [
+                {
+                  "borderRadius": 16,
+                  "elevation": 3,
+                  "marginBottom": 16,
+                  "overflow": "hidden",
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 2,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.1,
+                  "shadowRadius": 4,
+                },
+                {
+                  "backgroundColor": "#E3F2FD",
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "opacity": 1,
+                  "padding": 20,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    {
+                      "fontSize": 24,
+                      "marginRight": 12,
+                    }
+                  }
+                >
+                  💧
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "fontSize": 16,
+                        "fontWeight": "bold",
+                      },
+                      {
+                        "color": "#1565C0",
+                      },
+                    ]
+                  }
+                >
+                  Riego Maestro
+                </Text>
+              </View>
+              <Text
+                style={
+                  [
+                    {
+                      "fontSize": 14,
+                      "fontWeight": "bold",
+                    },
+                    {
+                      "color": "#1565C0",
+                    },
+                  ]
+                }
+              >
+                ▼
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View
+          onFocusCapture={[Function]}
+          onLayout={[Function]}
+          style={null}
+        >
+          <View
+            style={
+              [
+                {
+                  "borderRadius": 16,
+                  "elevation": 3,
+                  "marginBottom": 16,
+                  "overflow": "hidden",
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 2,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.1,
+                  "shadowRadius": 4,
+                },
+                {
+                  "backgroundColor": "#FFF8E1",
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "opacity": 1,
+                  "padding": 20,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    {
+                      "fontSize": 24,
+                      "marginRight": 12,
+                    }
+                  }
+                >
+                  ☀️
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "fontSize": 16,
+                        "fontWeight": "bold",
+                      },
+                      {
+                        "color": "#F57F17",
+                      },
+                    ]
+                  }
+                >
+                  Iluminación
+                </Text>
+              </View>
+              <Text
+                style={
+                  [
+                    {
+                      "fontSize": 14,
+                      "fontWeight": "bold",
+                    },
+                    {
+                      "color": "#F57F17",
+                    },
+                  ]
+                }
+              >
+                ▼
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View
+          onFocusCapture={[Function]}
+          onLayout={[Function]}
+          style={null}
+        >
+          <View
+            style={
+              [
+                {
+                  "borderRadius": 16,
+                  "elevation": 3,
+                  "marginBottom": 16,
+                  "overflow": "hidden",
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 2,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.1,
+                  "shadowRadius": 4,
+                },
+                {
+                  "backgroundColor": "#E0F2F1",
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "opacity": 1,
+                  "padding": 20,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    {
+                      "fontSize": 24,
+                      "marginRight": 12,
+                    }
+                  }
+                >
+                  ☁️
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "fontSize": 16,
+                        "fontWeight": "bold",
+                      },
+                      {
+                        "color": "#00695C",
+                      },
+                    ]
+                  }
+                >
+                  Humedad y Temperatura
+                </Text>
+              </View>
+              <Text
+                style={
+                  [
+                    {
+                      "fontSize": 14,
+                      "fontWeight": "bold",
+                    },
+                    {
+                      "color": "#00695C",
+                    },
+                  ]
+                }
+              >
+                ▼
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View
+          onFocusCapture={[Function]}
+          onLayout={[Function]}
+          style={null}
+        >
+          <View
+            style={
+              [
+                {
+                  "borderRadius": 16,
+                  "elevation": 3,
+                  "marginBottom": 16,
+                  "overflow": "hidden",
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 2,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.1,
+                  "shadowRadius": 4,
+                },
+                {
+                  "backgroundColor": "#F3E5F5",
+                },
+              ]
+            }
+          >
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": undefined,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "opacity": 1,
+                  "padding": 20,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "alignItems": "center",
+                    "flexDirection": "row",
+                  }
+                }
+              >
+                <Text
+                  style={
+                    {
+                      "fontSize": 24,
+                      "marginRight": 12,
+                    }
+                  }
+                >
+                  ✨
+                </Text>
+                <Text
+                  style={
+                    [
+                      {
+                        "fontSize": 16,
+                        "fontWeight": "bold",
+                      },
+                      {
+                        "color": "#6A1B9A",
+                      },
+                    ]
+                  }
+                >
+                  Limpieza y Plagas
+                </Text>
+              </View>
+              <Text
+                style={
+                  [
+                    {
+                      "fontSize": 14,
+                      "fontWeight": "bold",
+                    },
+                    {
+                      "color": "#6A1B9A",
+                    },
+                  ]
+                }
+              >
+                ▼
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</LinearGradient>
+`;

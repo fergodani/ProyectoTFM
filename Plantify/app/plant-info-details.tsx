@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams, useNavigation, useFocusEffect } from "expo-router";
-import { View, Image, StyleSheet, ActivityIndicator, useColorScheme, TouchableOpacity, FlatList } from "react-native";
+import { View, Image, StyleSheet, ActivityIndicator, useColorScheme, TouchableOpacity, FlatList, Text } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { useEffect, useLayoutEffect, useState, useCallback } from "react";
 import { PlantService } from "@/services/plantsService";
@@ -34,7 +34,6 @@ export default function PlantInfoDetails() {
     setLoading(true);
     try {
       const data = await PlantService.getPlantInfoById(Number(id));
-      console.log("Fetched plant data:", data);
       setPlant(data);
     } catch (error) {
       console.error("Error fetching plant details:", error);
@@ -63,7 +62,6 @@ export default function PlantInfoDetails() {
   // Recargar datos cuando la pantalla regaina el foco
   useFocusEffect(
     useCallback(() => {
-      console.log("Plant details screen focused - refreshing data");
       fetchPlant();
     }, [fetchPlant])
   );
@@ -162,7 +160,7 @@ export default function PlantInfoDetails() {
         </ThemedView>
         {/* Información básica */}
         <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-          <ThemedText type="title2">📋 Basic Information</ThemedText>
+          <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="clipboard">📋</Text> Basic Information</ThemedText>
           <View style={styles.infoRow}>
             <ThemedText style={styles.infoLabel}>Family:</ThemedText>
             <ThemedText style={styles.infoValue}>{plant.family || 'N/A'}</ThemedText>
@@ -192,7 +190,7 @@ export default function PlantInfoDetails() {
         {/* Descripción */}
         {plant.description && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-            <ThemedText type="title2">📝 Description</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="memo">📝</Text> Description</ThemedText>
             <ThemedText style={styles.description}>{plant.description}</ThemedText>
           </ThemedView>
         )}
@@ -200,7 +198,7 @@ export default function PlantInfoDetails() {
         {/* Dimensiones */}
         {plant.dimensions && plant.dimensions.length > 0 && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-            <ThemedText type="title2">📏 Dimensions</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="ruler">📏</Text> Dimensions</ThemedText>
             {plant.dimensions.map((dimension, index) => (
               <View key={index} style={styles.infoRow}>
                 <ThemedText style={styles.infoLabel}>{dimension.type}:</ThemedText>
@@ -218,7 +216,7 @@ export default function PlantInfoDetails() {
         {/* Anatomía de la planta */}
         {plant.plant_anatomy && plant.plant_anatomy.length > 0 && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-            <ThemedText type="title2">🌿 Plant Anatomy</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="herb">🌿</Text> Plant Anatomy</ThemedText>
             {plant.plant_anatomy.map((anatomy, index) => (
               <View key={index} style={styles.infoRow}>
                 <ThemedText style={styles.infoLabel}>{anatomy.part.charAt(0).toUpperCase() + anatomy.part.slice(1)}:</ThemedText>
@@ -231,7 +229,7 @@ export default function PlantInfoDetails() {
         {/* Hardiness */}
         {plant.hardiness && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-            <ThemedText type="title2">❄️ Cold Resistance</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="snowflake">❄️</Text> Cold Resistance</ThemedText>
             <View style={styles.infoRow}>
               <ThemedText style={styles.infoLabel}>Zone:</ThemedText>
               <ThemedText style={styles.infoValue}>
@@ -249,18 +247,18 @@ export default function PlantInfoDetails() {
 
         {/* Características de cuidado */}
         <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-          <ThemedText type="title2">🌱 Care Information</ThemedText>
+          <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="seedling">🌱</Text> Care Information</ThemedText>
           <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between" }}>
             {[
-              plant.care_level && { label: "🪴 Care Level", value: plant.care_level },
-              plant.cycle && { label: "🔄 Cycle", value: plant.cycle },
-              plant.growth_rate && { label: "📈 Growth Rate", value: plant.growth_rate },
-              plant.maintenance && { label: "🛠️ Maintenance", value: plant.maintenance },
-              plant.watering && { label: "💧 Watering", value: plant.watering },
-              plant.drought_tolerant !== undefined && { label: "🌵 Drought Tolerant", value: plant.drought_tolerant ? 'Yes' : 'No' },
-              plant.salt_tolerant !== undefined && { label: "🧂 Salt Tolerant", value: plant.salt_tolerant ? 'Yes' : 'No' },
-              plant.indoor !== undefined && { label: "🏠 Indoor", value: plant.indoor ? 'Yes' : 'No' },
-              plant.tropical !== undefined && { label: "🌴 Tropical", value: plant.tropical ? 'Yes' : 'No' },
+              plant.care_level && { label: <><Text accessibilityRole="image" accessibilityLabel="potted plant">🪴</Text> Care Level</>, value: plant.care_level },
+              plant.cycle && { label: <><Text accessibilityRole="image" accessibilityLabel="cycle arrows">🔄</Text> Cycle</>, value: plant.cycle },
+              plant.growth_rate && { label: <><Text accessibilityRole="image" accessibilityLabel="chart increasing">📈</Text> Growth Rate</>, value: plant.growth_rate },
+              plant.maintenance && { label: <><Text accessibilityRole="image" accessibilityLabel="tools">🛠️</Text> Maintenance</>, value: plant.maintenance },
+              plant.watering && { label: <><Text accessibilityRole="image" accessibilityLabel="droplet">💧</Text> Watering</>, value: plant.watering },
+              plant.drought_tolerant !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="cactus">🌵</Text> Drought Tolerant</>, value: plant.drought_tolerant ? 'Yes' : 'No' },
+              plant.salt_tolerant !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="salt">🧂</Text> Salt Tolerant</>, value: plant.salt_tolerant ? 'Yes' : 'No' },
+              plant.indoor !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="house">🏠</Text> Indoor</>, value: plant.indoor ? 'Yes' : 'No' },
+              plant.tropical !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="palm tree">🌴</Text> Tropical</>, value: plant.tropical ? 'Yes' : 'No' },
             ]
               .filter(Boolean)
               .map((item, idx) =>
@@ -276,17 +274,17 @@ export default function PlantInfoDetails() {
 
         {/* Características físicas */}
         <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-          <ThemedText type="title2">🌸 Physical Characteristics</ThemedText>
+          <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="cherry blossom">🌸</Text> Physical Characteristics</ThemedText>
           <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between" }}>
             {[
-              plant.flowers !== undefined && { label: "🌼 Flowers", value: plant.flowers ? 'Yes' : 'No' },
-              plant.cones !== undefined && { label: "🌲 Cones", value: plant.cones ? 'Yes' : 'No' },
-              plant.fruits !== undefined && { label: "🍎 Fruits", value: plant.fruits ? 'Yes' : 'No' },
-              plant.leaf !== undefined && { label: "🍃 Leaf", value: plant.leaf ? 'Yes' : 'No' },
-              plant.thorny !== undefined && { label: "🌵 Thorny", value: plant.thorny ? 'Yes' : 'No' },
-              plant.seeds !== undefined && { label: "🌰 Seeds", value: plant.seeds ? 'Yes' : 'No' },
-              plant.flowering_season && { label: "🌸 Flowering Season", value: plant.flowering_season },
-              plant.harvest_season && { label: "🌾 Harvest Season", value: plant.harvest_season },
+              plant.flowers !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="blossom">🌼</Text> Flowers</>, value: plant.flowers ? 'Yes' : 'No' },
+              plant.cones !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="evergreen tree">🌲</Text> Cones</>, value: plant.cones ? 'Yes' : 'No' },
+              plant.fruits !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="red apple">🍎</Text> Fruits</>, value: plant.fruits ? 'Yes' : 'No' },
+              plant.leaf !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="leaf">🍃</Text> Leaf</>, value: plant.leaf ? 'Yes' : 'No' },
+              plant.thorny !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="cactus">🌵</Text> Thorny</>, value: plant.thorny ? 'Yes' : 'No' },
+              plant.seeds !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="chestnut">🌰</Text> Seeds</>, value: plant.seeds ? 'Yes' : 'No' },
+              plant.flowering_season && { label: <><Text accessibilityRole="image" accessibilityLabel="cherry blossom">🌸</Text> Flowering Season</>, value: plant.flowering_season },
+              plant.harvest_season && { label: <><Text accessibilityRole="image" accessibilityLabel="sheaf of rice">🌾</Text> Harvest Season</>, value: plant.harvest_season },
             ]
               .filter(Boolean)
               .map((item, idx) =>
@@ -302,16 +300,16 @@ export default function PlantInfoDetails() {
 
         {/* Características de uso */}
         <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-          <ThemedText type="title2">🍽️ Usage & Safety</ThemedText>
+          <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="fork and knife with plate">🍽️</Text> Usage & Safety</ThemedText>
           <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between" }}>
             {[
-              plant.edible_fruit !== undefined && { label: "🍏 Edible Fruit", value: plant.edible_fruit ? 'Yes' : 'No' },
-              plant.edible_leaf !== undefined && { label: "🥬 Edible Leaf", value: plant.edible_leaf ? 'Yes' : 'No' },
-              plant.cuisine !== undefined && { label: "🍽️ Cuisine", value: plant.cuisine ? 'Yes' : 'No' },
-              plant.medicinal !== undefined && { label: "💊 Medicinal", value: plant.medicinal ? 'Yes' : 'No' },
-              plant.poisonous_to_humans !== undefined && { label: "☠️ Poisonous to Humans", value: plant.poisonous_to_humans ? 'Yes' : 'No' },
-              plant.poisonous_to_pets !== undefined && { label: "🐾 Poisonous to Pets", value: plant.poisonous_to_pets ? 'Yes' : 'No' },
-              plant.invasive !== undefined && { label: "🚫 Invasive", value: plant.invasive ? 'Yes' : 'No' },
+              plant.edible_fruit !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="green apple">🍏</Text> Edible Fruit</>, value: plant.edible_fruit ? 'Yes' : 'No' },
+              plant.edible_leaf !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="leafy green">🥬</Text> Edible Leaf</>, value: plant.edible_leaf ? 'Yes' : 'No' },
+              plant.cuisine !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="fork and knife with plate">🍽️</Text> Cuisine</>, value: plant.cuisine ? 'Yes' : 'No' },
+              plant.medicinal !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="pill">💊</Text> Medicinal</>, value: plant.medicinal ? 'Yes' : 'No' },
+              plant.poisonous_to_humans !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="skull and crossbones">☠️</Text> Poisonous to Humans</>, value: plant.poisonous_to_humans ? 'Yes' : 'No' },
+              plant.poisonous_to_pets !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="paw prints">🐾</Text> Poisonous to Pets</>, value: plant.poisonous_to_pets ? 'Yes' : 'No' },
+              plant.invasive !== undefined && { label: <><Text accessibilityRole="image" accessibilityLabel="prohibited">🚫</Text> Invasive</>, value: plant.invasive ? 'Yes' : 'No' },
             ]
               .filter(Boolean)
               .map((item, idx) =>
@@ -328,7 +326,7 @@ export default function PlantInfoDetails() {
         {/* Propagación */}
         {plant.propagation && plant.propagation.length > 0 && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-            <ThemedText type="title2">🌱 Propagation Methods</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="seedling">🌱</Text> Propagation Methods</ThemedText>
             <View style={styles.tagContainer}>
               {plant.propagation.map((method, index) => (
                 <View key={index} style={styles.tag}>
@@ -342,7 +340,7 @@ export default function PlantInfoDetails() {
         {/* Atracciones (si hay) */}
         {plant.attracts && plant.attracts.length > 0 && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-            <ThemedText type="title2">🦋 Attracts</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="butterfly">🦋</Text> Attracts</ThemedText>
             <View style={styles.tagContainer}>
               {plant.attracts.map((attraction, index) => (
                 <View key={index} style={styles.tag}>
@@ -354,7 +352,7 @@ export default function PlantInfoDetails() {
         )}
         {plant.watering_general_benchmark && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-            <ThemedText type="title2">💧 Watering Information</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="droplet">💧</Text> Watering Information</ThemedText>
             <View style={styles.infoRow}>
               <ThemedText style={styles.infoLabel}>Frequency:</ThemedText>
               <ThemedText style={styles.infoValue}>{plant.watering || 'N/A'}</ThemedText>
@@ -376,7 +374,7 @@ export default function PlantInfoDetails() {
             styles.card,
             { backgroundColor: cardBackground }
           ]}>
-            <ThemedText type="title2">☀️ Sunlight Requirements</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="sun">☀️</Text> Sunlight Requirements</ThemedText>
             <View style={styles.tagContainer}>
               {plant.sunlight.map((lightType, index) => (
                 <View key={index} style={styles.tag}>
@@ -394,7 +392,7 @@ export default function PlantInfoDetails() {
             styles.card,
             { backgroundColor: cardBackground }
           ]}>
-            <ThemedText type="title2">✂️ Pruning Information</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="scissors">✂️</Text> Pruning Information</ThemedText>
             {plant.pruning_month && plant.pruning_month.length > 0 && (
               <View>
                 <View style={styles.infoRow}>
@@ -418,7 +416,7 @@ export default function PlantInfoDetails() {
         {/* Guías de cuidado */}
         {plant.care_guides && typeof plant.care_guides === 'object' && plant.care_guides.data && plant.care_guides.data.length > 0 && (
           <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-            <ThemedText type="title2">📖 Care Guides</ThemedText>
+            <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="open book">📖</Text> Care Guides</ThemedText>
             {plant.care_guides.data.map((guide: any, guideIndex: number) => (
               <View key={guideIndex}>
                 {guide.section && guide.section.map((section: any, sectionIndex: number) => (

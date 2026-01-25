@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PostDetails matches snapshot 1`] = `
+<ViewManagerAdapter_ExpoLinearGradient
+  colors={
+    [
+      819327195,
+      4294769398,
+    ]
+  }
+  style={
+    [
+      {
+        "display": "flex",
+        "flex": 1,
+        "flexDirection": "column",
+        "gap": 16,
+        "marginBottom": 60,
+      },
+    ]
+  }
+>
+  <ActivityIndicator
+    size="large"
+  />
+</ViewManagerAdapter_ExpoLinearGradient>
+`;

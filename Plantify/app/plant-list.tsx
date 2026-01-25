@@ -91,7 +91,6 @@ export default function PlantList() {
                 owner: getUserId()!
             }
             setLoading(true);
-            console.log("Adding plant:", userPlant);
             await PlantService.createPlant(userPlant, accessToken!);
             setLoading(false);
             router.replace("/(tabs)/profile");

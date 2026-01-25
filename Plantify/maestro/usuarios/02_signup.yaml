@@ -1,0 +1,45 @@
+appId: com.uniovi.Plantify
+---
+# Flow de registro de usuario válido
+- launchApp
+- evalScript: ${output.randomId = Math.floor(Math.random() * 1000000)}
+
+# Navegar a la pestaña de perfil
+- tapOn: "Perfil de usuario"
+- assertVisible: "No estás autenticado"
+
+# Ir a la pantalla de registro
+- tapOn: "Crea una"
+
+# Esperar a que cargue la pantalla de registro
+- assertVisible: "Crear una cuenta"
+
+# Ingresar nombre de usuario
+- tapOn: "Introduce tu nombre de usuario"
+- inputText: "nuevo_usuario_${output.randomId}"
+
+# Ingresar correo electrónico
+- tapOn: "Introduce tu correo"
+- inputText: "usuario_${output.randomId}@test.com"
+
+# Ingresar contraseña (primera vez)
+- tapOn: 
+    text: "Introduce tu contraseña"
+    index: 0
+- inputText: "#uo277603"
+
+- pressKey: Back
+
+# Confirmar contraseña
+- tapOn:
+    text: "Confirma tu contraseña"
+    index: 0
+- inputText: "#uo277603"
+
+- pressKey: Back
+
+# Hacer clic en el botón Registrarse
+- tapOn: "Registrarse"
+
+# Verificar que se redirige al perfil autenticado
+- assertVisible: "Mis plantas"

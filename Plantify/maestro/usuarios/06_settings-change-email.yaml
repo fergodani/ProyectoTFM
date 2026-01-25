@@ -1,0 +1,37 @@
+appId: com.uniovi.Plantify
+---
+# Flow de cambio de email en ajustes
+# Prerequisito: Usuario ya autenticado
+
+- launchApp
+- evalScript: ${output.randomId = Math.floor(Math.random() * 1000000)}
+
+# Navegar a la pestaña de perfil
+- tapOn: "Perfil de usuario"
+- assertVisible: "Mis plantas"
+
+# Abrir ajustes
+- tapOn:
+    id: ".*settings.*"
+
+# Verificar que estamos en ajustes
+- assertVisible: "Cuenta"
+
+# Hacer scroll para asegurar que el campo Email es visible
+- scrollUntilVisible:
+    element: "Email"
+    direction: DOWN
+
+# Hacer tap en Email
+- tapOn: "Email"
+
+# Limpiar el campo y escribir nuevo email
+- tapOn: "Correo electrónico"
+- eraseText
+- inputText: "${output.randomId}@example.com"
+
+# Guardar cambios
+- tapOn: "Aceptar"
+
+# Verificar que el modal se cerró volviendo a la pantalla de ajustes
+- assertVisible: "${output.randomId}@example.com"

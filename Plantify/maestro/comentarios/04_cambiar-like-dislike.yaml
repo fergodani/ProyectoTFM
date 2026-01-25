@@ -1,0 +1,11 @@
+appId: com.uniovi.Plantify
+---
+# Flow de cambiar like a dislike en comentario
+# Prerequisito: Usuario ya autenticado y ha dado like a un comentario
+
+- tapOn:
+    text: 
+    index: 1
+- assertVisible:
+    text: "0"
+    index: 1

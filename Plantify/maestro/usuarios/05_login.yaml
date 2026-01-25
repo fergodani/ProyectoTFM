@@ -1,0 +1,28 @@
+appId: com.uniovi.Plantify
+---
+# Flow de Login desde la pestaña de perfil
+- launchApp
+
+# Navegar a la última pestaña (Perfil) usando el accessibility label
+- tapOn: "Perfil de usuario"
+- assertVisible: "No estás autenticado"
+
+# Hacer clic en el botón "Iniciar sesión"
+- tapOn: "Iniciar sesión"
+
+# Esperar a que cargue la pantalla de login
+- assertVisible: "Iniciar sesión"
+
+# Ingresar nombre de usuario
+- tapOn: "Introduce tu nombre de usuario"
+- inputText: "test"
+
+# Ingresar contraseña
+- tapOn: "Introduce tu contraseña"
+- inputText: "secure_password"
+
+# Hacer clic en el botón Entrar
+- tapOn: "Entrar"
+
+# Verificar que se redirige de vuelta a perfil y está autenticado
+- assertVisible: "Mis plantas"

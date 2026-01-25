@@ -1,0 +1,8 @@
+appId: com.uniovi.Plantify
+---
+# Flow de dar like a publicación
+# Prerequisito: Usuario ya autenticado y hay publicaciones disponibles
+
+- tapOn:
+    point: 8%,27%
+- assertVisible: "1"

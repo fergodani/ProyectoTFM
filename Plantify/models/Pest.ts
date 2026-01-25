@@ -1,32 +1,4 @@
-export interface PestTextItem {
-	subtitle: string;
-	description: string;
-}
-
-export interface PestImage {
-	license: number;
-	license_name: string;
-	license_url: string;
-	original_url: string;
-	regular_url: string;
-	medium_url: string;
-	small_url: string;
-	thumbnail: string;
-}
-
 export interface Pest {
-	id: number;
-	common_name: string;
-	scientific_name: string;
-	other_name: string | null;
-	family: string | null;
-	description: PestTextItem[];
-	solution: PestTextItem[];
-	host: string[];
-	images: PestImage[];
-}
-
-export interface PestParsed {
 	id: number;
 	href: string;
 	image: string;
@@ -35,16 +7,16 @@ export interface PestParsed {
 	solutions_count: number;
 }
 
-export interface SectionParsed {
+export interface Sections {
 	title: string;
 	subtitle?: string;
 	paragraphs: string[];
 	bullets: string[];
 }
 
-export interface PestDetailParsed {
+export interface PestDetail {
 	name: string;
 	scientific_name: string;
 	image: string;
-	sections: SectionParsed[];
+	sections: Sections[];
 }

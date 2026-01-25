@@ -14,6 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { UserService } from '@/services/userService';
 import Button from './Button';
 import { PlantService } from '@/services/plantsService';
+import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 
 export default function Gardens({ plantId }: Readonly<{ plantId: number | null }>) {
     const colorScheme = useColorScheme();
@@ -152,7 +153,8 @@ export default function Gardens({ plantId }: Readonly<{ plantId: number | null }
                 <>
                     {gardens.length === 0 && (
                         <View style={{ paddingHorizontal: 16 }}>
-                            <ThemedText type="default">No hay lugares aquí aún. ¡Añade un nuevo lugar!</ThemedText>
+                            <ThemedText type="default">No hay lugares aquí aún. ¡Añade un nuevo lugar y agrupa tus plantas!</ThemedText>
+                            <ThemedText type="subtitle">Crea espacios personalizados para agrupar tus plantas y gestionar sus cuidados por zonas</ThemedText>
                         </View>
                     )}
                     <ScrollView style={styles.container}

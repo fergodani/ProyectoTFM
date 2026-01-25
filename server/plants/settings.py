@@ -19,11 +19,11 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Cargar variables de entorno según el entorno
-environment = os.getenv('ENVIRONMENT', 'development')
-if environment == 'production':
-    load_dotenv(BASE_DIR / '.env.production')
-else:
-    load_dotenv(BASE_DIR / '.env')
+#environment = os.getenv('ENVIRONMENT', 'development')
+#if environment == 'production':
+#    load_dotenv(BASE_DIR / '.env.production')
+#else:
+load_dotenv(BASE_DIR / '.env')
 
 
 # Quick-start development settings - unsuitable for production

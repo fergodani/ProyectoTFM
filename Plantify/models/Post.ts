@@ -8,7 +8,7 @@ export interface Post {
     likes_count?: number;
     dislikes_count?: number;
     vote_score?: number;
-    user_vote?: VoteType | null; // Voto del usuario actual
+    user_vote?: VoteType | null; 
     plant_id?: number;
     created_at?: string;
     updated_at?: string;
@@ -22,12 +22,13 @@ export interface Comment {
     content: string;
     author: number;
     author_id?: number;
-    post: Post;
+    post?: Post;
+    post_id: number;
     likes_count?: number;
     dislikes_count?: number;
     is_deleted?: boolean;
     vote_score?: number;
-    user_vote?: VoteType | null; // Voto del usuario actual
+    user_vote?: VoteType | null;
     created_at?: string;
     updated_at?: string;
     created_since?: string;
@@ -42,7 +43,7 @@ export type VoteAction = 'created' | 'updated' | 'removed';
 // Respuesta del servidor al votar en un post
 export interface PostVoteResponse {
     action: VoteAction;
-    vote_type: VoteType | null; // null cuando se remueve el voto
+    vote_type: VoteType | null; 
     vote_score: number;
     likes_count: number;
     dislikes_count: number;
@@ -51,11 +52,11 @@ export interface PostVoteResponse {
 // Respuesta del servidor al votar en un comentario
 export interface CommentVoteResponse {
     action: VoteAction;
-    vote_type: VoteType | null; // null cuando se remueve el voto
+    vote_type: VoteType | null;
     vote_score: number;
     likes_count: number;
     dislikes_count: number;
-    user_vote: VoteType | null; // Voto actual del usuario
+    user_vote: VoteType | null;
 }
 
 // Request body para votar

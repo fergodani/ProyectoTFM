@@ -42,8 +42,8 @@ const CommentForm = () => {
   }, [edit, commentId, accessToken]);
 
   const handleSubmit = async () => {
-    if (!content.trim() || !content.trim()) {
-      Alert.alert("Error", "Please fill in both title and content");
+    if (!content.trim()) {
+      Alert.alert("Error", "Por favor, completa el contenido");
       return;
     }
 
@@ -52,27 +52,24 @@ const CommentForm = () => {
       if (edit && commentId) {
         const updated = await PostService.updateComment(Number(commentId), { content }, accessToken!);
         if (updated) {
-          Alert.alert("Éxito", "Comentario actualizado", [{ text: "OK", onPress: () => router.replace({ pathname: "/post-details", params: { id: postId } }) }]);
+          Alert.alert("Éxito", "Comentario actualizado", [{ text: "Aceptar", onPress: () => router.replace({ pathname: "/post-details", params: { id: postId } }) }]);
         } else {
           Alert.alert("Error", "No se pudo actualizar el comentario. Intenta de nuevo.");
         }
       } else {
-        console.log("Creating comment:", { content, postId });
         const comment: Comment = {
           content: content,
-          post: Number(postId),
+          post_id: Number(postId),
           author: getUserId()!,
         };
         const response = await PostService.createComment(comment, accessToken!)
-
-        console.log("Comment created successfully:", response);
         
         Alert.alert(
-          "Success",
-          "Comment created successfully!",
+          "Éxito",
+          "¡Comentario creado correctamente!",
           [
             {
-              text: "OK",
+              text: "Aceptar",
               onPress: () => {
                 // Reemplazar la pantalla actual por PostDetails para forzar recarga
                 router.replace({ pathname: "/post-details", params: { id: postId } });
@@ -82,7 +79,7 @@ const CommentForm = () => {
         );
       }
     } catch (error) {
-      Alert.alert("Error", "Failed to create post. Please try again.");
+      Alert.alert("Error", "No se pudo crear el comentario. Intenta de nuevo.");
       console.error("Error creating post:", error);
     } finally {
       setIsSubmitting(false);
@@ -104,7 +101,7 @@ const CommentForm = () => {
                   color: colorScheme === 'dark' ? '#fff' : '#000'
                 }
               ]}
-              placeholder="Write your post content here..."
+              placeholder="Escribe tu comentario..."
               placeholderTextColor={colorScheme === 'dark' ? '#999' : '#666'}
               value={content}
               onChangeText={setContent}
@@ -114,7 +111,7 @@ const CommentForm = () => {
               maxLength={1000}
             />
             <ThemedText style={styles.charCounter}>
-              {content.length}/1000 characters
+              {content.length}/1000 caracteres
             </ThemedText>
           </View>
 
@@ -126,7 +123,7 @@ const CommentForm = () => {
               disabled={isSubmitting}
             >
               <Ionicons name="close" size={20} color="#666" />
-              <Text style={styles.cancelButtonText}>Cancel</Text>
+              <Text style={styles.cancelButtonText}>Cancelar</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -144,7 +141,7 @@ const CommentForm = () => {
                 color="#333"
               />
               <Text style={styles.submitButtonText}>
-                {isSubmitting ? "Creating..." : "Create Comment"}
+                {isSubmitting ? "Creando..." : (edit ? "Actualizar" : "Crear")}
               </Text>
             </TouchableOpacity>
           </View>

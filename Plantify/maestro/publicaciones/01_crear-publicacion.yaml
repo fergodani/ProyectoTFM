@@ -1,0 +1,31 @@
+appId: com.uniovi.Plantify
+---
+# Flow de crear nueva publicación
+# Prerequisito: Usuario ya autenticado y tiene al menos una planta
+
+- launchApp
+- tapOn: Buscar plantas
+- tapOn: Ver todas las plantas
+- tapOn: European Silver Fir
+- tapOn:
+    point: 88%,93%
+- tapOn: Create Post
+- tapOn: Título...
+- inputText: "test"
+- tapOn: Escribe el contenido de la publicación...
+- inputText: "test"
+- tapOn: Crear
+- tapOn: ACEPTAR
+- scroll
+- scroll
+- scroll
+- scroll
+- scroll
+- scroll
+- scroll
+- scroll
+- scroll
+- scroll
+- scroll
+- scroll
+- assertVisible: "test"

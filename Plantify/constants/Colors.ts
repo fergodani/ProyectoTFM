@@ -23,6 +23,7 @@ export const Colors = {
     cardBackground: '#FFFFFF',
     green: green,
     lightGreen: lightGreen,
+    placeholder: 'gray',
   },
   dark: {
     text: '#ECEDEE',
@@ -36,5 +37,6 @@ export const Colors = {
     cardBackground: '#222',
     green: green,
     lightGreen: lightGreen,
+    placeholder: 'gray',
   },
 } as const;

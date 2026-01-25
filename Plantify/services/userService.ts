@@ -51,16 +51,36 @@ export const UserService = {
             body: JSON.stringify({ username, email, password }),
         });
         const data = await response.json();
+        console.log(data)
         if (response.ok && data.access) {
             console.log("Signup successful", data);
             return data; // Return the user data or token as needed
         } else {
             console.error("Signup failed", data);
+            // Parse password validation errors from backend
+            if (data.password && Array.isArray(data.password)) {
+                const translatedErrors = data.password.map((msg: string) => {
+                    if (msg.includes('too short') || msg.includes('at least 8 characters')) {
+                        return 'La contraseña es demasiado corta. Debe contener al menos 8 caracteres.';
+                    }
+                    if (msg.includes('too common')) {
+                        return 'La contraseña es demasiado común.';
+                    }
+                    if (msg.includes('entirely numeric')) {
+                        return 'La contraseña no puede ser completamente numérica.';
+                    }
+                    if (msg.includes('too similar')) {
+                        return 'La contraseña es demasiado similar a tu información personal.';
+                    }
+                    return msg;
+                });
+                throw new Error(translatedErrors.join(' '));
+            }
             throw new Error('Error en el registro');
         }
     } catch (e) {
         console.error('Error al registrarse:', e);
-        throw new Error('Error al registrarse: ' + e);
+        throw e;
     }
   },
 

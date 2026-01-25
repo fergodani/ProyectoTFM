@@ -36,6 +36,7 @@ export default function TabLayout() {
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="alarm" color={color} />,
+          tabBarAccessibilityLabel: 'Inicio',
         }}
       />
       <Tabs.Screen
@@ -43,6 +44,7 @@ export default function TabLayout() {
         options={{
           title: 'Health',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="monitor-heart" color={color} />,
+          tabBarAccessibilityLabel: 'Salud de las plantas',
         }}
       />
       <Tabs.Screen
@@ -50,6 +52,7 @@ export default function TabLayout() {
         options={{
           title: 'Search',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="search" color={color} />,
+          tabBarAccessibilityLabel: 'Buscar plantas',
         }}
       />
       <Tabs.Screen
@@ -57,6 +60,7 @@ export default function TabLayout() {
         options={{
           title: 'Guide',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="book" color={color} />,
+          tabBarAccessibilityLabel: 'Guía de cuidados',
         }}
       />
       <Tabs.Screen
@@ -64,6 +68,7 @@ export default function TabLayout() {
         options={{
           title: 'Profile',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="account" color={color} />,
+          tabBarAccessibilityLabel: 'Perfil de usuario',
         }}
       />
     </Tabs>

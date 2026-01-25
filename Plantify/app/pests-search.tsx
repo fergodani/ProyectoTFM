@@ -6,14 +6,14 @@ import { Colors } from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { globalStyles } from '@/styles/global-styles';
-import { Pest, PestParsed } from '@/models/Pest';
+import { Pest } from '@/models/Pest';
 import { router } from 'expo-router';
 import { PestsService } from '@/services/pestsService';
 
 export default function PestsScreen() {
   const [searchText, setSearchText] = useState('');
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState<PestParsed[]>([]);
+  const [results, setResults] = useState<Pest[]>([]);
   const colorScheme = useColorScheme();
   const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
 
@@ -23,7 +23,7 @@ export default function PestsScreen() {
       try {
         const pests = await PestsService.getAllPests(1, searchText.trim());
         setResults(pests);
-        console.log(pests);
+        setResults(pests);
       } catch (e) {
         setResults([]);
       }

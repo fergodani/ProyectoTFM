@@ -1,6 +1,6 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { Text, View, Image, StyleSheet, ScrollView, ActivityIndicator, useColorScheme, TouchableOpacity, Alert, Pressable, SafeAreaView, TouchableWithoutFeedback, Modal, TextInput } from "react-native";
+import { Text, View, Image, StyleSheet, KeyboardAvoidingView, Platform, ScrollView, ActivityIndicator, useColorScheme, TouchableOpacity, Alert, Pressable, SafeAreaView, TouchableWithoutFeedback, Modal, TextInput } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { Garden, UserPlant } from "@/models/Plant";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
@@ -86,7 +86,6 @@ export default function GardenSettings() {
         setIsLoading(true);
         try {
             gardenTemp.name = name;
-            console.log(gardenTemp);
             const garden = await GardensService.updateGarden(gardenTemp, accessToken!);
             if (garden)
                 setGarden(garden);
@@ -276,7 +275,9 @@ export default function GardenSettings() {
                 visible={isModalVisible}
                 transparent={true}
                 animationType="slide">
-                <View style={styles.centeredView}>
+                    <KeyboardAvoidingView
+                            style={styles.centeredView}
+                            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
                     <View style={styles.modalView}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
                             <TouchableOpacity onPress={() => setIsModalVisible(false)}>
@@ -356,7 +357,7 @@ export default function GardenSettings() {
                             </View>
                         )}
                     </View>
-                </View>
+                </KeyboardAvoidingView>
             </Modal >
         </>
     );

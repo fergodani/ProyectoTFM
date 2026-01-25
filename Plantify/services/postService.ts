@@ -12,9 +12,6 @@ export const PostService = {
         try {
             const response = await fetch(`${url}/posts/${id}`, {
                 method: "GET",
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
             });
             if (!response.ok) {
                 throw new Error("Failed to fetch post");
@@ -72,6 +69,9 @@ export const PostService = {
                 formData.append('title', post.title as any);
                 formData.append('content', post.content as any);
                 formData.append('plant_id', String(post.plant_id) as any);
+                if ((post as any).plant_common_name) {
+                    formData.append('plant_common_name', (post as any).plant_common_name as any);
+                }
 
                 if (Platform.OS === 'web') {
                     const res = await fetch(imageUri);
@@ -187,6 +187,7 @@ export const PostService = {
                     'Authorization': `Bearer ${accessToken}`,
                 },
             });
+            console.log('Delete post response status:', response.status);
             if (!response.ok) {
                 const text = await response.text().catch(() => '');
                 throw new Error(`Failed to delete post: ${response.status} ${text}`);

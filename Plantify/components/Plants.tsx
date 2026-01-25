@@ -1,7 +1,7 @@
 import { Garden, UserPlant } from "@/models/Plant";
 import { PlantService } from "@/services/plantsService";
-import React, { useEffect, useState } from "react";
-import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Image, useColorScheme, Pressable, Modal, ActivityIndicator, RefreshControl } from "react-native";
+import React, { useEffect, useState, useRef } from "react";
+import { ScrollView, Text, View, StyleSheet, TouchableOpacity, Image, useColorScheme, Pressable, Modal, ActivityIndicator, RefreshControl, Animated } from "react-native";
 import { ThemedView } from "./ThemedView";
 import { ThemedText } from "./ThemedText";
 import { useAuth } from "@/hooks/useAuthContext";
@@ -10,6 +10,8 @@ import { Colors } from "@/constants/Colors";
 import Ionicons from "@expo/vector-icons/build/Ionicons";
 import { UserService } from "@/services/userService";
 import Button from "./Button";
+import Swipeable from "react-native-gesture-handler/Swipeable";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function Plants({ gardenId }: Readonly<{ gardenId: number | null }>) {
   const colorScheme = useColorScheme();
@@ -22,6 +24,7 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
   const [menuPosition, setMenuPosition] = useState({ top: 0, right: 0 });
   const [isLoading, setIsLoading] = useState(false);
   const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
+  const swipeableRefs = useRef<Map<number, Swipeable>>(new Map());
 
   const openModal = (userPlant: UserPlant, event: any) => {
     if (modalVisible && selectedPlant?.id === userPlant.id) {
@@ -62,7 +65,6 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
         setUserPlants(data);
       } else {
         const data = await PlantService.getAllPlants(accessToken!);
-        console.log(data)
         setUserPlants(data);
       }
     } catch (error: any) {
@@ -108,10 +110,47 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
       const response = await PlantService.deletePlant(selectedPlant.id, accessToken!);
       if (response) {
         setUserPlants((prev) => prev.filter((p) => p.id !== selectedPlant.id));
+        // Cerrar el swipeable de la planta eliminada
+        swipeableRefs.current.get(selectedPlant.id)?.close();
       }
     } catch (error) {
       console.error("Error deleting plant:", error);
     }
+  };
+
+  const handleSwipeDelete = async (plantId: number) => {
+    const plant = userPlants.find(p => p.id === plantId);
+    if (!plant) return;
+    
+    setSelectedPlant(plant);
+    setConfirmVisible(true);
+  };
+
+  const renderLeftActions = (plantId: number, progress: Animated.AnimatedInterpolation<number>, dragX: Animated.AnimatedInterpolation<number>) => {
+    const scale = dragX.interpolate({
+      inputRange: [0, 100],
+      outputRange: [0, 1],
+      extrapolate: 'clamp',
+    });
+
+    return (
+      <Animated.View
+        style={[
+          styles.deleteButton,
+          {
+            opacity: scale,
+          },
+        ]}
+      >
+        <TouchableOpacity
+          style={styles.deleteButtonInner}
+          onPress={() => handleSwipeDelete(plantId)}
+        >
+          <Ionicons name="trash" size={24} color="white" />
+          <Text style={styles.deleteButtonText}>Eliminar</Text>
+        </TouchableOpacity>
+      </Animated.View>
+    );
   };
 
   const unitLabelsPlural = {
@@ -144,7 +183,7 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
   }
 
   return (
-    <>
+    <GestureHandlerRootView style={{ flex: 1 }}>
       { userPlants.length === 0 && (
         <View style={styles.container}>
           <ThemedText type="default">No hay plantas aquí aún. ¡Añade una nueva planta!</ThemedText>
@@ -155,13 +194,28 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
                   <RefreshControl refreshing={isLoading} onRefresh={fetchPlants} />
                 }>
         {userPlants.map((userPlant) => (
-          <TouchableOpacity
+          <Swipeable
             key={userPlant.id}
-            onPress={() => router.push({
-              pathname: "/plant-details",
-              params: { id: userPlant.id }
-            })}
+            ref={(ref) => {
+              if (ref) {
+                swipeableRefs.current.set(userPlant.id, ref);
+              }
+            }}
+            renderLeftActions={(progress, dragX) => renderLeftActions(userPlant.id, progress, dragX)}
+            overshootLeft={false}
+            overshootRight={false}
+            friction={2}
+            leftThreshold={1}
+            rightThreshold={2000}
+            activeOffsetX={[-30, 5]}
+            failOffsetY={[-30, 30]}
           >
+            <TouchableOpacity
+              onPress={() => router.push({
+                pathname: "/plant-details",
+                params: { id: userPlant.id }
+              })}
+            >
             <ThemedView style={styles.card}>
               {userPlant.custom_image ? (
               <Image source={{ uri: userPlant.custom_image }} style={{ width: 100, height: 100, borderRadius: 8 }} />
@@ -177,11 +231,11 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
                   <ThemedText type='title2'>{userPlant.custom_name || userPlant.common_name}</ThemedText>
                 </View>
                 <View style={{ display: 'flex', flexDirection: 'row', gap: 2, alignContent: 'center', alignItems: 'center' }}>
-                  <Ionicons name="water" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
+                  <Ionicons accessibilityRole="image" accessibilityLabel="Riego" name="water" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
                   <ThemedText type='default'>Cada {userPlant.watering_period.value} {unitLabelsPlural[userPlant.watering_period.unit as keyof typeof unitLabelsPlural]}</ThemedText>
                 </View>
                 <View style={{ display: 'flex', flexDirection: 'row', gap: 2, alignContent: 'center', alignItems: 'center' }}>
-                  <Ionicons name="location" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
+                  <Ionicons accessibilityRole="image" accessibilityLabel="Ubicado en" name="location" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
                   <ThemedText type='default'>{userPlant.garden_name || 'Ningún sitio seleccionado'}</ThemedText>
                 </View>
               </View>
@@ -192,11 +246,12 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
                   openModal(userPlant, event);
                 }}
               >
-                <Ionicons name="ellipsis-vertical" size={30} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
+                <Ionicons accessibilityRole="image" accessibilityLabel="Menú de opciones" name="ellipsis-vertical" size={30} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
               </TouchableOpacity>
 
             </ThemedView>
           </TouchableOpacity>
+          </Swipeable>
         ))}
         <Button text="Añadir planta" onPress={handleAdd} />
         <View style={{ marginBottom: 24 }} />
@@ -273,7 +328,7 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
           </View>
         </View>
       </Modal>
-    </>
+    </GestureHandlerRootView>
   );
 };
 
@@ -339,5 +394,28 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 6,
     top: 12,
+  },
+  deleteButton: {
+    backgroundColor: '#ff3b30',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    marginVertical: 8,
+    marginRight: 8,
+    borderTopLeftRadius: 8,
+    borderBottomLeftRadius: 8,
+    width: 100,
+    height: '92%',
+  },
+  deleteButtonInner: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 100,
+    height: '100%',
+  },
+  deleteButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 12,
+    marginTop: 4,
   },
 });

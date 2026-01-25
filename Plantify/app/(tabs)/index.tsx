@@ -1,6 +1,5 @@
 import { View, Image, StyleSheet, Platform, Pressable, Text, Touchable, TouchableOpacity, useWindowDimensions, ActivityIndicator } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -13,8 +12,6 @@ import { useEffect, useState, useCallback, use } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import Button from '@/components/Button';
-import { Collapsible } from '@/components/Collapsible';
 import * as Location from 'expo-location';
 import { PlantService } from '@/services/plantsService';
 import { UserService } from '@/services/userService';
@@ -59,7 +56,6 @@ export default function HomeScreen() {
       const hasPermission = await NotificationService.requestPermissions();
       const enabled = await StorageService.getIsNotificationsEnabled();
       if (!enabled) {
-        console.log("Notificaciones desactivadas por el usuario");
         return;
       }
       const hour = await StorageService.getNotificationTime();
@@ -77,18 +73,19 @@ export default function HomeScreen() {
     setLoadingWeather(true);
     try {
       let { status } = await Location.requestForegroundPermissionsAsync();
+      console.log("Location permission status:", status);
       if (status !== 'granted') {
-        console.log('Location permission not granted');
+        setLoadingWeather(false);
         return;
       }
 
       let location = await Location.getCurrentPositionAsync({});
       const { latitude, longitude } = location.coords;
-
+      console.log("User location:", latitude, longitude);
       const data = await RecommendationService.getWeather(latitude, longitude);
       setWeatherInfo(data);
     } catch (error) {
-      console.error("Error fetching weather data:", error);
+      console.log("Error fetching weather data:", error);
     } finally {
       setLoadingWeather(false);
     }
@@ -183,7 +180,7 @@ export default function HomeScreen() {
               <ThemedText type='default'>
                 {Math.trunc(weatherInfo.weather.main.temp_min)}°C - {Math.trunc(weatherInfo.weather.main.temp_max)}°C
               </ThemedText>
-              <ThemedText type='subtitle'>
+              <ThemedText type='italic'>
                 {weatherInfo.weather.name}
               </ThemedText>
             </View>
@@ -225,6 +222,7 @@ export default function HomeScreen() {
           initialLayout={{ width: layout.width }}
           renderTabBar={props => <TabBar
             {...props}
+            
             style={styles.tab}
             activeColor={Colors.light.text}
             inactiveColor={Colors.light.text}

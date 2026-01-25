@@ -1,9 +1,9 @@
-import { PestDetailParsed, PestParsed } from "@/models/Pest";
+import { PestDetail, Pest } from "@/models/Pest";
 
 const url = process.env.EXPO_PUBLIC_API_BASE_URL;
 
 export const PestsService = {
-    getAllPests: async (page: number = 1, q: string): Promise<PestParsed[]> => {
+    getAllPests: async (page: number = 1, q: string): Promise<Pest[]> => {
         try {
             let response;
             if (q) {
@@ -23,7 +23,7 @@ export const PestsService = {
         }
     },
 
-    getPestDetails: async (pestId: string): Promise<PestDetailParsed> => {
+    getPestDetails: async (pestId: string): Promise<PestDetail> => {
         try {
             const response = await fetch(`${url}/api/perenual/pests/${pestId}/?format=json`);
             if (!response.ok) {

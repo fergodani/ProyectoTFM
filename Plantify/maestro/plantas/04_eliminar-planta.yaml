@@ -1,0 +1,11 @@
+appId: com.uniovi.Plantify
+---
+# Flow de eliminar planta
+# Prerequisito: Usuario ya autenticado y tiene al menos una planta
+
+- launchApp
+- tapOn: Perfil de usuario
+- tapOn: Menú de opciones
+- tapOn: Eliminar
+- tapOn: Eliminar
+- assertVisible: No hay plantas aquí aún. ¡Añade una nueva planta!

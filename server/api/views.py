@@ -389,7 +389,8 @@ class UserPlantListCreateView(APIView):
                             {"error": "Plant not found in mock data"},
                             status=status.HTTP_404_NOT_FOUND
                         )
-                    return self.set_perenual_info(request.data, perenual_data, serializer, plant_id)
+                    request_data = request.data.copy()
+                    return self.set_perenual_info(request_data, perenual_data, serializer, plant_id)
                 else:
                     print("Fetching plant details from Perenual API")
                     api_key = os.getenv('PERENUAL_API_KEY')
@@ -417,6 +418,7 @@ class UserPlantListCreateView(APIView):
         return Response({"error": "Se ha producido un error"}, status=status.HTTP_400_BAD_REQUEST)
     
     def set_perenual_info(self, request_data, perenual_data, serializer, plant_id):
+        print(perenual_data)
         if not request_data.get('common_name') and perenual_data.get('common_name'):
             request_data['common_name'] = perenual_data['common_name']
                 
@@ -425,7 +427,7 @@ class UserPlantListCreateView(APIView):
             if isinstance(watering_data, dict):
                 value = watering_data.get('value', '').replace('"', '')
                 unit = watering_data.get('unit', '')
-                request_data['watering_period'] = {"value": value, "unit": unit}
+                request_data['watering_period'] = json.dumps({"value": value, "unit": unit})
             else:
                 watering_str = perenual_data['watering_general_benchmark']
                 # Dividir el string "7-10 days" en value y unit
@@ -433,8 +435,8 @@ class UserPlantListCreateView(APIView):
                 if len(parts) >= 2:
                     value = parts[0]  # "7-10"
                     unit = ' '.join(parts[1:])  # "days"
-                    request_data['watering_period'] = {"value": value, "unit": unit}
-        
+                    request_data['watering_period'] = json.dumps({"value": value, "unit": unit})
+        print("Dowloading image")
         try:
             img_url = perenual_data['default_image']['original_url']
             print(img_url)
@@ -570,6 +572,99 @@ class UserPlantDetailView(APIView):
         return Response(plant_data)
 
     def put(self, request, pk):
+        plant = self.get_object(pk)
+        if not plant:
+            return Response({"error": "Plant not found"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = UserPlantSerializer(plant, data=request.data, partial=True, context={'request': request})
+        if serializer.is_valid():
+            updated_plant = serializer.save()
+            
+            # Obtener el serializer data actualizado
+            updated_serializer = UserPlantSerializer(updated_plant, context={'request': request})
+            plant_data = updated_serializer.data
+            
+            # Hacer petición a Perenual para obtener detalles adicionales
+            if updated_plant.plant_id:
+                try:
+                    if should_use_mock_data():
+                        print("Using mock data for Perenual API")
+                        perenual_data = get_mock_species_details(plant.plant_id)
+                        if perenual_data:
+                            care_data = perenual_data.get('care_guides')
+                            # Procesar la información de cuidados
+                            if care_data.get('data') and len(care_data['data']) > 0:
+                                first_guide = care_data['data'][0]
+                                if 'section' in first_guide:
+                                    # Extraer watering, pruning y sunlight descriptions
+                                    for section in first_guide['section']:
+                                        section_type = section.get('type')
+                                        if section_type == 'watering':
+                                            perenual_data['watering_long'] = section.get('description', '')
+                                        elif section_type == 'pruning':
+                                            perenual_data['pruning'] = section.get('description', '')
+                                        elif section_type == 'sunlight':
+                                            perenual_data['sunlight_long'] = section.get('description', '')
+                            plant_data['perenual_details'] = perenual_data
+                    else:
+                        print("Fetching plant details from Perenual API")
+                        api_key = os.getenv('PERENUAL_API_KEY')
+                        if not api_key:
+                            return Response(
+                            {"error": "Perenual API key not configured", "env": "Missing PERENUAL_API_KEY"},
+                            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                            )
+                        url = f"{PERENUAL_API_URL}/species/details/{updated_plant.plant_id}"
+                        params = {
+                            'key': api_key
+                        }
+
+                        response = requests.get(url, params=params)
+
+                        if response.status_code == 200:
+                            perenual_data = response.json()
+
+                            # Obtener información de cuidados desde care_guides si existe
+                            if 'care_guides' in perenual_data:
+                                care_guides_url = perenual_data['care_guides']
+                                try:
+                                    care_response = requests.get(care_guides_url)
+                                    if care_response.status_code == 200:
+                                        care_data = care_response.json()
+                                        # Procesar la información de cuidados
+                                        if care_data.get('data') and len(care_data['data']) > 0:
+                                            first_guide = care_data['data'][0]
+                                            if 'section' in first_guide:
+                                                # Extraer watering, pruning y sunlight descriptions
+                                                for section in first_guide['section']:
+                                                    section_type = section.get('type')
+                                                    if section_type == 'watering':
+                                                        perenual_data['watering_long'] = section.get('description', '')
+                                                    elif section_type == 'pruning':
+                                                        perenual_data['pruning'] = section.get('description', '')
+                                                    elif section_type == 'sunlight':
+                                                        perenual_data['sunlight_long'] = section.get('description', '')
+                                except Exception as care_e:
+                                    print(f"Error fetching care guides: {str(care_e)}")
+
+                            # Agregar los datos de Perenual a la respuesta
+                            plant_data['perenual_details'] = perenual_data
+
+                        elif response.status_code != 404:
+                            # Si hay error pero no es 404, agregar información del error
+                            plant_data['perenual_details'] = {
+                                'error': f"Failed to fetch plant details from Perenual API (status: {response.status_code})"
+                            }
+                        
+                except Exception as e:
+                    # En caso de error de conexión, agregar información del error pero continuar
+                    plant_data['perenual_details'] = {
+                        'error': f"Error connecting to Perenual API: {str(e)}"
+                    }
+            
+            return Response(plant_data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self, request, pk):
         plant = self.get_object(pk)
         if not plant:
             return Response({"error": "Plant not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -821,7 +916,7 @@ model = YOLO("./model/results/plantify_model_v1/weights/best.pt")
 model_disease = YOLO("./model/results_disease/plantify_disease_model_v1/weights/best.pt")
 
 class PredictImageView(APIView):
-    parser_classes = [MultiPartParser]
+    parser_classes = [MultiPartParser, JSONParser]
 
     def post(self, request):
         # Acepta imagen subida por multipart o una URL
@@ -894,7 +989,7 @@ class PredictImageView(APIView):
             })
 
 class PredictPestDiseaseView(APIView):
-    parser_classes = [MultiPartParser]
+    parser_classes = [MultiPartParser, JSONParser]
 
     def post(self, request):
         # Acepta imagen subida por multipart o una URL
@@ -1151,7 +1246,7 @@ class PostDetailView(APIView):
         if not post:
             return Response({"error": "Post not found"}, status=status.HTTP_404_NOT_FOUND)
         post.delete()
-        return Response({"message": "Post deleted"}, status=status.HTTP_204_NO_CONTENT)
+        return Response({"message": "Post deleted"}, status=status.HTTP_200_OK)
     
 class CommentView(APIView):
     permission_classes = [IsAuthenticated]
@@ -1162,9 +1257,14 @@ class CommentView(APIView):
         return Response(serializer.data)
 
     def post(self, request):
+        print("Creating comment with data:", request.data)
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(author=request.user)
+            # Accept both 'post' and 'post_id' from clients
+            post_id = request.data.get('post_id') or request.data.get('post')
+            if post_id is None:
+                return Response({"post": ["This field is required."]}, status=status.HTTP_400_BAD_REQUEST)
+            serializer.save(author=request.user, post_id=post_id)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

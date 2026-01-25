@@ -44,7 +44,6 @@ export default function CameraScreen() {
     }
 
     async function sendPhoto() {
-        console.log('Camera for pest: ', isPest);
         if (photoUri) {
             setIsLoading(true);
             try {

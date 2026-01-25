@@ -1,0 +1,269 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommentForm matches snapshot 1`] = `
+<View
+  style={
+    [
+      {
+        "backgroundColor": "rgb(252, 250, 246)",
+      },
+      {
+        "flex": 1,
+        "padding": 16,
+      },
+    ]
+  }
+>
+  <RCTScrollView
+    showsVerticalScrollIndicator={false}
+  >
+    <View>
+      <View
+        style={
+          {
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "marginBottom": 20,
+            }
+          }
+        >
+          <TextInput
+            maxLength={1000}
+            multiline={true}
+            numberOfLines={6}
+            onChangeText={[Function]}
+            placeholder="Escribe tu comentario..."
+            placeholderTextColor="#666"
+            style={
+              [
+                {
+                  "borderColor": "#ddd",
+                  "borderRadius": 12,
+                  "borderWidth": 1,
+                  "elevation": 2,
+                  "fontSize": 16,
+                  "minHeight": 120,
+                  "paddingHorizontal": 16,
+                  "paddingVertical": 12,
+                  "shadowColor": "#000",
+                  "shadowOffset": {
+                    "height": 1,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.1,
+                  "shadowRadius": 2,
+                },
+                {
+                  "backgroundColor": "#fff",
+                  "color": "#000",
+                },
+              ]
+            }
+            textAlignVertical="top"
+            value=""
+          />
+          <Text
+            style={
+              [
+                {
+                  "color": "#11181C",
+                },
+                {
+                  "fontFamily": "LexendDeca",
+                  "fontSize": 16,
+                  "lineHeight": 24,
+                },
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                undefined,
+                {
+                  "fontSize": 12,
+                  "marginTop": 4,
+                  "opacity": 0.6,
+                  "textAlign": "right",
+                },
+              ]
+            }
+          >
+            0
+            /1000 caracteres
+          </Text>
+        </View>
+        <View
+          style={
+            {
+              "flexDirection": "row",
+              "gap": 12,
+              "justifyContent": "space-between",
+              "marginTop": 24,
+            }
+          }
+        >
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": false,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "backgroundColor": "#f5f5f5",
+                "borderColor": "#ddd",
+                "borderRadius": 12,
+                "borderWidth": 1,
+                "flex": 1,
+                "flexDirection": "row",
+                "gap": 8,
+                "justifyContent": "center",
+                "opacity": 1,
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text
+              allowFontScaling={false}
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "#666",
+                    "fontSize": 20,
+                  },
+                  undefined,
+                  {
+                    "fontFamily": "ionicons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  {},
+                ]
+              }
+            >
+              
+            </Text>
+            <Text
+              style={
+                {
+                  "color": "#666",
+                  "fontSize": 16,
+                  "fontWeight": "500",
+                }
+              }
+            >
+              Cancelar
+            </Text>
+          </View>
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": true,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={false}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "backgroundColor": "#bfd8c5ff",
+                "borderRadius": 12,
+                "flex": 1,
+                "flexDirection": "row",
+                "gap": 8,
+                "justifyContent": "center",
+                "opacity": 1,
+                "paddingVertical": 14,
+              }
+            }
+          >
+            <Text
+              allowFontScaling={false}
+              selectable={false}
+              style={
+                [
+                  {
+                    "color": "#333",
+                    "fontSize": 20,
+                  },
+                  undefined,
+                  {
+                    "fontFamily": "ionicons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                  {},
+                ]
+              }
+            >
+              
+            </Text>
+            <Text
+              style={
+                {
+                  "color": "#333",
+                  "fontSize": 16,
+                  "fontWeight": "600",
+                }
+              }
+            >
+              Crear
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;

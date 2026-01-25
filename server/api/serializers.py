@@ -30,6 +30,7 @@ class CommentSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
     author_id = serializers.IntegerField(source='author.id', read_only=True)
     post = PostBriefSerializer(read_only=True)
+    post_id = serializers.IntegerField(source='post.id', read_only=True)
     vote_score = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     dislikes_count = serializers.SerializerMethodField()
@@ -154,16 +155,6 @@ class UserPlantSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserPlant
         fields = '__all__'
-    def get_season(self, dt: date):
-        month = dt.month
-        if month in [3, 4, 5]:
-            return "spring"
-        elif month in [6, 7, 8]:
-            return "summer"
-        elif month in [9, 10, 11]:
-            return "fall"
-        else:
-            return "winter"
 
     def parse_value(self, value_str):
         # Si es un rango, usa el mínimo
@@ -199,7 +190,7 @@ class UserPlantSerializer(serializers.ModelSerializer):
                 return today + timedelta(days=days)
             except Exception:
                 return None
-        if obj.last_watered_date and obj.watering_period and obj.watering_type == 'manual':
+        if obj.last_watered_date and obj.watering_time and obj.watering_type == 'manual':
             units = {'day': 1, 'week': 7, 'month': 30}
             days = obj.watering_time * units.get(obj.watering_unit, 1)
             return obj.last_watered_date + timedelta(days=days)
@@ -268,6 +259,12 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'email', 'password']
+    
+    def validate_password(self, value):
+        # Validate password using Django's validators
+        validate_password(value)
+        return value
+    
     def create(self, validated_data):
         user = User.objects.create_user(
             username=validated_data['username'],
