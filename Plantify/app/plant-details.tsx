@@ -432,7 +432,7 @@ export default function PlantDetails() {
             onPress={handleCreatePost}
           >
             <Ionicons name="create" size={20} color="#333" />
-            <ThemedText style={styles.menuText}>Create Post</ThemedText>
+            <ThemedText style={styles.menuText}>Crear publicación</ThemedText>
           </TouchableOpacity>
         </View>
       )}
