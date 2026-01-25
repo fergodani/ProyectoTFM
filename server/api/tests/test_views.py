@@ -437,7 +437,7 @@ class UploadImageHandlingTests(APITestCase):
         self.user = User.objects.create_user(username='imguser', password='pwd123')
         self.client.force_authenticate(user=self.user)
 
-    @skipIf(os.getenv('CI') == 'true', "Skip in CI - model loading issues")
+    @skipIf(os.getenv('CI', 'false').lower() == 'true', "Skip in CI - model loading issues")
     def test_predict_image_from_file(self):
         url = reverse('predict-image')
         upload = create_test_image('img.jpg')
@@ -513,6 +513,7 @@ class AdditionalEdgeCaseTests(APITestCase):
         self.user = User.objects.create_user(username='edgeuser', password='edgepwd')
         self.client.force_authenticate(user=self.user)
 
+    @skipIf(os.getenv('CI', 'false').lower() == 'true', "Skip in CI - model loading issues")
     def test_predict_image_with_image_url_uses_model_and_returns_plant(self):
         url = reverse('predict-image')
         image_url = 'http://example.com/remote.jpg'
@@ -539,7 +540,7 @@ class AdditionalEdgeCaseTests(APITestCase):
             self.assertEqual(resp.status_code, 200)
             self.assertEqual(resp.data.get('plant_id'), 777)
 
-    @skipIf(os.getenv('CI') == 'true', "Skip in CI - model loading issues")
+    @skipIf(os.getenv('CI', 'false').lower() == 'true', "Skip in CI - model loading issues")
     def test_predict_image_model_raises_typeerror_returns_400_with_hint(self):
         url = reverse('predict-image')
         upload = create_test_image('img.jpg')
@@ -568,7 +569,7 @@ class AdditionalEdgeCaseTests(APITestCase):
             self.assertEqual(resp.status_code, 200)
             self.assertEqual(resp.data.get('id'), -1)
 
-    @skipIf(os.getenv('CI') == 'true', "Skip in CI - model loading issues")
+    @skipIf(os.getenv('CI', 'false').lower() == 'true', "Skip in CI - model loading issues")
     def test_diagnose_diseased_plant(self):
         url = reverse('predict-pest-image')
         upload = create_test_image('d.jpg')

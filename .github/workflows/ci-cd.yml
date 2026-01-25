@@ -46,7 +46,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd Plantify
-          npm install
+          npm install --legacy-peer-deps
         shell: bash
 
       - name: Run Jest tests
