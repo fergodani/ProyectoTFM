@@ -24,6 +24,8 @@ jobs:
         shell: bash
 
       - name: Run Django tests
+        env:
+          CI: true
         run: |
           cd server
           python manage.py test --verbosity=2
@@ -39,12 +41,12 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '20.19.4'
 
       - name: Install dependencies
         run: |
           cd Plantify
-          npm ci
+          npm install
         shell: bash
 
       - name: Run Jest tests
