@@ -241,6 +241,7 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
               </View>
 
               <TouchableOpacity
+                hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                 style={styles.buttonMenu}
                 onPress={(event) => {
                   openModal(userPlant, event);

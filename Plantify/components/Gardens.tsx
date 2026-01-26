@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, ScrollView, TouchableOpacity, Image, Pressable, Modal, ActivityIndicator, RefreshControl } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { View, Text, FlatList, StyleSheet, ScrollView, TouchableOpacity, Image, Pressable, Modal, ActivityIndicator, RefreshControl, Animated } from 'react-native';
 import gardensService from '@/services/gardensService';
 import { Garden, GardenBySuitability } from '@/models/Plant';
 import { ThemedText } from './ThemedText';
@@ -14,7 +14,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { UserService } from '@/services/userService';
 import Button from './Button';
 import { PlantService } from '@/services/plantsService';
-import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
+import Swipeable from "react-native-gesture-handler/Swipeable";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function Gardens({ plantId }: Readonly<{ plantId: number | null }>) {
     const colorScheme = useColorScheme();
@@ -28,6 +29,7 @@ export default function Gardens({ plantId }: Readonly<{ plantId: number | null }
     const [confirmVisible, setConfirmVisible] = useState(false);
     const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
     const [isLoading, setIsLoading] = useState(false);
+    const swipeableRefs = useRef<Map<number, Swipeable>>(new Map());
 
     const fetchGardens = async () => {
         if (!getUserId()) {
@@ -126,6 +128,42 @@ export default function Gardens({ plantId }: Readonly<{ plantId: number | null }
         }
     };
 
+    const handleSwipeDelete = async (plantId: number) => {
+        const garden = gardens.find(p => p.id === plantId);
+        if (!garden) return;
+
+        setSelectedGarden(garden);
+        setConfirmVisible(true);
+    };
+
+    const renderLeftActions = (plantId: number, progress: Animated.AnimatedInterpolation<number>, dragX: Animated.AnimatedInterpolation<number>) => {
+        const scale = dragX.interpolate({
+            inputRange: [-100, 0],
+            outputRange: [1, 0],
+            extrapolate: 'clamp',
+        });
+
+        return (
+            <Animated.View
+                style={[
+                    styles.deleteButton,
+                    {
+                        opacity: scale,
+                    },
+                ]}
+            >
+                <TouchableOpacity
+                    style={styles.deleteButtonInner}
+                    onPress={() => handleSwipeDelete(plantId)}
+                >
+                    <Ionicons name="trash" size={24} color="white" />
+                    <Text style={styles.deleteButtonText}>Eliminar</Text>
+                </TouchableOpacity>
+            </Animated.View>
+        );
+    };
+
+
     const handleSettings = async (gardenId: number) => {
         try {
             setIsLoading(true);
@@ -157,88 +195,109 @@ export default function Gardens({ plantId }: Readonly<{ plantId: number | null }
                             <ThemedText type="subtitle">Crea espacios personalizados para agrupar tus plantas y gestionar sus cuidados por zonas</ThemedText>
                         </View>
                     )}
-                    <ScrollView style={styles.container}
-                        refreshControl={
-                            <RefreshControl refreshing={isLoading} onRefresh={fetchGardens} />
-                        }>
-                        {isLoading && <ActivityIndicator size="large" style={{ marginTop: 32 }} />}
-                        {gardens.map((garden: Garden) => {
-                            // Suponiendo que garden.plants es un array de plantas con propiedad image
-                            const plantImages = garden.user_plants?.slice(0, 3).map(p => p.custom_image ? p.custom_image : p.image) || [];
-                            return (
-                                <TouchableOpacity
-                                    key={garden.id}
-                                    onPress={() => {
-                                        if (plantId) {
-                                            handleCreatePlantInGarden(garden.id);
-                                        } else {
-                                            router.push({
-                                                pathname: "/garden-details",
-                                                params: { id: garden.id }
-                                            })
-                                        }
-                                    }}
-                                >
-                                    <ThemedView key={garden.id} style={styles.gardenCard}>
-                                        <View style={styles.mosaicContainer}>
-                                            {plantImages.length > 0 && plantImages[0] && (
-                                                <Image
-                                                    source={{ uri: plantImages[0] }}
-                                                    style={styles.mainImage}
-                                                />
-                                            )}
-                                            {!plantImages[0] && (
-                                                <Image
-                                                    source={require('@/assets/images/plant-placeholder.png')}
-                                                    style={styles.mainImage}
-                                                />
-                                            )}
-                                            <View style={styles.sideImagesContainer}>
-                                                {plantImages[1] && (
-                                                    <Image
-                                                        source={{ uri: plantImages[1] }}
-                                                        style={styles.sideImage}
-                                                    />
-                                                )}
-                                                {!plantImages[1] && (
-                                                    <Image
-                                                        source={require('@/assets/images/plant-placeholder.png')}
-                                                        style={styles.sideImage}
-                                                    />
-                                                )}
-                                                {plantImages[2] && (
-                                                    <Image
-                                                        source={{ uri: plantImages[2] }}
-                                                        style={styles.sideImage}
-                                                    />
-                                                )}
-                                                {!plantImages[2] && (
-                                                    <Image
-                                                        source={require('@/assets/images/plant-placeholder.png')}
-                                                        style={styles.sideImage}
-                                                    />
-                                                )}
-                                            </View>
-                                        </View>
-                                        <View style={styles.gardenInfoContainer}>
-                                            <ThemedText type='title2'>{garden.name}</ThemedText>
-                                            <ThemedText type='default'>{garden.location === 'indoor' ? 'Interior' : garden.location === 'outdoor' ? 'Exterior' : garden.location}</ThemedText>
-                                            <ThemedText type='default'>{garden.user_plants?.length} {garden.user_plants?.length == 1 ? 'planta' : 'plantas'}</ThemedText>
-                                        </View>
-                                        <TouchableOpacity style={styles.buttonMenu} onPress={(event) => {
-                                            openModal(garden, event)
-                                        }}>
-                                            <Ionicons name="ellipsis-vertical" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
+                    <GestureHandlerRootView style={{ flex: 1 }}>
+                        <ScrollView style={styles.container}
+                            refreshControl={
+                                <RefreshControl refreshing={isLoading} onRefresh={fetchGardens} />
+                            }>
+                            {isLoading && <ActivityIndicator size="large" style={{ marginTop: 32 }} />}
+                            {gardens.map((garden: Garden) => {
+                                // Suponiendo que garden.plants es un array de plantas con propiedad image
+                                const plantImages = garden.user_plants?.slice(0, 3).map(p => p.custom_image ? p.custom_image : p.image) || [];
+                                return (
+                                    <Swipeable
+                                        key={garden.id}
+                                        ref={(ref) => {
+                                            if (ref) {
+                                                swipeableRefs.current.set(garden.id, ref);
+                                            }
+                                        }}
+                                        renderRightActions={(progress, dragX) => renderLeftActions(garden.id, progress, dragX)}
+                                        overshootLeft={false}
+                                        overshootRight={false}
+                                        friction={2}
+                                        leftThreshold={2000}
+                                        rightThreshold={1}
+                                        activeOffsetX={[-5, 30]}
+                                        failOffsetY={[-30, 30]}
+                                    >
+                                        <TouchableOpacity
+                                            key={garden.id}
+                                            onPress={() => {
+                                                if (plantId) {
+                                                    handleCreatePlantInGarden(garden.id);
+                                                } else {
+                                                    router.push({
+                                                        pathname: "/garden-details",
+                                                        params: { id: garden.id }
+                                                    })
+                                                }
+                                            }}
+                                        >
+                                            <ThemedView key={garden.id} style={styles.gardenCard}>
+                                                <View style={styles.mosaicContainer}>
+                                                    {plantImages.length > 0 && plantImages[0] && (
+                                                        <Image
+                                                            source={{ uri: plantImages[0] }}
+                                                            style={styles.mainImage}
+                                                        />
+                                                    )}
+                                                    {!plantImages[0] && (
+                                                        <Image
+                                                            source={require('@/assets/images/plant-placeholder.png')}
+                                                            style={styles.mainImage}
+                                                        />
+                                                    )}
+                                                    <View style={styles.sideImagesContainer}>
+                                                        {plantImages[1] && (
+                                                            <Image
+                                                                source={{ uri: plantImages[1] }}
+                                                                style={styles.sideImage}
+                                                            />
+                                                        )}
+                                                        {!plantImages[1] && (
+                                                            <Image
+                                                                source={require('@/assets/images/plant-placeholder.png')}
+                                                                style={styles.sideImage}
+                                                            />
+                                                        )}
+                                                        {plantImages[2] && (
+                                                            <Image
+                                                                source={{ uri: plantImages[2] }}
+                                                                style={styles.sideImage}
+                                                            />
+                                                        )}
+                                                        {!plantImages[2] && (
+                                                            <Image
+                                                                source={require('@/assets/images/plant-placeholder.png')}
+                                                                style={styles.sideImage}
+                                                            />
+                                                        )}
+                                                    </View>
+                                                </View>
+                                                <View style={styles.gardenInfoContainer}>
+                                                    <ThemedText type='title2'>{garden.name}</ThemedText>
+                                                    <ThemedText type='default'>{garden.location === 'indoor' ? 'Interior' : garden.location === 'outdoor' ? 'Exterior' : garden.location}</ThemedText>
+                                                    <ThemedText type='default'>{garden.user_plants?.length} {garden.user_plants?.length == 1 ? 'planta' : 'plantas'}</ThemedText>
+                                                </View>
+                                                <TouchableOpacity
+                                                    hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                                                    style={styles.buttonMenu} onPress={(event) => {
+                                                        openModal(garden, event)
+                                                    }}>
+                                                    <Ionicons name="ellipsis-vertical" size={24} color={colorScheme === "dark" ? Colors.dark.text : Colors.light.text} />
+                                                </TouchableOpacity>
+                                            </ThemedView>
                                         </TouchableOpacity>
-                                    </ThemedView>
-                                </TouchableOpacity>
-                            );
-                        })}
-                        {!plantId && (
-                            <Button text="Añadir lugar" onPress={handleAdd} />
-                        )}
-                        <View style={{ marginBottom: 24 }} />
-                    </ScrollView>
+                                    </Swipeable>
+                                );
+                            })}
+                            {!plantId && (
+                                <Button text="Añadir lugar" onPress={handleAdd} />
+                            )}
+                            <View style={{ marginBottom: 24 }} />
+                        </ScrollView>
+                    </GestureHandlerRootView>
                 </>
             )}
 
@@ -501,5 +560,28 @@ const styles = StyleSheet.create({
         elevation: 10,
         padding: 16,
         minWidth: 200,
+    },
+    deleteButton: {
+        backgroundColor: '#ff3b30',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        marginVertical: 8,
+        marginRight: 8,
+        borderTopLeftRadius: 8,
+        borderBottomLeftRadius: 8,
+        width: 100,
+        height: '92%',
+    },
+    deleteButtonInner: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 100,
+        height: '100%',
+    },
+    deleteButtonText: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 12,
+        marginTop: 4,
     },
 });

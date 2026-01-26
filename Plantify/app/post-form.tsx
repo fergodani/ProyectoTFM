@@ -157,7 +157,10 @@ const PostForm = () => {
           {/* Image picker preview */}
           <View style={styles.inputGroup}>
             <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
-              <TouchableOpacity onPress={pickImage} style={{ padding: 6, borderRadius: 8, backgroundColor: '#f5f5f5' }}>
+              <TouchableOpacity 
+                hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                onPress={pickImage} 
+                style={{ padding: 6, borderRadius: 8, backgroundColor: '#f5f5f5' }}>
                 <Ionicons name="image" size={20} color="#666" />
               </TouchableOpacity>
               <ThemedText>Adjuntar imagen (opcional)</ThemedText>

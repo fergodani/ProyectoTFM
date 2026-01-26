@@ -488,7 +488,10 @@ export default function PlantInfoDetails() {
         />
       )}
       {isAuthenticated && (
-        <TouchableOpacity style={styles.fab} onPress={handleAdd}>
+        <TouchableOpacity 
+          hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+          style={styles.fab} 
+          onPress={handleAdd}>
           <Ionicons
             name={showMenu ? "close" : "add"}
             size={24}

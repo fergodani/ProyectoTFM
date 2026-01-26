@@ -111,6 +111,7 @@ export default function PlantDetails() {
             <ThemedText type="default">{userPlant.perenual_details!.scientific_name}</ThemedText>
           </View>
           <TouchableOpacity
+            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
             key={userPlant.id}
             onPress={() => {
               router.replace({
@@ -446,7 +447,10 @@ export default function PlantDetails() {
         />
       )}
 
-      <TouchableOpacity style={styles.fab} onPress={handleAdd}>
+      <TouchableOpacity 
+        hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+        style={styles.fab} 
+        onPress={handleAdd}>
         <Ionicons
           name={showMenu ? "close" : "add"}
           size={24}

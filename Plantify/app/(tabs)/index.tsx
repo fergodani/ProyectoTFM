@@ -180,7 +180,7 @@ export default function HomeScreen() {
               <ThemedText type='default'>
                 {Math.trunc(weatherInfo.weather.main.temp_min)}°C - {Math.trunc(weatherInfo.weather.main.temp_max)}°C
               </ThemedText>
-              <ThemedText type='italic'>
+              <ThemedText type='default'>
                 {weatherInfo.weather.name}
               </ThemedText>
             </View>
@@ -197,6 +197,7 @@ export default function HomeScreen() {
             {weatherInfo.recommendation}
           </ThemedText>
           <TouchableOpacity
+            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
             onPress={() => setShowWarning(false)}
             style={styles.closeButton}
           >

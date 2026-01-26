@@ -626,7 +626,6 @@ export default function PlantSettings() {
                 <KeyboardAvoidingView
                     style={styles.centeredView}
                     behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-                <View style={styles.centeredView}>
                     <View style={styles.modalView}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginBottom: 20 }}>
                             <TouchableOpacity
@@ -837,7 +836,6 @@ export default function PlantSettings() {
                             </View>
                         )}
                     </View>
-                </View>
                 </KeyboardAvoidingView>
             </Modal >
             {/* Modal de confirmación de eliminación */}

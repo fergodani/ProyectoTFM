@@ -88,7 +88,9 @@ export default function PlantSearch() {
                         value={searchText}
                     />
                     {searchText.length > 0 && (
-                        <TouchableOpacity onPress={() => setSearchText('')}>
+                        <TouchableOpacity 
+                            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                            onPress={() => setSearchText('')}>
                             <Ionicons name="close-circle" size={22} color="#aaa" />
                         </TouchableOpacity>
                     )}
@@ -136,7 +138,10 @@ export default function PlantSearch() {
                                 <ThemedText type='title2'>{plant.common_name}</ThemedText>
                                 <ThemedText type='subtitle'>{plant.scientific_name}</ThemedText>
                             </View>
-                            <TouchableOpacity style={styles.button} onPress={() => {
+                            <TouchableOpacity 
+                                hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                                style={styles.button} 
+                                onPress={() => {
                                 router.push({
                                     pathname: "/garden-select",
                                     params: { id: plant.id }

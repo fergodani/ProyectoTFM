@@ -48,7 +48,9 @@ export default function GardenDetails() {
         >
             <View style={styles.titleContainer}>
                 <ThemedText type="title">{garden?.name}</ThemedText>
-                <TouchableOpacity onPress={() => {
+                <TouchableOpacity 
+                    hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                    onPress={() => {
                             router.push({
                               pathname: `/garden-settings`,
                               params: { gardenString: JSON.stringify(garden) }

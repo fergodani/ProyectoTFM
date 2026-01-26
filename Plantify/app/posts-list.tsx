@@ -107,6 +107,7 @@ export default function PostList() {
                                         <ThemedText type="subtitle">{post.created_since}</ThemedText>
                                     </View>
                                     <TouchableOpacity
+                                        hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                                         style={styles.buttonMenu}
                                         onPress={(event) => {
                                             openModal(post, event);

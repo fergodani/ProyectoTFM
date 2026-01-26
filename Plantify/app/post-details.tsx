@@ -234,6 +234,7 @@ export default function PostDetails() {
                     if (post.author_id && Number(post.author_id) === currentId) {
                         return (
                             <TouchableOpacity
+                                hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                                 onPress={() => router.push({ pathname: '/post-form', params: { id: String(post.id), edit: 'true' } })}
                                 style={{ marginRight: 12 }}
                                 activeOpacity={0.7}
@@ -306,6 +307,7 @@ export default function PostDetails() {
                             <ThemedText type="default">{post.content}</ThemedText>
                             <View style={{ flexDirection: "row", alignItems: "center", marginTop: 12, paddingVertical: 8 }}>
                                 <TouchableOpacity
+                                    hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                                     onPress={handleLikePost}
                                     style={{
                                         flexDirection: "row",
@@ -329,6 +331,7 @@ export default function PostDetails() {
                                     {post.vote_score || 0}
                                 </ThemedText>
                                 <TouchableOpacity
+                                    hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                                     onPress={handleDislikePost}
                                     style={{
                                         flexDirection: "row",
@@ -363,10 +366,18 @@ export default function PostDetails() {
                                     <View style={{ position: 'absolute', right: 12, top: 12, flexDirection: 'row', alignItems: 'center' }}>
                                         {comment.author_id && Number(getUserId && getUserId()) === Number(comment.author_id) && (
                                             <>
-                                                <TouchableOpacity onPress={() => router.push({ pathname: '/comment-form', params: { commentId: String(comment.id), postId: String(post.id), edit: 'true' } })} style={[styles.button, { marginRight: 6 }]} activeOpacity={0.7}>
+                                                <TouchableOpacity 
+                                                    hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                                                    onPress={() => router.push({ pathname: '/comment-form', params: { commentId: String(comment.id), postId: String(post.id), edit: 'true' } })} 
+                                                    style={[styles.button, { marginRight: 6 }]} 
+                                                    activeOpacity={0.7}>
                                                     <Ionicons name="pencil" size={24} color={buttonBackground} />
                                                 </TouchableOpacity>
-                                                <TouchableOpacity onPress={() => confirmDeleteComment(comment.id)} style={styles.button} activeOpacity={0.7}>
+                                                <TouchableOpacity 
+                                                    hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                                                    onPress={() => confirmDeleteComment(comment.id)} 
+                                                    style={styles.button} 
+                                                    activeOpacity={0.7}>
                                                     <Ionicons name="trash" size={24} color={buttonBackground} />
                                                 </TouchableOpacity>
                                             </>
@@ -375,6 +386,7 @@ export default function PostDetails() {
                                     <View style={{ flexDirection: "row", alignItems: "center", marginTop: 12, paddingVertical: 4 }}>
                                         <View style={{ flexDirection: "row", alignItems: "center", marginLeft: "auto" }}>
                                             <TouchableOpacity
+                                                hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                                                 onPress={() => handleLikeComment(comment.id!)}
                                                 style={{
                                                     flexDirection: "row",
@@ -398,6 +410,7 @@ export default function PostDetails() {
                                                 {comment.vote_score || 0}
                                             </ThemedText>
                                             <TouchableOpacity
+                                                hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
                                                 onPress={() => handleDislikeComment(comment.id!)}
                                                 style={{
                                                     flexDirection: "row",

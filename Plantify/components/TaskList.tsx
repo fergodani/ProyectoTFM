@@ -212,7 +212,10 @@ export default function TaskList({ tasks, isToday, isNext, onRefresh }: Readonly
                                         })()}</ThemedText>
                                     </View>
                                     {!isNext && (
-                                        <TouchableOpacity style={[styles.button, { justifyContent: 'flex-end' }]} onPress={() => completeTask(task)}>
+                                        <TouchableOpacity 
+                                            hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
+                                            style={[styles.button, { justifyContent: 'flex-end' }]} 
+                                            onPress={() => completeTask(task)}>
                                             <Ionicons name="checkmark-circle" size={24} color="#333" />
                                         </TouchableOpacity>
                                     )}
