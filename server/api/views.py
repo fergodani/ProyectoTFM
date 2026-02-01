@@ -980,7 +980,7 @@ class PredictImageView(APIView):
                     perenual_plant_id = search_data['data'][0].get('id')
                     print(f"🔍 Perenual Plant ID: {perenual_plant_id}")
                     return Response({
-                        'plant_id': perenual_plant_id
+                        'id': perenual_plant_id
                     })
         except Exception as e:
             print(f"Error buscando en Perenual API: {str(e)}")
