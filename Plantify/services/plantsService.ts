@@ -222,13 +222,11 @@ export const PlantService = {
     }
   },
   */
-  getPlantInfoList: async (page: number = 1, filter: string, type: string): Promise<PlantInfo[]> => {
+  getPlantInfoList: async (page: number = 1, filter: string): Promise<PlantInfo[]> => {
     try {
       let response;
       if (filter) {
         response = await fetch(`${url}/api/perenual/plants?format=json&page=${page}&q=${encodeURIComponent(filter)}`);
-      } else if (type) {
-        response = await fetch(`${url}/api/perenual/plants?format=json&page=${page}&type=${encodeURIComponent(type)}`);
       } else {
         response = await fetch(`${url}/api/perenual/plants?format=json&page=${page}`);
       }

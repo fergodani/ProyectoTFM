@@ -19,18 +19,34 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { globalStyles } from '@/styles/global-styles';
 import { goBack } from 'expo-router/build/global-state/routing';
 import { useAuth } from '@/hooks/useAuthContext';
-import { UserPlant } from '@/models/Plant';
+import { Garden, UserPlant } from '@/models/Plant';
+import GardensService from '@/services/gardensService';
 
 export default function PlantSearch() {
     const params = useLocalSearchParams();
     const { isCreating, gardenId } = params;
     const router = useRouter();
-    const { getUserId, accessToken } = useAuth();
+    const { getUserId, accessToken, isAuthenticated } = useAuth();
     const [searchText, setSearchText] = useState('');
     const [results, setResults] = useState<PlantInfo[]>([]);
     const [loading, setLoading] = useState(false);
+    const [gardens, setGardens] = useState<Garden[]>([]);
     const colorScheme = useColorScheme();
     const backgroundColor = colorScheme === 'dark' ? Colors.dark.background : Colors.light.background;
+
+    useEffect(() => {
+        const fetchGardens = async () => {
+            try {
+                const response = await GardensService.getGardensName(accessToken!);
+                setGardens(response);
+            } catch (error) {
+                console.error("Error fetching gardens:", error);
+            }
+        };
+        if (isAuthenticated && isCreating) {
+            fetchGardens();
+        }
+    }, []);
 
     useEffect(() => {
         const fetchResults = async () => {
@@ -68,6 +84,24 @@ export default function PlantSearch() {
             console.error("Error adding plant:", error);
         }
     }
+
+    const handleSkip = async (plantId: number) => {
+            try {
+                const userPlant = {
+                    plant_id: plantId,
+                    owner: getUserId()!
+                }
+                setLoading(true);
+                await PlantService.createPlant(userPlant, accessToken!);
+                setLoading(false);
+                router.replace("/(tabs)/profile");
+            } catch (error) {
+                //console.error("Error adding plant:", error);
+                alert("Error al agregar la planta.");
+                setLoading(false);
+                router.replace("/(tabs)/profile");
+            }
+        };
 
     const goBack = () => {
         router.back();
@@ -115,6 +149,10 @@ export default function PlantSearch() {
                             if (isCreating && gardenId) {
                                 handleCreate(plant.id);
                             } else if (isCreating) {
+                                if (gardens.length == 0) {
+                                    handleSkip(plant.id);
+                                    return;
+                                }
                                 router.push({
                                     pathname: "/garden-select",
                                     params: { id: plant.id }

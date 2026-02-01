@@ -129,7 +129,7 @@ export const UserService = {
     }
   },
 
-  changePassword: async (currentPassword: string, newPassword: string, confirmPassword: string, accessToken: string): Promise<void> => {
+  changePassword: async (currentPassword: string, newPassword: string, confirmPassword: string, accessToken: string): Promise<string | string[]> => {
     try {
       const response = await fetch(`${url}/api/user/password/`, {
         method: 'POST',

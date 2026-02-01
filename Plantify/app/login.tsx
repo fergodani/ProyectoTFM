@@ -2,7 +2,8 @@ import { ThemedText } from '@/components/ThemedText';
 import { Colors } from '@/constants/Colors';
 import { UserService } from '@/services/userService';
 import * as React from 'react';
-import { View, useWindowDimensions, Text, StatusBar, TextInput, TouchableOpacity, StyleSheet, useColorScheme } from 'react-native';
+import { View, useWindowDimensions, Text, StatusBar, TextInput, TouchableOpacity, StyleSheet, useColorScheme, ActivityIndicator } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { TabView, SceneMap } from 'react-native-tab-view';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, useRouter } from 'expo-router';
@@ -21,6 +22,8 @@ export default function LoginScreen() {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [error, setError] = React.useState('');
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [showPassword, setShowPassword] = React.useState(false);
     const { login } = useAuth();
     const colorScheme = useColorScheme() ?? 'light';
     const navigation = useNavigation();
@@ -40,13 +43,15 @@ export default function LoginScreen() {
             setError('Por favor, completa todos los campos.');
             return;
         }
+        setIsLoading(true);
         try {
             await login(email, password);
+            router.replace(fromPath || '/');
         } catch (e) {
             setError('Error al iniciar sesión.');
-            return;
+        } finally {
+            setIsLoading(false);
         }
-        router.replace(fromPath || '/');
     };
     return (
         <LinearGradient
@@ -74,11 +79,19 @@ export default function LoginScreen() {
                         <TextInput
                             placeholder="Introduce tu contraseña"
                             placeholderTextColor={colorScheme === 'dark' ? Colors.dark.placeholder : Colors.light.placeholder}
-                            secureTextEntry
+                            secureTextEntry={!showPassword}
+                            autoCapitalize="none"
                             style={styles.searchInput}
                             value={password}
                             onChangeText={setPassword}
                         />
+                        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                            <Ionicons 
+                                name={!showPassword ? 'eye-off-outline' : 'eye-outline'} 
+                                size={24} 
+                                color={Colors.light.icon} 
+                            />
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <ThemedText type="subtitle">¿No tienes cuenta?</ThemedText>
@@ -90,7 +103,14 @@ export default function LoginScreen() {
                         {error}
                     </Text>
                 ) : null}
-                <Button text="Entrar" onPress={handleLogin} />
+                {isLoading ? (
+                    <View style={{ marginTop: 32, alignItems: 'center' }}>
+                        <ActivityIndicator size="large" color={Colors.light.tint} />
+                        <Text style={{ marginTop: 8, color: Colors.light.icon }}>Iniciando sesión...</Text>
+                    </View>
+                ) : (
+                    <Button text="Entrar" onPress={handleLogin} />
+                )}
             </View>
         </LinearGradient>
     )

@@ -372,9 +372,9 @@ export default function Gardens({ plantId }: Readonly<{ plantId: number | null }
                                             ) : (
                                                 <ThemedText type='default' style={{ color: 'red', fontWeight: 'bold' }}>No óptimo</ThemedText>
                                             )}
-                                            {gardenBySuitability.reasons.map((reason: string) => {
+                                            {gardenBySuitability.reasons.map((reason: string, index: number) => {
                                                 return (
-                                                    <ThemedText type='subtitle' style={{ color: 'gray' }}>{reason}</ThemedText>
+                                                    <ThemedText key={index} type='subtitle' style={{ color: 'gray' }}>{reason}</ThemedText>
                                                 )
                                             })}
 

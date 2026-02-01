@@ -94,6 +94,9 @@ export default function Settings() {
     const [actualPassword, setActualPassword] = useState<string>('');
     const [newPassword, setNewPassword] = useState<string>('');
     const [confirmNewPassword, setConfirmNewPassword] = useState<string>('');
+    const [showActualPassword, setShowActualPassword] = useState<boolean>(false);
+    const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
+    const [showConfirmNewPassword, setShowConfirmNewPassword] = useState<boolean>(false);
     const [selectedHour, setSelectedHour] = useState<number>(9);
     const [selectedHourTemp, setSelectedHourTemp] = useState<number>(9);
     const colorScheme = useColorScheme() ?? 'light';
@@ -208,7 +211,7 @@ export default function Settings() {
         setIsLoading(true);
         try {
             const message = await UserService.changePassword(actualPassword, newPassword, confirmNewPassword, accessToken!);
-            alert(message);
+            Alert.alert("Error", Array.isArray(message) ? message.join(', ') : message);
             setIsModalVisible(false);
         } catch (error: any) {
             if (error.message === 'Unauthorized') {
@@ -218,7 +221,7 @@ export default function Settings() {
                     setTokens(newTokens.access, newTokens.refresh);
 
                     const message = await UserService.changePassword(actualPassword, newPassword, confirmNewPassword, accessToken!);
-                    alert(message);
+                    Alert.alert("Error", Array.isArray(message) ? message.join(', ') : message);
 
                     setIsModalVisible(false);
                 } catch (refreshError) {
@@ -452,30 +455,60 @@ export default function Settings() {
                             )}
                             {modalType === 'password' && (
                                 <View style={styles.passwordContainer}>
+                                    <View style={styles.searchContainer}>
                                     <TextInput
                                         placeholder="Contraseña actual"
+                                        placeholderTextColor={colorScheme === 'dark' ? Colors.dark.placeholder : Colors.light.placeholder}
                                         autoCapitalize="none"
-                                        secureTextEntry
+                                        secureTextEntry={!showActualPassword}
                                         style={styles.passwordInput}
                                         value={actualPassword}
                                         onChangeText={(text) => { setActualPassword(text); }}
                                     />
+                                    <TouchableOpacity onPress={() => setShowActualPassword(!showActualPassword)}>
+                                        <Ionicons 
+                                            name={!showActualPassword ? 'eye-off-outline' : 'eye-outline'} 
+                                            size={24} 
+                                            color={Colors.light.icon} 
+                                        />
+                                    </TouchableOpacity>
+                                    </View>
+                                    <View style={styles.searchContainer}>
                                     <TextInput
                                         placeholder="Contraseña nueva"
+                                        placeholderTextColor={colorScheme === 'dark' ? Colors.dark.placeholder : Colors.light.placeholder}
                                         autoCapitalize="none"
-                                        secureTextEntry
+                                        secureTextEntry={!showNewPassword}
                                         style={styles.passwordInput}
                                         value={newPassword}
                                         onChangeText={(text) => { setNewPassword(text); }}
                                     />
+                                    <TouchableOpacity onPress={() => setShowNewPassword(!showNewPassword)}>
+                                        <Ionicons 
+                                            name={!showNewPassword ? 'eye-off-outline' : 'eye-outline'} 
+                                            size={24} 
+                                            color={Colors.light.icon} 
+                                        />
+                                    </TouchableOpacity>
+                                    </View>
+                                    <View style={styles.searchContainer}>
                                     <TextInput
                                         placeholder="Contraseña nueva (confirmación)"
+                                        placeholderTextColor={colorScheme === 'dark' ? Colors.dark.placeholder : Colors.light.placeholder}
                                         autoCapitalize="none"
-                                        secureTextEntry
+                                        secureTextEntry={!showConfirmNewPassword}
                                         style={styles.passwordInput}
                                         value={confirmNewPassword}
                                         onChangeText={(text) => { setConfirmNewPassword(text); }}
                                     />
+                                    <TouchableOpacity onPress={() => setShowConfirmNewPassword(!showConfirmNewPassword)}>
+                                        <Ionicons 
+                                            name={!showConfirmNewPassword ? 'eye-off-outline' : 'eye-outline'} 
+                                            size={24} 
+                                            color={Colors.light.icon} 
+                                        />
+                                    </TouchableOpacity>
+                                    </View>
                                 </View>
                             )}
                             {modalType === 'hour' && (

@@ -5,7 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useRef, useState } from 'react';
-import { Button, StyleSheet, Text, TouchableOpacity, View, Image, ActivityIndicator } from 'react-native';
+import { Alert, Button, StyleSheet, Text, TouchableOpacity, View, Image, ActivityIndicator } from 'react-native';
 
 export default function CameraScreen() {
     const params = useLocalSearchParams();
@@ -50,17 +50,17 @@ export default function CameraScreen() {
                 const data = await PlantService.sendPhoto(photoUri, isPest === 'true');
                 if (data.id && data.id !== -1 ) {
                     router.push({
-                        pathname: isPest === 'true' ? '/pest-details' : '/plant-details',
+                        pathname: isPest === 'true' ? '/pest-details' : '/plant-info-details',
                         params: { id: data.id }
                     });
                 } else if (data.id === -1) {
-                    alert("La planta está sana. No se detectaron plagas o enfermedades.");
+                    Alert.alert("Planta sana", "La planta está sana. No se detectaron plagas o enfermedades.");
                 } else {
-                    alert("No se pudo identificar la imagen. Inténtalo de nuevo.");
+                    Alert.alert("No identificado", "No se pudo identificar la imagen. Inténtalo de nuevo.");
                 }
             } catch (error) {
                 console.error('Error sending photo:', error);
-                alert("Error al procesar la imagen. Inténtalo de nuevo.");
+                Alert.alert("Error", "Error al procesar la imagen. Inténtalo de nuevo.");
             } finally {
                 setIsLoading(false);
             }

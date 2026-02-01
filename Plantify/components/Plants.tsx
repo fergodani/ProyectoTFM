@@ -65,6 +65,7 @@ export default function Plants({ gardenId }: Readonly<{ gardenId: number | null 
         setUserPlants(data);
       } else {
         const data = await PlantService.getAllPlants(accessToken!);
+        console.log(data)
         setUserPlants(data);
       }
     } catch (error: any) {

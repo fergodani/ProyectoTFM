@@ -46,10 +46,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const setTokens = (access: string, refresh: string) => {
-    AsyncStorage.setItem('accessToken', access);
-    AsyncStorage.setItem('refreshToken', refresh);
-    setAccessToken(access);
-    setRefreshToken(refresh);
+    if (access) {
+      AsyncStorage.setItem('accessToken', access);
+      setAccessToken(access);
+    }
+    if (refresh) {
+      AsyncStorage.setItem('refreshToken', refresh);
+      setRefreshToken(refresh);
+    }
   };
 
   const signup = async (username: string, email: string, password: string) => {
@@ -57,11 +61,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     await AsyncStorage.setItem('accessToken', data.access);
     await AsyncStorage.setItem('refreshToken', data.refresh);
     setAccessToken(data.access);
+    setRefreshToken(data.refresh);
   };
 
   const logout = async () => {
     await AsyncStorage.removeItem("accessToken");
+    await AsyncStorage.removeItem("refreshToken");
     setAccessToken(null);
+    setRefreshToken(null);
   };
 
   const getUserId = () => {
