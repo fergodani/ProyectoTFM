@@ -310,6 +310,14 @@ class GardenSuitabilityView(APIView):
                         "full shade": "full_shade"
                     }
                     
+                    # Nombres en español para mostrar al usuario
+                    sunlight_names_spanish = {
+                        "full sun": "sol directo",
+                        "part sun": "sol parcial", 
+                        "part shade": "luz indirecta",
+                        "full shade": "sombra total"
+                    }
+                    
                     # Convertir los requisitos de luz de la planta al formato del jardín
                     compatible_lights = []
                     for light in plant_sunlight_list:
@@ -320,7 +328,7 @@ class GardenSuitabilityView(APIView):
                     # Verificar si la luz del jardín es compatible
                     if compatible_lights and garden_light not in compatible_lights:
                         is_optimal = False
-                        light_names = [k for k, v in sunlight_mapping.items() if v in compatible_lights]
+                        light_names = [sunlight_names_spanish.get(k, k) for k, v in sunlight_mapping.items() if v in compatible_lights]
                         reasons.append(f"La luz no es adecuada. La planta necesita: {', '.join(light_names)}")
                         
                 except (json.JSONDecodeError, TypeError):
@@ -427,7 +435,7 @@ class UserPlantListCreateView(APIView):
             if isinstance(watering_data, dict):
                 value = watering_data.get('value', '').replace('"', '')
                 unit = watering_data.get('unit', '')
-                request_data['watering_period'] = json.dumps({"value": value, "unit": unit})
+                request_data['watering_period'] = {"value": value, "unit": unit}
             else:
                 watering_str = perenual_data['watering_general_benchmark']
                 # Dividir el string "7-10 days" en value y unit
@@ -435,7 +443,7 @@ class UserPlantListCreateView(APIView):
                 if len(parts) >= 2:
                     value = parts[0]  # "7-10"
                     unit = ' '.join(parts[1:])  # "days"
-                    request_data['watering_period'] = json.dumps({"value": value, "unit": unit})
+                    request_data['watering_period'] = {"value": value, "unit": unit}
         print("Dowloading image")
         try:
             img_url = perenual_data['default_image']['original_url']
