@@ -125,9 +125,6 @@ export default function PlantDetails() {
           </TouchableOpacity>
         </ThemedView>
         <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
-          <ThemedText type="title2">{userPlant.perenual_details!.description}</ThemedText>
-        </ThemedView>
-        <ThemedView style={[styles.card, { backgroundColor: cardBackground }]}>
           <ThemedText type="title2"><Text accessibilityRole="image" accessibilityLabel="clipboard">📋</Text> Basic Information</ThemedText>
           <View style={styles.infoRow}>
             <ThemedText style={styles.infoLabel}>Family:</ThemedText>

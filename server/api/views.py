@@ -225,6 +225,9 @@ class GardenDetailView(APIView):
         garden = self.get_object(pk)
         if not garden:
             return Response({"error": "Garden not found"}, status=status.HTTP_404_NOT_FOUND)
+        # Verificar que el usuario sea el propietario
+        if garden.owner != request.user:
+            return Response({"error": "You don't have permission to delete this garden"}, status=status.HTTP_403_FORBIDDEN)
         garden.delete()
         return Response({"message": "Garden deleted"}, status=status.HTTP_200_OK)
 
@@ -769,6 +772,9 @@ class UserPlantDetailView(APIView):
         plant = self.get_object(pk)
         if not plant:
             return Response({"error": "Plant not found"}, status=status.HTTP_404_NOT_FOUND)
+        # Verificar que el usuario sea el propietario
+        if plant.owner != request.user:
+            return Response({"error": "You don't have permission to delete this plant"}, status=status.HTTP_403_FORBIDDEN)
         plant.delete()
         return Response({"message": "Plant deleted"}, status=status.HTTP_200_OK)  
     
@@ -1253,6 +1259,9 @@ class PostDetailView(APIView):
         post = self.get_object(pk)
         if not post:
             return Response({"error": "Post not found"}, status=status.HTTP_404_NOT_FOUND)
+        # Verificar que el usuario sea el autor
+        if post.author != request.user:
+            return Response({"error": "You don't have permission to delete this post"}, status=status.HTTP_403_FORBIDDEN)
         post.delete()
         return Response({"message": "Post deleted"}, status=status.HTTP_200_OK)
     
